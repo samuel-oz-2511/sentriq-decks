@@ -152,6 +152,7 @@
             .cta { flex-direction: column; padding: 28px 24px; text-align: center; }
             .cta-right { text-align: center; }
             .captcha-block .quote { font-size: 16px; }
+            .cost-bridge-grid { grid-template-columns: 1fr !important; }
         }
     </style>
 </head>
@@ -670,6 +671,25 @@ document.addEventListener('DOMContentLoaded', function() {
         <div style="margin-top:12px;font-size:11px;color:rgba(255,255,255,0.35);font-style:italic;text-align:center;">Figures are illustrative. The actual efficiency return depends on your pipeline's low-signal application rate, quantified during the pilot.</div>
     </div>
 
+    <!-- 8b. Cost per role bridge -->
+    <div style="max-width:780px;margin:0 auto 48px;padding:0 24px;">
+        <div class="cost-bridge-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div style="background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.2);border-radius:12px;padding:22px 24px;">
+                <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#E8A020;margin-bottom:10px;">Tier 1 — Enterprise</div>
+                <div style="font-size:28px;font-weight:800;color:#fff;line-height:1.1;">$750</div>
+                <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:4px;">per open role per year at 200 roles</div>
+                <div style="margin-top:14px;font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;">Less than one LinkedIn InMail sequence. The recoverable screening cost at this volume is $140K+ per year.</div>
+            </div>
+            <div style="background:#0D0E1A;border:1px solid #161728;border-radius:12px;padding:22px 24px;">
+                <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(232,160,32,0.6);margin-bottom:10px;">Tier 2 — Growth</div>
+                <div style="font-size:28px;font-weight:800;color:#fff;line-height:1.1;">$720</div>
+                <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:4px;">per open role per year at 50 roles</div>
+                <div style="margin-top:14px;font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;">The recoverable screening time at this volume exceeds $25K per year. Payback within the first hiring quarter.</div>
+            </div>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:rgba(255,255,255,0.3);text-align:center;">Annual contract justified against recruiter time already being spent. Not a new budget line.</div>
+    </div>
+
     <!-- 9. CTA -->
     <div class="cta">
         <div class="cta-left">
@@ -693,7 +713,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <p>[2] 25% of candidate profiles unreliable by 2028: Gartner "9 Future of Work Trends for 2026," G00844785, January 2026. "Employers Reverse the Candidate Fraud Arms Race" named a top 2026 CHRO priority. Gartner recommends deploying candidate verification tools early in the recruitment process. 72% embellish, 31% misrepresent qualifications: Purdue University resume integrity study. 3:1 interview-to-offer benchmark: SHRM 2025.</p>
         <p>[3] 1:50 signal-to-noise ratio: Pin 2026 Recruitment Funnel Benchmarks. "AI-enabled candidate verification and application quality detection" named a trending recruiting technology: Gartner Market Guide for Recruiting Technologies, G00836280, January 2026. "Broken signaling system": Journal of MIS Quarterly. 89% increased workload: Resume Genius AI Impact on Hiring survey, 2024.</p>
         <p>[4] 40-80% of applicants use AI: Resume Now AI applicant report, 2024. Recruiters managing 20+ requisitions: SHRM 2025.</p>
-        <p>[5] $60/hr loaded recruiter capacity rate. Conservative and internally consistent with lifecycle cost figures used throughout. Stage cost figures are illustrative estimates. Actual costs vary by organization.</p>
+        <p>[5] Tier 1 Enterprise: $90/hr loaded recruiter rate, $900 per interview loop (4 interviewers x $150/hr x 90 min). Tier 2 Growth: $60/hr loaded recruiter rate, $500 per interview loop. Stage cost figures are illustrative estimates. Actual costs vary by organization. SHRM 2025: cost of a bad hire ranges from 50% to 200% of annual salary (excluded from deck figures as conservative baseline).</p>
         <div class="disclaimer">All pipeline estimates are illustrative. Adjust the calculator for your actual open role count. Sentriq is in design partner phase. No live production data claims are implied. The efficiency return from Sentriq is quantified through the pilot, not estimated here.</div>
     </div>
 
