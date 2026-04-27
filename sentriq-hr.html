@@ -224,8 +224,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <!-- 1. HERO -->
     <div class="hero">
-        <div class="hero-label">HR Briefing | Application Intelligence for Talent Acquisition</div>
+        <div class="hero-label">HR Briefing | Application Quality Layer for Talent Acquisition</div>
         <h1>Recruiter productivity. Shortlist quality. Candidate signal. <span>All three are degrading from the same source.</span></h1>
+        <p style="font-size:17px;font-weight:500;color:rgba(255,255,255,0.75);margin-bottom:10px;line-height:1.55;">Your ATS shows what candidates submitted. Sentriq shows what needs clarification.</p>
         <p>Applications are the only moment in hiring where candidates self-describe, completely unverified. AI tools now engineer this moment at scale: overfitted qualifications, bulk submissions that match every keyword, generic answers that pass every filter. The result compounds across every KPI your team tracks: hours lost to low-signal reviews, shortlists built without reliable evidence, and hiring managers who stop trusting what recruiters send them.</p>
     </div>
 
@@ -425,19 +426,37 @@ document.addEventListener('DOMContentLoaded', function() {
                     <li>Zero workflow change for your team</li>
                 </ul>
             </div>
+            <div class="layer-card" style="background:#0B0C18;border-color:#1A1B2E;">
+                <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:rgba(232,160,32,0.6);margin-bottom:14px;">Examples of gaps Sentriq surfaces</div>
+                <div style="display:flex;flex-direction:column;gap:10px;">
+                    <div style="padding:12px 14px;background:#0D0E1A;border-radius:8px;border-left:3px solid rgba(232,160,32,0.4);">
+                        <div style="font-size:11px;font-weight:700;color:#E8A020;margin-bottom:4px;">Skill depth ambiguity</div>
+                        <div style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.5;">Resume lists SQL. No project, responsibility, or timeline supports the depth of usage required for the role.</div>
+                    </div>
+                    <div style="padding:12px 14px;background:#0D0E1A;border-radius:8px;border-left:3px solid rgba(232,160,32,0.4);">
+                        <div style="font-size:11px;font-weight:700;color:#E8A020;margin-bottom:4px;">Resume-to-application inconsistency</div>
+                        <div style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.5;">Resume says 5 years of experience. Screening answer says 2. Sentriq flags both and asks the candidate to clarify.</div>
+                    </div>
+                    <div style="padding:12px 14px;background:#0D0E1A;border-radius:8px;border-left:3px solid rgba(232,160,32,0.4);">
+                        <div style="font-size:11px;font-weight:700;color:#E8A020;margin-bottom:4px;">Role-critical requirement unclear</div>
+                        <div style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.5;">The role requires UK right-to-work. The application does not confirm it. Sentriq requests confirmation before the recruiter spends time on the profile.</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="layer-card">
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
                     <div class="layer-num" style="margin-bottom:0;">Step 2</div>
                     <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(232,160,32,0.55);background:rgba(232,160,32,0.06);border-radius:4px;padding:3px 8px;">Shortlist Quality</div>
                 </div>
                 <h3>Candidate Clarification Step</h3>
-                <div class="layer-desc">When Sentriq detects confidence gaps, it sends the candidate a short clarification step. Triggered only when needed, not on every application. Candidates with genuine intent complete it in under 3 minutes. The result updates the application profile in your ATS before the recruiter opens the file.</div>
+                <div class="layer-desc">When Sentriq detects a specific, explainable gap, it sends the candidate a short clarification step. Triggered only when a gap exists — not on every application. Most candidates never see it. Those who do can complete it in under two minutes.</div>
                 <ul class="layer-bullets">
-                    <li>Triggered only when confidence gaps exist</li>
-                    <li>Candidate clarifies missing or inconsistent signal</li>
-                    <li>Challenge completion updates the ATS profile automatically</li>
+                    <li>Triggered on 5-20% of applications depending on role — the majority flow through untouched</li>
+                    <li>Each challenge is tied to a specific detected gap: skill depth, timeline ambiguity, missing evidence, role requirement confirmation</li>
+                    <li>Candidate clarification updates the ATS profile automatically before recruiter review</li>
                     <li>No recruiter involvement required</li>
-                    <li>Abandonment is itself the signal — candidates who skip a 3-minute step to work at your organization were unlikely to be strong hires</li>
+                    <li>Abandonment is itself the signal — candidates who skip a two-minute step to work at your organization were unlikely to be strong hires</li>
                 </ul>
             </div>
         </div>
@@ -450,7 +469,8 @@ document.addEventListener('DOMContentLoaded', function() {
             <h3 style="font-size:15px;font-weight:700;color:#ffffff;margin-bottom:8px;">ATS Enrichment + Continuous Monitoring</h3>
             <div class="layer-desc">Every application receives a Candidate Signal Profile in your ATS before any recruiter opens the file. But Sentriq does not stop there. Every time new input arrives in the ATS across the hiring funnel, Sentriq re-analyzes it against the original application and the clarification step. Phone screen transcript. Hiring manager notes. Interview recording. Each one is checked for contradictions and gaps that were not visible at submission.</div>
             <ul class="layer-bullets">
-                <li>Initial signal profile: confidence label, role-fit evidence, explanation bullets</li>
+                <li>Signal profile in the ATS: application clarity, role-fit evidence, consistency status, gap highlights — before the recruiter opens the file</li>
+                <li>Suggested recruiter follow-up questions for each gap — what to ask in the phone screen, not just what was missing</li>
                 <li>Continuous monitoring: every new ATS input triggers re-analysis against the original application</li>
                 <li>Surfaces contradictions between written application and spoken interview answers</li>
                 <li>Updated gap summary pushed to ATS before each subsequent hiring stage</li>
@@ -459,8 +479,16 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
 
         <div class="layer-output">
-            <div class="output-label">What your team sees</div>
-            <div class="output-text">Each application enters your ATS with a Candidate Signal Profile. That profile updates at every stage. Recruiters and hiring managers always have the latest signal before their next decision.</div>
+            <div class="output-label">What your team sees in the ATS</div>
+            <div class="output-text">Each application enters your ATS with a Sentriq Signal Profile. The profile updates at every stage as new input arrives.</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin:14px 0;">
+                <span style="padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;background:rgba(68,204,136,0.1);border:1px solid rgba(68,204,136,0.3);color:#44CC88;">Clear application</span>
+                <span style="padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.3);color:#E8A020;">Needs clarification</span>
+                <span style="padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.15);color:rgba(232,160,32,0.7);">Clarification pending</span>
+                <span style="padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;background:rgba(68,204,136,0.06);border:1px solid rgba(68,204,136,0.2);color:rgba(68,204,136,0.8);">Clarified</span>
+                <span style="padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);">Partial evidence</span>
+                <span style="padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);">Missing evidence</span>
+            </div>
             <div class="output-sub">A candidate who looked strong at application can be flagged at phone screen if their spoken answers contradict what they submitted. The signal layer does not expire when the application does.</div>
         </div>
 
