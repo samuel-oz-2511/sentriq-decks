@@ -143,6 +143,10 @@
             .lc-callouts { grid-template-columns: 1fr; }
             .multiplier { grid-template-columns: 1fr; gap: 12px; text-align: center; }
             .mult-op { display: none; }
+            .roi-summary { grid-template-columns: 1fr !important; gap: 8px !important; }
+            .roi-summary .roi-op { display: none; }
+            .gartner-banner { grid-template-columns: 1fr !important; }
+            .gartner-banner .gartner-stat { border-left: none !important; border-top: 1px solid rgba(232,160,32,0.2); padding-left: 0 !important; padding-top: 12px !important; text-align: left !important; }
             .calc-row { flex-direction: column; align-items: flex-start; gap: 10px; }
             .calc-input { width: 100%; font-size: 18px; }
             .cta { flex-direction: column; padding: 28px 24px; text-align: center; }
@@ -227,35 +231,24 @@ document.addEventListener('DOMContentLoaded', function() {
     <!-- 2. PROBLEM -->
     <div class="section">
         <div class="section-label">Three KPIs. One root cause.</div>
-        <div style="background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.25);border-radius:10px;padding:14px 20px;margin-bottom:16px;display:flex;align-items:center;gap:16px;">
+        <div class="gartner-banner" style="background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.25);border-radius:10px;padding:16px 20px;margin-bottom:20px;display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;">
             <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#E8A020;flex-shrink:0;">Gartner, Jan 2026</div>
-            <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.55;">"Employers Reverse the Candidate Fraud Arms Race" is named a top 2026 CHRO trend. Gartner recommends deploying candidate verification tools early in the recruitment process. By 2028, Gartner estimates 25% of candidate profiles will be inaccurate or unreliable.</div>
-        </div>
-        <div class="pain-grid">
-            <div class="pain-card">
-                <div class="pain-num">23 hrs</div>
-                <div class="pain-label">Recruiter hours spent screening per hire. Most of it on applications that were never going to advance.</div>
-                <div class="pain-source">Shortlist, 2025</div>
-            </div>
-            <div class="pain-card">
-                <div class="pain-num">25%</div>
-                <div class="pain-label">of candidate profiles will be unreliable by 2028. Gartner names this the defining hiring quality challenge for CHROs.</div>
-                <div class="pain-source">Gartner Future of Work Trends 2026, G00844785</div>
-            </div>
-            <div class="pain-card">
-                <div class="pain-num">1:50</div>
-                <div class="pain-label">Signal-to-noise ratio in competitive hiring markets. One genuinely qualified candidate per 50 applications reviewed.</div>
-                <div class="pain-source">Pin 2026 Recruitment Funnel Benchmarks</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.55;">"Employers Reverse the Candidate Fraud Arms Race" is named a top 2026 CHRO priority. Gartner recommends deploying candidate verification tools early in the recruitment process.</div>
+            <div class="gartner-stat" style="text-align:right;flex-shrink:0;padding-left:20px;border-left:1px solid rgba(232,160,32,0.2);">
+                <div style="font-size:28px;font-weight:800;color:#E8A020;line-height:1;">25%</div>
+                <div style="font-size:11px;color:rgba(232,160,32,0.6);margin-top:3px;">of profiles unreliable by 2028</div>
+                <div style="font-size:10px;color:rgba(232,160,32,0.4);margin-top:2px;">G00844785</div>
             </div>
         </div>
 
-        <div style="margin-top:20px;margin-bottom:20px;display:flex;flex-direction:column;gap:12px;">
+        <div style="margin-top:0;margin-bottom:20px;display:flex;flex-direction:column;gap:12px;">
 
             <div style="background:#0D0E1A;border:1px solid rgba(232,160,32,0.2);border-left:4px solid #E8A020;border-radius:12px;padding:22px 24px;display:grid;grid-template-columns:1fr 2fr;gap:24px;align-items:start;">
                 <div>
                     <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#E8A020;margin-bottom:10px;">Recruiter Productivity</div>
                     <div style="font-size:28px;font-weight:800;color:#ffffff;line-height:1;margin-bottom:4px;">23 hrs</div>
-                    <div style="font-size:11px;color:rgba(255,255,255,0.35);">per hire, screening</div>
+                    <div style="font-size:18px;font-weight:700;color:#E8A020;margin-bottom:4px;">$1,380 per hire</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.35);">in recruiter screening time</div>
                 </div>
                 <div>
                     <div style="font-size:13px;font-weight:600;color:#ffffff;margin-bottom:8px;">What AI-generated volume does to this metric</div>
@@ -267,11 +260,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div>
                     <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#E8A020;margin-bottom:10px;">Shortlist Quality</div>
                     <div style="font-size:28px;font-weight:800;color:#ffffff;line-height:1;margin-bottom:4px;">3:1</div>
-                    <div style="font-size:11px;color:rgba(255,255,255,0.35);">interview-to-offer benchmark</div>
+                    <div style="font-size:18px;font-weight:700;color:#E8A020;margin-bottom:4px;">$1,500 per hire</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.35);">in interview costs at benchmark ratio</div>
                 </div>
                 <div>
                     <div style="font-size:13px;font-weight:600;color:#ffffff;margin-bottom:8px;">What low-signal applications do to this metric</div>
-                    <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.65;">Gartner calls it an arms race: candidates use AI to polish applications, organizations respond with more screening layers, candidates respond with more optimized submissions. 72% of applicants embellish. 31% misrepresent qualifications outright. Applications engineered to match job descriptions exactly pass ATS and phone screen, then fail at interview. When your shortlist is built on low-confidence signal, the 3:1 benchmark breaks and hiring manager trust in the pipeline collapses.</div>
+                    <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.65;">Gartner calls it an arms race: candidates use AI to polish applications, organizations respond with more screening layers, candidates respond with more optimized submissions. 72% of applicants embellish. 31% misrepresent qualifications outright. Applications engineered to match job descriptions exactly pass ATS and phone screen, then fail at interview. When shortlist quality degrades, the 3:1 benchmark breaks toward 6:1 or worse, and interview costs double before a single offer is made.</div>
                 </div>
             </div>
 
@@ -279,15 +273,43 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div>
                     <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#E8A020;margin-bottom:10px;">Candidate Signal Confidence</div>
                     <div style="font-size:28px;font-weight:800;color:#ffffff;line-height:1;margin-bottom:4px;">1:50</div>
-                    <div style="font-size:11px;color:rgba(255,255,255,0.35);">signal-to-noise ratio</div>
+                    <div style="font-size:18px;font-weight:700;color:#E8A020;margin-bottom:4px;">$1,500 to find one</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.35);">qualified candidate through the noise</div>
                 </div>
                 <div>
                     <div style="font-size:13px;font-weight:600;color:#ffffff;margin-bottom:8px;">What signal collapse does to this metric</div>
-                    <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.65;">Gartner's January 2026 Market Guide for Recruiting Technologies names "AI-enabled candidate verification and application quality detection" a trending recruiting technology and recommends organizations prioritize it. Academic research describes modern application pools as "a broken signaling system." 89% of hiring managers report AI-driven submissions have increased their workload. Your ATS shows what was submitted. It does not show how much confidence to place in what you are reading. That is the gap Sentriq fills.</div>
+                    <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.65;">At 1:50, surfacing one genuinely qualified candidate requires reviewing 50 applications at roughly 30 minutes each: 25 recruiter hours, $1,500 in capacity per qualified find. Gartner's January 2026 Market Guide names "AI-enabled candidate verification and application quality detection" a trending recruiting technology. Academic research describes modern application pools as "a broken signaling system." Your ATS shows what was submitted. It does not show how much confidence to place in what you are reading. That is the gap Sentriq fills.</div>
                 </div>
             </div>
 
         </div>
+
+        <div class="roi-summary" style="background:#0D0E1A;border:1px solid #161728;border-radius:12px;padding:20px 28px;display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;align-items:center;gap:0;">
+            <div style="text-align:center;padding:8px;">
+                <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.35);margin-bottom:6px;">Screening waste</div>
+                <div style="font-size:22px;font-weight:800;color:#ffffff;">$1,380</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:3px;">per hire</div>
+            </div>
+            <div class="roi-op" style="font-size:20px;font-weight:300;color:#161728;text-align:center;padding:0 4px;">+</div>
+            <div style="text-align:center;padding:8px;">
+                <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.35);margin-bottom:6px;">Wasted interviews</div>
+                <div style="font-size:22px;font-weight:800;color:#ffffff;">$1,500</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:3px;">per hire</div>
+            </div>
+            <div class="roi-op" style="font-size:20px;font-weight:300;color:#161728;text-align:center;padding:0 4px;">+</div>
+            <div style="text-align:center;padding:8px;">
+                <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.35);margin-bottom:6px;">Signal search cost</div>
+                <div style="font-size:22px;font-weight:800;color:#ffffff;">$1,500</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:3px;">per qualified find</div>
+            </div>
+            <div class="roi-op" style="font-size:20px;font-weight:300;color:#161728;text-align:center;padding:0 4px;">=</div>
+            <div style="text-align:center;padding:8px;background:rgba(232,160,32,0.06);border-radius:8px;border:1px solid rgba(232,160,32,0.15);">
+                <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#E8A020;margin-bottom:6px;">ROI exposure</div>
+                <div style="font-size:22px;font-weight:800;color:#E8A020;">$4,380</div>
+                <div style="font-size:11px;color:rgba(232,160,32,0.5);margin-top:3px;">per hire, recoverable</div>
+            </div>
+        </div>
+
     </div>
 
     <!-- 3. LIFECYCLE DIAGRAM -->
