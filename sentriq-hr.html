@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sentriq | Hiring Pipeline Integrity</title>
+    <title>Sentriq | Application Intelligence for Talent Acquisition</title>
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
@@ -106,15 +106,7 @@
         .calc-result { font-size: 22px; font-weight: 700; color: #E8A020; }
         .calc-result-label { font-size: 12px; color: rgba(255,255,255,0.72); }
 
-        /* Ask */
-        .ask-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 12px; }
-        .ask-card { background: #0D0E1A; border: 1px solid #161728; border-radius: 12px; padding: 24px 22px; }
-        .ask-card h3 { font-size: 14px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
-        .ask-card p { font-size: 13px; color: rgba(255,255,255,0.72); line-height: 1.6; }
-        .ask-card.highlight { background: rgba(232,160,32,0.04); border-color: rgba(232,160,32,0.2); }
-        .ask-card.highlight h3 { color: #E8A020; }
-
-        /* Stage cost escalation (reused from JPMorgan HR deck) */
+        /* Stage cost escalation */
         .stage-row-cost { background: #0D0E1A; border: 1px solid #161728; border-radius: 8px; padding: 14px 22px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px; }
         .stage-row-cost.danger-low { background: rgba(30,10,10,0.5); border-color: rgba(204,51,51,0.18); }
         .stage-row-cost.danger-mid { background: rgba(30,10,10,0.65); border-color: rgba(204,51,51,0.28); }
@@ -146,7 +138,6 @@
             .pain-grid { grid-template-columns: 1fr; }
             .problem-grid { grid-template-columns: 1fr; }
             .layers-grid { grid-template-columns: 1fr; }
-            .ask-grid { grid-template-columns: 1fr; }
             .lifecycle-grid-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
             .lifecycle-grid { min-width: 560px; }
             .lc-callouts { grid-template-columns: 1fr; }
@@ -228,9 +219,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <!-- 1. HERO -->
     <div class="hero">
-        <div class="hero-label">HR Briefing | Hiring Pipeline Integrity</div>
+        <div class="hero-label">HR Briefing | Application Intelligence for Talent Acquisition</div>
         <h1>Recruiter productivity. Shortlist quality. Candidate signal. <span>All three are degrading from the same source.</span></h1>
-        <p>Applications are the only moment in hiring where candidates self-describe, completely unverified. AI tools now engineer this moment at scale: fabricated credentials, overfitted qualifications, bulk submissions that pass every ATS filter. The result compounds across every KPI your team tracks: hours lost to noise, shortlists corrupted by misrepresentation, and hiring decisions made without reliable signal.</p>
+        <p>Applications are the only moment in hiring where candidates self-describe, completely unverified. AI tools now engineer this moment at scale: overfitted qualifications, bulk submissions that match every keyword, generic answers that pass every filter. The result compounds across every KPI your team tracks: hours lost to low-signal reviews, shortlists built without reliable evidence, and hiring managers who stop trusting what recruiters send them.</p>
     </div>
 
     <!-- 2. PROBLEM -->
@@ -238,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="section-label">Three KPIs. One root cause.</div>
         <div style="background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.25);border-radius:10px;padding:14px 20px;margin-bottom:16px;display:flex;align-items:center;gap:16px;">
             <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#E8A020;flex-shrink:0;">Gartner, Jan 2026</div>
-            <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.55;">"Employers Reverse the Candidate Fraud Arms Race" is named a top 2026 CHRO trend. Gartner recommends: deploy identity verification tools early in the recruitment process. By 2028, Gartner estimates 25% of candidate profiles will be fake.</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.55;">"Employers Reverse the Candidate Fraud Arms Race" is named a top 2026 CHRO trend. Gartner recommends deploying candidate verification tools early in the recruitment process. By 2028, Gartner estimates 25% of candidate profiles will be inaccurate or unreliable.</div>
         </div>
         <div class="pain-grid">
             <div class="pain-card">
@@ -248,12 +239,12 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             <div class="pain-card">
                 <div class="pain-num">25%</div>
-                <div class="pain-label">of candidate profiles will be fake by 2028. Gartner names this the defining hiring integrity challenge for CHROs.</div>
+                <div class="pain-label">of candidate profiles will be unreliable by 2028. Gartner names this the defining hiring quality challenge for CHROs.</div>
                 <div class="pain-source">Gartner Future of Work Trends 2026, G00844785</div>
             </div>
             <div class="pain-card">
                 <div class="pain-num">1:50</div>
-                <div class="pain-label">Signal-to-noise ratio in competitive hiring markets. One genuine qualified candidate per 50 applications reviewed.</div>
+                <div class="pain-label">Signal-to-noise ratio in competitive hiring markets. One genuinely qualified candidate per 50 applications reviewed.</div>
                 <div class="pain-source">Pin 2026 Recruitment Funnel Benchmarks</div>
             </div>
         </div>
@@ -268,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <div>
                     <div style="font-size:13px;font-weight:600;color:#ffffff;margin-bottom:8px;">What AI-generated volume does to this metric</div>
-                    <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.65;">40 to 80% of applicants now use AI tools to generate or enhance their submission. Each looks different. All require review. Recruiters managing 20+ open requisitions spend the majority of their screening time on applications that share no intent, no qualification, and no match. That time is gone before a single conversation happens.</div>
+                    <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.65;">40 to 80% of applicants now use AI tools to generate or enhance their submission. Each looks different. All require review. Recruiters managing 20+ open requisitions spend the majority of their screening time on applications with no real fit, no specific intent, and no match to the role. That time is gone before a single conversation happens.</div>
                 </div>
             </div>
 
@@ -279,8 +270,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div style="font-size:11px;color:rgba(255,255,255,0.35);">interview-to-offer benchmark</div>
                 </div>
                 <div>
-                    <div style="font-size:13px;font-weight:600;color:#ffffff;margin-bottom:8px;">What fabrication does to this metric</div>
-                    <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.65;">Gartner calls it an arms race: candidates use AI to engineer applications, organizations respond with more screening, candidates respond with more sophisticated fabrication. 72% of applicants embellish. 31% fabricate outright. Applications engineered to match job descriptions exactly pass ATS and phone screen, then fail at interview. When your shortlist is built on fabricated signals, the 3:1 benchmark breaks down and hiring manager confidence in the pipeline collapses.</div>
+                    <div style="font-size:13px;font-weight:600;color:#ffffff;margin-bottom:8px;">What low-signal applications do to this metric</div>
+                    <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.65;">Gartner calls it an arms race: candidates use AI to polish applications, organizations respond with more screening layers, candidates respond with more optimized submissions. 72% of applicants embellish. 31% misrepresent qualifications outright. Applications engineered to match job descriptions exactly pass ATS and phone screen, then fail at interview. When your shortlist is built on low-confidence signal, the 3:1 benchmark breaks and hiring manager trust in the pipeline collapses.</div>
                 </div>
             </div>
 
@@ -292,16 +283,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 <div>
                     <div style="font-size:13px;font-weight:600;color:#ffffff;margin-bottom:8px;">What signal collapse does to this metric</div>
-                    <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.65;">Gartner's January 2026 Market Guide for Recruiting Technologies names "AI-enabled candidate fraud detection" as a trending technology and recommends organizations prioritize solutions that "incorporate robust identity verification and fraud detection capabilities." Academic research describes modern applications as "a broken signaling system." When recruiters cannot trust what they read, they either over-screen (adding cost) or under-screen (letting fabrications through). 89% of hiring managers report AI-driven submissions have increased their workload. The signal layer does not exist yet in the TA stack. That is the gap Sentriq fills.</div>
+                    <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.65;">Gartner's January 2026 Market Guide for Recruiting Technologies names "AI-enabled candidate verification and application quality detection" a trending recruiting technology and recommends organizations prioritize it. Academic research describes modern application pools as "a broken signaling system." 89% of hiring managers report AI-driven submissions have increased their workload. Your ATS shows what was submitted. It does not show how much confidence to place in what you are reading. That is the gap Sentriq fills.</div>
                 </div>
             </div>
 
-        </div>
-
-        <div style="background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.18);border-left:4px solid #E8A020;border-radius:12px;padding:18px 22px;">
-            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(232,160,32,0.9);margin-bottom:6px;">The extreme version: when it makes it all the way through</div>
-            <div style="font-size:13px;color:rgba(232,160,32,0.8);line-height:1.6;">KnowBe4 hired a fraudulent IT worker in 2024 who immediately attempted to load malware. The hire passed a resume screen, four video interviews, and a full background check. 41% of companies have already onboarded a fraudulent employee. Remote engineering and DevOps roles are the primary vector.</div>
-            <div style="font-size:10px;color:rgba(232,160,32,0.7);margin-top:6px;">GetReal Security, Dec 2025 (668 IT/cybersecurity leaders). KnowBe4 CEO Stu Sjouwerman, July 2024.</div>
         </div>
     </div>
 
@@ -313,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="lc-stage lc-sentriq">
                     <div class="lc-badge">Sentriq</div>
                     <div class="lc-name">Application</div>
-                    <div class="lc-tool">Trust signal here</div>
+                    <div class="lc-tool">Signal profile here</div>
                     <div class="lc-cost">Before ATS</div>
                 </div>
                 <div class="lc-stage">
@@ -362,16 +347,16 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         <div class="lc-callouts">
             <div class="lc-callout lc-amber">
-                <h4>Sentriq intercepts at submission</h4>
-                <p>Before the first resume review. Before any recruiter time is spent. Fraud and noise are surfaced before they enter your ATS queue.</p>
+                <h4>Sentriq enriches at submission</h4>
+                <p>Before the first resume review. Before any recruiter time is spent. Every application enters your ATS with a Candidate Signal Profile already attached.</p>
             </div>
             <div class="lc-callout lc-red">
                 <h4>Background check verifies identity, not the application</h4>
-                <p>Checkr confirms a Social Security number post-offer. It does not verify who filled out the form or whether qualifications are real.</p>
+                <p>Checkr confirms a Social Security number post-offer. It does not verify role-fit evidence, consistency, or how the application was completed.</p>
             </div>
             <div class="lc-callout">
                 <h4>Platform-agnostic</h4>
-                <p>No changes to your ATS setup. Trust signals surface before applications enter your existing workflow. No recruiter workflow disruption.</p>
+                <p>No changes to your ATS setup. Signal profiles surface before applications enter your existing workflow. No recruiter workflow disruption.</p>
             </div>
         </div>
     </div>
@@ -382,58 +367,58 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="layers-grid">
             <div class="layer-card">
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-                    <div class="layer-num" style="margin-bottom:0;">Layer 1</div>
+                    <div class="layer-num" style="margin-bottom:0;">Step 1</div>
                     <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(232,160,32,0.55);background:rgba(232,160,32,0.06);border-radius:4px;padding:3px 8px;">Recruiter Productivity</div>
                 </div>
-                <h3>Behavioral Baseline</h3>
-                <div class="layer-desc">Every submission carries a behavioral fingerprint. Sentriq reads it at the moment of application: how the form was filled, what tools were used, timing and environment signals. Invisible to genuine applicants. Noise is filtered before any recruiter time is committed.</div>
+                <h3>Application Behavior Analysis</h3>
+                <div class="layer-desc">Sentriq instruments the application flow and reads how each submission was completed: time per field, completion patterns, engagement with role-specific questions, screening answer depth. This happens before any recruiter opens the application. Low-confidence applications are identified before any recruiter time is committed.</div>
                 <ul class="layer-bullets">
-                    <li>AI-generated content detection</li>
-                    <li>Tool and automation fingerprinting</li>
-                    <li>Behavioral anomaly scoring</li>
+                    <li>Captures application behavior signals at submission</li>
+                    <li>Analyzes role-fit evidence and screening answer quality</li>
+                    <li>Checks consistency across resume, answers, and candidate links</li>
                     <li>Zero workflow change for your team</li>
                 </ul>
             </div>
             <div class="layer-card">
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-                    <div class="layer-num" style="margin-bottom:0;">Layer 2</div>
+                    <div class="layer-num" style="margin-bottom:0;">Step 2</div>
                     <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(232,160,32,0.55);background:rgba(232,160,32,0.06);border-radius:4px;padding:3px 8px;">Shortlist Quality</div>
                 </div>
-                <h3>Async Challenge</h3>
-                <div class="layer-desc">When Layer 1 flags an anomaly, a short async task surfaces whether the submission is human-driven. Triggered only on anomaly. Real applicants complete it without friction. Fabricated or proxy-assisted submissions surface here, before they corrupt your shortlist.</div>
+                <h3>Candidate Clarification Step</h3>
+                <div class="layer-desc">When Sentriq detects confidence gaps, it sends the candidate a short clarification step. Triggered only when needed, not on every application. Candidates with genuine intent complete it in under 3 minutes. The result updates the application profile in your ATS before the recruiter opens the file.</div>
                 <ul class="layer-bullets">
-                    <li>Triggered only on anomaly, not on every application</li>
-                    <li>Detects proxy and AI-assisted submissions</li>
-                    <li>Abandonment itself is a signal</li>
-                    <li>No scheduler, no recruiter involvement</li>
+                    <li>Triggered only when confidence gaps exist</li>
+                    <li>Candidate clarifies missing or inconsistent signal</li>
+                    <li>Challenge completion updates the ATS profile automatically</li>
+                    <li>No recruiter involvement required</li>
                 </ul>
             </div>
         </div>
 
         <div style="background:#0D0E1A;border:1px solid #161728;border-radius:12px;padding:24px 22px;margin-bottom:14px;">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-                <div class="layer-num" style="margin-bottom:0;">Layer 3</div>
+                <div class="layer-num" style="margin-bottom:0;">Step 3</div>
                 <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(232,160,32,0.55);background:rgba(232,160,32,0.06);border-radius:4px;padding:3px 8px;">Candidate Signal Confidence</div>
             </div>
-            <h3 style="font-size:15px;font-weight:700;color:#ffffff;margin-bottom:8px;">Human Review</h3>
-            <div class="layer-desc">When Layer 2 flags divergence, a Sentriq analyst reviews the full signal stack. The employer decides. Zero automated rejections. Every flagged application is documented, giving your hiring team and legal team a defensible audit trail. This is the layer that restores confidence in what you are actually looking at.</div>
+            <h3 style="font-size:15px;font-weight:700;color:#ffffff;margin-bottom:8px;">ATS Enrichment</h3>
+            <div class="layer-desc">Every application in your ATS receives a Candidate Signal Profile: a confidence label, role-fit evidence level, consistency summary, and 2-5 recruiter-readable explanation bullets. Recruiters see it before they open the resume. No automated rejections. Recruiters and hiring managers remain the decision makers. A complete audit trail is available for every profile.</div>
             <ul class="layer-bullets">
-                <li>Analyst reviews: employer always decides</li>
-                <li>Zero automated rejections on any application</li>
-                <li>EU AI Act Article 9 compliant by design</li>
-                <li>Full signal documentation available to HR and legal</li>
+                <li>Confidence label: High / Medium / Clarification recommended / Low-signal</li>
+                <li>Role-fit evidence: Strong / Partial / Weak / Missing</li>
+                <li>Explanation bullets: why this label, what to look at first</li>
+                <li>Recruiter recommendation: Review first / Review normally / Clarify before review</li>
             </ul>
         </div>
 
         <div class="layer-output">
             <div class="output-label">What your team sees</div>
-            <div class="output-text">Each application in your ATS arrives with a trust signal attached. Recruiters spend time on real applicants. Shortlists reflect actual qualification. Hiring managers trust the pipeline again.</div>
-            <div class="output-sub">High signal: proceed as normal. Flagged: confidence indicator before phone screen. Challenge triggered: recruiter sees result before investing any time.</div>
+            <div class="output-text">Each application in your ATS arrives with a Candidate Signal Profile attached. Recruiters spend time on high-confidence candidates. Shortlists reflect actual evidence of fit. Hiring managers trust the pipeline again.</div>
+            <div class="output-sub">High confidence: review first. Clarification recommended: recruiter sees the gap before deciding. Low-signal: recruiter deprioritizes without spending time on a full review.</div>
         </div>
 
         <div style="margin-top:14px;background:#0D0E1A;border-radius:12px;padding:22px 28px;border-left:4px solid #E8A020;">
-            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.35);margin-bottom:8px;">Platform-agnostic by design</div>
-            <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.75;">Like Cloudflare, Sentriq sits upstream of your hiring stack. No changes to your ATS. No recruiter workflow changes. No PII stored or shared. The signal layer plugs into your existing intake. Every application is evaluated against network-level patterns of behavioral anomaly, tool usage, and submission signals observed across the Sentriq network.</div>
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.35);margin-bottom:8px;">ATS-native by design</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.75;">Sentriq sits before your ATS. No changes to your ATS setup. No recruiter workflow changes. No PII stored across customers. The Candidate Signal Profile plugs into your existing intake as custom fields, tags, and recruiter notes inside Greenhouse, Lever, Ashby, Workday, or iCIMS. Recruiters stay where they already work.</div>
         </div>
     </div>
 
@@ -451,7 +436,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;">
                     <li style="display:flex;gap:10px;align-items:flex-start;">
                         <span style="color:#44CC88;font-size:13px;flex-shrink:0;">&#10003;</span>
-                        <span style="font-size:13px;color:rgba(255,255,255,0.72);line-height:1.5;">Attack research complete: 17 documented techniques, 30+ live ATS experiments.</span>
+                        <span style="font-size:13px;color:rgba(255,255,255,0.72);line-height:1.5;">Application behavior signal research complete across 30+ ATS environments and application flows.</span>
                     </li>
                     <li style="display:flex;gap:10px;align-items:flex-start;">
                         <span style="color:#44CC88;font-size:13px;flex-shrink:0;">&#10003;</span>
@@ -463,7 +448,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </li>
                     <li style="display:flex;gap:10px;align-items:flex-start;">
                         <span style="color:#E8A020;font-size:13px;flex-shrink:0;">&#9679;</span>
-                        <span style="font-size:13px;color:rgba(255,255,255,0.72);line-height:1.5;">Active design partner conversations. Each lead at a different stage of the process.</span>
+                        <span style="font-size:13px;color:rgba(255,255,255,0.72);line-height:1.5;">Active design partner conversations with enterprise Talent teams. Each lead at a different stage.</span>
                     </li>
                 </ul>
             </div>
@@ -476,11 +461,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     </li>
                     <li style="display:flex;gap:10px;align-items:flex-start;">
                         <span style="color:#E8A020;font-size:13px;flex-shrink:0;">&#9670;</span>
-                        <span style="font-size:13px;color:rgba(255,255,255,0.72);line-height:1.5;">Direct product input. Your hiring workflow shapes what gets built first.</span>
+                        <span style="font-size:13px;color:rgba(255,255,255,0.72);line-height:1.5;">Direct product input. Your recruiting workflow shapes what gets built first.</span>
                     </li>
                     <li style="display:flex;gap:10px;align-items:flex-start;">
                         <span style="color:#E8A020;font-size:13px;flex-shrink:0;">&#9670;</span>
-                        <span style="font-size:13px;color:rgba(255,255,255,0.72);line-height:1.5;">Pilot data on your own application pool. Real signal, your pipeline, no fabricated benchmarks.</span>
+                        <span style="font-size:13px;color:rgba(255,255,255,0.72);line-height:1.5;">Pilot data on your own application pool. Real signal from your pipeline, not fabricated benchmarks.</span>
                     </li>
                 </ul>
             </div>
@@ -491,13 +476,13 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="section">
         <div class="section-label">The cost compounds at every stage</div>
         <p style="font-size:14px; color:rgba(255,255,255,0.55); line-height:1.8; margin-bottom:28px; max-width:680px;">
-            Every stage a fraudulent application advances costs more than the last. Sentriq stops it at $0.
+            Every stage a low-signal application advances costs more than the last. Sentriq adds confidence at $0 internal cost per application.
         </p>
 
         <div style="margin-bottom:28px;">
             <div class="stage-row-cost intercept" style="display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-radius:8px;margin-bottom:3px;">
                 <div>
-                    <div style="font-size:11px;font-weight:700;color:#E8A020;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:3px;">Sentriq intercepts here</div>
+                    <div style="font-size:11px;font-weight:700;color:#E8A020;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:3px;">Sentriq adds confidence here</div>
                     <div style="font-size:13px;color:rgba(232,160,32,0.7);">Before any internal resource is committed. Before any recruiter sees the application.</div>
                 </div>
                 <div style="text-align:right;flex-shrink:0;margin-left:24px;">
@@ -567,7 +552,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="section">
         <div class="section-label">Recruiter capacity at risk</div>
         <p style="font-size:14px;color:rgba(255,255,255,0.55);line-height:1.8;margin-bottom:24px;max-width:680px;">
-            Recruiter productivity is measurable. Use the calculator to see the scale of recruiter capacity currently exposed to unverified applications across your open roles.
+            Recruiter productivity is measurable. Use the calculator to see the scale of recruiter capacity currently spent on applications without reliable signal across your open roles.
         </p>
 
         <div class="multiplier">
@@ -578,7 +563,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="mult-op">x</div>
             <div class="mult-item">
                 <div class="mult-num">8.44</div>
-                <div class="mult-label">hrs per role<br>exposed to<br>unverified apps</div>
+                <div class="mult-label">hrs per role<br>spent reviewing<br>low-signal apps</div>
             </div>
             <div class="mult-op">=</div>
             <div class="mult-item">
@@ -603,17 +588,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="calc-result-label">per quarter at risk</div>
                 </div>
             </div>
-            <div style="margin-top:12px;font-size:13px;color:rgba(255,255,255,0.45);" id="calcWeeks">That is approximately <span id="calcWeeksNum">10.5</span> recruiter-weeks currently exposed to unverified applications. Sentriq gives you a signal on every one of them before any of that time is spent.</div>
+            <div style="margin-top:12px;font-size:13px;color:rgba(255,255,255,0.45);" id="calcWeeks">That is approximately <span id="calcWeeksNum">10.5</span> recruiter-weeks currently spent on applications without reliable signal. Sentriq gives you a Candidate Signal Profile on every one of them before any of that time is spent.</div>
         </div>
 
-        <div style="font-size:11px;color:rgba(255,255,255,0.35);font-style:italic;text-align:center;">Figures are illustrative. The actual efficiency return depends on your pipeline's fraud and noise rate, quantified during the pilot.</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.35);font-style:italic;text-align:center;">Figures are illustrative. The actual efficiency return depends on your pipeline's low-signal application rate, quantified during the pilot.</div>
     </div>
 
     <!-- 9. CTA -->
     <div class="cta">
         <div class="cta-left">
             <h2>Recruiter hours. Shortlist quality. Candidate signal. Here is the layer that restores all three.</h2>
-            <p>30 minutes. We show you what a trust signal looks like against your actual application pool and your existing recruiter workflow.</p>
+            <p>30 minutes. We show you what a Candidate Signal Profile looks like against your actual application pool and your existing recruiter workflow.</p>
         </div>
         <div class="cta-right">
             <div class="contact">samuel@sentriq.co</div>
@@ -629,11 +614,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <div class="footnotes">
         <p>[1] 23 hours screening per hire: Shortlist, 2025. Industry benchmark across resume review, sourcing outreach, and phone screen time per open role.</p>
-        <p>[2] 25% of candidate profiles fake by 2028: Gartner "9 Future of Work Trends for 2026," G00844785, January 2026. "Employers Reverse the Candidate Fraud Arms Race" named a top 2026 CHRO priority. Gartner recommends deploying IDV tools early in the recruitment process. 72% embellish, 31% fabricate: Purdue University resume fraud study. 3:1 interview-to-offer benchmark: SHRM 2025.</p>
-        <p>[3] 1:50 signal-to-noise ratio: Pin 2026 Recruitment Funnel Benchmarks. "AI-enabled candidate fraud detection" named a trending recruiting technology: Gartner Market Guide for Recruiting Technologies, G00836280, January 2026. "Broken signaling system": Journal of MIS Quarterly. 89% increased workload: Resume Genius AI Impact on Hiring survey, 2024.</p>
+        <p>[2] 25% of candidate profiles unreliable by 2028: Gartner "9 Future of Work Trends for 2026," G00844785, January 2026. "Employers Reverse the Candidate Fraud Arms Race" named a top 2026 CHRO priority. Gartner recommends deploying candidate verification tools early in the recruitment process. 72% embellish, 31% misrepresent qualifications: Purdue University resume integrity study. 3:1 interview-to-offer benchmark: SHRM 2025.</p>
+        <p>[3] 1:50 signal-to-noise ratio: Pin 2026 Recruitment Funnel Benchmarks. "AI-enabled candidate verification and application quality detection" named a trending recruiting technology: Gartner Market Guide for Recruiting Technologies, G00836280, January 2026. "Broken signaling system": Journal of MIS Quarterly. 89% increased workload: Resume Genius AI Impact on Hiring survey, 2024.</p>
         <p>[4] 40-80% of applicants use AI: Resume Now AI applicant report, 2024. Recruiters managing 20+ requisitions: SHRM 2025.</p>
-        <p>[5] KnowBe4 incident: publicly disclosed by CEO Stu Sjouwerman, July 2024. GetReal Security survey: 668 IT/cybersecurity leaders, December 2025.</p>
-        <p>[6] $60/hr loaded recruiter capacity rate. Conservative and internally consistent with lifecycle cost figures used throughout. Stage cost figures are illustrative estimates. Actual costs vary by organization.</p>
+        <p>[5] $60/hr loaded recruiter capacity rate. Conservative and internally consistent with lifecycle cost figures used throughout. Stage cost figures are illustrative estimates. Actual costs vary by organization.</p>
         <div class="disclaimer">All pipeline estimates are illustrative. Adjust the calculator for your actual open role count. Sentriq is in design partner phase. No live production data claims are implied. The efficiency return from Sentriq is quantified through the pilot, not estimated here.</div>
     </div>
 
