@@ -573,50 +573,45 @@ ntfy topic: sentriq-bhp-x8k2
     <!-- ROI CALCULATOR -->
     <div class="section">
         <div class="label">ROI: מנקודת מבט הבנק</div>
-        <div class="roi-cards">
+        <div class="roi-cards" style="grid-template-columns:1fr;">
             <div class="roi-card">
-                <div class="roi-card-label">חיסכון בעלות סינון הספק</div>
+                <div class="roi-card-label">עלות תחלופת קבלני BPO לא מתאימים</div>
                 <div class="roi-inputs">
-                    <div class="roi-input-row"><span>קבלנים חדשים דרך BPO בשנה</span><input type="number" id="roiRoles" class="roi-calc-input" value="500" min="50" max="5000" step="50" oninput="calcROI()"/></div>
-                    <div class="roi-input-row"><span>הגשות לכל תפקיד (ממוצע)</span><input type="number" id="roiApps" class="roi-calc-input" value="60" min="10" max="300" step="10" oninput="calcROI()"/></div>
-                    <div class="roi-input-row"><span>עלות שיחת סינון טלפוני</span><span>&#8362;75</span></div>
-                    <div class="roi-input-row"><span>הגשות שסוננו לפני שיחה</span><span>25%</span></div>
+                    <div class="roi-input-row"><span>קבלנים חדשים דרך BPO בשנה</span><input type="number" id="roiRoles" class="roi-calc-input" value="300" min="50" max="3000" step="50" oninput="calcROI()"/></div>
+                    <div class="roi-input-row"><span>% שיוצאים בגלל אי-התאמה תוך 6 חודשים</span><input type="number" id="roiChurnPct" class="roi-calc-input" value="15" min="5" max="40" step="1" oninput="calcROI()"/></div>
+                    <div class="roi-input-row"><span>עלות החלפת קבלן (גיוס + היכרות + פרודוקטיביות)</span><span>&#8362;60K</span></div>
+                    <div class="roi-input-row"><span>הפחתת אי-התאמה עם Sentriq</span><span>30%</span></div>
                 </div>
                 <div class="roi-result-block">
-                    <div class="roi-big-num" id="roiScreenSaved">&#8362;563K</div>
-                    <div class="roi-result-label">חיסכון שנתי משוער בעלויות סינון</div>
-                </div>
-            </div>
-            <div class="roi-card">
-                <div class="roi-card-label">רצפת חשיפה רגולטורית</div>
-                <div class="roi-inputs">
-                    <div class="roi-input-row"><span>תפקידי BPO עם גישה מיוחסת בשנה</span><input type="number" id="roiPriv" class="roi-calc-input" value="150" min="10" max="2000" step="10" oninput="calcROI()"/></div>
-                    <div class="roi-input-row"><span>עלות ממוצעת אירוע insider</span><span>&#8362;34M</span></div>
-                    <div class="roi-input-row"><span>עלות Sentriq שנתית (Mid-Market)</span><span>&#8362;250K</span></div>
-                    <div class="roi-input-row"><span>כיסוי: Sentriq לעומת אירוע אחד</span><span id="roiCoverageRatio">136x</span></div>
-                </div>
-                <div class="roi-result-block">
-                    <div class="roi-big-num" id="roiExposure">&#8362;5.1B</div>
-                    <div class="roi-result-label">חשיפה שנתית כוללת: תפקידי BPO עם גישה מיוחסת</div>
+                    <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-end;">
+                        <div>
+                            <div class="roi-big-num" id="roiChurnCost">&#8362;2.7M</div>
+                            <div class="roi-result-label">עלות תחלופה שנתית נוכחית</div>
+                        </div>
+                        <div style="flex:1;min-width:140px;">
+                            <div class="roi-big-num" style="color:var(--amber);" id="roiSaving">&#8362;810K</div>
+                            <div class="roi-result-label">חיסכון משוער עם Sentriq</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="roi-ratio-strip">
             <div class="roi-ratio-cell">
-                <div class="roi-ratio-num" id="roiReturnRatio">2.3:1</div>
-                <div class="roi-ratio-label">תשואה שנתית על חיסכון בסינון</div>
+                <div class="roi-ratio-num" id="roiReturnRatio">3.2x</div>
+                <div class="roi-ratio-label">ROI על עלות Sentriq שנתית</div>
             </div>
             <div class="roi-ratio-cell">
-                <div class="roi-ratio-num" id="roiCoverageRatioStrip">136x</div>
-                <div class="roi-ratio-label">אירוע אחד לעומת עלות Sentriq שנתית</div>
+                <div class="roi-ratio-num" id="roiChurnCount">45</div>
+                <div class="roi-ratio-label">החלפות BPO צפויות בשנה</div>
             </div>
             <div class="roi-ratio-cell">
-                <div class="roi-ratio-num" id="roiBreakevenCalls">3,334</div>
-                <div class="roi-ratio-label">שיחות סינון שנתיות לנקודת האיזון</div>
+                <div class="roi-ratio-num" id="roiBreakevenHires">5</div>
+                <div class="roi-ratio-label">החלפות שמכסות את עלות Sentriq</div>
             </div>
         </div>
         <p style="font-size:11px;color:var(--text-dim);line-height:1.8;direction:ltr;">
-            Screening cost: &#8362;75/call. Triage rate: 25% (enterprise benchmark). Sentriq Mid-Market tier: &#8362;250K/yr. Breakeven: 3,334 calls/yr covers full annual cost. Compliance exposure: BPO privileged-access roles x &#8362;34M (IBM/Ponemon $11.45M at 2.98 NIS/USD). Coverage ratio: 34M / 250K = 136x per incident. Sentriq does not guarantee incident prevention.
+            Replacement cost &#8362;60K/hire: BPO re-recruitment fee (&#8776;&#8362;15K) + 6-week onboarding + productivity gap. Churn rate 15%: conservative estimate for role-misfit exits within 6 months. Sentriq reduction 30%: estimated improvement in shortlist signal quality. Sentriq Mid-Market tier: &#8362;250K/yr. Breakeven: 5 prevented replacements cover full annual cost. Sentriq does not guarantee outcomes.
         </p>
     </div>
 
@@ -684,27 +679,24 @@ function fmtNIS(n) {
 }
 
 function calcROI() {
-    var roles        = parseInt(document.getElementById('roiRoles').value) || 500;
-    var apps         = parseInt(document.getElementById('roiApps').value)  || 60;
-    var priv         = parseInt(document.getElementById('roiPriv').value)  || 150;
+    var roles       = parseInt(document.getElementById('roiRoles').value)    || 300;
+    var churnPct    = parseInt(document.getElementById('roiChurnPct').value) || 15;
 
-    var totalApps      = roles * apps;
-    var triageRate     = 0.25;
-    var screenCost     = 75;
-    var sentriqCost    = 250000;
-    var incidentCost   = 34000000;
-    var screenSaved    = totalApps * triageRate * screenCost;
-    var exposure       = priv * incidentCost;
-    var coverageRatio  = Math.round(incidentCost / sentriqCost);
-    var returnRatio    = Math.round((screenSaved / sentriqCost) * 10) / 10;
-    var breakevenCalls = Math.ceil(sentriqCost / screenCost);
+    var replaceCost = 60000;
+    var sentriqCost = 250000;
+    var reduction   = 0.30;
 
-    document.getElementById('roiScreenSaved').innerHTML          = fmtNIS(screenSaved);
-    document.getElementById('roiExposure').innerHTML             = fmtNIS(exposure);
-    document.getElementById('roiCoverageRatio').textContent       = coverageRatio + 'x';
-    document.getElementById('roiCoverageRatioStrip').textContent  = coverageRatio + 'x';
-    document.getElementById('roiReturnRatio').textContent         = returnRatio.toFixed(1) + ':1';
-    document.getElementById('roiBreakevenCalls').textContent      = breakevenCalls.toLocaleString();
+    var churnCount      = Math.round(roles * churnPct / 100);
+    var churnCost       = churnCount * replaceCost;
+    var saving          = Math.round(churnCost * reduction);
+    var returnRatio     = Math.round((saving / sentriqCost) * 10) / 10;
+    var breakevenHires  = Math.ceil(sentriqCost / replaceCost);
+
+    document.getElementById('roiChurnCost').innerHTML      = fmtNIS(churnCost);
+    document.getElementById('roiSaving').innerHTML         = fmtNIS(saving);
+    document.getElementById('roiReturnRatio').textContent  = returnRatio.toFixed(1) + 'x';
+    document.getElementById('roiChurnCount').textContent   = churnCount.toLocaleString();
+    document.getElementById('roiBreakevenHires').textContent = breakevenHires.toLocaleString();
 }
 
 calcROI();
