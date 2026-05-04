@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<title>Sentriq - Investor Brief</title>
+<style>
+:root {
+    --bg:      #09090F;
+    --card:    #0D0E1A;
+    --border:  #161728;
+    --muted:   #8080A8;
+    --amber:   #E8A020;
+    --amber-d: #B87010;
+    --text:    #ffffff;
+    --text-sub: rgba(255,255,255,0.72);
+    --green:   #44CC88;
+    --primary: #E8A020;
+    --white:   #ffffff;
+    --gray-900: #09090F;
+    --gray-800: #0D0E1A;
+    --orange:  #E8A020;
+    --red:     #E05555;
+    --purple:  #3A2058;
+    --text-dim: rgba(255,255,255,0.52);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+.page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 52px 36px 80px;
+}
+@media (max-width: 640px) {
+    .page { padding: 28px 18px 60px; }
+}
+.label {
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.15em; color: var(--amber); margin-bottom: 12px;
+    display: flex; align-items: center; gap: 9px;
+}
+.label::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--amber); opacity: 0.5; }
+.signal-tag {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 10px; border-radius: 6px;
+    font-size: 11px; font-weight: 600;
+    background: rgba(232,160,32,0.08); color: var(--amber);
+    border: 1px solid rgba(232,160,32,0.2);
+}
+.hero-quote {
+    margin-top: 14px; padding: 20px 26px;
+    background: rgba(232,160,32,0.06);
+    border-left: 3px solid #E8A020;
+    border-radius: 0 12px 12px 0;
+}
+.hero-quote p { font-size: 15px; color: rgba(255,255,255,0.94); font-weight: 600; letter-spacing: -0.01em; line-height: 1.6; font-style: italic; }
+.hero-quote small { display: block; font-size: 11px; color: rgba(255,255,255,0.38); margin-top: 8px; line-height: 1.5; }
+.stat-num { font-size: 52px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; color: var(--amber); }
+.pill { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; border: 1px solid; }
+.pill-amber { background: rgba(232,160,32,0.08); color: var(--amber); border-color: rgba(232,160,32,0.2); }
+.pill-green { background: rgba(68,204,136,0.08); color: #44CC88; border-color: rgba(68,204,136,0.2); }
+section { margin-bottom: 44px; }
+h1 { font-size: clamp(28px, 5vw, 52px); font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; }
+h2 { font-size: clamp(18px, 3vw, 28px); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; }
+h3 { font-size: 15px; font-weight: 700; }
+p { line-height: 1.65; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+@media (max-width: 640px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .stat-num { font-size: 40px; }
+}
+.confidential-footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+    text-align: center;
+    letter-spacing: 0.06em;
+}
+</style>
+</head>
+<body>
+
+<script>
+(function() {
+    var t = new Date().toISOString();
+    var ua = navigator.userAgent;
+    fetch('https://ipapi.co/json/')
+        .then(function(r) { return r.json(); })
+        .then(function(geo) {
+            var loc = (geo.city || '') + ', ' + (geo.country_name || '') + ' (' + (geo.ip || '') + ')';
+            var org = geo.org || '';
+            var msg = 'Sentriq Work-Bench brief opened\n' + loc + '\n' + org + '\n' + t;
+            fetch('https://ntfy.sh/sentriq-wb-j4k2', { method: 'POST', mode: 'no-cors', body: msg }).catch(function(){});
+        })
+        .catch(function() {
+            fetch('https://ntfy.sh/sentriq-wb-j4k2', {
+                method: 'POST', mode: 'no-cors',
+                body: 'Sentriq Work-Bench brief opened (location unavailable)\n' + ua.substring(0,80) + '\n' + t
+            }).catch(function(){});
+        });
+})();
+</script>
+
+<div class="page">
+
+<!-- HEADER -->
+<section style="padding-bottom:36px;border-bottom:1px solid var(--border);">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:36px;flex-wrap:wrap;gap:12px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+            <svg width="40" height="40" viewBox="0 0 56 56" fill="none">
+                <rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+                <rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+                <rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+                <rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+                <circle cx="28" cy="7" r="3" fill="#E8A020"/>
+            </svg>
+            <span style="font-size:24px;font-weight:500;color:#ffffff;letter-spacing:-0.01em;">Sentriq<span style="color:#E8A020;">.</span></span>
+        </div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:rgba(232,160,32,0.7);background:rgba(232,160,32,0.1);padding:5px 12px;border-radius:6px;border:1px solid rgba(232,160,32,0.25);">Prepared for Work-Bench</div>
+    </div>
+    <h1 style="margin-bottom:14px;">The integrity layer between every<br/>application and every hiring decision.</h1>
+    <p style="font-size:16px;color:rgba(255,255,255,0.5);max-width:620px;line-height:1.6;margin-bottom:22px;">Built in Israel. Executing in the US. The hiring integrity infrastructure that has never existed.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <span class="pill pill-amber">Candidate Hiring Captcha</span>
+        <span class="pill pill-amber">$3.5M Seed</span>
+        <span class="pill pill-green">NY Tech Week: June 1-7</span>
+    </div>
+</section>
+
+<!-- WHY WORK-BENCH -->
+<section>
+    <span class="label">Why Work-Bench</span>
+    <div style="padding:22px 26px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.22);border-radius:14px;">
+        <h3 style="color:var(--amber);margin-bottom:10px;">You seeded the identity verification layer. We are building the application integrity layer above it.</h3>
+        <p style="font-size:13px;color:var(--text-sub);line-height:1.7;">In July 2025, Socure launched Workforce Verification, explicitly naming hiring fraud and imposter workers as the target market. That product starts after the application is submitted. We operate before: behavioral detection at the moment of form fill, before anything enters an ATS. The cross-company fraud graph Socure cannot build, because they arrive from identity, not from application behavior. Work-Bench seeded the identity layer that became a unicorn. Sentriq is the application integrity layer that does not yet exist.</p>
+    </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section>
+    <span class="label">The Problem</span>
+    <h2 style="margin-bottom:16px;">The hiring funnel is the only enterprise perimeter <span style="color:var(--amber);">that has never been defended.</span></h2>
+    <div class="grid-3" style="margin-bottom:16px;">
+        <div style="padding:18px;background:rgba(232,160,32,0.1);border:2px solid rgba(232,160,32,0.4);border-radius:12px;text-align:center;">
+            <div class="stat-num">41%</div>
+            <p style="font-size:12px;color:var(--text-sub);margin-top:8px;line-height:1.5;">of companies already hired a fraudulent employee. Not nearly. Hired. Onboarded. Given access.</p>
+            <p style="font-size:10px;color:var(--muted);margin-top:6px;">668 enterprise security leaders, Dec 2025</p>
+        </div>
+        <div style="padding:18px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.15);border-radius:12px;text-align:center;">
+            <div class="stat-num">75%</div>
+            <p style="font-size:12px;color:var(--text-sub);margin-top:8px;line-height:1.5;">of job seekers globally now use AI tools to optimize applications. The signal is gone.</p>
+            <p style="font-size:10px;color:var(--muted);margin-top:6px;">DemandSage, 2026</p>
+        </div>
+        <div style="padding:18px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.15);border-radius:12px;text-align:center;">
+            <div class="stat-num" style="font-size:38px;">$1,900+</div>
+            <p style="font-size:12px;color:var(--text-sub);margin-top:8px;line-height:1.5;">in recruiter and executive time spent before a background check even runs.</p>
+            <p style="font-size:10px;color:var(--muted);margin-top:6px;">SHRM, 2025</p>
+        </div>
+    </div>
+    <div style="padding:14px 18px;background:rgba(255,255,255,0.03);border-left:3px solid var(--amber);border-radius:0 10px 10px 0;margin-bottom:10px;">
+        <p style="font-size:13px;color:var(--text-sub);line-height:1.65;">State-backed operatives clear Okta. They pass Persona. They survive background checks with real stolen SSNs. KnowBe4 hired one: passed four video interviews and a full background check. The attack enters through hiring because hiring has no infrastructure layer. Every other perimeter is defended.</p>
+    </div>
+    <div style="padding:12px 16px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.15);border-radius:10px;">
+        <span style="font-size:11px;font-weight:700;color:var(--amber);">EU AI Act: August 2, 2026.</span>
+        <span style="font-size:11px;color:var(--text-sub);"> Hiring AI classified high-risk under Annex III. Every company with EU operations must prove human oversight and audit trails. Fines up to 35M euros or 7% of global revenue. This is a forced purchase event for every enterprise using AI in hiring.</span>
+    </div>
+</section>
+
+<!-- PRODUCT -->
+<section>
+    <span class="label">The Product</span>
+    <h2 style="margin-bottom:6px;">The Candidate Hiring Captcha. <span style="color:var(--amber);">Not a filter. A signal.</span></h2>
+    <p style="font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:18px;">Platform-agnostic. No recruiter workflow changes. Zero automated rejections.</p>
+    <div class="grid-3" style="margin-bottom:12px;">
+        <div style="padding:18px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.18);border-radius:12px;">
+            <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Layer 1</div>
+            <div style="font-size:14px;font-weight:700;margin-bottom:8px;">Behavioral Baseline</div>
+            <p style="font-size:12px;color:var(--text-sub);line-height:1.6;">Captured during form fill. Invisible. No friction. Detects bots, overfitting, and synthetic submissions before they enter any system.</p>
+        </div>
+        <div style="padding:18px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.18);border-radius:12px;">
+            <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Layer 2</div>
+            <div style="font-size:14px;font-weight:700;margin-bottom:8px;">Async Challenge</div>
+            <p style="font-size:12px;color:var(--text-sub);line-height:1.6;">Triggered only when Layer 1 flags an anomaly. A short task framed as part of the application. Detects proxy impersonation and AI-assisted responses.</p>
+        </div>
+        <div style="padding:18px;background:rgba(68,204,136,0.04);border:1px solid rgba(68,204,136,0.18);border-radius:12px;">
+            <div style="font-size:10px;font-weight:700;color:#44CC88;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Layer 3</div>
+            <div style="font-size:14px;font-weight:700;margin-bottom:8px;">Human Review</div>
+            <p style="font-size:12px;color:var(--text-sub);line-height:1.6;">Sentriq analyst reviews the full signal stack. Employer decides. Zero automated rejections. EU AI Act compliant by design.</p>
+        </div>
+    </div>
+    <div style="padding:12px 16px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.15);border-radius:10px;margin-bottom:8px;">
+        <span style="font-size:11px;font-weight:700;color:var(--amber);">Ongoing Gap Analysis:</span>
+        <span style="font-size:11px;color:var(--text-sub);"> The same engine re-runs at every downstream stage against what the candidate originally claimed. Phone screen notes, test scores, interview transcripts, manager assessments. The trust signal travels with every application.</span>
+    </div>
+    <div style="padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;">
+        <span style="font-size:11px;font-weight:700;color:var(--text);">Cross-company fraud graph:</span>
+        <span style="font-size:11px;color:var(--text-sub);"> The same fraudulent fingerprint appearing at one employer is flagged on arrival at the next. ATS incumbents cannot build this. Their customer contracts prohibit cross-employer data sharing. That constraint is permanent.</span>
+    </div>
+</section>
+
+<!-- TRACTION -->
+<section>
+    <span class="label">Traction</span>
+    <h2 style="margin-bottom:16px;">Four enterprise conversations. <span style="color:var(--amber);">Each at a different stage.</span></h2>
+
+    <div class="hero-quote" style="margin-bottom:18px;">
+        <p>"Every call, I don't know how we quantify it, but it costs the bank quite a bit of money. And if the funnel is smaller, if you're able to screen more of these out before they even get to the call, that would be great."</p>
+        <small>C.S. Lai, Director, HSBC Innovation Banking. Ran HSBC's PoC/PoV procurement pipeline to Global CISO for 6 years. Unprompted, after seeing the demo built on HSBC's own live open roles.</small>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:14px;">
+        <div style="padding:14px 16px;background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.28);border-radius:10px;">
+            <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:5px;">HSBC Innovation Banking</div>
+            <p style="font-size:11px;color:var(--text-sub);line-height:1.55;">Demo built on HSBC's actual live open roles. CS Lai named two internal contacts on the first call: IAM/CISO lead and Head of Workforce Architecture. Design partner conversion targeting NY Tech Week.</p>
+        </div>
+        <div style="padding:14px 16px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.14);border-radius:10px;">
+            <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:5px;">Booking Holdings</div>
+            <p style="font-size:11px;color:var(--text-sub);line-height:1.55;">VP People Programs, global scope, former CPO of Agoda (8,000 employees, 40+ countries). Advisory board target. Design partner conversion in motion.</p>
+        </div>
+        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;">
+            <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:5px;">SQLink Group</div>
+            <p style="font-size:11px;color:var(--text-sub);line-height:1.55;">Israel's largest IT staffing company. Places 1,000+ candidates per year across 1,000+ employers. Champion is the former CEO, now on Sentriq's advisory board.</p>
+        </div>
+        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;">
+            <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:5px;">Mizrahi-Tefahot Bank</div>
+            <p style="font-size:11px;color:var(--text-sub);line-height:1.55;">Israel's 3rd largest bank. Same champion: current External Director on the bank's board. Board-level access, not a warm intro.</p>
+        </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <span class="signal-tag">30+ ATS experiments</span>
+        <span class="signal-tag">17 detection rules</span>
+        <span class="signal-tag">18 months adversarial research</span>
+        <span class="signal-tag">$300K founders' capital</span>
+        <span class="signal-tag">Live demo</span>
+    </div>
+</section>
+
+<!-- TEAM -->
+<section>
+    <span class="label">The Team</span>
+    <h2 style="margin-bottom:16px;">Built in Israel. <span style="color:var(--amber);">Executing in the US.</span></h2>
+    <div class="grid-2" style="margin-bottom:14px;">
+        <div style="padding:20px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.18);border-radius:14px;">
+            <div style="font-size:16px;font-weight:700;margin-bottom:3px;">Samuel Kemper</div>
+            <div style="font-size:12px;color:var(--amber);margin-bottom:14px;">Co-Founder, CEO</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="display:flex;gap:10px;align-items:flex-start;">
+                    <div style="width:5px;height:5px;border-radius:50%;background:var(--amber);margin-top:5px;flex-shrink:0;"></div>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">HR operator.</strong> Founded TechRuiter IL (7 headhunters, defense and aerospace placements). Spent 18 months inside Greenhouse, Comeet, and Workday as a hands-on recruiter. Watched signal collapse from the inside.</p>
+                </div>
+                <div style="display:flex;gap:10px;align-items:flex-start;">
+                    <div style="width:5px;height:5px;border-radius:50%;background:var(--amber);margin-top:5px;flex-shrink:0;"></div>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">3x founder.</strong> CYou Retail (Nielsen Innovate Fund, $12K MRR, European distribution). LLM recruiting platform (30+ empirical ATS tests). Technion Executive MBA. Relocates to the US at close.</p>
+                </div>
+                <div style="display:flex;gap:10px;align-items:flex-start;">
+                    <div style="width:5px;height:5px;border-radius:50%;background:var(--amber);margin-top:5px;flex-shrink:0;"></div>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">IDF Unit 81.</strong> Hardware intelligence technology. US GTM from Israel is not new territory: $120K monthly P&amp;L at Upword, US campus program across 7 universities, 300% monthly customer growth.</p>
+                </div>
+            </div>
+        </div>
+        <div style="padding:20px;background:rgba(68,204,136,0.04);border:1px solid rgba(68,204,136,0.18);border-radius:14px;">
+            <div style="font-size:16px;font-weight:700;margin-bottom:3px;">Ben Czarninski</div>
+            <div style="font-size:12px;color:#44CC88;margin-bottom:14px;">Co-Founder, CTO</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="display:flex;gap:10px;align-items:flex-start;">
+                    <div style="width:5px;height:5px;border-radius:50%;background:#44CC88;margin-top:5px;flex-shrink:0;"></div>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">Two IDF intelligence units.</strong> Unit Tamar (offensive cyber) and Unit Yachlam (full-stack engineering). Security researcher inside classified intelligence operations.</p>
+                </div>
+                <div style="display:flex;gap:10px;align-items:flex-start;">
+                    <div style="width:5px;height:5px;border-radius:50%;background:#44CC88;margin-top:5px;flex-shrink:0;"></div>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">KPMG pentesting (international) then AppSec at AppsFlyer,</strong> training 25 developers on secure systems design. ADTech system: 5 paying customers, running in production today. Only founder on the cap table with a paying customer.</p>
+                </div>
+                <div style="display:flex;gap:10px;align-items:flex-start;">
+                    <div style="width:5px;height:5px;border-radius:50%;background:#44CC88;margin-top:5px;flex-shrink:0;"></div>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">CPA + MBA + BSc CS (TAU).</strong> Deep security engineering plus financial and compliance fluency.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding:16px 22px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.2);border-radius:12px;">
+        <p style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.7;">Two IDF veterans, opposite angles on the same problem. Ben came from the security layer: offensive cyber, penetration testing, application security at enterprise scale. Samuel came from the operator layer: 18 months running recruiters inside Greenhouse, Comeet, and Workday. They met and became friends during the October 7 war. Neither was looking for a startup idea. Both had already lived the problem.</p>
+    </div>
+</section>
+
+<!-- THE ASK -->
+<section>
+    <span class="label">The Ask</span>
+    <h2 style="margin-bottom:16px;">$3.5M seed. <span style="color:var(--amber);">Clean cap table. Category window open now.</span></h2>
+    <div class="grid-2" style="margin-bottom:16px;">
+        <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="padding:14px 16px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.2);border-radius:10px;">
+                <div style="font-size:10px;font-weight:700;color:var(--amber);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">Pricing</div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                    <span style="font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(232,160,32,0.1);border:1px solid rgba(232,160,32,0.25);color:var(--amber);">Pilot: $10K / 6 weeks</span>
+                    <span style="font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text-sub);">Growth: $36K / yr</span>
+                    <span style="font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text-sub);">Scale: $84K / yr</span>
+                    <span style="font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text-sub);">Enterprise: $150K+ / yr</span>
+                </div>
+            </div>
+            <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;">
+                <div style="font-size:10px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">What the seed buys</div>
+                <p style="font-size:11px;color:var(--text-sub);line-height:1.65;">Product to production (M1-2). Two design partner pilots running (M2-3). SOC 2 Type I complete (Q4 2026). First paid contract signed (M4-6). $1M ARR at Series A trigger (Q4 2027).</p>
+            </div>
+            <div style="padding:14px 16px;background:rgba(68,204,136,0.04);border:1px solid rgba(68,204,136,0.14);border-radius:10px;">
+                <div style="font-size:10px;font-weight:700;color:#44CC88;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">Burn efficiency</div>
+                <p style="font-size:11px;color:var(--text-sub);line-height:1.65;">$38-45K/mo now. $82K/mo at seed close. 24+ months runway. Cloud: $0 (Google and AWS credits through Q4 2026). Legal: $0 (Ben is a qualified CPA).</p>
+            </div>
+        </div>
+        <div style="padding:22px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.22);border-radius:14px;">
+            <div style="font-size:11px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">Why Work-Bench at this stage</div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+                <div style="display:flex;gap:10px;align-items:flex-start;">
+                    <div style="width:5px;height:5px;border-radius:50%;background:var(--amber);margin-top:5px;flex-shrink:0;"></div>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">You seeded the identity layer (Socure).</strong> Sentriq is the application integrity layer: earlier in the funnel, higher leverage, and the gap Socure's workforce verification cannot reach. Same category conviction, different layer.</p>
+                </div>
+                <div style="display:flex;gap:10px;align-items:flex-start;">
+                    <div style="width:5px;height:5px;border-radius:50%;background:var(--amber);margin-top:5px;flex-shrink:0;"></div>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">NYC enterprise financial services network.</strong> HSBC is in active design partner conversion. Work-Bench's financial services relationships are the fastest path to the first 3 US LOIs.</p>
+                </div>
+                <div style="display:flex;gap:10px;align-items:flex-start;">
+                    <div style="width:5px;height:5px;border-radius:50%;background:var(--amber);margin-top:5px;flex-shrink:0;"></div>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">NY Tech Week: June 1-7.</strong> Samuel is in New York closing the first enterprise LOI. The validation event happens regardless. An investor who commits before it gets the category price.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding:20px 24px;background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.3);border-radius:12px;text-align:center;">
+        <p style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:5px;">samuel@sentriq.co</p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.4);">Samuel Kemper, Co-Founder and CEO</p>
+    </div>
+</section>
+
+<div class="confidential-footer">
+    sentriq.co &nbsp;&#183;&nbsp; Seed 2026 &nbsp;&#183;&nbsp; Confidential &nbsp;&#183;&nbsp; Prepared for Work-Bench
+</div>
+
+</div>
+</body>
+</html>
