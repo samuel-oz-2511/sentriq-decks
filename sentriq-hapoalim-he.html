@@ -136,7 +136,7 @@ ntfy topic: sentriq-bhp-x8k2
     .paradox-tag {
         font-size: 10px; font-weight: 700; text-transform: uppercase;
         letter-spacing: 0.1em; padding: 3px 10px; border-radius: 20px;
-        display: inline-block; margin-bottom: 14px; direction: ltr;
+        display: inline-block; margin-bottom: 14px;
     }
     .tag-green { color: var(--green); background: rgba(68,204,136,0.1); border: 1px solid rgba(68,204,136,0.2); }
     .tag-red { color: rgba(224,85,85,0.9); background: rgba(224,85,85,0.08); border: 1px solid rgba(224,85,85,0.2); }
@@ -250,7 +250,6 @@ ntfy topic: sentriq-bhp-x8k2
     .output-label {
         font-size: 10px; font-weight: 700; text-transform: uppercase;
         letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 6px;
-        direction: ltr;
     }
     .output-text { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; line-height: 1.4; direction: ltr; }
     .output-sub { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; }
@@ -399,7 +398,7 @@ ntfy topic: sentriq-bhp-x8k2
         <div class="pain-grid">
             <div class="pain-card">
                 <div class="pain-num">&#8362;34M</div>
-                <div class="pain-label">עלות ממוצעת של אירוע איום פנים ארגוני במוסד פיננסי. הוראות תשלום, מידע לקוחות, הרשאות גישה מיוחסות. הרשאות ניתנות ביום הראשון.</div>
+                <div class="pain-label">עלות ממוצעת של אירוע איום פנים ארגוני במוסד פיננסי. הוראות תשלום, מידע לקוחות, הרשאות גישה מיוחסות. גישה מוענקת ביום הראשון.</div>
                 <div class="pain-source">IBM Security / Ponemon Institute, 2023 (2.98 &#8362;/$)</div>
             </div>
             <div class="pain-card">
@@ -415,7 +414,7 @@ ntfy topic: sentriq-bhp-x8k2
         </div>
         <div style="margin-top:14px;padding:18px 22px;background:var(--card);border:1px solid var(--border);border-radius:12px;">
             <p style="font-size:13px;color:var(--text-sub);line-height:1.85;">
-                KnowBe4 גייסה עובד צפון קוריאני שניסה מיד להתקין תוכנה זדונית. הוא עבר סינון קורות חיים, ארבעה ראיונות וידאו ובדיקת רקע מלאה. השירותים הפיננסיים הם יעד העדיפות. נקודת הכניסה לא הייתה הרשת. היא הייתה ההגשה.
+                KnowBe4 גייסה בטעות עובד צפון קוריאני שניסה מיד להתקין תוכנה זדונית. הוא עבר סינון קורות חיים, ארבעה ראיונות וידאו ובדיקת רקע מלאה. השירותים הפיננסיים הם יעד העדיפות. נקודת הכניסה לא הייתה הרשת. היא הייתה ההגשה.
             </p>
             <p style="font-size:10px;color:var(--text-dim);margin-top:8px;direction:ltr;">KnowBe4 CEO Stu Sjouwerman, July 2024. FBI/CISA Joint Advisory 2024.</p>
         </div>
@@ -516,6 +515,7 @@ ntfy topic: sentriq-bhp-x8k2
         <div class="label">אימות ממגזר הבנקאות</div>
         <div class="validation-block">
             <div class="validation-quote">"I actually think that's the right approach."</div>
+            <div style="font-size:13px;color:rgba(232,160,32,0.5);margin-bottom:4px;">״זו בדיוק הגישה הנכונה.״</div>
             <div class="validation-source">מנהל, HSBC Innovation Banking. שש שנות ניהול בחינת ספקים מול CISO ומנהיגות IT בכירה של HSBC.</div>
             <div class="validation-outcomes">
                 <div class="validation-outcome">בשיחה ראשונה אחת, HSBC זיהה מיד את בעל הבקרה על joiners, movers, leavers תחת ה-CISO כנקודת הכניסה הנכונה. ללא שאלה.</div>
@@ -524,7 +524,7 @@ ntfy topic: sentriq-bhp-x8k2
             </div>
         </div>
         <div style="padding:14px 20px;background:var(--card);border:1px solid var(--border);border-radius:12px;">
-            <p style="font-size:13px;color:var(--text-sub);line-height:1.8;">השירותים הפיננסיים אינם ורטיקל שSentriq נכנסת אליו. זה המקום שבו הקטגוריה מתחילה. עבור בנקים גדולים עם ערוצי גיוס חיצוניים פעילים, הבעיה היא פונקציה של נפח ושל פער נראות מבני.</p>
+            <p style="font-size:13px;color:var(--text-sub);line-height:1.8;">השירותים הפיננסיים אינם ורטיקל ש-Sentriq נכנסת אליו. זה המקום שבו הקטגוריה מתחילה. עבור בנקים גדולים עם ערוצי גיוס חיצוניים פעילים, הבעיה היא פונקציה של נפח ושל פער נראות מבני.</p>
         </div>
     </div>
 
@@ -537,7 +537,7 @@ ntfy topic: sentriq-bhp-x8k2
                 <h3>Behavioral Baseline</h3>
                 <p class="layer-desc">פסיבי, בלתי נראה. כל הגשה נושאת טביעת אצבע: דפוסי תזמון, חתימות כלים, איתותי מכשיר. נקלטת בהגשה ללא חיכוך, ללא שינוי בטפסי הספק.</p>
                 <ul class="layer-bullets">
-                    <li>עובד על גבי טפסי האינטייק של הספק</li>
+                    <li>עובד על גבי טפסי הגשת המועמדים של הספק</li>
                     <li>ללא שינויים בתהליך הספק</li>
                     <li>מזהה הגשת פרוקסי, מילוי אוטומטי, כלי הגשה המונית</li>
                 </ul>
@@ -548,7 +548,7 @@ ntfy topic: sentriq-bhp-x8k2
                 <p class="layer-desc">מופעל רק כש-Layer 1 מזהה חריגה. משימה אסינכרונית שמזהה התחזות על ידי פרוקסי ותגובות שהוכנו על ידי AI. מועמדים לגיטימיים ממשיכים ללא הפרעה.</p>
                 <ul class="layer-bullets">
                     <li>מופעל רק על הגשות חריגות</li>
-                    <li>השאלות בנויות כך שAI לא יכול לענות</li>
+                    <li>השאלות בנויות כך ש-AI לא יכול לענות</li>
                     <li>מועמד לגיטימי לא מרגיש הבדל</li>
                 </ul>
             </div>
@@ -559,27 +559,27 @@ ntfy topic: sentriq-bhp-x8k2
                 <ul class="layer-bullets">
                     <li>אפס פסילות אוטומטיות בכל שלב</li>
                     <li>כל דגל כולל הסבר בשפה פשוטה</li>
-                    <li>עומד בדרישות EU AI Act by design</li>
+                    <li>תואם EU AI Act by design</li>
                 </ul>
             </div>
         </div>
         <div class="layer-output">
             <div class="output-label">תוצר לבנק</div>
             <div class="output-text">Candidate Signal Profile</div>
-            <div class="output-sub">כל הגשה שמגיעה מהספק נכנסת לסקירת הבנק עם signal אמינות, תיעוד ודגל סיכון אם קיים. ללא מערכת חדשה לבנק. ללא PII אצל Sentriq. נכנס לתוך הקיים, לא מחליף דבר.</div>
+            <div class="output-sub">כל הגשה שמגיעה מהספק נכנסת לסקירת הבנק עם signal אמינות, תיעוד ודגל סיכון אם קיים. ללא מערכת חדשה לבנק. Sentriq אינה אוגרת מידע אישי. משתלב בתשתית הקיימת, לא מחליף דבר.</div>
         </div>
     </div>
 
     <!-- ROI CALCULATOR -->
     <div class="section">
-        <div class="label">ROI: מנקודת מבט הבנק</div>
+        <div class="label">ROI מנקודת מבט הבנק</div>
         <div class="roi-cards" style="grid-template-columns:1fr;">
             <div class="roi-card">
                 <div class="roi-card-label">עלות תחלופה של עובדי קבלן לא מתאימים</div>
                 <div class="roi-inputs">
-                    <div class="roi-input-row"><span>עובדי קבלן חדשים דרך ספקי כוח אדם בשנה</span><input type="number" id="roiRoles" class="roi-calc-input" value="300" min="50" max="3000" step="50" oninput="calcROI()"/></div>
+                    <div class="roi-input-row"><span>עובדי קבלן חדשים דרך ספקי כוח אדם בשנה</span><input type="number" id="roiRoles" class="roi-calc-input" value="500" min="50" max="3000" step="50" oninput="calcROI()"/></div>
                     <div class="roi-input-row"><span>% שיוצאים בגלל אי-התאמה תוך 6 חודשים</span><input type="number" id="roiChurnPct" class="roi-calc-input" value="15" min="5" max="40" step="1" oninput="calcROI()"/></div>
-                    <div class="roi-input-row"><span>עלות החלפת קבלן (גיוס + היכרות + פרודוקטיביות)</span><span>&#8362;60K</span></div>
+                    <div class="roi-input-row"><span>עלות החלפת קבלן (גיוס + היכרות + אובדן פריון)</span><span>&#8362;60K</span></div>
                     <div class="roi-input-row"><span>הפחתת אי-התאמה עם Sentriq</span><span>30%</span></div>
                 </div>
                 <div class="roi-result-block">
@@ -611,7 +611,7 @@ ntfy topic: sentriq-bhp-x8k2
             </div>
         </div>
         <p style="font-size:11px;color:var(--text-dim);line-height:1.8;direction:ltr;">
-            Replacement cost &#8362;60K/hire: BPO re-recruitment fee (&#8776;&#8362;15K) + 6-week onboarding + productivity gap. Churn rate 15%: conservative estimate for role-misfit exits within 6 months. Sentriq reduction 30%: estimated improvement in shortlist signal quality. Sentriq Mid-Market tier: &#8362;250K/yr. Breakeven: 5 prevented replacements cover full annual cost. Sentriq does not guarantee outcomes.
+            Replacement cost &#8362;60K/hire: BPO re-recruitment fee (&#8776;&#8362;15K) + 6-week onboarding + productivity gap. Churn rate 15%: conservative estimate for role-misfit exits within 6 months. Sentriq reduction 30%: estimated improvement in shortlist signal quality. Sentriq annual tier: &#8362;250K/yr. Breakeven: 5 prevented replacements cover full annual cost. Sentriq does not guarantee outcomes.
         </p>
     </div>
 
@@ -620,7 +620,7 @@ ntfy topic: sentriq-bhp-x8k2
         <div class="label">הפיילוט</div>
         <div style="background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.25);border-radius:12px;padding:22px 24px;margin-bottom:14px;">
             <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
-                <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);">חינם: ניתוח Signal רטרואקטיבי</span>
+                <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);">חינם: ניתוח signal על נתוני עבר</span>
                 <span style="font-size:11px;background:rgba(232,160,32,0.15);color:var(--amber);border-radius:20px;padding:2px 10px;font-weight:700;">ללא התחייבות</span>
             </div>
             <p style="font-size:14px;font-weight:700;color:#ffffff;margin-bottom:8px;line-height:1.6;">תנו לנו תפקיד קבלני אחד שסגרתם. אנחנו מראים לכם מה היינו תופסים.</p>
@@ -629,11 +629,11 @@ ntfy topic: sentriq-bhp-x8k2
         <div class="ask-grid">
             <div class="ask-card highlight">
                 <h3>&#8362;35,000 / פיילוט 6 שבועות</h3>
-                <p>עלות הפיילוט מזוכה במלואה כנגד החוזה השנתי עם חתימה. 1-2 תפקידי קבלן פעילים, אינסטרומנטציית signal מלאה, Candidate Signal Profiles לבנק ישירות. ללא שינויים בתהליך הספק, ללא PII אצל Sentriq. מדד ROI מוסכם לפני יום ראשון. אם עובד, פריסה מלאה על ערוצי הגיוס החיצוניים (&#8362;250K/שנה, Mid-Market).</p>
+                <p>עלות הפיילוט מזוכה במלואה כנגד החוזה השנתי עם חתימה. 1-2 תפקידי קבלן פעילים, ניטור signal מלא, Candidate Signal Profiles לבנק ישירות. ללא שינויים בתהליך הספק, ללא PII אצל Sentriq. מדד ROI מוסכם לפני יום ראשון. אם עובד, פריסה מלאה על ערוצי הגיוס החיצוניים (&#8362;250K/שנה).</p>
             </div>
             <div class="ask-card">
                 <h3>תנאי שותפות פיתוח</h3>
-                <p>ללא מחיר רשימה. התנאים נקבעים על ידכם. ביקורת SOC 2 Type I מתחילה ברבעון 3 2026. תואם EU AI Act by architecture: אפס פסילות אוטומטיות, שובל ביקורת מלא, אדם בלולאה בכל דגל. תנאים מועדפים שמורים לאורך כל ההתרחבות. ניתן להחיל על ספקי כוח אדם ספציפיים לפי עדיפות.</p>
+                <p>ללא מחיר רשימה. התנאים נקבעים על ידכם. ביקורת SOC 2 Type I מתחילה ברבעון 3 2026. תואם EU AI Act by architecture: אפס פסילות אוטומטיות, שובל ביקורת מלא, פיקוח אנושי מלא בכל דגל. תנאים מועדפים שמורים לאורך כל ההתרחבות. ניתן להחיל על ספקי כוח אדם ספציפיים לפי עדיפות.</p>
             </div>
         </div>
         <div style="padding:18px 22px;background:var(--card);border:1px solid var(--border);border-radius:12px;">
@@ -679,7 +679,7 @@ function fmtNIS(n) {
 }
 
 function calcROI() {
-    var roles       = parseInt(document.getElementById('roiRoles').value)    || 300;
+    var roles       = parseInt(document.getElementById('roiRoles').value)    || 500;
     var churnPct    = parseInt(document.getElementById('roiChurnPct').value) || 15;
 
     var replaceCost = 60000;
