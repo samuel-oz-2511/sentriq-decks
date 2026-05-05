@@ -337,6 +337,31 @@ ntfy topic: sentriq-bhp-x8k2
         .roi-ratio-strip { grid-template-columns: 1fr; }
         .page { padding: 28px 14px 48px; }
     }
+
+    /* Gap Assessor */
+    .gap-table { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--border); }
+    .gap-table-inner { display: grid; grid-template-columns: 1.1fr 1.3fr 1.6fr; gap: 1px; }
+    .gap-hd { padding: 10px 16px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; background: rgba(255,255,255,0.03); }
+    .gap-hd-stage { color: var(--text-dim); }
+    .gap-hd-bank  { color: rgba(224,85,85,0.65); }
+    .gap-hd-add   { color: var(--amber); }
+    .gap-cell { padding: 13px 16px; font-size: 12px; line-height: 1.55; background: var(--card); }
+    .gap-cell-stage { font-weight: 600; color: rgba(255,255,255,0.75); }
+    .gap-cell-bank  { color: rgba(224,85,85,0.5); }
+    .gap-cell-add   { color: rgba(232,160,32,0.65); }
+    .gap-cell-stage.gap-entry { font-weight: 700; color: #fff; background: rgba(232,160,32,0.05); }
+    .gap-cell-bank.gap-entry  { background: rgba(232,160,32,0.02); }
+    .gap-cell-add.gap-entry   { background: rgba(232,160,32,0.05); color: rgba(232,160,32,0.9); font-weight: 600; }
+    .gap-dot { display: inline-block; width: 5px; height: 5px; background: var(--amber); border-radius: 50%; margin-left: 6px; vertical-align: middle; flex-shrink: 0; }
+    @media (max-width: 640px) {
+        .gap-table-inner { grid-template-columns: 1fr; }
+        .gap-hd-bank, .gap-hd-stage { display: none; }
+        .gap-hd-add { grid-column: 1; }
+        .gap-cell-bank { display: none; }
+        .gap-cell-stage { border-top: 2px solid rgba(255,255,255,0.06); font-size: 11px; padding: 8px 14px; }
+        .gap-cell-add { font-size: 12px; padding: 10px 14px; }
+        .gap-cell-stage.gap-entry { border-top: 2px solid rgba(232,160,32,0.2); }
+    }
 </style>
 </head>
 <body>
@@ -506,6 +531,48 @@ ntfy topic: sentriq-bhp-x8k2
                     <div class="stack-layer-tool">signal אמינות על כל הגשה, כולל אלה שמגיעות מערוצי גיוס חיצוניים. הבנק מקבל נראות שלא הייתה לו קודם.</div>
                 </div>
                 <span class="stack-layer-badge" style="color:var(--amber);background:rgba(232,160,32,0.12);border:1px solid rgba(232,160,32,0.25);">כאן אנחנו יושבים</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- GAP ASSESSOR -->
+    <div class="section">
+        <div class="label">הפער בכל שלב בתהליך הגיוס</div>
+        <p style="font-size:14px;color:var(--text-sub);line-height:1.8;margin-bottom:20px;max-width:700px;">בכל שלב שבו הספק פועל, הבנק מקבל תוצאה: כן או לא. Sentriq מוסיף signal לכל שלב.</p>
+        <div class="gap-table">
+            <div class="gap-table-inner">
+                <!-- Header -->
+                <div class="gap-hd gap-hd-stage">שלב</div>
+                <div class="gap-hd gap-hd-bank">הבנק כיום</div>
+                <div class="gap-hd gap-hd-add">Sentriq מוסיף</div>
+                <!-- Row 1: Job posting -->
+                <div class="gap-cell gap-cell-stage">פרסום משרה</div>
+                <div class="gap-cell gap-cell-bank">הספק מפרסם. הבנק לא מקבל עדכון.</div>
+                <div class="gap-cell gap-cell-add">SDK מוטמע בטפסי הגשת המועמדות לפני ההגשה הראשונה.</div>
+                <!-- Row 2: Application — entry point, highlighted -->
+                <div class="gap-cell gap-cell-stage gap-entry"><span class="gap-dot"></span>הגשת מועמדות</div>
+                <div class="gap-cell gap-cell-bank gap-entry">CV בלבד. אין data על ההגשה עצמה.</div>
+                <div class="gap-cell gap-cell-add gap-entry">Layer 1: טביעת אצבע התנהגותית נלכדת בשקט בזמן ההגשה.</div>
+                <!-- Row 3: Vendor screening -->
+                <div class="gap-cell gap-cell-stage">סינון ראשוני</div>
+                <div class="gap-cell gap-cell-bank">הספק מחזיר רשימה. התהליך אטום לבנק.</div>
+                <div class="gap-cell gap-cell-add">Layer 2: חריגות מזוהות. Challenge מופעל רק על הגשות חשודות.</div>
+                <!-- Row 4: Interview -->
+                <div class="gap-cell gap-cell-stage">ראיון עם הספק</div>
+                <div class="gap-cell gap-cell-bank">החלטת הספק. הבנק מקבל המלצה בלבד.</div>
+                <div class="gap-cell gap-cell-add">Signal profile מוכן. הגשות חריגות מסומנות לפני הראיון.</div>
+                <!-- Row 5: Background check -->
+                <div class="gap-cell gap-cell-stage">בדיקת רקע</div>
+                <div class="gap-cell gap-cell-bank">מגיעה אחרי ההחלטה. מאוחר מדי לשנות.</div>
+                <div class="gap-cell gap-cell-add">Signal Profile זמין לפני ההצעה. שכבה נוספת לבדיקת הרקע.</div>
+                <!-- Row 6: Handover to bank -->
+                <div class="gap-cell gap-cell-stage">העברה לבנק</div>
+                <div class="gap-cell gap-cell-bank">CV ותעודות בלבד. ללא context על תהליך הגיוס.</div>
+                <div class="gap-cell gap-cell-add">Layer 3: Candidate Signal Profile מגיע עם המועמד. הבנק מחליט.</div>
+                <!-- Row 7: Day 1 -->
+                <div class="gap-cell gap-cell-stage">יום ראשון / הרשאות</div>
+                <div class="gap-cell gap-cell-bank">גישה ניתנת. אין data על תהליך הגיוס שהביא אותו לכאן.</div>
+                <div class="gap-cell gap-cell-add">שובל ביקורת מלא. כל החלטה מתועדת ונגישה לביקורת.</div>
             </div>
         </div>
     </div>
