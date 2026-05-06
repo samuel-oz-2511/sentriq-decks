@@ -812,7 +812,7 @@
             <div style="display:flex;flex-direction:column;gap:7px;">
                 <div style="padding:11px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;">
                     <div style="font-size:10px;font-weight:700;color:var(--amber);margin-bottom:4px;">M 1-2</div>
-                    <p style="font-size:11px;color:var(--text-sub);line-height:1.5;">Pilot-ready product deployed. Design partner pilots confirmed. SOC 2 audit starts at close.</p>
+                    <p style="font-size:11px;color:var(--text-sub);line-height:1.5;">Integration layer complete. First design partner pilots confirmed. SOC 2 audit starts at close.</p>
                 </div>
                 <div style="padding:11px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;">
                     <div style="font-size:10px;font-weight:700;color:var(--amber);margin-bottom:4px;">M 3-4</div>
@@ -967,7 +967,7 @@
             <div style="display:flex;flex-direction:column;gap:7px;">
                 <div style="display:flex;align-items:flex-start;gap:12px;padding:11px 14px;background:rgba(255,255,255,0.03);border-radius:10px;border:1px solid var(--border);">
                     <div style="font-size:10px;font-weight:700;color:var(--amber);min-width:52px;padding-top:1px;">M 1-2</div>
-                    <div><div style="font-size:11px;font-weight:600;color:var(--text);">Pilot-ready product deployed</div><div style="font-size:10px;color:var(--muted);margin-top:2px;">Ben builds. Samuel sells. Research foundation complete: 30+ adversarial experiments, 17 detection rules. Integration layer remaining.</div></div>
+                    <div><div style="font-size:11px;font-weight:600;color:var(--text);">Integration layer complete</div><div style="font-size:10px;color:var(--muted);margin-top:2px;">Ben builds. Samuel sells. Research foundation complete: 30+ adversarial experiments, 17 detection rules. Integration layer is the final build milestone.</div></div>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:12px;padding:11px 14px;background:rgba(255,255,255,0.03);border-radius:10px;border:1px solid var(--border);">
                     <div style="font-size:10px;font-weight:700;color:var(--amber);min-width:52px;padding-top:1px;">M 2-3</div>
@@ -1051,12 +1051,9 @@
     var total = slides.length;
 
     function showSlide(n) {
-        var next = (n + total) % total;
-        if (next !== cur) {
-            slides[cur].classList.remove('active');
-            cur = next;
-            slides[cur].classList.add('active');
-        }
+        slides[cur].classList.remove('active');
+        cur = (n + total) % total;
+        slides[cur].classList.add('active');
         document.getElementById('slideCounter').textContent = (cur + 1) + ' / ' + total;
         document.getElementById('progressBar').style.width = ((cur + 1) / total * 100) + '%';
         document.getElementById('meetingBadge').style.opacity = cur === 0 ? '0' : '1';
