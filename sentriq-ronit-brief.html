@@ -51,7 +51,7 @@ h2 {
     font-size: 15px; font-weight: 700; color: var(--text);
     margin-bottom: 6px;
 }
-p { font-size: 13px; color: var(--text-sub); line-height: 1.7; }
+p { font-size: 14px; color: var(--text-sub); line-height: 1.7; }
 .card {
     padding: 20px 24px;
     background: rgba(255,255,255,0.03);
@@ -77,29 +77,13 @@ p { font-size: 13px; color: var(--text-sub); line-height: 1.7; }
 }
 @media (max-width: 680px) {
     .grid-3 { grid-template-columns: 1fr; }
+    .card-amber { padding: 16px 18px !important; }
 }
 .dot {
     width: 7px; height: 7px; border-radius: 50%;
-    flex-shrink: 0; margin-top: 5px;
+    flex-shrink: 0; margin-top: 6px;
 }
 .row { display: flex; gap: 12px; align-items: flex-start; }
-.divider {
-    height: 1px; background: var(--border); margin: 32px 0;
-}
-.tag {
-    display: inline-flex; align-items: center;
-    padding: 3px 9px; border-radius: 5px;
-    font-size: 10px; font-weight: 700;
-    background: rgba(232,160,32,0.08);
-    color: var(--amber);
-    border: 1px solid rgba(232,160,32,0.2);
-}
-.tag-green {
-    background: rgba(68,204,136,0.07);
-    color: var(--green);
-    border-color: rgba(68,204,136,0.18);
-}
-sup { font-size: 9px; color: var(--muted); }
 .quote-block {
     padding: 18px 22px;
     background: rgba(232,160,32,0.05);
@@ -111,10 +95,13 @@ sup { font-size: 9px; color: var(--muted); }
     color: rgba(255,255,255,0.88); line-height: 1.7;
 }
 .quote-attr {
-    margin-top: 8px; font-size: 11px; font-weight: 700;
+    margin-top: 10px; font-size: 11px; font-weight: 700;
     color: var(--amber);
 }
-.quote-attr span { font-weight: 400; color: var(--muted); }
+.quote-attr span {
+    display: block; font-weight: 400; color: var(--muted);
+    margin-top: 2px;
+}
 .cta-bar {
     margin-top: 36px; padding: 24px 28px;
     background: rgba(232,160,32,0.06);
@@ -123,9 +110,12 @@ sup { font-size: 9px; color: var(--muted); }
     display: flex; align-items: center; justify-content: space-between;
     gap: 20px; flex-wrap: wrap;
 }
+@media (max-width: 560px) {
+    .cta-bar > div { text-align: left !important; }
+}
 .logo-row {
     display: flex; align-items: center; gap: 10px;
-    margin-bottom: 32px;
+    margin-bottom: 36px;
 }
 .logo-name {
     font-size: 19px; font-weight: 500; letter-spacing: -0.01em;
@@ -145,93 +135,94 @@ sup { font-size: 9px; color: var(--muted); }
             <circle cx="28" cy="7" r="3" fill="#E8A020"/>
         </svg>
         <span class="logo-name">Sentriq<span style="color:#E8A020;">.</span></span>
-        <span style="font-size:10px;color:var(--muted);margin-left:4px;">/ Introduction for Ronit Benbasat</span>
+        <span style="font-size:10px;color:var(--muted);margin-left:4px;border-left:1px solid var(--border);padding-left:10px;">Introduction for Ronit Benbasat</span>
     </div>
 
     <!-- Hero -->
     <div class="eyebrow">The problem</div>
     <h1>Hiring teams cannot tell which<br/><span style="color:var(--amber);">applications are real anymore.</span></h1>
-    <p style="font-size:15px;max-width:640px;line-height:1.75;margin-bottom:28px;color:rgba(255,255,255,0.65);">AI tools now write, submit, and optimize applications at scale. Gartner projects 25% of applicants will be AI-assisted by 2028. The problem is not that candidates use AI. The problem is that hiring teams have no way to know whether the application in front of them reflects a real person or an optimized output designed to pass the screen. Every recruiter feels it. Nobody has built the infrastructure layer to address it.</p>
+    <p style="font-size:15px;max-width:640px;line-height:1.75;margin-bottom:32px;color:rgba(255,255,255,0.65);">AI tools now write, submit, and optimize applications at scale. Gartner projects 25% of applicants will be AI-assisted by 2028. The problem is not that candidates use AI. The problem is that hiring teams have no way to know whether the application in front of them reflects genuine effort or an optimized output designed to pass the screen.</p>
 
     <!-- What Sentriq does -->
-    <div class="eyebrow" style="margin-top:8px;">The product</div>
-    <div class="card card-amber" style="margin-top:10px;margin-bottom:28px;">
-        <h2 style="font-size:17px;margin-bottom:10px;">Candidate Hiring Captcha</h2>
-        <p style="font-size:13px;margin-bottom:16px;">Sentriq sits at the moment of application submission, before any human time is spent. It captures behavioral signals during form fill, runs a lightweight qualification layer, and enriches the ATS record with a trust signal. Recruiters do not change their workflow. They see which applications are worth their time.</p>
+    <div class="eyebrow">The product</div>
+    <div class="card card-amber" style="margin-top:10px;margin-bottom:32px;padding:22px 26px;">
+        <h2 style="font-size:21px;margin-bottom:12px;letter-spacing:-0.02em;">Candidate Hiring Captcha</h2>
+        <p style="font-size:14px;margin-bottom:18px;">Sentriq sits at the moment of application submission, before any human time is spent. It captures behavioral signals during form fill, runs a lightweight qualification layer, and enriches the ATS record with a trust signal. Recruiters do not change their workflow. They see which applications are worth their time.</p>
         <div class="grid-3" style="margin-top:4px;">
             <div class="card" style="padding:14px 16px;">
-                <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">01. Behavioral layer</div>
-                <p style="font-size:11px;">How the application was filled out. Timing, consistency, and editing patterns that cannot be replicated at scale.</p>
+                <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">01. Behavioral layer</div>
+                <p style="font-size:12px;">How the application was filled out. Timing, consistency, and editing patterns that cannot be replicated at scale.</p>
             </div>
             <div class="card" style="padding:14px 16px;">
-                <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">02. Signal profile</div>
-                <p style="font-size:11px;">A qualification check at submission: does the application hold up to the role requirements, or does it show signs of fabrication?</p>
+                <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">02. Signal profile</div>
+                <p style="font-size:12px;">Does the application hold up against the role requirements, or does the pattern suggest an optimized output rather than a genuine fit?</p>
             </div>
             <div class="card" style="padding:14px 16px;">
-                <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">03. ATS enrichment</div>
-                <p style="font-size:11px;">Trust signals written directly into the candidate record. No new tool for the recruiter to learn. Works with any ATS.</p>
+                <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">03. ATS enrichment</div>
+                <p style="font-size:12px;">Trust signals written directly into the candidate record. No new tool for the recruiter to learn. Works with any ATS.</p>
             </div>
         </div>
-        <p style="font-size:11px;color:var(--muted);margin-top:14px;">Platform-agnostic. Pre-submission layer, upstream of every ATS and every review tool. Think of it as what Cloudflare did for web traffic, applied to hiring.</p>
+        <p style="font-size:12px;color:var(--text-sub);margin-top:14px;">Platform-agnostic. Pre-submission layer, upstream of every ATS and review tool. Think of it as what Cloudflare did for web traffic, applied to hiring.</p>
     </div>
 
     <!-- Why this is relevant to Ronit -->
-    <div class="eyebrow">Why this conversation makes sense</div>
-    <p style="margin-top:10px;margin-bottom:16px;font-size:13px;">Gilad suggested we speak because your background sits precisely at the intersection this product lives in: global-scale HR operations, and the security and compliance environment that comes with it.</p>
-    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:28px;">
-        <div class="row">
-            <div class="dot" style="background:var(--amber);"></div>
-            <p><strong style="color:var(--text);">Team8.</strong> You built HR infrastructure across a portfolio of cyber companies during their earliest and fastest growth phases. You understand how security products sell into enterprise, what enterprise HR and security buyers care about, and where the organizational friction lives. That is exactly the environment Sentriq is entering.</p>
+    <div class="eyebrow">Why Gilad thought of you</div>
+    <p style="margin-top:10px;margin-bottom:20px;font-size:14px;">This is not a generic introduction. Three things in your background sit at the exact intersection Sentriq operates in.</p>
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:32px;">
+        <div style="padding:16px 20px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;">
+            <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px;">Team8.</div>
+            <p style="font-size:13px;">You built HR infrastructure across a portfolio of cyber companies during their earliest and fastest growth phases. You know how security products sell into enterprise, what HR and security buyers care about at the decision stage, and where the organizational friction lives. That is exactly the environment Sentriq is entering.</p>
         </div>
-        <div class="row">
-            <div class="dot" style="background:var(--amber);"></div>
-            <p><strong style="color:var(--text);">Check Point and Intuit Global Security R&D.</strong> You ran worldwide HR for Check Point and global HR for Intuit's cyber business units. You have managed high-volume, high-stakes hiring inside organizations where trust and credential integrity matter at an infrastructure level. The problem Sentriq is solving is one you have personally managed around.</p>
+        <div style="padding:16px 20px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;">
+            <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px;">Check Point and Intuit Global Security R&D.</div>
+            <p style="font-size:13px;">You ran worldwide HR for Check Point and global HR for Intuit's cyber business units. You have managed high-volume hiring inside organizations where credential integrity is not an HR abstraction, it is an operational requirement. You have lived the exact problem Sentriq is solving.</p>
         </div>
-        <div class="row">
-            <div class="dot" style="background:var(--amber);"></div>
-            <p><strong style="color:var(--text);">Israel-America Chamber of Commerce.</strong> Sentriq is an Israeli founding team building for the US enterprise market. You are currently Deputy Chairwoman of the organization that connects both sides. The companies and executives in your network are precisely the design partner and customer targets in our first 90 days.</p>
+        <div style="padding:16px 20px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;">
+            <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px;">Israel-America Chamber of Commerce.</div>
+            <p style="font-size:13px;">You are actively building the US-Israel bridge that Sentriq is trying to cross right now. The executives and HR leaders you are working with at IACC are the same people we need to meet. This conversation is useful in both directions.</p>
         </div>
     </div>
 
     <!-- Traction signal -->
-    <div class="quote-block" style="margin-bottom:28px;">
+    <div class="quote-block" style="margin-bottom:32px;">
         <p>"Every call, I don't know how we quantify it, but it costs the bank quite a bit of money. And if the funnel is smaller, if you're able to screen more of these out before they even get to the call, that would be great."</p>
-        <div class="quote-attr">C.S. Lai, Director, HSBC Innovation Banking <span>Former PoC/PoV procurement lead to Global CISO. After seeing the demo run on HSBC's own live open roles.</span></div>
+        <div class="quote-attr">
+            C.S. Lai, Director, HSBC Innovation Banking
+            <span>Former PoC/PoV procurement lead to Global CISO for 6 years. After seeing the demo run against HSBC's own open roles.</span>
+        </div>
     </div>
-
-    <div class="divider"></div>
 
     <!-- Stage and raise -->
     <div class="eyebrow">Where we are</div>
-    <div class="grid-2" style="margin-top:12px;margin-bottom:28px;">
+    <div class="grid-2" style="margin-top:12px;margin-bottom:32px;">
         <div class="card" style="padding:16px 20px;">
-            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">Current stage</div>
-            <div style="display:flex;flex-direction:column;gap:7px;">
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">Current stage</div>
+            <div style="display:flex;flex-direction:column;gap:9px;">
                 <div class="row">
-                    <div class="dot" style="background:var(--green);"></div>
-                    <p style="font-size:12px;">Demo complete. Running on real enterprise hiring pipelines.</p>
+                    <div class="dot" style="background:var(--green);margin-top:5px;"></div>
+                    <p style="font-size:13px;">Demo complete. Tested against HSBC's live open roles.</p>
                 </div>
                 <div class="row">
-                    <div class="dot" style="background:var(--amber);"></div>
-                    <p style="font-size:12px;">HSBC in active design partner conversion. First pilot targeting June 2026.</p>
+                    <div class="dot" style="background:rgba(255,255,255,0.3);margin-top:5px;"></div>
+                    <p style="font-size:13px;">HSBC in active design partner conversion. First pilot targeting June 2026.</p>
                 </div>
                 <div class="row">
-                    <div class="dot" style="background:var(--amber);"></div>
-                    <p style="font-size:12px;">Raising $3.5M seed. Israeli founding team, US GTM focus.</p>
+                    <div class="dot" style="background:rgba(255,255,255,0.3);margin-top:5px;"></div>
+                    <p style="font-size:13px;">Raising $3.5M seed. Israeli founding team, US GTM focus.</p>
                 </div>
             </div>
         </div>
         <div class="card" style="padding:16px 20px;">
-            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">The founding team</div>
-            <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">The founding team</div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
                 <div>
                     <div style="font-size:13px;font-weight:700;color:var(--text);">Samuel Kemper</div>
-                    <p style="font-size:11px;">Founded and ran TechRuiter IL, one of Israel's leading tech recruiting firms. Lived inside ATS systems and hiring operations for years. Built GTM from inside the problem.</p>
+                    <p style="font-size:12px;">Founded and ran TechRuiter IL, one of Israel's leading tech recruiting firms. Lived inside ATS systems and hiring operations for years. Built GTM from inside the problem.</p>
                 </div>
                 <div style="height:1px;background:var(--border);"></div>
                 <div>
                     <div style="font-size:13px;font-weight:700;color:var(--text);">Ben Czarninski</div>
-                    <p style="font-size:11px;">Two IDF intelligence units (Tamar + Yachlam). KPMG international pentesting. AppSec lead at AppsFlyer. Built the behavioral detection engine from first principles.</p>
+                    <p style="font-size:12px;">Two IDF intelligence units (Tamar + Yachlam). KPMG international pentesting. AppSec lead at AppsFlyer. Built the behavioral detection engine from first principles.</p>
                 </div>
             </div>
         </div>
@@ -240,22 +231,22 @@ sup { font-size: 9px; color: var(--muted); }
     <!-- Advisory ask -->
     <div class="eyebrow">The advisory opportunity</div>
     <div class="card card-amber" style="margin-top:12px;padding:22px 26px;">
-        <p style="font-size:13px;margin-bottom:16px;">We are building a small advisory board of senior operators who have lived the problem from the inside. Gilad Rabinovich is already on board, bringing enterprise sales credibility and direct relationships at SQLink Group and Mizrahi-Tefahot Bank. We would like to bring you in as the HR domain anchor.</p>
-        <div class="grid-2" style="gap:10px;">
+        <p style="font-size:14px;margin-bottom:18px;">We are building a small advisory board of senior operators who have lived this problem from the inside. Gilad Rabinovich is already on board, covering enterprise sales and Israeli market relationships. We would like to bring you in as the person who can tell us whether we are solving the right problem in the right room.</p>
+        <div class="grid-2" style="gap:12px;">
             <div>
-                <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">What we are asking for</div>
-                <div style="display:flex;flex-direction:column;gap:5px;">
-                    <div class="row"><div class="dot" style="background:var(--amber);"></div><p style="font-size:12px;">Strategic guidance on the HR buyer journey and what moves enterprise People leaders to act</p></div>
-                    <div class="row"><div class="dot" style="background:var(--amber);"></div><p style="font-size:12px;">Introductions to HR leaders at Israeli enterprise and global tech companies</p></div>
-                    <div class="row"><div class="dot" style="background:var(--amber);"></div><p style="font-size:12px;">Presence or endorsement in key sales conversations where HR credibility is the deciding factor</p></div>
+                <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">What we are asking for</div>
+                <div style="display:flex;flex-direction:column;gap:7px;">
+                    <div class="row"><div class="dot" style="background:rgba(255,255,255,0.3);"></div><p style="font-size:12px;">Strategic guidance on the HR buyer journey and what moves People leaders to act</p></div>
+                    <div class="row"><div class="dot" style="background:rgba(255,255,255,0.3);"></div><p style="font-size:12px;">Introductions to HR leaders at Israeli enterprise and global tech companies</p></div>
+                    <div class="row"><div class="dot" style="background:rgba(255,255,255,0.3);"></div><p style="font-size:12px;">Your perspective in key conversations where HR operator credibility changes the outcome</p></div>
                 </div>
             </div>
             <div>
-                <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">What it looks like in practice</div>
-                <div style="display:flex;flex-direction:column;gap:5px;">
-                    <div class="row"><div class="dot" style="background:rgba(255,255,255,0.25);"></div><p style="font-size:12px;">2-3 hours per month. Mostly reactive: specific intros, quick reviews, occasional calls</p></div>
-                    <div class="row"><div class="dot" style="background:rgba(255,255,255,0.25);"></div><p style="font-size:12px;">Standard advisory equity (options, 2-year vesting, 6-month cliff)</p></div>
-                    <div class="row"><div class="dot" style="background:rgba(255,255,255,0.25);"></div><p style="font-size:12px;">No exclusivity. No board seat required at this stage.</p></div>
+                <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">What it looks like in practice</div>
+                <div style="display:flex;flex-direction:column;gap:7px;">
+                    <div class="row"><div class="dot" style="background:rgba(255,255,255,0.2);"></div><p style="font-size:12px;">2-3 hours per month. Mostly reactive: specific intros, quick reviews, occasional calls</p></div>
+                    <div class="row"><div class="dot" style="background:rgba(255,255,255,0.2);"></div><p style="font-size:12px;">Standard advisory equity (options, 2-year vesting, 6-month cliff)</p></div>
+                    <div class="row"><div class="dot" style="background:rgba(255,255,255,0.2);"></div><p style="font-size:12px;">No exclusivity. No formal board commitment required.</p></div>
                 </div>
             </div>
         </div>
@@ -265,7 +256,7 @@ sup { font-size: 9px; color: var(--muted); }
     <div class="cta-bar">
         <div>
             <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px;">Samuel Kemper, Co-Founder</div>
-            <div style="font-size:13px;color:var(--muted);">samuel@sentriq.co &nbsp;|&nbsp; sentriq.co</div>
+            <div style="font-size:13px;color:var(--muted);"><a href="mailto:samuel@sentriq.co" style="color:var(--amber);text-decoration:none;">samuel@sentriq.co</a> &nbsp;|&nbsp; sentriq.co</div>
             <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:5px;">Introduction via Gilad Rabinovich</div>
         </div>
         <div style="text-align:right;">
