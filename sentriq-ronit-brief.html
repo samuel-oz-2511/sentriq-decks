@@ -145,24 +145,42 @@ p { font-size: 14px; color: var(--text-sub); line-height: 1.7; }
 
     <!-- What Sentriq does -->
     <div class="eyebrow">The product</div>
-    <div class="card card-amber" style="margin-top:10px;margin-bottom:32px;padding:22px 26px;">
-        <h2 style="font-size:21px;margin-bottom:12px;letter-spacing:-0.02em;">Candidate Hiring Captcha</h2>
-        <p style="font-size:14px;margin-bottom:18px;">Sentriq sits at the moment of application submission, before any human time is spent. It captures behavioral signals during form fill, runs a lightweight qualification layer, and enriches the ATS record with a trust signal. Recruiters do not change their workflow. They see which applications are worth their time.</p>
-        <div class="grid-3" style="margin-top:4px;">
-            <div class="card" style="padding:14px 16px;">
-                <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">01. Behavioral layer</div>
-                <p style="font-size:12px;">How the application was filled out. Timing, consistency, and editing patterns that cannot be replicated at scale.</p>
+    <div class="card card-amber" style="margin-top:10px;margin-bottom:24px;padding:22px 26px;">
+        <h2 style="font-size:21px;margin-bottom:10px;letter-spacing:-0.02em;">Candidate Hiring Captcha</h2>
+        <p style="font-size:13px;color:var(--text-sub);margin-bottom:6px;">application integrity layer &nbsp;&#183;&nbsp; pre-submission &nbsp;&#183;&nbsp; platform-agnostic</p>
+        <p style="font-size:14px;margin-bottom:22px;">Sentriq enters at the moment of application submission, before any human time is spent. It sits upstream of the ATS and every review tool — the layer that has never been defended. Recruiters do not change their workflow. They get a trust signal on every application before the first screen.</p>
+
+        <!-- 4-step flow -->
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0;margin-bottom:6px;">
+            <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px 0 0 10px;border-right:none;">
+                <div style="font-size:9px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px;">01</div>
+                <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:5px;">Behavioral Capture</div>
+                <p style="font-size:11px;">Signals recorded during form fill: timing, edits, paste events, field transitions. A fingerprint the applicant cannot fake at scale.</p>
             </div>
-            <div class="card" style="padding:14px 16px;">
-                <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">02. Signal profile</div>
-                <p style="font-size:12px;">Does the application hold up against the role requirements, or does the pattern suggest an optimized output rather than a genuine fit?</p>
+            <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-top:1px solid var(--border);border-right:none;">
+                <div style="font-size:9px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px;">02</div>
+                <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:5px;">Consistency Check</div>
+                <p style="font-size:11px;">Claims in the application cross-referenced against behavioral patterns and role requirements. Gaps surface automatically.</p>
             </div>
-            <div class="card" style="padding:14px 16px;">
-                <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">03. ATS enrichment</div>
-                <p style="font-size:12px;">Trust signals written directly into the candidate record. No new tool for the recruiter to learn. Works with any ATS.</p>
+            <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-top:1px solid var(--border);border-right:none;">
+                <div style="font-size:9px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px;">03</div>
+                <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:5px;">Trust Signal Profile</div>
+                <p style="font-size:11px;">A structured signal written into the ATS record. No score. No label. A signal the recruiter uses to decide where to spend their time.</p>
+            </div>
+            <div style="padding:14px 16px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.25);border-radius:0 10px 10px 0;">
+                <div style="font-size:9px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:7px;">04</div>
+                <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:5px;">Gap Assessor</div>
+                <p style="font-size:11px;">Re-runs at every downstream stage: phone screen notes, interview transcripts, assessments. Each new data point checked against the original application.</p>
             </div>
         </div>
-        <p style="font-size:12px;color:var(--text-sub);margin-top:14px;">Platform-agnostic. Pre-submission layer, upstream of every ATS and review tool. Think of it as what Cloudflare did for web traffic, applied to hiring.</p>
+        <p style="font-size:11px;color:var(--muted);margin-top:12px;">Think of it as what Cloudflare did for web traffic, applied to hiring. Pre-submission, upstream of everything, invisible to the applicant.</p>
+    </div>
+
+    <!-- Demo -->
+    <div class="eyebrow" style="margin-bottom:10px;">See it in action</div>
+    <p style="font-size:13px;margin-bottom:14px;">Built and run against HSBC's actual live open roles. What you see is the product working on a real pipeline.</p>
+    <div style="position:relative;padding-bottom:56.25%;height:0;border-radius:12px;overflow:hidden;border:1px solid rgba(232,160,32,0.2);box-shadow:0 0 32px rgba(232,160,32,0.07);margin-bottom:36px;">
+        <iframe src="https://www.youtube.com/embed/u7sF_2GiMco?rel=0&modestbranding=1&color=white" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
     <!-- Why this is relevant to Ronit -->
