@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<title>Sentriq - Introduction for Ronit Benbasat</title>
+<style>
+:root {
+    --bg:       #09090F;
+    --card:     #0D0E1A;
+    --border:   #161728;
+    --muted:    #8080A8;
+    --amber:    #E8A020;
+    --text:     #ffffff;
+    --text-sub: rgba(255,255,255,0.72);
+    --green:    #44CC88;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+}
+.page {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 52px 36px 80px;
+}
+@media (max-width: 640px) {
+    .page { padding: 28px 18px 60px; }
+}
+.eyebrow {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.18em; color: var(--amber); margin-bottom: 6px;
+    display: flex; align-items: center; gap: 8px;
+}
+.eyebrow::before {
+    content: ''; display: inline-block; width: 18px; height: 1px;
+    background: var(--amber); opacity: 0.5;
+}
+h1 {
+    font-size: clamp(26px, 4vw, 40px);
+    font-weight: 700; letter-spacing: -0.03em;
+    line-height: 1.15; margin-bottom: 16px;
+}
+h2 {
+    font-size: 15px; font-weight: 700; color: var(--text);
+    margin-bottom: 6px;
+}
+p { font-size: 13px; color: var(--text-sub); line-height: 1.7; }
+.card {
+    padding: 20px 24px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+}
+.card-amber {
+    background: rgba(232,160,32,0.04);
+    border-color: rgba(232,160,32,0.2);
+}
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+@media (max-width: 560px) {
+    .grid-2 { grid-template-columns: 1fr; }
+}
+.grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+}
+@media (max-width: 680px) {
+    .grid-3 { grid-template-columns: 1fr; }
+}
+.dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    flex-shrink: 0; margin-top: 5px;
+}
+.row { display: flex; gap: 12px; align-items: flex-start; }
+.divider {
+    height: 1px; background: var(--border); margin: 32px 0;
+}
+.tag {
+    display: inline-flex; align-items: center;
+    padding: 3px 9px; border-radius: 5px;
+    font-size: 10px; font-weight: 700;
+    background: rgba(232,160,32,0.08);
+    color: var(--amber);
+    border: 1px solid rgba(232,160,32,0.2);
+}
+.tag-green {
+    background: rgba(68,204,136,0.07);
+    color: var(--green);
+    border-color: rgba(68,204,136,0.18);
+}
+sup { font-size: 9px; color: var(--muted); }
+.quote-block {
+    padding: 18px 22px;
+    background: rgba(232,160,32,0.05);
+    border-left: 3px solid var(--amber);
+    border-radius: 0 10px 10px 0;
+}
+.quote-block p {
+    font-size: 14px; font-style: italic;
+    color: rgba(255,255,255,0.88); line-height: 1.7;
+}
+.quote-attr {
+    margin-top: 8px; font-size: 11px; font-weight: 700;
+    color: var(--amber);
+}
+.quote-attr span { font-weight: 400; color: var(--muted); }
+.cta-bar {
+    margin-top: 36px; padding: 24px 28px;
+    background: rgba(232,160,32,0.06);
+    border: 1px solid rgba(232,160,32,0.25);
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px; flex-wrap: wrap;
+}
+.logo-row {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 32px;
+}
+.logo-name {
+    font-size: 19px; font-weight: 500; letter-spacing: -0.01em;
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+    <!-- Header -->
+    <div class="logo-row">
+        <svg width="22" height="22" viewBox="0 0 56 56" fill="none">
+            <rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+            <rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+            <rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+            <rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+            <circle cx="28" cy="7" r="3" fill="#E8A020"/>
+        </svg>
+        <span class="logo-name">Sentriq<span style="color:#E8A020;">.</span></span>
+        <span style="font-size:10px;color:var(--muted);margin-left:4px;">/ Introduction for Ronit Benbasat</span>
+    </div>
+
+    <!-- Hero -->
+    <div class="eyebrow">The problem</div>
+    <h1>Hiring teams cannot tell which<br/><span style="color:var(--amber);">applications are real anymore.</span></h1>
+    <p style="font-size:15px;max-width:640px;line-height:1.75;margin-bottom:28px;color:rgba(255,255,255,0.65);">AI tools now write, submit, and optimize applications at scale. Gartner projects 25% of applicants will be AI-assisted by 2028. The problem is not that candidates use AI. The problem is that hiring teams have no way to know whether the application in front of them reflects a real person or an optimized output designed to pass the screen. Every recruiter feels it. Nobody has built the infrastructure layer to address it.</p>
+
+    <!-- What Sentriq does -->
+    <div class="eyebrow" style="margin-top:8px;">The product</div>
+    <div class="card card-amber" style="margin-top:10px;margin-bottom:28px;">
+        <h2 style="font-size:17px;margin-bottom:10px;">Candidate Hiring Captcha</h2>
+        <p style="font-size:13px;margin-bottom:16px;">Sentriq sits at the moment of application submission, before any human time is spent. It captures behavioral signals during form fill, runs a lightweight qualification layer, and enriches the ATS record with a trust signal. Recruiters do not change their workflow. They see which applications are worth their time.</p>
+        <div class="grid-3" style="margin-top:4px;">
+            <div class="card" style="padding:14px 16px;">
+                <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">01. Behavioral layer</div>
+                <p style="font-size:11px;">How the application was filled out. Timing, consistency, and editing patterns that cannot be replicated at scale.</p>
+            </div>
+            <div class="card" style="padding:14px 16px;">
+                <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">02. Signal profile</div>
+                <p style="font-size:11px;">A qualification check at submission: does the application hold up to the role requirements, or does it show signs of fabrication?</p>
+            </div>
+            <div class="card" style="padding:14px 16px;">
+                <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">03. ATS enrichment</div>
+                <p style="font-size:11px;">Trust signals written directly into the candidate record. No new tool for the recruiter to learn. Works with any ATS.</p>
+            </div>
+        </div>
+        <p style="font-size:11px;color:var(--muted);margin-top:14px;">Platform-agnostic. Pre-submission layer, upstream of every ATS and every review tool. Think of it as what Cloudflare did for web traffic, applied to hiring.</p>
+    </div>
+
+    <!-- Why this is relevant to Ronit -->
+    <div class="eyebrow">Why this conversation makes sense</div>
+    <p style="margin-top:10px;margin-bottom:16px;font-size:13px;">Gilad suggested we speak because your background sits precisely at the intersection this product lives in: global-scale HR operations, and the security and compliance environment that comes with it.</p>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:28px;">
+        <div class="row">
+            <div class="dot" style="background:var(--amber);"></div>
+            <p><strong style="color:var(--text);">Team8.</strong> You built HR infrastructure across a portfolio of cyber companies during their earliest and fastest growth phases. You understand how security products sell into enterprise, what enterprise HR and security buyers care about, and where the organizational friction lives. That is exactly the environment Sentriq is entering.</p>
+        </div>
+        <div class="row">
+            <div class="dot" style="background:var(--amber);"></div>
+            <p><strong style="color:var(--text);">Check Point and Intuit Global Security R&D.</strong> You ran worldwide HR for Check Point and global HR for Intuit's cyber business units. You have managed high-volume, high-stakes hiring inside organizations where trust and credential integrity matter at an infrastructure level. The problem Sentriq is solving is one you have personally managed around.</p>
+        </div>
+        <div class="row">
+            <div class="dot" style="background:var(--amber);"></div>
+            <p><strong style="color:var(--text);">Israel-America Chamber of Commerce.</strong> Sentriq is an Israeli founding team building for the US enterprise market. You are currently Deputy Chairwoman of the organization that connects both sides. The companies and executives in your network are precisely the design partner and customer targets in our first 90 days.</p>
+        </div>
+    </div>
+
+    <!-- Traction signal -->
+    <div class="quote-block" style="margin-bottom:28px;">
+        <p>"Every call, I don't know how we quantify it, but it costs the bank quite a bit of money. And if the funnel is smaller, if you're able to screen more of these out before they even get to the call, that would be great."</p>
+        <div class="quote-attr">C.S. Lai, Director, HSBC Innovation Banking <span>Former PoC/PoV procurement lead to Global CISO. After seeing the demo run on HSBC's own live open roles.</span></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Stage and raise -->
+    <div class="eyebrow">Where we are</div>
+    <div class="grid-2" style="margin-top:12px;margin-bottom:28px;">
+        <div class="card" style="padding:16px 20px;">
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">Current stage</div>
+            <div style="display:flex;flex-direction:column;gap:7px;">
+                <div class="row">
+                    <div class="dot" style="background:var(--green);"></div>
+                    <p style="font-size:12px;">Demo complete. Running on real enterprise hiring pipelines.</p>
+                </div>
+                <div class="row">
+                    <div class="dot" style="background:var(--amber);"></div>
+                    <p style="font-size:12px;">HSBC in active design partner conversion. First pilot targeting June 2026.</p>
+                </div>
+                <div class="row">
+                    <div class="dot" style="background:var(--amber);"></div>
+                    <p style="font-size:12px;">Raising $3.5M seed. Israeli founding team, US GTM focus.</p>
+                </div>
+            </div>
+        </div>
+        <div class="card" style="padding:16px 20px;">
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">The founding team</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+                <div>
+                    <div style="font-size:13px;font-weight:700;color:var(--text);">Samuel Kemper</div>
+                    <p style="font-size:11px;">Founded and ran TechRuiter IL, one of Israel's leading tech recruiting firms. Lived inside ATS systems and hiring operations for years. Built GTM from inside the problem.</p>
+                </div>
+                <div style="height:1px;background:var(--border);"></div>
+                <div>
+                    <div style="font-size:13px;font-weight:700;color:var(--text);">Ben Czarninski</div>
+                    <p style="font-size:11px;">Two IDF intelligence units (Tamar + Yachlam). KPMG international pentesting. AppSec lead at AppsFlyer. Built the behavioral detection engine from first principles.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Advisory ask -->
+    <div class="eyebrow">The advisory opportunity</div>
+    <div class="card card-amber" style="margin-top:12px;padding:22px 26px;">
+        <p style="font-size:13px;margin-bottom:16px;">We are building a small advisory board of senior operators who have lived the problem from the inside. Gilad Rabinovich is already on board, bringing enterprise sales credibility and direct relationships at SQLink Group and Mizrahi-Tefahot Bank. We would like to bring you in as the HR domain anchor.</p>
+        <div class="grid-2" style="gap:10px;">
+            <div>
+                <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">What we are asking for</div>
+                <div style="display:flex;flex-direction:column;gap:5px;">
+                    <div class="row"><div class="dot" style="background:var(--amber);"></div><p style="font-size:12px;">Strategic guidance on the HR buyer journey and what moves enterprise People leaders to act</p></div>
+                    <div class="row"><div class="dot" style="background:var(--amber);"></div><p style="font-size:12px;">Introductions to HR leaders at Israeli enterprise and global tech companies</p></div>
+                    <div class="row"><div class="dot" style="background:var(--amber);"></div><p style="font-size:12px;">Presence or endorsement in key sales conversations where HR credibility is the deciding factor</p></div>
+                </div>
+            </div>
+            <div>
+                <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">What it looks like in practice</div>
+                <div style="display:flex;flex-direction:column;gap:5px;">
+                    <div class="row"><div class="dot" style="background:rgba(255,255,255,0.25);"></div><p style="font-size:12px;">2-3 hours per month. Mostly reactive: specific intros, quick reviews, occasional calls</p></div>
+                    <div class="row"><div class="dot" style="background:rgba(255,255,255,0.25);"></div><p style="font-size:12px;">Standard advisory equity (options, 2-year vesting, 6-month cliff)</p></div>
+                    <div class="row"><div class="dot" style="background:rgba(255,255,255,0.25);"></div><p style="font-size:12px;">No exclusivity. No board seat required at this stage.</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-bar">
+        <div>
+            <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px;">Samuel Kemper, Co-Founder</div>
+            <div style="font-size:13px;color:var(--muted);">samuel@sentriq.co &nbsp;|&nbsp; sentriq.co</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:5px;">Introduction via Gilad Rabinovich</div>
+        </div>
+        <div style="text-align:right;">
+            <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:4px;">Next step</div>
+            <p style="font-size:12px;color:var(--text-sub);">A 30-minute conversation to see if there's a fit.<br/>No ask beyond that.</p>
+        </div>
+    </div>
+
+    <div style="margin-top:28px;font-size:11px;color:rgba(255,255,255,0.2);text-align:center;">
+        Sentriq &nbsp;&#183;&nbsp; Seed 2026 &nbsp;&#183;&nbsp; Confidential
+    </div>
+
+</div>
+
+<script>
+(function() {
+    var key = 'ronit-pinged';
+    if (sessionStorage.getItem(key)) return;
+    sessionStorage.setItem(key, '1');
+    fetch('https://ntfy.sh/sentriq-ronit-b5k2', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            topic: 'sentriq-ronit-b5k2',
+            title: 'Ronit Benbasat opened the brief',
+            message: 'Sentriq one-pager opened. Referral: Gilad Rabinovich.',
+            priority: 4
+        })
+    }).catch(function(){});
+})();
+</script>
+</body>
+</html>
