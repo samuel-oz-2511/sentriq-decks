@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<title>COMPASS Intel — May 8 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#09090F;--card:#0D0E1A;--border:#161728;--muted:#8080A8;--amber:#E8A020;--text:#fff;--text-sub:rgba(255,255,255,0.72);--green:#44CC88;--red:#E05555;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;min-height:100vh;}
+
+/* GATE */
+#gate{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:999;flex-direction:column;gap:16px;}
+#gate h1{font-size:22px;font-weight:700;color:var(--text);letter-spacing:-0.02em;}
+#gate p{font-size:12px;color:var(--muted);}
+#gate input{background:var(--card);border:1px solid var(--border);color:var(--text);padding:11px 16px;border-radius:8px;font-family:inherit;font-size:14px;width:280px;outline:none;text-align:center;}
+#gate input:focus{border-color:var(--amber);}
+#gate button{background:var(--amber);color:#000;border:none;padding:11px 32px;border-radius:8px;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;width:280px;}
+#gate .err{color:var(--red);font-size:11px;display:none;}
+
+/* MAIN */
+#main{display:none;max-width:960px;margin:0 auto;padding:28px 20px 60px;}
+
+/* HEADER */
+.page-header{margin-bottom:24px;}
+.page-header h1{font-size:18px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.page-header .meta{font-size:11px;color:var(--muted);display:flex;gap:16px;flex-wrap:wrap;}
+.page-header .badge{background:rgba(232,160,32,0.12);color:var(--amber);border:1px solid rgba(232,160,32,0.25);padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;}
+
+/* TABS */
+.tabs{display:flex;gap:4px;margin-bottom:20px;border-bottom:1px solid var(--border);padding-bottom:0;}
+.tab{padding:8px 16px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color 0.15s;}
+.tab:hover{color:var(--text);}
+.tab.active{color:var(--amber);border-bottom-color:var(--amber);}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+
+/* SECTION LABELS */
+.section-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin:20px 0 10px;}
+.section-label:first-child{margin-top:0;}
+
+/* PROSPECT CARDS */
+.prospect-grid{display:flex;flex-direction:column;gap:10px;}
+.prospect-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start;}
+.prospect-card.hot{border-left:3px solid var(--amber);}
+.prospect-card.warm{border-left:3px solid rgba(232,160,32,0.45);}
+.prospect-card.nurture{border-left:3px solid rgba(255,255,255,0.1);}
+.p-name{font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.p-role{font-size:11px;color:var(--muted);margin-bottom:8px;}
+.p-signal{font-size:11px;color:var(--text-sub);line-height:1.55;margin-bottom:8px;}
+.p-outreach{background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.14);border-radius:7px;padding:9px 11px;font-size:10.5px;color:rgba(255,255,255,0.65);line-height:1.5;font-style:italic;}
+.p-outreach strong{color:var(--amber);font-style:normal;}
+.p-scores{display:flex;flex-direction:column;gap:6px;min-width:110px;}
+.score-row{display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.score-label{font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;}
+.score-val{font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;}
+.score-hot{background:rgba(232,160,32,0.15);color:var(--amber);}
+.score-warm{background:rgba(232,160,32,0.08);color:rgba(232,160,32,0.7);}
+.score-low{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.4);}
+.score-green{background:rgba(68,204,136,0.12);color:var(--green);}
+.total-score{margin-top:4px;padding:6px 8px;background:rgba(255,255,255,0.04);border-radius:6px;text-align:center;}
+.total-score .num{font-size:22px;font-weight:800;line-height:1;}
+.total-score .denom{font-size:9px;color:var(--muted);}
+.total-score .tier{font-size:10px;font-weight:700;margin-top:3px;}
+.p-links{margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;}
+.p-link{font-size:10px;color:var(--amber);text-decoration:none;border:1px solid rgba(232,160,32,0.25);padding:2px 8px;border-radius:4px;}
+.p-link:hover{background:rgba(232,160,32,0.08);}
+
+/* VALIDATOR CARDS */
+.val-group{margin-bottom:24px;}
+.val-group-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.val-group-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;}
+.g1{background:rgba(68,204,136,0.1);color:var(--green);border:1px solid rgba(68,204,136,0.2);}
+.g2{background:rgba(232,160,32,0.1);color:var(--amber);border:1px solid rgba(232,160,32,0.2);}
+.g3{background:rgba(128,128,168,0.15);color:#A0A0CC;border:1px solid rgba(128,128,168,0.25);}
+.val-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;}
+.val-card{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:13px 14px;}
+.v-name{font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.v-role{font-size:10px;color:var(--muted);margin-bottom:8px;}
+.v-quote{font-size:10.5px;color:rgba(255,255,255,0.6);line-height:1.5;border-left:2px solid rgba(232,160,32,0.3);padding-left:8px;font-style:italic;margin-bottom:6px;}
+.v-source{font-size:9px;color:var(--muted);}
+
+/* COMPETITOR CARDS */
+.comp-grid{display:flex;flex-direction:column;gap:8px;}
+.comp-card{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:13px 16px;display:grid;grid-template-columns:160px 1fr auto;gap:14px;align-items:start;}
+.c-name{font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px;}
+.c-sub{font-size:10px;color:var(--muted);}
+.c-desc{font-size:10.5px;color:var(--text-sub);line-height:1.55;}
+.threat-badge{font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;white-space:nowrap;}
+.threat-direct{background:rgba(224,85,85,0.15);color:#E05555;border:1px solid rgba(224,85,85,0.25);}
+.threat-adjacent{background:rgba(232,160,32,0.12);color:var(--amber);border:1px solid rgba(232,160,32,0.22);}
+.threat-complement{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);border:1px solid rgba(255,255,255,0.1);}
+
+/* INTEL CARDS */
+.intel-grid{display:flex;flex-direction:column;gap:8px;}
+.intel-card{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:13px 16px;}
+.i-quote{font-size:13px;font-weight:600;color:var(--text);line-height:1.55;margin-bottom:6px;}
+.i-source{font-size:10px;color:var(--amber);margin-bottom:4px;}
+.i-context{font-size:10px;color:var(--muted);line-height:1.4;}
+
+/* PIPELINE CARDS */
+.pipeline-grid{display:flex;flex-direction:column;gap:8px;}
+.pipeline-card{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:13px 16px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start;}
+.pipeline-card.active-card{border-left:3px solid var(--green);}
+.pipeline-card.warm-card{border-left:3px solid var(--amber);}
+.pipeline-card.stale-card{border-left:3px solid rgba(255,255,255,0.1);}
+.pipeline-card.passed-card{border-left:3px solid rgba(224,85,85,0.4);}
+.pl-company{font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.pl-contact{font-size:10.5px;color:var(--muted);margin-bottom:7px;}
+.pl-next{font-size:10.5px;color:var(--text-sub);line-height:1.5;}
+.pl-meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;min-width:90px;}
+.pl-status{font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;white-space:nowrap;}
+.pl-status-active{background:rgba(68,204,136,0.12);color:var(--green);border:1px solid rgba(68,204,136,0.2);}
+.pl-status-warm{background:rgba(232,160,32,0.12);color:var(--amber);border:1px solid rgba(232,160,32,0.2);}
+.pl-status-stale{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.35);border:1px solid rgba(255,255,255,0.08);}
+.pl-status-passed{background:rgba(224,85,85,0.1);color:#E05555;border:1px solid rgba(224,85,85,0.2);}
+.pl-source{font-size:9px;color:var(--muted);text-align:right;}
+.pl-date{font-size:9px;color:rgba(255,255,255,0.3);text-align:right;}
+.pipeline-divider{border:none;border-top:1px solid var(--border);margin:16px 0;}
+
+@media(max-width:600px){
+  .prospect-card{grid-template-columns:1fr;}
+  .p-scores{flex-direction:row;flex-wrap:wrap;min-width:unset;}
+  .comp-card{grid-template-columns:1fr;}
+  .pipeline-card{grid-template-columns:1fr;}
+  .pl-meta{flex-direction:row;flex-wrap:wrap;align-items:center;min-width:unset;}
+}
+</style>
+</head>
+<body>
+
+<!-- GATE -->
+<div id="gate">
+  <h1>COMPASS Intel</h1>
+  <p>LinkedIn scan — May 8, 2026</p>
+  <input id="pw" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')unlock()"/>
+  <button onclick="unlock()">Access</button>
+  <span class="err" id="err">Incorrect password</span>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+  <div class="page-header">
+    <h1>COMPASS Intelligence Report <span style="color:var(--amber)">— May 8, 2026</span></h1>
+    <div class="meta">
+      <span>21 posts analyzed</span>
+      <span class="badge">11 prospects</span>
+      <span class="badge">59 pain validators</span>
+      <span class="badge">10 competitors detected</span>
+      <span style="color:var(--muted);">Source: Sentriq WhatsApp group "סנטריק - מידע"</span>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="showTab('prospects')">Prospects</div>
+    <div class="tab" onclick="showTab('validators')">Pain Validators</div>
+    <div class="tab" onclick="showTab('competitors')">Competitors</div>
+    <div class="tab" onclick="showTab('intel')">Market Intel</div>
+    <div class="tab" onclick="showTab('pipeline')">Pipeline</div>
+  </div>
+
+  <!-- PROSPECTS TAB -->
+  <div class="tab-content active" id="tab-prospects">
+    <div class="section-label">Tier A — HOT (Score 13-15)</div>
+    <div class="prospect-grid">
+
+      <!-- Paul Zauch -->
+      <div class="prospect-card hot">
+        <div>
+          <div class="p-name">Paul Zauch</div>
+          <div class="p-role">Senior Leader, Randstad Enterprise (RPO) — Candidate Fraud Insights Report author</div>
+          <div class="p-signal">Published institutional research on candidate fraud across Randstad Enterprise's RPO pipeline. Explicitly states RPO providers "need to pivot." Cites 460%+ deepfake growth. Proposes biometrics and in-person verification — both identity-layer responses that leave the submission layer unaddressed. That gap is Sentriq.</div>
+          <div class="p-outreach"><strong>Outreach angle:</strong> "Your Candidate Fraud Insights report identifies the right problem. The gap I'd add is the submission layer itself, where the fabrication happens before biometrics or in-person checks ever run. That's the stage Sentriq was built for."</div>
+          <div class="p-links">
+            <a class="p-link" href="https://www.linkedin.com/in/paul-zauch-7628464" target="_blank">LinkedIn</a>
+            <a class="p-link" href="https://www.linkedin.com/posts/paul-zauch-7628464_currently-the-hiring-landscape-is-changing-share-7450065808199688192-GcvC/" target="_blank">Source post</a>
+          </div>
+        </div>
+        <div class="p-scores">
+          <div class="score-row"><span class="score-label">GTM Fit</span><span class="score-val score-hot">4/5</span></div>
+          <div class="score-row"><span class="score-label">Seniority</span><span class="score-val score-hot">5/5</span></div>
+          <div class="score-row"><span class="score-label">Signal</span><span class="score-val score-hot">5/5</span></div>
+          <div class="score-row"><span class="score-label">Champion</span><span class="score-val score-green">HIGH</span></div>
+          <div class="total-score">
+            <div class="num" style="color:var(--amber)">14</div>
+            <div class="denom">/15</div>
+            <div class="tier" style="color:var(--amber)">TIER A</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:20px;">Tier B — WARM (Score 10-13)</div>
+    <div class="prospect-grid">
+
+      <!-- Bhawna Bist -->
+      <div class="prospect-card warm">
+        <div>
+          <div class="p-name">Bhawna Bist</div>
+          <div class="p-role">Talent Acquisition Leader, Deloitte</div>
+          <div class="p-signal">Cited by name in Ernie Kueffner's post as a practitioner actively exploring technology for detecting fraudulent applicants. Deloitte runs high-volume hiring across financial services, consulting, and tech — exactly the application pressure profile where fabricated credentials and overfitted submissions are hardest to catch manually.</div>
+          <div class="p-outreach"><strong>Outreach angle:</strong> "Saw you were cited in Ernie Kueffner's post on systemic hiring fraud. We built the application integrity layer that flags fabricated credentials and behavioral anomalies before they reach your screeners. Deloitte's hiring volume makes it worth a 20-minute call."</div>
+        </div>
+        <div class="p-scores">
+          <div class="score-row"><span class="score-label">GTM Fit</span><span class="score-val score-hot">5/5</span></div>
+          <div class="score-row"><span class="score-label">Seniority</span><span class="score-val score-warm">4/5</span></div>
+          <div class="score-row"><span class="score-label">Signal</span><span class="score-val score-warm">3/5</span></div>
+          <div class="score-row"><span class="score-label">Champion</span><span class="score-val score-green">HIGH</span></div>
+          <div class="total-score">
+            <div class="num" style="color:rgba(232,160,32,0.7)">12</div>
+            <div class="denom">/15</div>
+            <div class="tier" style="color:rgba(232,160,32,0.7)">TIER B</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ernie Kueffner -->
+      <div class="prospect-card warm">
+        <div>
+          <div class="p-name">Ernie Kueffner</div>
+          <div class="p-role">TA Leader — Avature reference, thought leader on systemic hiring fraud</div>
+          <div class="p-signal">Post author who shifted from "candidate fraud is overhyped" to "I was wrong — it's now systemic." References Bhawna Bist at Deloitte and Avature as part of the conversation. His public "I was wrong" framing means he is motivated to act. The fact that he references Avature suggests he has ATS-level budget conversations.</div>
+          <div class="p-outreach"><strong>Outreach angle:</strong> "Your post on shifting your view on hiring fraud was the most honest thing I've read on this topic. The layer that closed it for me: the fraud is baked into the application before your ATS ever sees it. That's the stage we built for."</div>
+          <div class="p-links">
+            <a class="p-link" href="https://www.linkedin.com/in/ernstar" target="_blank">LinkedIn</a>
+            <a class="p-link" href="https://www.linkedin.com/posts/ernstar_a-year-ago-i-truly-felt-candidate-fraud-ugcPost-7446976373698486272--yKU" target="_blank">Source post</a>
+          </div>
+        </div>
+        <div class="p-scores">
+          <div class="score-row"><span class="score-label">GTM Fit</span><span class="score-val score-hot">4/5</span></div>
+          <div class="score-row"><span class="score-label">Seniority</span><span class="score-val score-warm">4/5</span></div>
+          <div class="score-row"><span class="score-label">Signal</span><span class="score-val score-hot">5/5</span></div>
+          <div class="score-row"><span class="score-label">Champion</span><span class="score-val score-green">HIGH</span></div>
+          <div class="total-score">
+            <div class="num" style="color:rgba(232,160,32,0.7)">13</div>
+            <div class="denom">/15</div>
+            <div class="tier" style="color:rgba(232,160,32,0.7)">TIER B</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sunnah Wang -->
+      <div class="prospect-card warm">
+        <div>
+          <div class="p-name">Sunnah Wang</div>
+          <div class="p-role">Talent Acquisition Professional (company not confirmed — seniority unknown)</div>
+          <div class="p-signal">Post author who personally experienced a false positive: nearly rejected a strong candidate flagged by a fraud tool. Cited Gartner's 1-in-4 fraudulent applications stat. Ended the post with an open question: "How are you spotting fraud without losing the good ones?" That is an active buying signal.</div>
+          <div class="p-outreach"><strong>Outreach angle:</strong> "Your post about nearly losing the perfect candidate to a false positive is exactly the failure mode we built Sentriq to fix. It surfaces signals per application so your team decides — not the system. Worth 20 minutes?"</div>
+          <div class="p-links">
+            <a class="p-link" href="https://www.linkedin.com/posts/sunnahwang_i-almost-rejected-the-perfect-candidate-last-share-7457707529859428354-v6bG" target="_blank">Source post</a>
+          </div>
+        </div>
+        <div class="p-scores">
+          <div class="score-row"><span class="score-label">GTM Fit</span><span class="score-val score-hot">4/5</span></div>
+          <div class="score-row"><span class="score-label">Seniority</span><span class="score-val score-low">?/5</span></div>
+          <div class="score-row"><span class="score-label">Signal</span><span class="score-val score-hot">5/5</span></div>
+          <div class="score-row"><span class="score-label">Champion</span><span class="score-val score-warm">MAYBE</span></div>
+          <div class="total-score">
+            <div class="num" style="color:rgba(232,160,32,0.7)">~11</div>
+            <div class="denom">/15</div>
+            <div class="tier" style="color:rgba(232,160,32,0.7)">TIER B</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stephanie Mannon -->
+      <div class="prospect-card warm">
+        <div>
+          <div class="p-name">Stephanie Mannon</div>
+          <div class="p-role">Enterprise HR/TA Thought Leader (company not confirmed)</div>
+          <div class="p-signal">Publishing enterprise-facing content on candidate fraud specifically framed as organized operations targeting hiring teams. Her framing matches Sentriq's exactly: the fraud is coordinated, not individual. If she is in a TA, HR, or workforce security advisory role she is both a potential buyer and a potential champion.</div>
+          <div class="p-outreach"><strong>Outreach angle:</strong> "Your post on organized fraud operations targeting hiring teams is the framing most TA leaders still haven't made. The response has to be upstream detection, not downstream damage control. Happy to show you what that layer looks like."</div>
+          <div class="p-links">
+            <a class="p-link" href="https://www.linkedin.com/in/stephanie-mannon-0925533" target="_blank">LinkedIn</a>
+            <a class="p-link" href="https://www.linkedin.com/posts/stephanie-mannon-0925533_candidate-fraud-is-becoming-more-sophisticated-share-7458177766190907392-7G8i" target="_blank">Source post</a>
+          </div>
+        </div>
+        <div class="p-scores">
+          <div class="score-row"><span class="score-label">GTM Fit</span><span class="score-val score-warm">4/5</span></div>
+          <div class="score-row"><span class="score-label">Seniority</span><span class="score-val score-low">?/5</span></div>
+          <div class="score-row"><span class="score-label">Signal</span><span class="score-val score-warm">4/5</span></div>
+          <div class="score-row"><span class="score-label">Champion</span><span class="score-val score-warm">MAYBE</span></div>
+          <div class="total-score">
+            <div class="num" style="color:rgba(232,160,32,0.7)">~10</div>
+            <div class="denom">/15</div>
+            <div class="tier" style="color:rgba(232,160,32,0.7)">TIER B</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Capt Pawan Kumar -->
+      <div class="prospect-card warm">
+        <div>
+          <div class="p-name">Capt Pawan Kumar, CPP, CFE</div>
+          <div class="p-role">Security and Fraud Prevention Professional (CPP, CFE certified) — company not stated</div>
+          <div class="p-signal">Named the exact structural gap: background checks catch fake degrees, not fabricated application integrity. CPP (Certified Protection Professional) and CFE (Certified Fraud Examiner) certification = senior security/fraud practitioner with budget and organizational authority. Different buyer profile than TA — but enterprise security teams are increasingly involved in hiring integrity decisions.</div>
+          <div class="p-outreach"><strong>Outreach angle:</strong> "You said it exactly right — checks catch the degree, not the application. The fabrication happens before the degree check is even triggered. We built the layer that catches the application while it's still being filled out."</div>
+        </div>
+        <div class="p-scores">
+          <div class="score-row"><span class="score-label">GTM Fit</span><span class="score-val score-warm">3/5</span></div>
+          <div class="score-row"><span class="score-label">Seniority</span><span class="score-val score-warm">4/5</span></div>
+          <div class="score-row"><span class="score-label">Signal</span><span class="score-val score-warm">4/5</span></div>
+          <div class="score-row"><span class="score-label">Champion</span><span class="score-val score-warm">MAYBE</span></div>
+          <div class="total-score">
+            <div class="num" style="color:rgba(232,160,32,0.7)">11</div>
+            <div class="denom">/15</div>
+            <div class="tier" style="color:rgba(232,160,32,0.7)">TIER B</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:20px;">Tier C — NURTURE (Score 7-9) — Channel / Referral Value</div>
+    <div class="prospect-grid">
+
+      <!-- Fin Perkins -->
+      <div class="prospect-card nurture">
+        <div>
+          <div class="p-name">Fin Perkins</div>
+          <div class="p-role">Recruiter, Staffing/RPO firm (not enterprise in-house TA)</div>
+          <div class="p-signal">Directly articulated proxy fraud, credential fabrication, and AI-assisted interview fraud. Outside primary ICP (enterprise in-house TA), but placing repeatedly into enterprise accounts. A warm referral from Fin to a placement client is a realistic path to ICP access.</div>
+          <div class="p-outreach"><strong>Outreach angle:</strong> Channel partner or warm intro source. Position Sentriq as the audit trail that defends Fin's placements when a client questions a bad hire.</div>
+          <div class="p-links">
+            <a class="p-link" href="https://www.linkedin.com/in/fin-perkins" target="_blank">LinkedIn</a>
+            <a class="p-link" href="https://www.linkedin.com/posts/fin-perkins_lets-talk-about-something-the-industry-doesnt-share-7458190246652882944-C_g5" target="_blank">Source post</a>
+          </div>
+        </div>
+        <div class="p-scores">
+          <div class="score-row"><span class="score-label">GTM Fit</span><span class="score-val score-low">2/5</span></div>
+          <div class="score-row"><span class="score-label">Seniority</span><span class="score-val score-low">2/5</span></div>
+          <div class="score-row"><span class="score-label">Signal</span><span class="score-val score-hot">5/5</span></div>
+          <div class="score-row"><span class="score-label">Champion</span><span class="score-val score-low">LOW</span></div>
+          <div class="total-score">
+            <div class="num" style="color:rgba(255,255,255,0.4)">9</div>
+            <div class="denom">/15</div>
+            <div class="tier" style="color:rgba(255,255,255,0.4)">TIER C</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Simon Gray -->
+      <div class="prospect-card nurture">
+        <div>
+          <div class="p-name">Simon Gray</div>
+          <div class="p-role">Recruiting Consultant — has active employer relationships</div>
+          <div class="p-signal">"Candidate fraud is coming up in nearly every conversation" with clients. Not a direct buyer, but actively seeding awareness of this problem inside hiring organizations. High referral value once a named design partner is signed.</div>
+          <div class="p-outreach"><strong>Outreach angle:</strong> Partnership or referral framing. Wait until first signed design partner, then approach as a distribution partner.</div>
+          <div class="p-links">
+            <a class="p-link" href="https://ca.linkedin.com/in/simongray4" target="_blank">LinkedIn</a>
+          </div>
+        </div>
+        <div class="p-scores">
+          <div class="score-row"><span class="score-label">GTM Fit</span><span class="score-val score-low">2/5</span></div>
+          <div class="score-row"><span class="score-label">Seniority</span><span class="score-val score-low">3/5</span></div>
+          <div class="score-row"><span class="score-label">Signal</span><span class="score-val score-warm">4/5</span></div>
+          <div class="score-row"><span class="score-label">Champion</span><span class="score-val score-low">LOW</span></div>
+          <div class="total-score">
+            <div class="num" style="color:rgba(255,255,255,0.4)">9</div>
+            <div class="denom">/15</div>
+            <div class="tier" style="color:rgba(255,255,255,0.4)">TIER C</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Katarina Aguilar -->
+      <div class="prospect-card nurture">
+        <div>
+          <div class="p-name">Katarina Aguilar</div>
+          <div class="p-role">TA/HR Professional or Writer — seniority and company not confirmed</div>
+          <div class="p-signal">Publishing sourced content with Greenhouse 2026 data and Gartner stats. Post headline "When the candidate on your screen is not the candidate you're hiring" shows deep familiarity with the problem. If a TA leader or HR tech writer with enterprise audience, she is a warm intro path to buyers.</div>
+          <div class="p-outreach"><strong>Outreach angle:</strong> Acknowledge the post. Brief intro to Sentriq as the upstream layer for the impersonation problem she is framing.</div>
+          <div class="p-links">
+            <a class="p-link" href="https://www.linkedin.com/in/katarina-aguilar-09b6a1279" target="_blank">LinkedIn</a>
+          </div>
+        </div>
+        <div class="p-scores">
+          <div class="score-row"><span class="score-label">GTM Fit</span><span class="score-val score-low">3/5</span></div>
+          <div class="score-row"><span class="score-label">Seniority</span><span class="score-val score-low">2/5</span></div>
+          <div class="score-row"><span class="score-label">Signal</span><span class="score-val score-warm">4/5</span></div>
+          <div class="score-row"><span class="score-label">Champion</span><span class="score-val score-low">LOW</span></div>
+          <div class="total-score">
+            <div class="num" style="color:rgba(255,255,255,0.4)">9</div>
+            <div class="denom">/15</div>
+            <div class="tier" style="color:rgba(255,255,255,0.4)">TIER C</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Yuliia Kuts Joliat -->
+      <div class="prospect-card nurture">
+        <div>
+          <div class="p-name">Yuliia Kuts Joliat</div>
+          <div class="p-role">StaffFinder / Recruitment / Hospitality Hiring</div>
+          <div class="p-signal">Publicly articulating fabricated histories, AI-generated answers, and deepfakes with accurate framing. Proposing manual human-verification — unscalable. Worth a light-touch connection as a potential channel partner for hospitality enterprise clients, not a direct buyer.</div>
+          <div class="p-outreach"><strong>Outreach angle:</strong> Light connect. Channel partner framing if StaffFinder has enterprise hospitality accounts.</div>
+          <div class="p-links">
+            <a class="p-link" href="https://www.linkedin.com/in/yuliia-kuts-joliat" target="_blank">LinkedIn</a>
+          </div>
+        </div>
+        <div class="p-scores">
+          <div class="score-row"><span class="score-label">GTM Fit</span><span class="score-val score-low">1/5</span></div>
+          <div class="score-row"><span class="score-label">Seniority</span><span class="score-val score-low">2/5</span></div>
+          <div class="score-row"><span class="score-label">Signal</span><span class="score-val score-warm">4/5</span></div>
+          <div class="score-row"><span class="score-label">Champion</span><span class="score-val score-low">LOW</span></div>
+          <div class="total-score">
+            <div class="num" style="color:rgba(255,255,255,0.4)">7</div>
+            <div class="denom">/15</div>
+            <div class="tier" style="color:rgba(255,255,255,0.4)">TIER C</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- VALIDATORS TAB -->
+  <div class="tab-content" id="tab-validators">
+
+    <div class="val-group">
+      <div class="val-group-header">
+        <div class="val-group-badge g1">Group 1 — HR and Recruiters</div>
+        <span style="font-size:11px;color:var(--muted);">Direct practitioners experiencing the pain</span>
+      </div>
+      <div class="val-grid">
+        <div class="val-card">
+          <div class="v-name">Sunnah Wang</div>
+          <div class="v-role">Talent Acquisition Professional</div>
+          <div class="v-quote">"I almost rejected the perfect candidate last week" — nearly eliminated a strong hire due to a false-positive fraud flag. Cites Gartner 1-in-4 stat. Asking openly how teams are solving this.</div>
+          <div class="v-source">Post author — open buying signal</div>
+        </div>
+        <div class="val-card">
+          <div class="v-name">Fin Perkins</div>
+          <div class="v-role">Recruiter, Staffing/RPO</div>
+          <div class="v-quote">"Let's talk about something the industry doesn't share" — direct articulation of proxy fraud, credential fabrication, AI interview fraud across multiple placements.</div>
+          <div class="v-source">Post author — high pain signal</div>
+        </div>
+        <div class="val-card">
+          <div class="v-name">Bhawna Bist</div>
+          <div class="v-role">TA Leader, Deloitte</div>
+          <div class="v-quote">Cited as practitioner actively discussing detection technology for fraudulent applicants. Tier 1 enterprise, high-volume hiring profile.</div>
+          <div class="v-source">Referenced in Ernie Kueffner's post</div>
+        </div>
+        <div class="val-card">
+          <div class="v-name">Ernie Kueffner</div>
+          <div class="v-role">TA Leader</div>
+          <div class="v-quote">"A year ago I truly felt candidate fraud was overhyped. I was wrong." — public position reversal after direct experience. References Avature and Deloitte practitioners.</div>
+          <div class="v-source">Post author — high engagement</div>
+        </div>
+        <div class="val-card">
+          <div class="v-name">Stephanie Mannon</div>
+          <div class="v-role">Enterprise TA Thought Leader</div>
+          <div class="v-quote">"Candidate fraud is becoming more sophisticated" — frames the problem as organized operations, not isolated bad actors. Enterprise hiring team framing throughout.</div>
+          <div class="v-source">Post author</div>
+        </div>
+        <div class="val-card">
+          <div class="v-name">Katarina Aguilar</div>
+          <div class="v-role">TA/HR Content Creator</div>
+          <div class="v-quote">"86% of recruiters across the UK, Ireland, and Germany caught or suspected candidate fraud in the past 12 months." Cites Greenhouse 2026 report and Gartner 72% adding in-person rounds.</div>
+          <div class="v-source">Post author — sourced data</div>
+        </div>
+        <div class="val-card">
+          <div class="v-name">Yuliia Kuts Joliat</div>
+          <div class="v-role">StaffFinder, Hospitality Hiring</div>
+          <div class="v-quote">Publicly describing fabricated histories, AI-generated answers, and deepfake interviews. Proposing manual verification as the only solution — confirms the market gap.</div>
+          <div class="v-source">Post author</div>
+        </div>
+        <div class="val-card">
+          <div class="v-name">Brian Phelan</div>
+          <div class="v-role">Talent/Hiring Professional</div>
+          <div class="v-quote">Lost a role because another candidate had fabricated credentials and performed well in a coached interview. Validates credential consistency as a real hiring distortion.</div>
+          <div class="v-source">Comment on Sunnah Wang's post</div>
+        </div>
+        <div class="val-card">
+          <div class="v-name">Simon Gray</div>
+          <div class="v-role">Recruiting Consultant</div>
+          <div class="v-quote">"Candidate fraud is coming up in nearly every conversation." Framing around learning failure, not just detection failure — maps to Sentriq's cross-company signal layer.</div>
+          <div class="v-source">Post author</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="val-group">
+      <div class="val-group-header">
+        <div class="val-group-badge g2">Group 2 — C-Level and Senior Executives</div>
+        <span style="font-size:11px;color:var(--muted);">Organizational authority, institutional signal</span>
+      </div>
+      <div class="val-grid">
+        <div class="val-card">
+          <div class="v-name">Paul Zauch</div>
+          <div class="v-role">Senior Leader, Randstad Enterprise RPO</div>
+          <div class="v-quote">"RPO providers need to pivot." Publishing a Candidate Fraud Insights report across Randstad Enterprise. Citing 460%+ deepfake growth. Calling for multi-layered defense.</div>
+          <div class="v-source">Institutional report author — strongest organizational signal in the scan</div>
+        </div>
+        <div class="val-card">
+          <div class="v-name">Ken Schumacher</div>
+          <div class="v-role">Ropes (Candidate Verification Platform)</div>
+          <div class="v-quote">"36% of candidate assessments flagged high risk — identity fraud, proxy interviewers, AI deception, DPRK operatives." Tens of thousands of assessments in 2026. Quotable for investor conversations as third-party market validation.</div>
+          <div class="v-source">Ropes CEO/founder — quantified market data</div>
+        </div>
+        <div class="val-card">
+          <div class="v-name">Marc Pavlopoulos</div>
+          <div class="v-role">Founder, Talexios</div>
+          <div class="v-quote">"Interview fraud has two types. Stage 1: submission fraud. Stage 2: interview impersonation. Talexios addresses Stage 2." Explicitly acknowledges Stage 1 (Sentriq's layer) as unaddressed and open.</div>
+          <div class="v-source">Post author — competitor founder validating Sentriq's gap</div>
+        </div>
+        <div class="val-card">
+          <div class="v-name">Capt Pawan Kumar, CPP, CFE</div>
+          <div class="v-role">Security and Fraud Prevention (Senior Practitioner)</div>
+          <div class="v-quote">"Security and Fraud Prevention teams should be shaping the hiring process, not just running back-end checks." Named the exact gap: checks catch fake degrees, not fabricated application integrity.</div>
+          <div class="v-source">Comment — precise problem articulation from a credentialed professional</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="val-group">
+      <div class="val-group-header">
+        <div class="val-group-badge g3">Group 3 — Research and Academia</div>
+        <span style="font-size:11px;color:var(--muted);">Data-backed validation, quotable for investor and press use</span>
+      </div>
+      <div class="val-grid">
+        <div class="val-card">
+          <div class="v-name">Group-IB</div>
+          <div class="v-role">Cybersecurity Research Firm (154K LinkedIn followers)</div>
+          <div class="v-quote">"The hiring pipeline has become a new battleground." Research on DPRK-linked fake remote developer operations, ghost employees, synthetic identities entering companies through recruitment.</div>
+          <div class="v-source">Published research — authoritative cybersecurity validation of Sentriq's attack surface</div>
+        </div>
+        <div class="val-card">
+          <div class="v-name">Mrityunjaya (Jay) P.</div>
+          <div class="v-role">Hiring Fraud Researcher (Skill Passport Series)</div>
+          <div class="v-quote">"79% of fraud cases involved experienced professionals — not freshers. 45% were moonlighting for competing companies. 50% of education check failures came from multi-year employees." Source: EY study, 1M+ background checks.</div>
+          <div class="v-source">EY research, 90+ organizations — research-grade sourcing</div>
+        </div>
+        <div class="val-card">
+          <div class="v-name">Greenhouse</div>
+          <div class="v-role">ATS Vendor — 2026 AI in Hiring Report</div>
+          <div class="v-quote">"86% of recruiters in UK, Ireland, Germany caught or suspected candidate fraud in the past 12 months." Publishing the research means they are positioning to own the solution — ATS bundling threat confirmed.</div>
+          <div class="v-source">2026 AI in Hiring Report — mainstream ATS vendor now owns the stat</div>
+        </div>
+        <div class="val-card">
+          <div class="v-name">Gian Soriano / Ashkan Rajaee</div>
+          <div class="v-role">Staffing Industry Researchers</div>
+          <div class="v-quote">Candidate fraud in staffing has matured from anomaly to persistent operational risk. The industry failure: verifying too late, after selection has locked in — exactly the timing gap Sentriq closes.</div>
+          <div class="v-source">LinkedIn Pulse research article</div>
+        </div>
+        <div class="val-card">
+          <div class="v-name">Paul Zauch / Randstad Enterprise</div>
+          <div class="v-role">RPO Research</div>
+          <div class="v-quote">460%+ deepfake growth cited in Randstad Enterprise Candidate Fraud Insights report. RPO-scale institutional data on fraud patterns across enterprise hiring pipelines.</div>
+          <div class="v-source">Randstad Enterprise institutional report — RPO scale validation</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- COMPETITORS TAB -->
+  <div class="tab-content" id="tab-competitors">
+    <div class="section-label">Direct Threats</div>
+    <div class="comp-grid">
+      <div class="comp-card">
+        <div>
+          <div class="c-name">Gem Recruiting Software</div>
+          <div class="c-sub">29,661 followers · Well-funded ATS platform</div>
+        </div>
+        <div class="c-desc">Launched "Gem's AI Fraud Detection Agent" May 2026. Evaluates resume metadata, email, phone, LinkedIn, person verification, IP and device data. Claims 90%+ accuracy. Assigns risk level per application. Customers: Daxko, OneSignal. Operates post-submission, inside Gem's own workflow only. No behavioral baseline capture. No cross-company graph. Platform-locked to Gem users.</div>
+        <div><div class="threat-badge threat-direct">DIRECT</div></div>
+      </div>
+      <div class="comp-card">
+        <div>
+          <div class="c-name">Greenhouse</div>
+          <div class="c-sub">ATS vendor — published 2026 AI in Hiring Report</div>
+        </div>
+        <div class="c-desc">Published the 86% stat — they own the research narrative. Likely building native detection. ATS bundling is the primary structural threat: if Greenhouse ships fraud detection as a default feature, it commoditizes the intake layer. Window to establish Sentriq as the independent, platform-agnostic standard: 6-12 months.</div>
+        <div><div class="threat-badge threat-direct">DIRECT</div></div>
+      </div>
+    </div>
+
+    <div class="section-label">Adjacent Competitors</div>
+    <div class="comp-grid">
+      <div class="comp-card">
+        <div>
+          <div class="c-name">Ropes</div>
+          <div class="c-sub">Candidate verification — staffing buyers</div>
+        </div>
+        <div class="c-desc">36% high-risk flag rate across tens of thousands of assessments. Covers identity fraud, proxy interviewers, AI-assisted deception, DPRK operatives. Operates at interview and identity layer, not application submission. Buyers are staffing firms, not enterprise in-house TA. Adjacent, not direct. The 36% stat is quotable for investor conversations.</div>
+        <div><div class="threat-badge threat-adjacent">ADJACENT</div></div>
+      </div>
+      <div class="comp-card">
+        <div>
+          <div class="c-name">Talexios</div>
+          <div class="c-sub">Interview authenticity (Stage 2 only)</div>
+        </div>
+        <div class="c-desc">Founder Marc Pavlopoulos explicitly says Talexios "addresses Stage 2" (interview impersonation) and acknowledges Stage 1 (Sentriq's layer) as open. Not a direct threat. The founder's framing is a co-marketing angle: Sentriq is Stage 1, Talexios is Stage 2.</div>
+        <div><div class="threat-badge threat-adjacent">ADJACENT</div></div>
+      </div>
+      <div class="comp-card">
+        <div>
+          <div class="c-name">RefAssured</div>
+          <div class="c-sub">Reference verification — staffing</div>
+        </div>
+        <div class="c-desc">Publishing original research on candidate fraud trends in staffing. Reference verification is post-offer, not submission-layer. Adjacent, downstream of Sentriq.</div>
+        <div><div class="threat-badge threat-adjacent">ADJACENT</div></div>
+      </div>
+      <div class="comp-card">
+        <div>
+          <div class="c-name">AuthBridge</div>
+          <div class="c-sub">Background verification — India/APAC</div>
+        </div>
+        <div class="c-desc">Cited as source for 12.02% address mismatch rate in IT/ITeS background checks. BGV firm, not application integrity. Geographic concentration in India/APAC. Useful for GTM intel in APAC region.</div>
+        <div><div class="threat-badge threat-adjacent">ADJACENT</div></div>
+      </div>
+      <div class="comp-card">
+        <div>
+          <div class="c-name">Avature</div>
+          <div class="c-sub">ATS — resharing fraud awareness content</div>
+        </div>
+        <div class="c-desc">"Hiring fraud is no longer an edge case. It's a systemic risk." — Avature is resharing fraud content, positioning. Not yet a detection product, but an ATS actively curating the problem narrative. Monitor.</div>
+        <div><div class="threat-badge threat-adjacent">ADJACENT</div></div>
+      </div>
+    </div>
+
+    <div class="section-label">Complements</div>
+    <div class="comp-grid">
+      <div class="comp-card">
+        <div>
+          <div class="c-name">Group-IB</div>
+          <div class="c-sub">Cybersecurity firm — 154K followers</div>
+        </div>
+        <div class="c-desc">Validating Sentriq's attack surface from a cybersecurity framing. Not a detection product for hiring teams. Potential co-marketing or data partnership angle: their threat intelligence + Sentriq's application layer.</div>
+        <div><div class="threat-badge threat-complement">COMPLEMENT</div></div>
+      </div>
+      <div class="comp-card">
+        <div>
+          <div class="c-name">Searchbug</div>
+          <div class="c-sub">Background check / identity verification</div>
+        </div>
+        <div class="c-desc">Positioning around AI fraud and fake candidate detection. Background check tool, not submission layer. Complement to Sentriq's upstream signal, not a competitor.</div>
+        <div><div class="threat-badge threat-complement">COMPLEMENT</div></div>
+      </div>
+      <div class="comp-card">
+        <div>
+          <div class="c-name">Skill Passport / Kalp</div>
+          <div class="c-sub">Blockchain credential verification</div>
+        </div>
+        <div class="c-desc">Proposing verified employment records on-chain as a supply-side credential solution. Different attack vector: they want to make credentials unfakeable. Sentriq detects that they are fake at submission. Both are needed in the long run.</div>
+        <div><div class="threat-badge threat-complement">COMPLEMENT</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIPELINE TAB -->
+  <!-- PIPELINE_DATA_START -->
+  <div class="tab-content" id="tab-pipeline">
+
+    <div class="section-label">Investors — Active</div>
+    <div class="pipeline-grid">
+
+      <!-- Lerer Hippeau -->
+      <div class="pipeline-card active-card">
+        <div>
+          <div class="pl-company">Lerer Hippeau</div>
+          <div class="pl-contact">Maurice Russo — Partner</div>
+          <div class="pl-next">Deck live. Strategic signal email drafted. NY Tech Week June 1-7 target. Conditional lead ask: signed LOI by June 30.</div>
+        </div>
+        <div class="pl-meta">
+          <span class="pl-status pl-status-active">IN TALKS</span>
+          <span class="pl-source">Prior (Sparqlee)</span>
+          <span class="pl-date">May 3-4</span>
+        </div>
+      </div>
+
+      <!-- RUNI Ventures -->
+      <div class="pipeline-card active-card">
+        <div>
+          <div class="pl-company">RUNI Ventures</div>
+          <div class="pl-contact">Hila Goldman-Aslan — Partner</div>
+          <div class="pl-next">Deck sent May 1. Strategic signal (Socure build-or-buy) created May 4. Follow up if silent.</div>
+        </div>
+        <div class="pl-meta">
+          <span class="pl-status pl-status-active">AWAITING</span>
+          <span class="pl-source">Alumni (Reichman)</span>
+          <span class="pl-date">May 1</span>
+        </div>
+      </div>
+
+      <!-- Daniel Krivelevich -->
+      <div class="pipeline-card active-card">
+        <div>
+          <div class="pl-company">Daniel Krivelevich (Angel)</div>
+          <div class="pl-contact">Co-founder Cider Security (acq. Palo Alto Networks)</div>
+          <div class="pl-next">Deck sent May 7. ntfy topic: sentriq-dk-m4x9. First-contact stage. AppSec parallel is the core pitch angle.</div>
+        </div>
+        <div class="pl-meta">
+          <span class="pl-status pl-status-active">SENT</span>
+          <span class="pl-source">Outbound</span>
+          <span class="pl-date">May 7</span>
+        </div>
+      </div>
+
+      <!-- Groundup Ventures -->
+      <div class="pipeline-card warm-card">
+        <div>
+          <div class="pl-company">Groundup Ventures</div>
+          <div class="pl-contact">Contact TBD</div>
+          <div class="pl-next">Initial talks. Same stage as RUNI. No deck sent yet.</div>
+        </div>
+        <div class="pl-meta">
+          <span class="pl-status pl-status-warm">EARLY</span>
+          <span class="pl-source">Outbound</span>
+          <span class="pl-date">May 2026</span>
+        </div>
+      </div>
+
+      <!-- Lool Ventures -->
+      <div class="pipeline-card warm-card">
+        <div>
+          <div class="pl-company">Lool Ventures</div>
+          <div class="pl-contact">Hila Kronfeld-Meirow — Founder/GP</div>
+          <div class="pl-next">Deck live at GitHub Pages. IC score 85.7% (above 75% threshold). NOT YET SENT. Send the deck.</div>
+        </div>
+        <div class="pl-meta">
+          <span class="pl-status pl-status-warm">READY</span>
+          <span class="pl-source">Cold outbound</span>
+          <span class="pl-date">Built May 3</span>
+        </div>
+      </div>
+
+      <!-- Vertex Ventures -->
+      <div class="pipeline-card warm-card">
+        <div>
+          <div class="pl-company">Vertex Ventures Israel</div>
+          <div class="pl-contact">Ran Gartenberg — GP/CFO</div>
+          <div class="pl-next">Deck live. Warm intro via Samuel's friend. Confirm intro before sending deck. CyberArk parallel.</div>
+        </div>
+        <div class="pl-meta">
+          <span class="pl-status pl-status-warm">PRE-SEND</span>
+          <span class="pl-source">Warm intro</span>
+          <span class="pl-date">May 2026</span>
+        </div>
+      </div>
+
+      <!-- Izaki Ventures -->
+      <div class="pipeline-card warm-card">
+        <div>
+          <div class="pl-company">Izaki Ventures</div>
+          <div class="pl-contact">Yaniv Izaki — Founding SAFE target, $200K</div>
+          <div class="pl-next">Deck live (sentriq-izaki.html). WhatsApp first, then deck. Israeli angel / IGI family office. Reichman alumni.</div>
+        </div>
+        <div class="pl-meta">
+          <span class="pl-status pl-status-warm">PRE-SEND</span>
+          <span class="pl-source">Alumni</span>
+          <span class="pl-date">May 2026</span>
+        </div>
+      </div>
+
+      <!-- a16z / Noya Kremer -->
+      <div class="pipeline-card warm-card">
+        <div>
+          <div class="pl-company">a16z / Speedrun</div>
+          <div class="pl-contact">Noya Kremer — Israel Ecosystem Lead + SR007 Scout</div>
+          <div class="pl-next">Previous relationship (Sparqlee, Sep 2025). Now targeting SR007 scout + Israeli Founder Sprint (NY Tech Week June 1-7). One-pager live.</div>
+        </div>
+        <div class="pl-meta">
+          <span class="pl-status pl-status-warm">WARM</span>
+          <span class="pl-source">Prior (Sparqlee)</span>
+          <span class="pl-date">Apr 30</span>
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="pipeline-divider"/>
+
+    <div class="section-label">Design Partners — Active</div>
+    <div class="pipeline-grid">
+
+      <!-- HSBC -->
+      <div class="pipeline-card active-card">
+        <div>
+          <div class="pl-company">HSBC</div>
+          <div class="pl-contact">Bianca Caban (Innovation Banking) + CS Lai (Ventures)</div>
+          <div class="pl-next">Met April 30. CS Lai ROI quote secured. 2 internal contacts identified. Next: convert to design partner agreement.</div>
+        </div>
+        <div class="pl-meta">
+          <span class="pl-status pl-status-active">IN TALKS</span>
+          <span class="pl-source">Outbound</span>
+          <span class="pl-date">Apr 30</span>
+        </div>
+      </div>
+
+      <!-- Booking Holdings -->
+      <div class="pipeline-card warm-card">
+        <div>
+          <div class="pl-company">Booking Holdings</div>
+          <div class="pl-contact">Eliana Carmel Gilboa — VP People Programs</div>
+          <div class="pl-next">Warm intro via Seffi (Apr 30). Advisory board target first, customer second. Call pending. Do NOT contact cold.</div>
+        </div>
+        <div class="pl-meta">
+          <span class="pl-status pl-status-warm">WARM</span>
+          <span class="pl-source">Intro (Seffi)</span>
+          <span class="pl-date">Apr 30</span>
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="pipeline-divider"/>
+
+    <div class="section-label">Compass-Promoted Prospects</div>
+    <!-- COMPASS_PROMOTED_START -->
+    <div class="pipeline-grid" id="compass-promoted">
+      <div style="padding:16px;text-align:center;color:var(--muted);font-size:11px;">No prospects promoted to pipeline yet. When a Tier A/B prospect is contacted, add them here via COMPASS.</div>
+    </div>
+    <!-- COMPASS_PROMOTED_END -->
+
+    <hr class="pipeline-divider"/>
+
+    <div class="section-label">Inactive / Closed</div>
+    <div class="pipeline-grid">
+      <div class="pipeline-card passed-card">
+        <div>
+          <div class="pl-company">UpWest</div>
+          <div class="pl-contact">Lia Cromwell, Aya</div>
+          <div class="pl-next">PASSED. Advisor offer accepted. Re-engage at first signed design partner.</div>
+        </div>
+        <div class="pl-meta">
+          <span class="pl-status pl-status-passed">PASSED</span>
+          <span class="pl-source">Outbound</span>
+        </div>
+      </div>
+      <div class="pipeline-card passed-card">
+        <div>
+          <div class="pl-company">SYN Ventures</div>
+          <div class="pl-contact">Marcio Lampert</div>
+          <div class="pl-next">OUT. Passed April 23 — out of scope for fund. Do not re-engage on investment.</div>
+        </div>
+        <div class="pl-meta">
+          <span class="pl-status pl-status-passed">OUT</span>
+          <span class="pl-source">Outbound</span>
+          <span class="pl-date">Apr 23</span>
+        </div>
+      </div>
+      <div class="pipeline-card stale-card">
+        <div>
+          <div class="pl-company">NFX</div>
+          <div class="pl-contact">Nimrod</div>
+          <div class="pl-next">STALE. Too early. Needs US design partners + data room. Update send pending.</div>
+        </div>
+        <div class="pl-meta">
+          <span class="pl-status pl-status-stale">STALE</span>
+          <span class="pl-source">Direct</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- PIPELINE_DATA_END -->
+
+  <!-- INTEL TAB -->
+  <div class="tab-content" id="tab-intel">
+    <div class="section-label">Quotable stats — investor and sales conversations</div>
+    <div class="intel-grid">
+      <div class="intel-card">
+        <div class="i-quote">"86% of recruiters across the UK, Ireland, and Germany caught or suspected candidate fraud in the past 12 months."</div>
+        <div class="i-source">Greenhouse — 2026 AI in Hiring Report</div>
+        <div class="i-context">Mainstream ATS vendor now owns this stat. Confirms the problem is no longer niche. Use to frame market timing.</div>
+      </div>
+      <div class="intel-card">
+        <div class="i-quote">"36% of candidate assessments flagged high risk — identity fraud, proxy interviewers, AI-assisted deception, DPRK operatives."</div>
+        <div class="i-source">Ken Schumacher, Ropes — tens of thousands of assessments in 2026</div>
+        <div class="i-context">Third-party market validation from an adjacent player. Quotable for investor conversations as independent scale data.</div>
+      </div>
+      <div class="intel-card">
+        <div class="i-quote">"79% of IT hiring fraud involves experienced professionals — not freshers. Not first-jobbers. People with 3, 5, 7 years of experience."</div>
+        <div class="i-source">EY Study — 1M+ background checks across 90+ organizations (via Mrityunjaya (Jay) P.)</div>
+        <div class="i-context">Destroys the myth that fraud is an entry-level problem. Lateral hire fraud is the real enterprise risk. Use to reframe buyer conversations.</div>
+      </div>
+      <div class="intel-card">
+        <div class="i-quote">"45% of flagged IT candidates were moonlighting — working two jobs simultaneously, often for competing companies."</div>
+        <div class="i-source">EY Study — same dataset</div>
+        <div class="i-context">IP leakage and conflict-of-interest angle. Useful for financial services and enterprise tech buyers where data security is top of mind.</div>
+      </div>
+      <div class="intel-card">
+        <div class="i-quote">"460%+ deepfake growth in recruitment contexts."</div>
+        <div class="i-source">Randstad Enterprise Candidate Fraud Insights Report — cited by Paul Zauch</div>
+        <div class="i-context">RPO-scale institutional data point. Strong for investor slides. Randstad Enterprise is a credible source for a VC audience.</div>
+      </div>
+      <div class="intel-card">
+        <div class="i-quote">"The hiring pipeline has become a new battleground."</div>
+        <div class="i-source">Group-IB — 154K LinkedIn followers</div>
+        <div class="i-context">Cybersecurity framing of Sentriq's problem. Useful when pitching to security-adjacent investors or CISO-track enterprise buyers.</div>
+      </div>
+      <div class="intel-card">
+        <div class="i-quote">"Candidate fraud is coming up in nearly every conversation."</div>
+        <div class="i-source">Simon Gray — Recruiting Consultant</div>
+        <div class="i-context">Practitioner-level confirmation that this is now a recurring conversation, not an edge case. Use in sales conversations to validate the buyer's context.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var K = atob('Y29tcGFzczI2');
+  var pinged = sessionStorage.getItem('compass-pinged');
+  function pingOpen(){
+    if(pinged) return;
+    pinged = true;
+    sessionStorage.setItem('compass-pinged','1');
+    var t = new Date().toISOString();
+    fetch('https://ipapi.co/json/')
+      .then(function(r){return r.json();})
+      .then(function(g){
+        var loc=(g.city||'')+', '+(g.country_name||'')+' ('+(g.ip||'')+')';
+        var msg='COMPASS Intel page opened\n'+loc+'\n'+(g.org||'')+'\n'+t;
+        fetch('https://ntfy.sh/sentriq-compass-m5q8',{method:'POST',mode:'no-cors',body:msg}).catch(function(){});
+      })
+      .catch(function(){
+        fetch('https://ntfy.sh/sentriq-compass-m5q8',{method:'POST',mode:'no-cors',body:'COMPASS Intel page opened\n'+t}).catch(function(){});
+      });
+  }
+  window.unlock = function(){
+    var v = document.getElementById('pw').value;
+    if(v === K){
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('main').style.display = 'block';
+      pingOpen();
+    } else {
+      document.getElementById('err').style.display = 'block';
+      document.getElementById('pw').value = '';
+    }
+  };
+  window.showTab = function(id){
+    document.querySelectorAll('.tab-content').forEach(function(el){el.classList.remove('active');});
+    document.querySelectorAll('.tab').forEach(function(el){el.classList.remove('active');});
+    document.getElementById('tab-'+id).classList.add('active');
+    var tabs = ['prospects','validators','competitors','intel','pipeline'];
+    var idx = tabs.indexOf(id);
+    document.querySelectorAll('.tab')[idx].classList.add('active');
+  };
+  var saved = sessionStorage.getItem('compass-pw');
+  if(saved === K){
+    document.getElementById('gate').style.display='none';
+    document.getElementById('main').style.display='block';
+    pingOpen();
+  }
+  document.getElementById('pw').addEventListener('keydown',function(e){
+    if(e.key==='Enter') window.unlock();
+  });
+})();
+</script>
+</body>
+</html>
