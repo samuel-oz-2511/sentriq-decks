@@ -199,8 +199,12 @@
         h1 { font-size: 24px; } h2 { font-size: 18px; }
         .nav-bar { padding: 10px 16px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
         div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+        div.grid-2col-mobile { grid-template-columns: 1fr 1fr !important; }
         .step-arrow { display: none !important; }
         .nav-company { display: none; }
+    }
+    @media (max-width: 480px) {
+        div.grid-2col-mobile { grid-template-columns: 1fr !important; }
     }
     @media (max-width: 640px) {
         .stack-layer-label { width: 100px; }
@@ -570,7 +574,7 @@
         </div>
         <p style="font-size:10px;color:var(--muted);margin-top:8px;">Sentriq enters at submission. The trust signal travels with the application and updates at every downstream stage. No blocking. No friction.</p>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;">
+    <div class="grid-2col-mobile" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;">
         <div style="padding:16px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.18);border-radius:12px;">
             <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Layer 1</div>
             <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px;">Behavioral Baseline</div>
@@ -1002,7 +1006,7 @@
             <p style="font-size:10px;color:var(--muted);margin-top:3px;">$8K CAC / $7K MRR x 78% margin</p>
         </div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;">
+    <div class="grid-2col-mobile" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;">
         <div style="padding:14px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;text-align:center;">
             <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;">Pilot</div>
             <div style="font-size:13px;font-weight:700;color:var(--text);">$10K</div>
@@ -1013,7 +1017,8 @@
             <div style="font-size:13px;font-weight:700;color:var(--text);">$36K / yr</div>
             <div style="font-size:9px;color:var(--muted);margin-top:3px;">~$3K MRR</div>
         </div>
-        <div style="padding:14px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.4);border-radius:10px;text-align:center;">
+        <div style="padding:14px;background:rgba(232,160,32,0.06);border:2px solid rgba(232,160,32,0.5);border-radius:10px;text-align:center;position:relative;">
+            <div style="position:absolute;top:-9px;left:50%;transform:translateX(-50%);font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:2px 8px;background:var(--amber);color:#09090F;border-radius:4px;">Recommended</div>
             <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;">Scale</div>
             <div style="font-size:13px;font-weight:700;color:var(--text);">$84K / yr</div>
             <div style="font-size:9px;color:var(--muted);margin-top:3px;">~$7K MRR. Full pipeline coverage.</div>
@@ -1067,7 +1072,7 @@
                 <p style="font-size:11px;color:var(--text-sub);line-height:1.6;">SQLink Group (Israel's largest IT staffing company) and Mizrahi-Tefahot Bank (Israel's 3rd largest bank): both in active design partner conversation via Gilad Rabinovich's direct relationships. 1,300+ Israeli high-tech companies. Top 200 by headcount at Scale tier ($84K ACV) = $16.8M Israeli SAM.</p>
             </div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+        <div class="grid-2col-mobile" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
             <div style="padding:9px 12px;background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.3);border-radius:8px;text-align:center;">
                 <div style="font-size:11px;font-weight:700;color:var(--text);">HSBC</div>
                 <div style="font-size:9px;color:var(--amber);margin-top:2px;">Innovation Banking</div>
