@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Sentriq -- Ronit Benbasat</title>
+<title>Sentriq - Ronit Benbasat</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
@@ -153,7 +153,7 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
 }
 .funnel-name { font-size: 12px; font-weight: 600; }
 .funnel-name.amber { color: var(--amber); }
-.funnel-tool { font-size: 11px; color: var(--muted); }
+.funnel-tool { font-size: 12px; color: var(--muted); }
 .funnel-tag { font-size: 10px; font-weight: 600; color: var(--muted); white-space: nowrap; }
 .funnel-tag.amber { color: var(--amber); }
 .funnel-arrow { text-align: center; font-size: 10px; color: var(--border); padding: 1px 0; }
@@ -177,7 +177,7 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
 .ats-name { font-size: 12px; color: var(--sub); }
 .badge-green { font-size: 10px; font-weight: 700; color: var(--green); background: rgba(68,204,136,0.12); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(68,204,136,0.22); white-space: nowrap; }
 .badge-amber-s { font-size: 10px; font-weight: 700; color: var(--amber); background: rgba(232,160,32,0.12); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(232,160,32,0.25); white-space: nowrap; }
-.ats-note { font-size: 10px; color: var(--muted); margin-top: 8px; }
+.ats-note { font-size: 12px; color: var(--muted); margin-top: 8px; }
 
 /* ── Traction ── */
 .traction-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(14px, 1.8vw, 22px); }
@@ -194,6 +194,7 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
 .ask-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 1.5vw, 20px); margin-top: 10px; }
 .ask-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: clamp(16px, 1.8vw, 22px); }
 .ask-num { font-size: clamp(24px, 2.8vw, 34px); font-weight: 800; color: var(--amber); letter-spacing: -0.04em; line-height: 1; margin-bottom: 10px; }
+@media (max-width: 640px) { .cover-grid { grid-template-columns: 1fr !important; } }
 .ask-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
 
 /* ── Amber callout ── */
@@ -216,7 +217,7 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
      ============================================================ -->
 <div class="slide slide-cover active">
   <div class="slide-inner">
-    <div style="display:grid;grid-template-columns:1fr 380px;gap:clamp(40px,5vw,80px);align-items:center;min-height:calc(100vh - 140px);">
+    <div style="display:grid;grid-template-columns:1fr 380px;gap:clamp(40px,5vw,80px);align-items:center;min-height:calc(100vh - 140px);" class="cover-grid">
 
       <div>
         <div class="eyebrow" style="margin-bottom:20px;">For Ronit Benbasat</div>
@@ -235,11 +236,11 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
           <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(232,160,32,0.6);margin-bottom:8px;">Question 1</div>
           <div class="body-sm" style="color:rgba(255,255,255,0.85);">Does the problem we're describing match what you saw across your career?</div>
         </div>
-        <div class="card-amber">
-          <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(232,160,32,0.6);margin-bottom:8px;">Question 2</div>
+        <div class="card">
+          <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Question 2</div>
           <div class="body-sm" style="color:rgba(255,255,255,0.85);">Is our approach to solving it the right one?</div>
         </div>
-        <div class="body-sm" style="color:var(--muted);">We're looking for senior HR operators who have lived this problem from the inside -- to tell us where we're right, and where we're wrong.</div>
+        <div class="body-sm" style="color:var(--muted);">We're looking for senior HR operators who have lived this problem from the inside. To tell us where we're right, and where we're wrong.</div>
       </div>
 
     </div>
@@ -263,7 +264,7 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
           <div class="bullet"><div class="dot"></div><div class="body-sm">LinkedIn Easy Apply scaled inbound pipelines to thousands of anonymous submissions per role.</div></div>
           <div class="bullet"><div class="dot"></div><div class="body-sm">AI tools generate keyword-perfect, tailored applications in seconds -- indistinguishable from genuine ones.</div></div>
           <div class="bullet"><div class="dot"></div><div class="body-sm">Fabricated credentials and overfitted qualifications pass the initial screen with no signal to the recruiter.</div></div>
-          <div class="bullet"><div class="dot"></div><div class="body-sm">HR teams are spending more time on screening, not less -- and increasingly on applications that were never genuine.</div></div>
+          <div class="bullet"><div class="dot"></div><div class="body-sm">HR teams are spending more time on screening, not less, and increasingly on applications that were never genuine.</div></div>
         </div>
       </div>
 
@@ -275,7 +276,7 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
         </div>
         <div class="stat-box">
           <div class="stat-num">86%</div>
-          <div class="stat-label">of recruiters across UK, Ireland and Germany caught or suspected candidate fraud in the past 12 months</div>
+          <div class="stat-label">of recruiters across UK, Ireland and Germany caught or suspected misrepresented applications in the past 12 months</div>
           <div class="stat-source">Greenhouse 2026 AI in Hiring Report</div>
         </div>
         <div class="stat-box">
@@ -305,7 +306,7 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
         <div class="funnel">
           <div class="funnel-row sentriq">
             <span class="funnel-name amber">Application Submitted</span>
-            <span class="funnel-tool" style="color:rgba(232,160,32,0.7);">Sentriq fires here -- behavioral signals captured at form-fill</span>
+            <span class="funnel-tool" style="color:rgba(232,160,32,0.7);">Sentriq fires here. Behavioral signals captured at form-fill</span>
             <span class="funnel-tag amber">Sentriq</span>
           </div>
           <div class="funnel-arrow">&#8595;</div>
@@ -317,7 +318,7 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
           <div class="funnel-arrow">&#8595;</div>
           <div class="funnel-row">
             <span class="funnel-name" style="color:var(--sub);">Recruiter Screen</span>
-            <span class="funnel-tool">Manual review -- 23hrs avg per shortlist</span>
+            <span class="funnel-tool">Manual review. 23hrs avg per shortlist</span>
             <span class="funnel-tag">Post-submission</span>
           </div>
           <div class="funnel-arrow">&#8595;</div>
@@ -360,7 +361,7 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
         </div>
         <div class="bullets">
           <div class="bullet"><div class="dot"></div><div class="body-sm"><strong style="color:var(--text);">Not a rejection engine.</strong> Every flag routes to a human. No automated decisions on candidates.</div></div>
-          <div class="bullet"><div class="dot"></div><div class="body-sm"><strong style="color:var(--text);">Not ATS-dependent.</strong> Works regardless of which applicant tracking system is in place.</div></div>
+          <div class="bullet"><div class="dot"></div><div class="body-sm"><strong style="color:var(--text);">Platform-agnostic.</strong> Works regardless of which applicant tracking system is in place.</div></div>
           <div class="bullet"><div class="dot"></div><div class="body-sm"><strong style="color:var(--text);">The unit is the application, not the candidate.</strong> We analyze the submission event -- how it was completed, not who completed it.</div></div>
           <div class="bullet"><div class="dot"></div><div class="body-sm"><strong style="color:var(--text);">No new workflow for recruiters.</strong> The trust signal appears alongside the existing application record in the ATS.</div></div>
         </div>
@@ -413,7 +414,7 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
       </div>
     </div>
     <div class="callout" style="margin-top:16px;">
-      The founding team built the attack infrastructure before building the detection layer -- running live experiments across real ATS systems. The detection came directly from seeing what actually works on the offense.
+      The research came from running the offense before writing the defense. The team mapped what fabricated submissions actually look like in practice, across 30+ ATS environments, before building a single detection rule. The corpus is proprietary. No competitor can replicate it.
     </div>
   </div>
 </div>
@@ -423,7 +424,7 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
      ============================================================ -->
 <div class="slide">
   <div class="slide-inner">
-    <div class="eyebrow">Where We Are</div>
+    <div class="eyebrow">Traction</div>
     <h2>Early stage. <em>Honest about it.</em></h2>
     <div class="traction-grid">
 
@@ -433,7 +434,7 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
         <div class="body-sm">Director-level conversation with the Innovation Banking team. Two internal referrals in progress. CS Lai from HSBC Ventures joined the meeting and responded immediately.</div>
         <div class="quote-bar">
           "The ROI justification writes itself."
-          <div class="quote-attr">-- CS Lai, HSBC Ventures</div>
+          <div class="quote-attr">CS Lai, HSBC Ventures</div>
         </div>
       </div>
 
@@ -472,18 +473,18 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
         <div class="body-sm">Does what we're describing match what you saw at Check Point, Team8, and Intuit? Where is the pain most acute? Where are we describing it wrong?</div>
       </div>
       <div class="ask-card">
-        <div class="ask-num">02</div>
+        <div class="ask-num" style="color:var(--muted);">02</div>
         <div class="ask-title">Challenge the Approach</div>
         <div class="body-sm">Is a trust signal at submission the right intervention? What would a Head of Talent actually do differently if they had this? What objections will we hear that we're not anticipating?</div>
       </div>
       <div class="ask-card">
-        <div class="ask-num">03</div>
+        <div class="ask-num" style="color:var(--muted);">03</div>
         <div class="ask-title">Open Two Doors</div>
-        <div class="body-sm">If this resonates -- two or three introductions to senior HR leaders you trust. Not a warm email. A genuine "this is worth your time." That's how we get the validation conversations that matter.</div>
+        <div class="body-sm">If this resonates, two or three introductions to senior HR leaders you trust. The goal is a real conversation, not a cold chain. You know who would care about this.</div>
       </div>
     </div>
     <div class="callout" style="margin-top:18px;">
-      We are not asking for a formal commitment today. We are asking for an honest hour and the willingness to tell us where we are wrong.
+      We are building a small group of senior HR operators to advise on where we are right and where we are wrong. This conversation is part of figuring out who belongs in it. No formal commitment today.
     </div>
   </div>
 </div>
