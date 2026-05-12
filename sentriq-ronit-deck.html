@@ -441,112 +441,113 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
 <div class="slide">
   <div class="slide-inner">
     <div class="eyebrow">Competitive Landscape</div>
-    <h2>Every tool runs after the application arrives. <em>Nobody checks the submission.</em></h2>
+    <h2>Every tool runs after a recruiter has already opened the application. <em>Nobody checks before it gets there.</em></h2>
 
     <!-- CATEGORY EXPLAINER: three lanes for HR clarity -->
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px;align-items:stretch;">
 
       <!-- Lane 1: Background Check -->
       <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-top:3px solid rgba(150,150,170,0.45);border-radius:8px;padding:14px 15px;">
         <div style="font-size:8.5px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:rgba(150,150,170,0.65);margin-bottom:7px;">Background Check</div>
         <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.85);margin-bottom:5px;">Checks the person</div>
-        <div style="font-size:11px;color:var(--muted);line-height:1.55;margin-bottom:9px;">Criminal record, employment history, education. Runs <strong style="color:rgba(255,255,255,0.55);">after you decide to hire</strong>. The fraud already reached final-stage interviews.</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.55;margin-bottom:9px;">Criminal record, employment history, education. Runs <strong style="color:rgba(255,255,255,0.55);">after you decide to hire</strong>. By then, a fabricated application has already passed every screen and consumed hours of recruiter and hiring manager time.</div>
         <div style="font-size:10px;color:rgba(150,150,170,0.5);font-style:italic;">Checkr, HireRight, First Advantage, Sterling</div>
       </div>
 
       <!-- Lane 2: AI Content / Interview Detection (peers' suggestions) -->
-      <div style="background:rgba(80,195,185,0.05);border:1px solid rgba(80,195,185,0.18);border-top:3px solid rgba(80,195,185,0.55);border-radius:8px;padding:14px 15px;position:relative;">
-        <div style="position:absolute;top:-1px;right:10px;background:rgba(80,195,185,0.15);border:1px solid rgba(80,195,185,0.3);border-top:none;border-radius:0 0 6px 6px;padding:2px 8px;font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(80,195,185,0.8);">Your peers mentioned</div>
-        <div style="font-size:8.5px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:rgba(80,195,185,0.7);margin-bottom:7px;">AI Detection</div>
+      <div style="background:rgba(80,195,185,0.05);border:1px solid rgba(80,195,185,0.18);border-top:3px solid rgba(80,195,185,0.55);border-radius:8px;padding:14px 15px;">
+        <div style="display:inline-block;background:rgba(80,195,185,0.15);border:1px solid rgba(80,195,185,0.3);border-radius:4px;padding:2px 8px;font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(80,195,185,0.8);margin-bottom:9px;">Your peers mentioned</div>
+        <div style="font-size:8.5px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:rgba(80,195,185,0.7);margin-bottom:7px;">AI Use Detection</div>
         <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.85);margin-bottom:5px;">Checks the content</div>
-        <div style="font-size:11px;color:var(--muted);line-height:1.55;margin-bottom:9px;">Scans resume text for AI-generation, or monitors live interviews for cheating tools. Runs <strong style="color:rgba(255,255,255,0.55);">after your ATS already holds the application</strong>. A recruiter must run it manually.</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.55;margin-bottom:9px;">Scans resume text for AI-generation, or monitors live interviews for AI-assistance tools. Runs <strong style="color:rgba(255,255,255,0.55);">after your ATS already holds the application</strong>. Runs only when a recruiter initiates it.</div>
         <div style="font-size:10px;color:rgba(80,195,185,0.65);">Pangram, Polygraf, Sherlock AI</div>
       </div>
 
       <!-- Lane 3: Application Authenticity (Sentriq) -->
       <div style="background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.28);border-top:3px solid var(--amber);border-radius:8px;padding:14px 15px;">
         <div style="font-size:8.5px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:var(--amber);margin-bottom:7px;">Application Authenticity</div>
-        <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.95);margin-bottom:5px;">Checks the submission</div>
-        <div style="font-size:11px;color:rgba(245,245,245,0.72);line-height:1.55;margin-bottom:9px;">Detects bot behavior and fabricated submissions at the moment of form-fill, <strong style="color:rgba(255,255,255,0.85);">before a recruiter ever opens the application</strong>. Fully automatic. Zero extra work for HR.</div>
-        <div style="font-size:10px;font-weight:700;color:var(--amber);">Sentriq. No other vendor operates here.</div>
+        <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.95);margin-bottom:5px;">Checks the application itself</div>
+        <div style="font-size:11px;color:rgba(245,245,245,0.72);line-height:1.55;margin-bottom:9px;">Detects automated and fabricated submissions at the moment a candidate applies, <strong style="color:rgba(255,255,255,0.85);">before a recruiter ever opens the application</strong>. Fully automatic. Zero extra work for HR.</div>
+        <div style="font-size:10px;font-weight:700;color:var(--amber);">Sentriq. The only layer operating before recruiter review.</div>
       </div>
     </div>
 
     <!-- GANTT: where everything sits in the funnel -->
     <div style="margin-bottom:14px;">
       <div style="font-size:9.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">Every player mapped to the hiring funnel</div>
-      <svg viewBox="0 0 660 356" style="width:100%;display:block;border:1px solid rgba(255,255,255,0.06);border-radius:8px;background:rgba(255,255,255,0.01);" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 660 340" style="width:100%;display:block;border:1px solid rgba(255,255,255,0.06);border-radius:8px;background:rgba(255,255,255,0.01);" xmlns="http://www.w3.org/2000/svg">
 
         <!-- Amber zone highlight: FORM FILL -->
-        <rect x="90" y="0" width="110" height="356" fill="rgba(232,160,32,0.04)"/>
+        <rect x="90" y="0" width="110" height="340" fill="rgba(232,160,32,0.04)"/>
 
         <!-- Header -->
         <rect x="0" y="0" width="660" height="26" fill="rgba(255,255,255,0.03)"/>
         <text x="145" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="700" fill="#E8A020">FORM FILL</text>
-        <text x="255" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.38)">IN ATS</text>
+        <text x="255" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.38)">ATS REVIEW</text>
         <text x="365" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.38)">SCREENING</text>
         <text x="475" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.38)">INTERVIEW</text>
         <text x="590" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.38)">POST-OFFER</text>
 
         <!-- Column dividers -->
-        <line x1="90"  y1="0"  x2="90"  y2="356" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-        <line x1="200" y1="26" x2="200" y2="356" stroke="rgba(232,160,32,0.2)"   stroke-width="1" stroke-dasharray="3 3"/>
-        <line x1="310" y1="26" x2="310" y2="356" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-        <line x1="420" y1="26" x2="420" y2="356" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-        <line x1="530" y1="26" x2="530" y2="356" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <line x1="90"  y1="0"  x2="90"  y2="340" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <line x1="200" y1="26" x2="200" y2="340" stroke="rgba(232,160,32,0.2)"   stroke-width="1" stroke-dasharray="3 3"/>
+        <line x1="310" y1="26" x2="310" y2="340" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <line x1="420" y1="26" x2="420" y2="340" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <line x1="530" y1="26" x2="530" y2="340" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
 
         <!-- ── KNOWN COMPETITORS ── -->
         <!-- Gem -->
         <rect x="0"   y="26" width="660" height="22" fill="rgba(255,255,255,0.01)"/>
         <text x="86"  y="41" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.6)">Gem</text>
-        <rect x="202" y="31" width="456" height="12" rx="2" fill="rgba(224,85,85,0.28)"/>
-        <text x="430" y="41" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.42)">AI Fraud Agent (outbound sourcing only)</text>
+        <rect x="202" y="31" width="456" height="12" rx="2" fill="rgba(200,200,210,0.18)"/>
+        <text x="430" y="41" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.42)">Outbound sourcing and pipeline management</text>
 
         <!-- Tofu -->
         <rect x="0"   y="48" width="660" height="22" fill="rgba(255,255,255,0.01)"/>
         <text x="86"  y="63" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.6)">Tofu</text>
-        <rect x="202" y="53" width="218" height="12" rx="2" fill="rgba(200,110,55,0.28)"/>
+        <rect x="202" y="53" width="218" height="12" rx="2" fill="rgba(200,200,210,0.18)"/>
         <text x="311" y="63" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.42)">CV forensics</text>
 
         <!-- Endorsed -->
         <rect x="0"   y="70" width="660" height="22" fill="rgba(255,255,255,0.015)"/>
         <text x="86"  y="85" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.6)">Endorsed</text>
-        <rect x="202" y="75" width="218" height="12" rx="2" fill="rgba(200,110,55,0.22)"/>
+        <rect x="202" y="75" width="218" height="12" rx="2" fill="rgba(200,200,210,0.18)"/>
         <text x="311" y="85" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.42)">Identity + skill ranking</text>
 
         <!-- Crosschq -->
         <rect x="0"   y="92" width="660" height="22" fill="rgba(255,255,255,0.01)"/>
         <text x="86"  y="107" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.6)">Crosschq</text>
-        <rect x="202" y="97" width="436" height="12" rx="2" fill="rgba(200,110,55,0.18)"/>
+        <rect x="202" y="97" width="436" height="12" rx="2" fill="rgba(200,200,210,0.18)"/>
         <text x="420" y="107" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.42)">Static signal scan</text>
 
         <!-- Persona -->
         <rect x="0"   y="114" width="660" height="22" fill="rgba(255,255,255,0.015)"/>
         <text x="86"  y="129" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.6)">Persona</text>
-        <rect x="312" y="119" width="346" height="12" rx="2" fill="rgba(130,80,210,0.28)"/>
+        <rect x="312" y="119" width="346" height="12" rx="2" fill="rgba(200,200,210,0.18)"/>
         <text x="485" y="129" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.42)">Identity verification</text>
 
         <!-- Clarity -->
         <rect x="0"   y="136" width="660" height="22" fill="rgba(255,255,255,0.01)"/>
         <text x="86"  y="151" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.6)">Clarity</text>
-        <rect x="422" y="141" width="236" height="12" rx="2" fill="rgba(50,120,220,0.28)"/>
+        <rect x="422" y="141" width="236" height="12" rx="2" fill="rgba(200,200,210,0.18)"/>
         <text x="540" y="151" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.42)">Interview intelligence</text>
 
         <!-- HireVue -->
         <rect x="0"   y="158" width="660" height="22" fill="rgba(255,255,255,0.015)"/>
         <text x="86"  y="173" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.6)">HireVue</text>
-        <rect x="422" y="163" width="236" height="12" rx="2" fill="rgba(50,120,220,0.2)"/>
+        <rect x="422" y="163" width="236" height="12" rx="2" fill="rgba(200,200,210,0.18)"/>
         <text x="540" y="173" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.42)">Video interview</text>
 
         <!-- Checkr -->
         <rect x="0"   y="180" width="660" height="22" fill="rgba(255,255,255,0.01)"/>
         <text x="86"  y="195" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.6)">Checkr / HireRight</text>
-        <rect x="532" y="185" width="126" height="12" rx="2" fill="rgba(100,100,110,0.38)"/>
+        <rect x="532" y="185" width="126" height="12" rx="2" fill="rgba(200,200,210,0.18)"/>
         <text x="595" y="195" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.42)">Background check</text>
 
         <!-- ── PEERS' SUGGESTIONS (teal) ── -->
-        <!-- Section label -->
+        <!-- Section separator + label -->
         <rect x="0" y="202" width="660" height="14" fill="rgba(80,195,185,0.06)"/>
+        <line x1="0" y1="202" x2="660" y2="202" stroke="rgba(80,195,185,0.2)" stroke-width="1" stroke-dasharray="4 3"/>
         <text x="90" y="213" font-family="Space Grotesk,sans-serif" font-size="7.5" font-weight="700" letter-spacing="0.1" fill="rgba(80,195,185,0.7)">MENTIONED BY YOUR HR PEERS</text>
 
         <!-- Pangram -->
@@ -572,33 +573,33 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
         <rect x="0" y="285" width="660" height="30" fill="rgba(232,160,32,0.05)"/>
         <text x="86" y="305" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="10.5" font-weight="800" fill="#E8A020">Sentriq</text>
         <!-- Solid entry zone -->
-        <rect x="92"  y="291" width="106" height="18" rx="3" fill="rgba(232,160,32,0.6)"/>
+        <rect x="92"  y="291" width="106" height="18" rx="3" fill="rgba(232,160,32,0.85)"/>
         <text x="145" y="304" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="8" font-weight="800" fill="#09090F">ONLY PLAYER HERE</text>
         <!-- Passive coverage bar -->
         <rect x="200" y="291" width="458" height="18" rx="3" fill="rgba(232,160,32,0.09)" stroke="rgba(232,160,32,0.28)" stroke-width="1"/>
-        <text x="429" y="304" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" font-weight="600" fill="rgba(232,160,32,0.72)">Gap Assessor: passive signal across full pipeline</text>
+        <text x="429" y="304" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" font-weight="600" fill="rgba(232,160,32,0.72)">Ongoing signal coverage across full pipeline</text>
 
         <!-- Legend -->
-        <rect x="92" y="320" width="10" height="10" rx="2" fill="rgba(224,85,85,0.38)"/>
+        <rect x="92" y="320" width="10" height="10" rx="2" fill="rgba(200,200,210,0.35)"/>
         <text x="106" y="329" font-family="Space Grotesk,sans-serif" font-size="8" fill="rgba(255,255,255,0.32)">Known competitors</text>
         <rect x="220" y="320" width="10" height="10" rx="2" fill="rgba(80,195,185,0.38)"/>
         <text x="234" y="329" font-family="Space Grotesk,sans-serif" font-size="8" fill="rgba(80,195,185,0.6)">Mentioned by your peers</text>
-        <rect x="376" y="320" width="10" height="10" rx="2" fill="rgba(232,160,32,0.6)"/>
+        <rect x="376" y="320" width="10" height="10" rx="2" fill="rgba(232,160,32,0.85)"/>
         <text x="390" y="329" font-family="Space Grotesk,sans-serif" font-size="8" fill="rgba(232,160,32,0.7)">Sentriq: new category</text>
       </svg>
     </div>
 
     <!-- SIMPLIFIED TABLE: the questions HR actually asks -->
-    <div style="overflow-x:auto;">
+    <div style="overflow-x:auto;border-top:1px solid rgba(255,255,255,0.06);padding-top:14px;">
       <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">What each product actually does</div>
       <table style="width:100%;border-collapse:collapse;font-size:10.5px;">
         <thead>
           <tr style="background:rgba(255,255,255,0.04);border-bottom:1px solid var(--border);">
             <th style="padding:8px 10px;text-align:left;color:var(--muted);font-weight:600;width:16%;">Product</th>
-            <th style="padding:8px 10px;text-align:left;color:var(--muted);font-weight:600;width:26%;">What it checks</th>
-            <th style="padding:8px 10px;text-align:left;color:var(--muted);font-weight:600;width:22%;">When it runs</th>
-            <th style="padding:8px 10px;text-align:center;color:var(--muted);font-weight:600;width:18%;">Passive for HR?</th>
-            <th style="padding:8px 10px;text-align:center;color:var(--muted);font-weight:600;width:18%;">Stops fraud before recruiter sees it?</th>
+            <th style="padding:8px 10px;text-align:left;color:var(--muted);font-weight:600;width:30%;">What it checks</th>
+            <th style="padding:8px 10px;text-align:left;color:var(--muted);font-weight:600;width:24%;">When it runs</th>
+            <th style="padding:8px 10px;text-align:center;color:var(--muted);font-weight:600;width:15%;">Passive for HR?</th>
+            <th style="padding:8px 10px;text-align:center;color:var(--muted);font-weight:600;width:15%;">Acts before the recruiter opens it?</th>
           </tr>
         </thead>
         <tbody>
@@ -620,14 +621,14 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
           </tr>
           <tr style="border-bottom:1px solid rgba(80,195,185,0.12);background:rgba(80,195,185,0.02);">
             <td style="padding:7px 10px;font-weight:700;color:rgba(80,195,185,0.85);">Polygraf <span style="font-size:8px;font-weight:600;padding:1px 6px;border-radius:3px;background:rgba(80,195,185,0.12);color:rgba(80,195,185,0.7);border:1px solid rgba(80,195,185,0.25);margin-left:4px;">Peer rec</span></td>
-            <td style="padding:7px 10px;color:rgba(80,195,185,0.65);">Credential authenticity + interview AI cheating detection</td>
+            <td style="padding:7px 10px;color:rgba(80,195,185,0.65);">Credential authenticity + interview AI detection</td>
             <td style="padding:7px 10px;color:rgba(80,195,185,0.65);">After application is in ATS, during interview</td>
             <td style="padding:7px 10px;text-align:center;color:rgba(80,195,185,0.5);">Partial, recruiter initiates</td>
             <td style="padding:7px 10px;text-align:center;color:rgba(255,255,255,0.25);">No</td>
           </tr>
           <tr style="border-bottom:1px solid rgba(80,195,185,0.12);background:rgba(80,195,185,0.03);">
             <td style="padding:7px 10px;font-weight:700;color:rgba(80,195,185,0.85);">Sherlock AI <span style="font-size:8px;font-weight:600;padding:1px 6px;border-radius:3px;background:rgba(80,195,185,0.12);color:rgba(80,195,185,0.7);border:1px solid rgba(80,195,185,0.25);margin-left:4px;">Peer rec</span></td>
-            <td style="padding:7px 10px;color:rgba(80,195,185,0.65);">Live interview behavior: deepfakes, AI tools mid-call</td>
+            <td style="padding:7px 10px;color:rgba(80,195,185,0.65);">Live interview behavior: identity impersonation, AI tools mid-call</td>
             <td style="padding:7px 10px;color:rgba(80,195,185,0.65);">During scheduled interviews only</td>
             <td style="padding:7px 10px;text-align:center;color:rgba(80,195,185,0.5);">Yes, runs during call</td>
             <td style="padding:7px 10px;text-align:center;color:rgba(255,255,255,0.25);">No</td>
@@ -642,8 +643,8 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
           </tr>
           <!-- Sentriq -->
           <tr style="background:rgba(232,160,32,0.06);border-top:1px solid rgba(232,160,32,0.2);">
-            <td style="padding:8px 10px;font-weight:800;color:var(--amber);font-size:11.5px;">Sentriq</td>
-            <td style="padding:8px 10px;color:rgba(245,245,245,0.85);">Whether the submission itself is authentic: bot, fabricated, or AI-scripted</td>
+            <td style="padding:8px 10px;font-weight:800;color:var(--amber);font-size:13px;">Sentriq</td>
+            <td style="padding:8px 10px;color:rgba(245,245,245,0.85);">Whether the submission itself is authentic: fabricated credentials, AI-generated content, or automated volume submission</td>
             <td style="padding:8px 10px;color:rgba(245,245,245,0.85);">At the moment the candidate fills the form, before submission</td>
             <td style="padding:8px 10px;text-align:center;font-weight:700;color:var(--amber);">Yes, fully automatic</td>
             <td style="padding:8px 10px;text-align:center;font-weight:700;color:var(--amber);">Yes, only player that can</td>
