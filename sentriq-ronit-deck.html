@@ -194,6 +194,9 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
 .ask-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 1.5vw, 20px); margin-top: 10px; }
 .ask-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: clamp(16px, 1.8vw, 22px); }
 .ask-num { font-size: clamp(24px, 2.8vw, 34px); font-weight: 800; color: var(--amber); letter-spacing: -0.04em; line-height: 1; margin-bottom: 10px; }
+@media (max-width: 1024px) {
+  .steps { grid-template-columns: 1fr 1fr; }
+}
 @media (max-width: 768px) {
   .two-col, .two-col-wide, .traction-grid { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr 1fr; }
@@ -240,7 +243,7 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
      ============================================================ -->
 <div class="slide slide-cover active">
   <div class="slide-inner">
-    <div style="display:grid;grid-template-columns:1fr 380px;gap:clamp(40px,5vw,80px);align-items:center;min-height:calc(100vh - 140px);" class="cover-grid">
+    <div style="display:grid;grid-template-columns:1fr 380px;gap:clamp(40px,5vw,80px);align-items:center;" class="cover-grid">
 
       <div>
         <div class="eyebrow" style="margin-bottom:20px;">For Ronit Benbasat</div>
@@ -266,7 +269,6 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
           <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Question 2</div>
           <div class="body-sm" style="color:rgba(255,255,255,0.85);">Is our approach to solving it the right one?</div>
         </div>
-        <div class="body-sm" style="color:var(--muted);">We're looking for senior HR operators who have lived this problem from the inside. To tell us where we're right, and where we're wrong.</div>
       </div>
 
     </div>
@@ -301,9 +303,9 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
           <div class="stat-source">Gartner G00844785</div>
         </div>
         <div class="stat-box">
-          <div class="stat-num">86%</div>
-          <div class="stat-label">of recruiters across UK, Ireland and Germany caught or suspected misrepresented applications in the past 12 months</div>
-          <div class="stat-source">Greenhouse 2026 AI in Hiring Report</div>
+          <div class="stat-num">23hrs</div>
+          <div class="stat-label">average time HR teams spend reviewing and shortlisting applications per open role, most of it on applications that were never genuine</div>
+          <div class="stat-source">Pin Research 2026</div>
         </div>
         <div class="stat-box">
           <div class="stat-num">41%</div>
@@ -332,7 +334,7 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
         <div class="funnel">
           <div class="funnel-row sentriq">
             <span class="funnel-name amber">Application Submitted</span>
-            <span class="funnel-tool" style="color:rgba(232,160,32,0.7);">Sentriq fires here. Behavioral signals captured at form-fill</span>
+            <span class="funnel-tool" style="color:rgba(232,160,32,0.7);">Sentriq runs here. Behavioral signals captured as the candidate fills the form</span>
             <span class="funnel-tag amber">Sentriq</span>
           </div>
           <div class="funnel-arrow">&#8595;</div>
@@ -351,7 +353,7 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
           <div class="funnel-row">
             <span class="funnel-name" style="color:var(--sub);">Interview + Assessment</span>
             <span class="funnel-tool">HireVue, Clarity, video platforms</span>
-            <span class="funnel-tag">$1,700+ spent by here</span>
+            <span class="funnel-tag">Significant cost sunk by this stage</span>
           </div>
         </div>
       </div>
@@ -363,7 +365,7 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
         <div class="body-sm">
           The submission event is the only moment where behavioral signals exist. How the application was completed, not just what it contains. After that moment, those signals are gone permanently.
         </div>
-        <div class="body-sm">
+        <div class="body-sm" style="border-left:2px solid rgba(232,160,32,0.35);padding-left:10px;margin-top:2px;">
           No ATS captures this. No background check reaches back to it. It is the only layer in the hiring stack with no incumbent.
         </div>
       </div>
@@ -383,22 +385,21 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
 
       <div>
         <div class="body" style="margin-bottom:16px;">
-          We call it Candidate Hiring Captcha. Like the CAPTCHA on every website. It doesn't block anyone, it doesn't replace the recruiter's judgment, and genuine applicants never notice it. It distinguishes authentic human intent from fabricated submissions and surfaces that signal alongside the application.
+          You know the CAPTCHA on every website: the invisible test that stops automated systems without slowing down a real person. We apply the same logic to job applications. We call it Candidate Hiring Captcha. It doesn't block anyone, it doesn't replace the recruiter's judgment, and applicants who complete the form genuinely will never notice it. It surfaces an authenticity signal alongside the application.
         </div>
         <div class="bullets">
           <div class="bullet"><div class="dot"></div><div class="body-sm"><strong style="color:var(--text);">Not a rejection engine.</strong> Every flag routes to a human. No automated decisions on candidates.</div></div>
           <div class="bullet"><div class="dot"></div><div class="body-sm"><strong style="color:var(--text);">Platform-agnostic.</strong> Works regardless of which applicant tracking system is in place.</div></div>
           <div class="bullet"><div class="dot"></div><div class="body-sm"><strong style="color:var(--text);">The unit is the application, not the candidate.</strong> We analyze the submission event: how it was completed, not who completed it.</div></div>
-          <div class="bullet"><div class="dot"></div><div class="body-sm"><strong style="color:var(--text);">No new workflow for recruiters.</strong> The trust signal appears alongside the existing application record in the ATS.</div></div>
         </div>
       </div>
 
       <div style="display:flex;flex-direction:column;gap:14px;">
         <div class="ats-mock">
           <div class="ats-header">What the recruiter sees</div>
-          <div class="ats-row"><span class="ats-name">Sarah Chen, Senior Product Manager</span><span class="badge-green">High Trust</span></div>
+          <div class="ats-row"><span class="ats-name">Maya Cohen, Senior Product Manager</span><span class="badge-green">High Trust</span></div>
           <div class="ats-row"><span class="ats-name">Alex Johnson, Senior Product Manager</span><span class="badge-amber-s">Review</span></div>
-          <div class="ats-row"><span class="ats-name">Michael Park, Senior Product Manager</span><span class="badge-green">High Trust</span></div>
+          <div class="ats-row"><span class="ats-name">David Levy, Senior Product Manager</span><span class="badge-green">High Trust</span></div>
           <div class="ats-note">Same ATS view. One additional signal. No new workflow.</div>
         </div>
         <div class="callout">
@@ -430,8 +431,8 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
       </div>
       <div class="step">
         <div class="step-num">03</div>
-        <div class="step-title">Cross-Company Graph</div>
-        <div class="body-sm">Signals cross-referenced against a shared behavioral graph across all employers. A pattern flagged at one company surfaces at the next. No single ATS can build this. It requires neutral ground.</div>
+        <div class="step-title">Pattern Recognition</div>
+        <div class="body-sm">Signals are analyzed against behavioral patterns built across the hiring market. What authentic applications look like, and what fabricated ones look like. Aggregate only. No personal data. No candidate is ever identified or flagged to another employer.</div>
       </div>
       <div class="step">
         <div class="step-num">04</div>
@@ -440,7 +441,7 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
       </div>
     </div>
     <div class="callout" style="margin-top:16px;">
-      The research came from running the offense before writing the defense. The team mapped what fabricated submissions actually look like in practice, across 30+ ATS environments, before building a single detection rule. The corpus is proprietary. No competitor can replicate it.
+      The signal model was built by first mapping what fabricated and automated submissions actually look like in practice, across dozens of hiring environments, before writing a single detection rule. The behavioral model captures signals no ATS can see, because no ATS operates at the form-fill moment. No competitor is structurally positioned to build the same layer.
     </div>
   </div>
 </div>
@@ -665,11 +666,11 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
       <div style="display:flex;flex-direction:column;gap:14px;">
         <div class="t-card">
           <div class="t-company">Booking Holdings</div>
-          <div class="t-status">Warm Intro</div>
-          <div class="body-sm">Introduction to VP People Programs via personal connection. Conversation in progress. Global-scale hiring. The volume problem is acute there.</div>
+          <div class="t-status">Advisory Discussion</div>
+          <div class="body-sm">VP, Global Head of People Programs. Intro via a personal connection. Conversation in progress. Booking Holdings manages hiring across 24,000+ employees and 40+ global brands.</div>
         </div>
 
-        <div class="t-card">
+        <div class="t-card" style="border-top:2px solid var(--border);">
           <div class="t-company" style="color:var(--muted);">Current Stage</div>
           <div class="t-status dim">Pre-Revenue. Design Partner Phase</div>
           <div class="honest-row"><div class="dot-dim"></div><div class="body-sm">Demo ready. No live product yet.</div></div>
@@ -684,7 +685,7 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
 </div>
 
 <!-- ============================================================
-     SLIDE 7: THE ASK
+     SLIDE 8: THE ASK
      ============================================================ -->
 <div class="slide">
   <div class="slide-inner">
@@ -699,7 +700,7 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
       <div class="ask-card">
         <div class="ask-num" style="color:var(--muted);">02</div>
         <div class="ask-title">Challenge the Approach</div>
-        <div class="body-sm">Is a trust signal at submission the right intervention? What would a Head of Talent actually do differently if they had this? What objections will we hear that we're not anticipating?</div>
+        <div class="body-sm">Is a trust signal at submission the right intervention? What would you have done differently if you had this during your time at Check Point or Intuit? What objections will we hear from your peers that we are not anticipating?</div>
       </div>
       <div class="ask-card">
         <div class="ask-num" style="color:var(--muted);">03</div>
@@ -708,7 +709,7 @@ h1 em, h2 em { color: var(--amber); font-style: normal; }
       </div>
     </div>
     <div class="callout" style="margin-top:18px;">
-      We are building a small group of senior HR operators to advise on where we are right and where we are wrong. This conversation is part of figuring out who belongs in it. No formal commitment today.
+      We are building an advisory circle of two or three senior HR operators to tell us where we are right and where we are wrong. This conversation is part of figuring out who belongs in it. No formal commitment today.
     </div>
   </div>
 </div>
