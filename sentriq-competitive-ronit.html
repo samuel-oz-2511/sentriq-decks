@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sentriq — Competitive Landscape</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+@page { size: 11in 8.5in landscape; margin: 0.42in 0.52in; }
+
+:root {
+  --bg:    #09090F;
+  --card:  #0D0E1A;
+  --border:#1A1B2E;
+  --muted: #9090B8;
+  --amber: #E8A020;
+  --text:  #ffffff;
+  --sub:   rgba(255,255,255,0.78);
+  --teal:  rgba(80,195,185,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  color-scheme: dark;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+body { background: var(--bg); }
+
+.page {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 48px 28px;
+  background: var(--bg);
+}
+
+.eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--amber);
+  display: flex; align-items: center; gap: 8px; margin-bottom: 13px;
+}
+.eyebrow::before {
+  content: ''; display: inline-block; width: 20px; height: 1px;
+  background: var(--amber); opacity: 0.5;
+}
+
+h2 {
+  font-size: 28px; font-weight: 800; letter-spacing: -0.03em;
+  line-height: 1.12; margin-bottom: 20px; color: #fff;
+}
+h2 em { color: var(--amber); font-style: normal; }
+
+/* ── CATEGORY CARDS ── */
+.lanes {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 18px;
+  align-items: stretch;
+}
+.lane {
+  display: flex;
+  flex-direction: column;
+  border-radius: 9px;
+  padding: 18px 20px;
+}
+.lane-gray  { background:rgba(255,255,255,0.025); border:1px solid rgba(255,255,255,0.07); border-top:3px solid rgba(160,160,180,0.55); }
+.lane-teal  { background:rgba(80,195,185,0.05);   border:1px solid rgba(80,195,185,0.2);  border-top:3px solid rgba(80,195,185,0.65); }
+.lane-amber { background:rgba(232,160,32,0.07);   border:1px solid rgba(232,160,32,0.3);  border-top:3px solid var(--amber); }
+
+.lane-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.13em;
+  text-transform: uppercase; margin-bottom: 7px;
+}
+.lane-gray  .lane-eyebrow { color: rgba(160,160,180,0.75); }
+.lane-teal  .lane-eyebrow { color: rgba(80,195,185,0.8);  }
+.lane-amber .lane-eyebrow { color: var(--amber);           }
+
+.lane-headline {
+  font-size: 14px; font-weight: 700; margin-bottom: 7px; color: rgba(255,255,255,0.9);
+}
+.lane-amber .lane-headline { color: rgba(255,255,255,0.97); }
+
+.lane-body {
+  font-size: 12px; line-height: 1.6; margin-bottom: 10px;
+  color: rgba(255,255,255,0.58);
+  flex: 1;
+}
+.lane-amber .lane-body { color: rgba(245,245,245,0.72); }
+
+.lane-body strong { color: rgba(255,255,255,0.75); }
+.lane-amber .lane-body strong { color: rgba(255,255,255,0.9); }
+
+.peer-badge {
+  display: inline-block;
+  background: rgba(80,195,185,0.15); border: 1px solid rgba(80,195,185,0.32);
+  border-radius: 4px; padding: 2px 8px;
+  font-size: 8.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(80,195,185,0.85); margin-bottom: 9px;
+}
+
+.lane-companies { margin-top: auto; }
+.sub-group-label {
+  font-size: 8.5px; font-weight: 700; letter-spacing: 0.09em;
+  text-transform: uppercase; margin-bottom: 3px; margin-top: 8px;
+}
+.lane-teal .sub-group-label { color: rgba(80,195,185,0.55); }
+.company-primary {
+  font-size: 12.5px; font-weight: 700; margin-bottom: 2px;
+}
+.lane-gray  .company-primary { color: rgba(180,180,200,0.85); }
+.lane-teal  .company-primary { color: rgba(80,195,185,0.9);  }
+.lane-amber .company-primary { color: var(--amber);           }
+.company-peers {
+  font-size: 10px; line-height: 1.5;
+}
+.lane-gray  .company-peers { color: rgba(180,180,200,0.55); }
+.lane-teal  .company-peers { color: rgba(80,195,185,0.6);  }
+.lane-amber .company-peers { color: rgba(232,160,32,0.65); }
+.lane-cta {
+  font-size: 11px; font-weight: 700; color: var(--amber); margin-top: auto; padding-top: 8px;
+}
+
+/* ── GANTT ── */
+.gantt-wrap { margin-bottom: 16px; }
+.section-label {
+  font-size: 10px; font-weight: 700; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px;
+}
+
+/* ── TABLE ── */
+.table-wrap {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 14px;
+  overflow-x: auto;
+}
+.table-title {
+  font-size: 10px; font-weight: 700; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px;
+}
+table {
+  width: 100%; border-collapse: collapse;
+  font-size: 12.5px;
+}
+thead tr {
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.09);
+}
+th {
+  padding: 8px 10px; text-align: left;
+  color: var(--muted); font-weight: 600; font-size: 11px;
+}
+th:nth-child(4), th:nth-child(5) { text-align: center; }
+tbody tr { border-bottom: 1px solid rgba(255,255,255,0.05); }
+tbody tr.peer-row { background: rgba(80,195,185,0.03); border-bottom: 1px solid rgba(80,195,185,0.1); }
+tbody tr.sentriq-row { background: rgba(232,160,32,0.06); border-top: 1px solid rgba(232,160,32,0.22); }
+td { padding: 8px 10px; color: rgba(255,255,255,0.6); vertical-align: top; }
+td.cat-cell { color: rgba(255,255,255,0.75); font-weight: 700; }
+td.cat-cell .sub { font-size: 10px; color: rgba(255,255,255,0.35); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+td.peer-cat { color: rgba(80,195,185,0.9); font-weight: 700; }
+td.peer-cat .sub { font-size: 10px; color: rgba(80,195,185,0.5); font-weight: 400; margin-top: 2px; line-height: 1.4; }
+td.peer-val { color: rgba(80,195,185,0.75); }
+.peer-badge-sm {
+  display: inline-block;
+  background: rgba(80,195,185,0.12); border: 1px solid rgba(80,195,185,0.25);
+  border-radius: 3px; padding: 1px 5px;
+  font-size: 8.5px; font-weight: 600; color: rgba(80,195,185,0.75);
+  margin-left: 4px; vertical-align: middle;
+}
+td.no-cell { text-align: center; color: rgba(255,255,255,0.5); }
+td.sentriq-name { font-size: 14px; font-weight: 800; color: var(--amber); }
+td.sentriq-val { color: rgba(245,245,245,0.88); font-size: 13px; }
+td.sentriq-yes { text-align: center; font-weight: 700; color: var(--amber); font-size: 13px; }
+
+/* ── FOOTER ── */
+.footer {
+  margin-top: 22px; padding-bottom: 4px;
+  display: flex; justify-content: space-between; align-items: center;
+  page-break-inside: avoid;
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="eyebrow">Competitive Landscape</div>
+  <h2>Every tool runs after a recruiter has already opened the application.<br><em>Nobody checks before it gets there.</em></h2>
+
+  <!-- CATEGORY CARDS -->
+  <div class="lanes">
+
+    <div class="lane lane-gray">
+      <div class="lane-eyebrow">Background Check</div>
+      <div class="lane-headline">Checks the person</div>
+      <div class="lane-body">Criminal record, employment history, education. Runs <strong>after you decide to hire</strong>. By then, a fabricated application has already passed every screen and consumed hours of recruiter and hiring manager time.</div>
+      <div class="lane-companies">
+        <div class="company-primary">Checkr</div>
+        <div class="company-peers">HireRight &middot; First Advantage &middot; Sterling &middot; Accurate</div>
+      </div>
+    </div>
+
+    <div class="lane lane-teal">
+      <div><span class="peer-badge">Your peers mentioned</span></div>
+      <div class="lane-eyebrow">Screening &amp; Assessment</div>
+      <div class="lane-headline">Checks content, identity, or interviews</div>
+      <div class="lane-body">Scans resume text for AI signals, verifies identity, or monitors live interviews for AI-assistance tools. Runs <strong>after the application is already in your ATS</strong>. Most require manual initiation.</div>
+      <div class="lane-companies">
+        <div class="sub-group-label">Resume AI</div>
+        <div class="company-primary">Pangram</div>
+        <div class="company-peers" style="margin-bottom:8px;">Polygraf &middot; Tofu &middot; Endorsed &middot; Crosschq</div>
+        <div class="sub-group-label">Interview</div>
+        <div class="company-primary">HireVue</div>
+        <div class="company-peers">Clarity &middot; Sherlock AI &middot; Willo &middot; Metaview</div>
+      </div>
+    </div>
+
+    <div class="lane lane-amber">
+      <div class="lane-eyebrow">Application Authenticity</div>
+      <div class="lane-headline">Checks the application itself</div>
+      <div class="lane-body">Detects automated and fabricated submissions at the moment a candidate applies, <strong>before a recruiter ever opens the application</strong>. Fully automatic. Zero extra work for HR.</div>
+      <div class="lane-cta">Sentriq. The only layer operating before recruiter review.</div>
+    </div>
+
+  </div>
+
+  <!-- GANTT -->
+  <div class="gantt-wrap">
+    <div class="section-label">Every vendor mapped to the hiring funnel</div>
+    <svg viewBox="0 0 660 278" style="width:100%;display:block;border:1px solid rgba(255,255,255,0.07);border-radius:8px;background:rgba(255,255,255,0.01);" xmlns="http://www.w3.org/2000/svg">
+
+      <rect x="90" y="0" width="110" height="278" fill="rgba(232,160,32,0.04)"/>
+      <rect x="0" y="0" width="660" height="26" fill="rgba(255,255,255,0.035)"/>
+      <text x="145" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="700" fill="#E8A020">FORM FILL</text>
+      <text x="255" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.45)">ATS REVIEW</text>
+      <text x="365" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.45)">SCREENING</text>
+      <text x="475" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.45)">INTERVIEW</text>
+      <text x="590" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.45)">POST-OFFER</text>
+
+      <line x1="90"  y1="0"  x2="90"  y2="234" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <line x1="200" y1="26" x2="200" y2="196" stroke="rgba(232,160,32,0.25)"  stroke-width="1" stroke-dasharray="3 3"/>
+      <line x1="310" y1="26" x2="310" y2="196" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <line x1="420" y1="26" x2="420" y2="196" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <line x1="530" y1="26" x2="530" y2="196" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+      <!-- Gem -->
+      <rect x="0" y="26" width="660" height="34" fill="rgba(255,255,255,0.01)"/>
+      <text x="86" y="40" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="700" fill="rgba(220,220,235,0.75)">Gem</text>
+      <rect x="202" y="31" width="456" height="11" rx="2" fill="rgba(200,200,215,0.22)"/>
+      <text x="430" y="40" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="8" fill="rgba(255,255,255,0.55)">AI sourcing + outbound credential checks</text>
+      <text x="204" y="55" font-family="Space Grotesk,sans-serif" font-size="8.5" fill="rgba(255,255,255,0.35)">Beamery · Phenom · SmartRecruiters</text>
+
+      <!-- Pangram (teal, peer) -->
+      <rect x="0" y="60" width="660" height="34" fill="rgba(80,195,185,0.03)"/>
+      <text x="86" y="74" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="700" fill="rgba(80,195,185,0.9)">Pangram</text>
+      <rect x="202" y="65" width="218" height="11" rx="2" fill="rgba(80,195,185,0.28)"/>
+      <text x="311" y="74" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="8" fill="rgba(80,195,185,0.8)">resume AI + credential analysis</text>
+      <text x="204" y="89" font-family="Space Grotesk,sans-serif" font-size="8.5" fill="rgba(80,195,185,0.5)">Polygraf · Tofu · Endorsed · Crosschq</text>
+
+      <!-- Persona -->
+      <rect x="0" y="94" width="660" height="34" fill="rgba(255,255,255,0.01)"/>
+      <text x="86" y="108" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="700" fill="rgba(220,220,235,0.75)">Persona</text>
+      <rect x="312" y="99" width="216" height="11" rx="2" fill="rgba(200,200,215,0.22)"/>
+      <text x="420" y="108" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="8" fill="rgba(255,255,255,0.55)">identity verification</text>
+      <text x="314" y="123" font-family="Space Grotesk,sans-serif" font-size="8.5" fill="rgba(255,255,255,0.35)">Jumio · Socure · Onfido · iProov · Veriff</text>
+
+      <!-- HireVue / Sherlock AI (teal, peer) -->
+      <rect x="0" y="128" width="660" height="34" fill="rgba(80,195,185,0.025)"/>
+      <text x="86" y="142" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="700" fill="rgba(80,195,185,0.9)">HireVue / Sherlock AI</text>
+      <rect x="422" y="133" width="236" height="11" rx="2" fill="rgba(80,195,185,0.28)"/>
+      <text x="540" y="142" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="8" fill="rgba(80,195,185,0.8)">video + interview intelligence</text>
+      <text x="424" y="157" font-family="Space Grotesk,sans-serif" font-size="8.5" fill="rgba(80,195,185,0.5)">Clarity · Willo · Metaview · Kira</text>
+
+      <!-- Checkr -->
+      <rect x="0" y="162" width="660" height="34" fill="rgba(255,255,255,0.01)"/>
+      <text x="86" y="176" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="700" fill="rgba(220,220,235,0.75)">Checkr</text>
+      <rect x="532" y="167" width="126" height="11" rx="2" fill="rgba(200,200,215,0.22)"/>
+      <text x="595" y="176" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="8" fill="rgba(255,255,255,0.55)">background check</text>
+      <text x="534" y="191" font-family="Space Grotesk,sans-serif" font-size="8.5" fill="rgba(255,255,255,0.35)">HireRight · First Advantage · Sterling</text>
+
+      <!-- Sentriq -->
+      <line x1="0" y1="196" x2="660" y2="196" stroke="rgba(232,160,32,0.25)" stroke-width="1"/>
+      <rect x="0" y="198" width="660" height="36" fill="rgba(232,160,32,0.05)"/>
+      <text x="86" y="220" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="10.5" font-weight="800" fill="#E8A020">Sentriq</text>
+      <rect x="92"  y="204" width="106" height="22" rx="3" fill="rgba(232,160,32,0.88)"/>
+      <text x="145" y="219" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="8" font-weight="800" fill="#09090F">ONLY PLAYER HERE</text>
+      <rect x="200" y="204" width="458" height="22" rx="3" fill="rgba(232,160,32,0.18)" stroke="rgba(232,160,32,0.45)" stroke-width="1"/>
+      <text x="429" y="219" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="8" font-weight="600" fill="rgba(232,160,32,0.82)">Ongoing signal coverage across full pipeline</text>
+
+      <!-- Legend -->
+      <rect x="92" y="244" width="10" height="10" rx="2" fill="rgba(200,200,215,0.38)"/>
+      <text x="106" y="253" font-family="Space Grotesk,sans-serif" font-size="8.5" fill="rgba(255,255,255,0.6)">Known vendors (smaller names = same-category peers)</text>
+      <rect x="390" y="244" width="10" height="10" rx="2" fill="rgba(80,195,185,0.55)"/>
+      <text x="404" y="253" font-family="Space Grotesk,sans-serif" font-size="8.5" fill="rgba(80,195,185,0.75)">Mentioned by your HR peers</text>
+      <rect x="558" y="244" width="10" height="10" rx="2" fill="rgba(232,160,32,0.88)"/>
+      <text x="572" y="253" font-family="Space Grotesk,sans-serif" font-size="8.5" fill="rgba(232,160,32,0.8)">Sentriq</text>
+    </svg>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-wrap">
+    <div class="table-title">What each category actually does for HR</div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:18%;">Category</th>
+          <th style="width:28%;">What it checks</th>
+          <th style="width:21%;">When it runs</th>
+          <th style="width:16.5%;">HR-Passive?</th>
+          <th style="width:16.5%;">Pre-Review?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="cat-cell">Gem<div class="sub">Beamery &middot; Phenom</div></td>
+          <td>Profile authenticity and pipeline integrity (outbound sourcing only)</td>
+          <td>When recruiter is actively sourcing</td>
+          <td class="no-cell">No, sourcer triggers it</td>
+          <td class="no-cell">No</td>
+        </tr>
+        <tr class="peer-row">
+          <td class="peer-cat">Pangram <span class="peer-badge-sm">Peer rec</span><div class="sub">Polygraf &middot; Tofu &middot; Endorsed &middot; Crosschq</div></td>
+          <td class="peer-val">Whether resume text was written by AI or credentials are fabricated</td>
+          <td class="peer-val">After application lands in ATS</td>
+          <td class="no-cell">No, recruiter initiates manually</td>
+          <td class="no-cell">No</td>
+        </tr>
+        <tr>
+          <td class="cat-cell">Persona<div class="sub">Jumio &middot; Socure &middot; Onfido</div></td>
+          <td>Whether the person is real (identity document check)</td>
+          <td>During screening or onboarding</td>
+          <td class="no-cell">Partial, recruiter initiates</td>
+          <td class="no-cell">No</td>
+        </tr>
+        <tr class="peer-row">
+          <td class="peer-cat">HireVue / Sherlock AI <span class="peer-badge-sm">Peer rec</span><div class="sub">Clarity &middot; Willo &middot; Metaview</div></td>
+          <td class="peer-val">Live interview behavior: identity impersonation, AI tools mid-call</td>
+          <td class="peer-val">During scheduled interviews only</td>
+          <td class="no-cell">Yes, runs during call</td>
+          <td class="no-cell">No</td>
+        </tr>
+        <tr>
+          <td class="cat-cell">Checkr<div class="sub">HireRight &middot; First Advantage</div></td>
+          <td>Criminal record, employment history, education credentials</td>
+          <td>After you decide to hire</td>
+          <td class="no-cell">No, HR triggers it</td>
+          <td class="no-cell">No</td>
+        </tr>
+        <tr class="sentriq-row">
+          <td class="sentriq-name">Sentriq</td>
+          <td class="sentriq-val">Whether the submission itself is authentic: fabricated credentials, AI-generated content, or automated volume submission</td>
+          <td class="sentriq-val">At the moment the candidate fills the form, before submission</td>
+          <td class="sentriq-yes">Yes, fully automatic</td>
+          <td class="sentriq-yes">Yes, only player that can</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div style="display:flex;align-items:center;gap:8px;">
+      <svg width="16" height="16" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+        <rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+        <rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+        <rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+        <circle cx="28" cy="7" r="3" fill="#E8A020"/>
+      </svg>
+      <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.5);">Sentriq<span style="color:#E8A020;">.</span>&nbsp;&nbsp;sentriq.co</span>
+    </div>
+    <div style="font-size:10px;color:rgba(255,255,255,0.28);">Confidential</div>
+  </div>
+
+</div>
+</body>
+</html>
