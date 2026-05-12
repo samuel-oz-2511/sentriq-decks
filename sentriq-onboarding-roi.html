@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sentriq: Roi Zamir Briefing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #09090F;
+  --surface: #111118;
+  --border: rgba(255,255,255,0.07);
+  --amber: #E8A020;
+  --amber-dim: rgba(232,160,32,0.12);
+  --white: #F5F5F5;
+  --muted: rgba(245,245,245,0.45);
+  --roi: rgba(80,200,150,0.12);
+  --roi-border: rgba(80,200,150,0.32);
+  --roi-text: #6CD6B0;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--white);font-family:'Space Grotesk',sans-serif;font-size:15px;line-height:1.65;}
+a{color:var(--amber);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+.layout{display:flex;min-height:100vh;}
+.sidebar{width:260px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);position:sticky;top:0;height:100vh;overflow-y:auto;padding:32px 0;}
+.main{flex:1;max-width:860px;padding:64px 56px;min-width:0;}
+
+.sidebar-logo{padding:0 24px 28px;border-bottom:1px solid var(--border);margin-bottom:20px;}
+.sidebar-name{font-size:17px;font-weight:800;letter-spacing:-0.02em;color:var(--white);margin-top:12px;line-height:1;}
+.sidebar-dot{color:var(--amber);}
+.sidebar-tag{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--roi-text);margin-top:6px;}
+.sidebar-section{padding:8px 24px 0;margin-bottom:4px;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);}
+.sidebar-link{display:block;padding:8px 24px;font-size:13px;font-weight:500;color:var(--muted);border-left:2px solid transparent;transition:all 0.15s;}
+.sidebar-link:hover,.sidebar-link.active{color:var(--white);border-left-color:var(--amber);background:rgba(232,160,32,0.04);text-decoration:none;}
+.sidebar-footer{padding:20px 24px 0;border-top:1px solid var(--border);margin-top:16px;font-size:12px;color:var(--muted);}
+
+.doc-section{padding-bottom:80px;border-bottom:1px solid var(--border);margin-bottom:80px;scroll-margin-top:64px;}
+.doc-section:last-child{border-bottom:none;}
+.doc-header{margin-bottom:32px;}
+.doc-num{font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
+.doc-title{font-size:36px;font-weight:800;letter-spacing:-0.02em;line-height:1.1;margin-bottom:12px;}
+.doc-subtitle{font-size:16px;color:var(--muted);line-height:1.5;max-width:620px;}
+.body-text{font-size:15px;color:rgba(245,245,245,0.8);line-height:1.7;margin-bottom:20px;}
+.sh{font-size:18px;font-weight:700;letter-spacing:-0.01em;margin:32px 0 14px;}
+
+.callout{background:var(--amber-dim);border:1px solid rgba(232,160,32,0.2);border-radius:12px;padding:24px 28px;margin:24px 0;}
+.callout.roi{background:var(--roi);border-color:var(--roi-border);}
+.callout.neutral{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.12);}
+.callout-label{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;}
+.callout.roi .callout-label{color:var(--roi-text);}
+.callout.neutral .callout-label{color:rgba(255,255,255,0.5);}
+
+.demo-block{background:linear-gradient(160deg,rgba(232,160,32,0.10) 0%,rgba(232,160,32,0.04) 100%);border:2px solid rgba(232,160,32,0.4);border-radius:16px;padding:36px 40px;margin:32px 0;text-align:center;}
+.demo-label{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);margin-bottom:16px;}
+.demo-title{font-size:24px;font-weight:800;letter-spacing:-0.02em;margin-bottom:10px;}
+.demo-sub{font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.5;}
+.demo-btn{display:inline-block;background:var(--amber);color:#09090F;font-weight:800;font-size:14px;letter-spacing:0.02em;padding:14px 32px;border-radius:8px;text-decoration:none;transition:opacity 0.15s;}
+.demo-btn:hover{opacity:0.85;text-decoration:none;}
+.demo-context{font-size:12px;color:var(--muted);margin-top:16px;line-height:1.5;}
+
+.net-step{display:flex;gap:20px;margin-bottom:20px;align-items:flex-start;}
+.net-dot{width:36px;height:36px;border-radius:50%;border:2px solid var(--amber);background:rgba(232,160,32,0.1);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:var(--amber);flex-shrink:0;margin-top:2px;}
+.net-content{flex:1;}
+.net-title{font-size:15px;font-weight:700;margin-bottom:4px;}
+.net-desc{font-size:14px;color:var(--muted);}
+
+.t{width:100%;border-collapse:collapse;font-size:14px;margin:16px 0;}
+.t th{text-align:left;padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);}
+.t td{padding:12px 14px;border-bottom:1px solid var(--border);vertical-align:top;color:rgba(245,245,245,0.8);}
+.t tr:last-child td{border-bottom:none;}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:9px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;}
+.b-amber{background:rgba(232,160,32,0.15);color:var(--amber);border:1px solid rgba(232,160,32,0.3);}
+.b-dim{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.12);}
+
+.person-card{display:flex;gap:20px;padding:24px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;}
+.person-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(145deg,rgba(232,160,32,0.22) 0%,rgba(232,160,32,0.06) 100%);border:1px solid rgba(232,160,32,0.35);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:var(--amber);flex-shrink:0;}
+.person-name{font-size:16px;font-weight:700;margin-bottom:3px;}
+.person-role{font-size:12px;color:var(--amber);font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em;}
+.person-bio{font-size:13px;color:var(--muted);line-height:1.6;}
+
+.role-block{background:rgba(255,255,255,0.025);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:16px;}
+.role-title{font-size:16px;font-weight:700;margin-bottom:14px;color:var(--white);}
+.role-list{list-style:none;padding:0;}
+.role-list li{font-size:14px;color:rgba(245,245,245,0.8);padding:6px 0 6px 20px;border-bottom:1px solid rgba(255,255,255,0.04);position:relative;line-height:1.55;}
+.role-list li:before{content:"";position:absolute;left:0;top:15px;width:8px;height:2px;background:var(--amber);}
+.role-list li:last-child{border-bottom:none;}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0;}
+.kpi{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:18px 20px;}
+.kpi-val{font-size:28px;font-weight:800;letter-spacing:-0.02em;margin-bottom:6px;}
+.kpi-label{font-size:12px;color:var(--muted);line-height:1.4;}
+
+.pipeline-row{padding:20px 0;border-bottom:1px solid var(--border);}
+.pipeline-row:last-child{border-bottom:none;}
+.pipeline-company{font-size:15px;font-weight:700;margin-bottom:4px;}
+.pipeline-meta{font-size:12px;color:var(--amber);margin-bottom:8px;font-weight:600;}
+.pipeline-status{font-size:13px;color:rgba(245,245,245,0.7);line-height:1.55;}
+
+.exit-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:12px;}
+.exit-step{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;}
+.exit-title{font-size:16px;font-weight:700;margin-bottom:8px;}
+.exit-desc{font-size:13px;color:var(--muted);line-height:1.6;}
+
+#mobile-nav{display:none;position:sticky;top:0;z-index:200;background:var(--surface);border-bottom:1px solid var(--border);}
+.mn-bar{display:flex;align-items:center;padding:12px 20px;gap:12px;}
+.mn-logo{display:flex;align-items:center;gap:10px;flex:1;}
+.mn-brand{font-size:13px;font-weight:700;color:var(--white);}
+.mn-brand span{color:var(--amber);}
+.mn-toggle{background:none;border:none;cursor:pointer;padding:4px;display:flex;flex-direction:column;gap:5px;flex-shrink:0;}
+.mn-toggle span{display:block;width:20px;height:2px;background:var(--white);border-radius:2px;transition:transform 0.2s,opacity 0.2s;}
+.mn-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.mn-toggle.open span:nth-child(2){opacity:0;}
+.mn-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mn-menu{overflow:hidden;max-height:0;transition:max-height 0.3s ease;}
+.mn-menu.open{max-height:700px;}
+.mn-menu-inner{border-top:1px solid var(--border);padding:8px 0 12px;}
+.mn-section{padding:10px 20px 3px;font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);}
+.mn-link{display:block;padding:9px 20px;font-size:14px;font-weight:500;color:var(--muted);text-decoration:none;transition:color 0.12s;}
+.mn-link:active,.mn-link.active{color:var(--amber);text-decoration:none;}
+
+@media(max-width:768px){
+  #mobile-nav{display:block;}
+  .sidebar{display:none;}
+  .main{padding:32px 20px;}
+  .kpi-grid{grid-template-columns:1fr 1fr;}
+  .doc-title{font-size:26px;}
+  .demo-block{padding:24px 20px;}
+}
+</style>
+</head>
+<body>
+
+<div id="gate" style="position:fixed;inset:0;z-index:9999;background:#09090F;display:flex;align-items:center;justify-content:center;">
+  <div style="width:320px;text-align:center;padding:0 20px;">
+    <svg viewBox="0 0 56 56" width="36" height="36" fill="none" style="margin-bottom:16px;">
+      <rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+      <rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+      <rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+      <rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+      <circle cx="28" cy="7" r="3" fill="#E8A020"/>
+    </svg>
+    <div style="font-size:17px;font-weight:800;letter-spacing:-0.01em;color:#F5F5F5;margin-bottom:6px;">Sentriq<span style="color:#E8A020;">.</span></div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:28px;">Confidential Briefing</div>
+    <input id="gate-pw" type="password" placeholder="Access code" autofocus
+      style="width:100%;padding:14px 18px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:#fff;font-size:15px;font-family:'Space Grotesk',sans-serif;outline:none;margin-bottom:10px;box-sizing:border-box;"
+      onkeydown="if(event.key==='Enter')checkPass()">
+    <button onclick="checkPass()"
+      style="width:100%;padding:14px;background:#E8A020;border:none;border-radius:10px;color:#09090F;font-size:14px;font-weight:800;font-family:'Space Grotesk',sans-serif;cursor:pointer;letter-spacing:0.02em;">
+      Open
+    </button>
+    <div id="gate-err" style="margin-top:10px;font-size:12px;color:#E05555;display:none;">Incorrect access code.</div>
+  </div>
+</div>
+
+<div id="doc-wrap" style="display:none">
+
+<div id="mobile-nav">
+  <div class="mn-bar">
+    <div class="mn-logo">
+      <svg viewBox="0 0 56 56" width="28" height="28" fill="none">
+        <rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+        <rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+        <rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+        <rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+        <circle cx="28" cy="7" r="3" fill="#E8A020"/>
+      </svg>
+      <span class="mn-brand">Sentriq <span>/ Roi</span></span>
+    </div>
+    <button class="mn-toggle" id="mn-toggle" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mn-menu" id="mn-menu" aria-hidden="true">
+    <div class="mn-menu-inner">
+      <div class="mn-section">Overview</div>
+      <a class="mn-link" href="#s0">Welcome</a>
+      <a class="mn-link" href="#s1">The Problem</a>
+      <div class="mn-section">The Product</div>
+      <a class="mn-link" href="#s2">What We Built</a>
+      <a class="mn-link" href="#s3">See It Live</a>
+      <div class="mn-section">The Moat</div>
+      <a class="mn-link" href="#s4">The Network Effect</a>
+      <a class="mn-link" href="#s5">Competitive Position</a>
+      <div class="mn-section">Business</div>
+      <a class="mn-link" href="#s6">Traction</a>
+      <a class="mn-link" href="#s7">Exit Thesis</a>
+      <a class="mn-link" href="#s8">The Team</a>
+      <div class="mn-section">Your Chapter</div>
+      <a class="mn-link" href="#s9">Market Connector</a>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <svg viewBox="0 0 56 56" width="40" height="40" fill="none">
+      <rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+      <rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+      <rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+      <rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+      <circle cx="28" cy="7" r="3" fill="#E8A020"/>
+    </svg>
+    <div class="sidebar-name">Sentriq<span class="sidebar-dot">.</span></div>
+    <div class="sidebar-tag">Briefing / Roi Zamir</div>
+  </div>
+  <div class="sidebar-section">Overview</div>
+  <a class="sidebar-link active" href="#s0">Welcome</a>
+  <a class="sidebar-link" href="#s1">The Problem</a>
+  <div class="sidebar-section">The Product</div>
+  <a class="sidebar-link" href="#s2">What We Built</a>
+  <a class="sidebar-link" href="#s3">See It Live</a>
+  <div class="sidebar-section">The Moat</div>
+  <a class="sidebar-link" href="#s4">The Network Effect</a>
+  <a class="sidebar-link" href="#s5">Competitive Position</a>
+  <div class="sidebar-section">Business</div>
+  <a class="sidebar-link" href="#s6">Traction</a>
+  <a class="sidebar-link" href="#s7">Exit Thesis</a>
+  <a class="sidebar-link" href="#s8">The Team</a>
+  <div class="sidebar-section">Your Chapter</div>
+  <a class="sidebar-link" href="#s9">Market Connector</a>
+  <div class="sidebar-footer">Confidential. For Roi Zamir only.</div>
+</nav>
+
+<main class="main">
+
+<!-- SECTION 0: WELCOME -->
+<section class="doc-section" id="s0">
+  <div class="doc-header">
+    <div class="doc-num">Section 00</div>
+    <h1 class="doc-title">Roi, thank you for hearing the music.</h1>
+    <p class="doc-subtitle">This document gives you the full picture. Not a pitch deck. Everything you need to understand what we are building, why we will win, and what we are asking from you specifically.</p>
+  </div>
+
+  <div class="callout roi">
+    <div class="callout-label">What you said in our call</div>
+    <p>You said you hear the music, not the words. That when Samuel described the problem, you were not listening to the pitch. You were already thinking three connections ahead. That is exactly why we sent this to you. You have 9 years of building enterprise relationships globally at Elbit. You founded a community of 500 curated Israeli hi-tech operators in Spain and Portugal from nothing. You know what it means to build something that compounds. Sentriq computes on the same principle: every new customer makes the network smarter for every other customer. You already understand this. This document fills in everything behind the idea.</p>
+  </div>
+
+  <div class="body-text">Samuel and Ben are two founders, pre-revenue, with a working demo, active enterprise conversations at HSBC and Booking Holdings, and a $3.5M seed round open. We will not overstate a single thing. We are in the design partner phase. The product exists and works. Enterprise deployment is 8-12 weeks out from a signed agreement. We need the right people in the right rooms at the right moment. That is what this document is about.</div>
+</section>
+
+<!-- SECTION 1: THE PROBLEM -->
+<section class="doc-section" id="s1">
+  <div class="doc-header">
+    <div class="doc-num">Section 01</div>
+    <h2 class="doc-title">The Problem</h2>
+    <p class="doc-subtitle">The hiring funnel is the only undefended entry point into a global enterprise. Every other door has a guard. This one does not.</p>
+  </div>
+
+  <div class="body-text">Every enterprise in the world spends enormous resources defending its perimeter. Email security. Identity verification. Access control. SIEM. Endpoint protection. And then the same enterprise posts a job on LinkedIn, and anyone on earth can submit an application. No verification. No behavioral baseline. No signal beyond what the applicant wrote themselves.</div>
+
+  <div class="body-text">Since 2023, three forces have converged to make this the most exploited gap in enterprise security:</div>
+
+  <div class="callout neutral">
+    <div class="callout-label">Three converging forces</div>
+    <p style="margin-bottom:14px;"><strong style="color:var(--white);">1. AI-generated applications at scale.</strong> A single person can now submit 500 tailored applications in a day. The inbound pipeline at every large company has grown 3-5x. Recruiters are drowning in volume. Signal quality per application has collapsed.</p>
+    <p style="margin-bottom:14px;"><strong style="color:var(--white);">2. Remote hiring as the default.</strong> Remote work made it normal to hire someone you have never met in person. State-sponsored operatives have exploited this. DPRK IT workers passed 4 video interviews and a full background check at KnowBe4 before being discovered generating revenue for the North Korean weapons program. This is not a theoretical risk.</p>
+    <p><strong style="color:var(--white);">3. Easy AI fabrication.</strong> A convincing, consistent, well-formatted CV with plausible work history, accurate company names, and tailored skills takes approximately 4 minutes to generate. No friction. The old detection approaches (look for keyword stuffing, check LinkedIn consistency) are obsolete. The new attacks overfitting the job description so precisely that ATS scoring systems rank fabricated applications in the top decile.</p>
+  </div>
+
+  <div class="body-text">Every tool enterprise HR teams use fires after the application is already inside the pipeline. ATS systems, assessment tools, interview platforms, background checks: all of them assume the person who submitted the application is who they say they are. Sentriq sits at the moment of submission, before any cost is spent, before any recruiter invests any time.</div>
+
+  <div class="callout roi">
+    <div class="callout-label">You already named this in our call</div>
+    <p>You mentioned LinkedIn and Drushim as the earliest public signals of this problem. You are right: the Israeli job board data shows exactly this pattern. The volume inflection happened in Q3 2023. The signal quality degradation followed within 60 days. You were already reading those signals. Sentriq is the infrastructure that sits behind those signals.</p>
+  </div>
+</section>
+
+<!-- SECTION 2: WHAT WE BUILT -->
+<section class="doc-section" id="s2">
+  <div class="doc-header">
+    <div class="doc-num">Section 02</div>
+    <h2 class="doc-title">What We Built</h2>
+    <p class="doc-subtitle">A three-layer application integrity system. It runs at submission, tracks through the pipeline, and delivers one signal to the recruiter inside the ATS they already use.</p>
+  </div>
+
+  <div class="callout neutral">
+    <div class="callout-label">The one framing rule</div>
+    <p>Sentriq evaluates <strong>applications</strong>, not candidates. The unit of analysis is a submission event. We do not do identity verification. We do not build a candidate profile. We are the application integrity layer: Cloudflare for the front door of hiring.</p>
+  </div>
+
+  <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px;">
+    <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;padding:20px 24px;">
+      <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;">Layer 1: Passive Behavioral Baseline</div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:8px;">Invisible to real applicants. Immediately visible to automated submissions.</div>
+      <div style="font-size:14px;color:var(--muted);line-height:1.65;">Sentriq runs as the candidate fills the application form. Typing dynamics, fill patterns, CV-to-JD overfitting, mass-apply fingerprints, AI content markers, timing anomalies. Clean applicants experience zero friction. Bots, AI agents, and fabricated submissions produce a behavioral signature that is immediately distinct. No anomaly: passes through to the ATS. Anomaly detected: Layer 2 triggered.</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;padding:20px 24px;">
+      <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;">Layer 2: Async Challenge</div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:8px;">Calibrated to this specific candidate, this specific gap. Cannot be proxied by an LLM.</div>
+      <div style="font-size:14px;color:var(--muted);line-height:1.65;">A short task, framed as part of the application process. Generated for the specific gap detected: requires private experiential knowledge. Decisions you actually made. Tradeoffs you lived. Things that did not work. An AI assistant can write a plausible-sounding answer. It cannot write what a specific person with a specific background would say about a specific moment they actually experienced. That is the design principle.</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;padding:20px 24px;">
+      <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;">Gap Assessor: Ongoing Pipeline Coverage</div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:8px;">The same engine, running through every downstream stage.</div>
+      <div style="font-size:14px;color:var(--muted);line-height:1.65;">After submission, the Gap Assessor tracks the candidate through the full pipeline. Every new data point (phone screen notes, test results, interview transcripts) is checked against what they originally claimed. The recruiter sees a trust signal appended inside the ATS they already use. No new tool to learn. No new system to log into. One signal, in the right place, at the right time.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: SEE IT LIVE -->
+<section class="doc-section" id="s3">
+  <div class="doc-header">
+    <div class="doc-num">Section 03</div>
+    <h2 class="doc-title">See It Live</h2>
+    <p class="doc-subtitle">The demo runs on HSBC's actual open roles. Not a prototype. A working product on real enterprise hiring data.</p>
+  </div>
+
+  <div class="demo-block">
+    <div class="demo-label">Live Demo</div>
+    <div class="demo-title">HSBC Innovation Banking: Live Open Roles</div>
+    <div class="demo-sub">Ben built this demo on HSBC's actual posted positions. You can see exactly what a candidate experiences when Sentriq is running behind the form, and what the recruiter sees on the other side: the behavioral layer, the challenge trigger, the trust signal profile output.</div>
+    <a class="demo-btn" href="https://www.youtube.com/watch?v=u7sF_2GiMco" target="_blank">Watch the Demo</a>
+    <div class="demo-context">Built by Ben Czarninski (CTO) on live HSBC open role data. May 2026.</div>
+  </div>
+
+  <div class="body-text">Product status as of May 2026: working demo. We can run this on any open role at any company within hours of receiving the job description. Full enterprise deployment (SOC 2 Type I, ATS integration, Data Processing Agreements) targets Q3 2026. We do not have a live production deployment. We are being direct about that.</div>
+</section>
+
+<!-- SECTION 4: THE NETWORK EFFECT -->
+<section class="doc-section" id="s4">
+  <div class="doc-header">
+    <div class="doc-num">Section 04</div>
+    <h2 class="doc-title">The Network Effect</h2>
+    <p class="doc-subtitle">You built Innovators Hub Iberia from 0 to 500 curated members. You know what a compounding network looks like from the inside. Sentriq is built on the same principle.</p>
+  </div>
+
+  <div class="callout roi">
+    <div class="callout-label">Why this resonates with what you built</div>
+    <p>Innovators Hub Iberia works because quality compounds. You do not let everyone in. Each member makes the network more valuable for every other member. You spent 18 months building the filter before the flywheel started. Sentriq's cross-company graph works exactly the same way. Every company that deploys Sentriq makes the detection smarter for every other company. The first deployment is the hardest. The hundredth deployment is the most powerful. And the structural moat is not the code: it is the corpus. The deployment IS the graph.</p>
+  </div>
+
+  <div class="net-step">
+    <div class="net-dot">1</div>
+    <div class="net-content">
+      <div class="net-title">Customer 1: Behavioral anomaly detection from day one</div>
+      <div class="net-desc">The seven-layer detection system operates on individual application signals from the first deployment. No prior corpus required to flag obvious anomalies.</div>
+    </div>
+  </div>
+  <div class="net-step">
+    <div class="net-dot">10</div>
+    <div class="net-content">
+      <div class="net-title">Customer 10: Cross-company patterns emerge</div>
+      <div class="net-desc">The same behavioral fingerprint seen at three companies last month is flagged on arrival at the tenth. No candidate data shared between employers. The fingerprint is abstract: fraud pattern, not identity.</div>
+    </div>
+  </div>
+  <div class="net-step">
+    <div class="net-dot">100</div>
+    <div class="net-content">
+      <div class="net-title">Customer 100: Campaign-level detection</div>
+      <div class="net-desc">Coordinated fraud campaigns targeting financial services companies are identified across the network before reaching the twelfth company on the list. The network becomes a collective immune system.</div>
+    </div>
+  </div>
+
+  <div class="callout neutral">
+    <div class="callout-label">Why no one else can build this</div>
+    <p>ATS vendors are contractually banned from cross-employer data sharing. They cannot build the graph. Identity vendors have no behavioral layer. Background check companies work post-offer. A new entrant would need neutral status, candidate consent, a behavioral engine, a seeded graph, and a deployed commercial product simultaneously. There is no way to shortcut the deployment requirement. The commercial product generates the only corpus that trains the model. That is the structural argument: the deployment is the moat.</p>
+  </div>
+</section>
+
+<!-- SECTION 5: COMPETITIVE POSITION -->
+<section class="doc-section" id="s5">
+  <div class="doc-header">
+    <div class="doc-num">Section 05</div>
+    <h2 class="doc-title">Competitive Position</h2>
+    <p class="doc-subtitle">Every player in this space fires after the application exists. Sentriq fires before. That is the structural gap no one has closed.</p>
+  </div>
+
+  <!-- GANTT MAP -->
+  <div style="margin-bottom:20px;">
+    <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">Where every player operates in the hiring funnel</div>
+    <svg viewBox="0 0 620 284" style="width:100%;display:block;border:1px solid rgba(255,255,255,0.06);border-radius:8px;background:rgba(255,255,255,0.01);" xmlns="http://www.w3.org/2000/svg">
+      <rect x="90" y="0" width="106" height="284" fill="rgba(232,160,32,0.04)"/>
+      <rect x="0" y="0" width="620" height="26" fill="rgba(255,255,255,0.03)"/>
+      <text x="143" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="700" fill="#E8A020">FORM FILL</text>
+      <text x="249" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.38)">APPLICATION</text>
+      <text x="355" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.38)">SCREENING</text>
+      <text x="461" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.38)">INTERVIEW</text>
+      <text x="567" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.38)">OFFER / HIRE</text>
+      <line x1="90" y1="0" x2="90" y2="284" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <line x1="196" y1="26" x2="196" y2="284" stroke="rgba(232,160,32,0.22)" stroke-width="1" stroke-dasharray="3 3"/>
+      <line x1="302" y1="26" x2="302" y2="284" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <line x1="408" y1="26" x2="408" y2="284" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <line x1="514" y1="26" x2="514" y2="284" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+      <rect x="0" y="26" width="620" height="22" fill="rgba(255,255,255,0.01)"/>
+      <text x="86" y="41" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.65)">Gem</text>
+      <rect x="198" y="31" width="420" height="12" rx="2" fill="rgba(224,85,85,0.28)"/>
+      <text x="408" y="41" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.45)">AI Fraud Detection Agent</text>
+      <rect x="198" y="53" width="420" height="12" rx="2" fill="rgba(224,85,85,0.22)"/>
+      <text x="86" y="63" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.65)">Crosschq</text>
+      <text x="408" y="63" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.45)">ApplicantX</text>
+      <rect x="0" y="70" width="620" height="22" fill="rgba(255,255,255,0.01)"/>
+      <text x="86" y="85" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.65)">Tofu</text>
+      <rect x="198" y="75" width="212" height="12" rx="2" fill="rgba(200,120,60,0.28)"/>
+      <text x="304" y="85" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.45)">CV forensics</text>
+      <text x="86" y="107" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.65)">Endorsed</text>
+      <rect x="198" y="97" width="212" height="12" rx="2" fill="rgba(200,120,60,0.22)"/>
+      <text x="304" y="107" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.45)">Identity + ranking</text>
+      <rect x="0" y="114" width="620" height="22" fill="rgba(255,255,255,0.01)"/>
+      <text x="86" y="129" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.65)">Persona</text>
+      <rect x="304" y="119" width="314" height="12" rx="2" fill="rgba(140,90,210,0.28)"/>
+      <text x="461" y="129" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.45)">Identity verification</text>
+      <text x="86" y="151" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.65)">Clarity</text>
+      <rect x="304" y="141" width="212" height="12" rx="2" fill="rgba(60,130,220,0.28)"/>
+      <text x="410" y="151" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.45)">Interview intelligence</text>
+      <rect x="0" y="158" width="620" height="22" fill="rgba(255,255,255,0.01)"/>
+      <text x="86" y="173" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.65)">GetReal</text>
+      <rect x="410" y="163" width="106" height="12" rx="2" fill="rgba(60,130,220,0.22)"/>
+      <text x="463" y="173" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.45)">Deepfakes</text>
+      <text x="86" y="195" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.65)">HireVue</text>
+      <rect x="410" y="185" width="208" height="12" rx="2" fill="rgba(60,130,220,0.18)"/>
+      <text x="514" y="195" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.45)">Video interview</text>
+      <rect x="0" y="202" width="620" height="22" fill="rgba(255,255,255,0.01)"/>
+      <text x="86" y="217" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.65)">iProov</text>
+      <rect x="410" y="207" width="208" height="12" rx="2" fill="rgba(60,130,220,0.15)"/>
+      <text x="514" y="217" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.45)">Biometric identity</text>
+      <text x="86" y="239" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.65)">Checkr</text>
+      <rect x="516" y="229" width="102" height="12" rx="2" fill="rgba(100,100,100,0.35)"/>
+      <text x="567" y="239" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.45)">Background check</text>
+      <line x1="0" y1="248" x2="620" y2="248" stroke="rgba(232,160,32,0.18)" stroke-width="1"/>
+      <rect x="0" y="248" width="620" height="30" fill="rgba(232,160,32,0.04)"/>
+      <text x="86" y="268" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="10" font-weight="800" fill="#E8A020">Sentriq</text>
+      <rect x="92" y="254" width="102" height="16" rx="2" fill="rgba(232,160,32,0.5)"/>
+      <text x="143" y="266" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" font-weight="700" fill="#09090F">Entry point</text>
+      <rect x="196" y="254" width="422" height="16" rx="2" fill="rgba(232,160,32,0.1)" stroke="rgba(232,160,32,0.3)" stroke-width="1"/>
+      <text x="407" y="266" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" font-weight="600" fill="rgba(232,160,32,0.75)">Gap Assessor: continuous pipeline coverage</text>
+      <text x="196" y="282" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7" font-weight="700" fill="rgba(232,160,32,0.4)">SUBMIT</text>
+    </svg>
+  </div>
+
+  <table class="t">
+    <thead>
+      <tr>
+        <th style="width:18%;">Competitor</th>
+        <th style="width:40%;">Their ceiling</th>
+        <th style="width:42%;color:var(--amber);">Sentriq's edge</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Gem</strong> <span class="badge b-amber" style="margin-left:4px;">Direct</span></td>
+        <td>Fraud detection inside Gem's platform. Runs after submission. No form-fill behavioral baseline. No cross-company graph across other tools.</td>
+        <td style="color:var(--amber);">Platform-agnostic entry before the application exists. Catches what Gem's network never sees because Sentriq operates upstream of every ATS.</td>
+      </tr>
+      <tr style="background:rgba(255,255,255,0.015);">
+        <td><strong>Crosschq</strong> <span class="badge b-amber" style="margin-left:4px;">Direct</span></td>
+        <td>Full-funnel scan of static signals. No behavioral challenge during form fill. No cross-company graph. Series B overhead without a structural moat.</td>
+        <td style="color:var(--amber);">Behavioral baseline during form fill captures what no static signal can. Cross-company graph requires neutral ground: architecturally unavailable to Crosschq.</td>
+      </tr>
+      <tr>
+        <td><strong>Tofu</strong> <span class="badge b-amber" style="margin-left:4px;">Direct</span></td>
+        <td>CV forensics and a static fraud database. Signatures limited to patterns already catalogued. No behavioral challenge. No live cross-company network.</td>
+        <td style="color:var(--amber);">Behavioral baseline catches zero-day fraud. Cross-company graph catches repeating patterns across organizations Tofu cannot connect.</td>
+      </tr>
+      <tr style="background:rgba(255,255,255,0.015);">
+        <td><strong>Persona</strong> <span class="badge b-amber" style="margin-left:4px;">Distribution Risk</span></td>
+        <td>Confirms the person is real. Cannot tell you if the application is real. No hiring-specific signal graph. Identity verification is a different question from application authenticity.</td>
+        <td style="color:var(--amber);">Complementary, not competing. Persona says the person is real. Sentriq says the application is real. Both signals together; neither alone is enough.</td>
+      </tr>
+      <tr>
+        <td><strong>Endorsed</strong> <span class="badge b-amber" style="margin-left:4px;">Direct</span></td>
+        <td>Identity check plus AI ranking, inside the ATS after the application exists. No pre-submission behavioral signal. Three products competing for one ATS integration slot.</td>
+        <td style="color:var(--amber);">Pre-submission behavioral baseline captures signals Endorsed will never access. Sentriq entry happens before Endorsed ever runs.</td>
+      </tr>
+      <tr style="background:rgba(255,255,255,0.015);">
+        <td><strong>Clarity</strong> <span class="badge b-dim" style="margin-left:4px;">Complement</span></td>
+        <td>Interview-stage deepfake detection. By the time Clarity runs, over $1,700 in process cost per candidate has already been spent reviewing a potentially fraudulent application.</td>
+        <td style="color:var(--amber);">Sentriq flags the anomaly at form fill. If flagged, Clarity never needs to run. Entry 10x earlier in the funnel, at a fraction of the downstream cost.</td>
+      </tr>
+      <tr>
+        <td><strong>Workday / Greenhouse / iCIMS</strong> <span class="badge b-dim" style="margin-left:4px;white-space:nowrap;">Structurally Blocked</span></td>
+        <td>ATS customer contracts prohibit cross-employer data sharing. The cross-company graph requires neutral ground. This is not a policy decision they can reverse.</td>
+        <td style="color:var(--amber);">Neutral infrastructure model. Direct candidate consent model. The cross-company graph is architecturally unavailable to any ATS vendor, permanently.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SECTION 6: TRACTION -->
+<section class="doc-section" id="s6">
+  <div class="doc-header">
+    <div class="doc-num">Section 06</div>
+    <h2 class="doc-title">Traction</h2>
+    <p class="doc-subtitle">Pre-revenue. Active enterprise conversations at two global institutions. Here is exactly what is moving.</p>
+  </div>
+
+  <div class="pipeline-row">
+    <div class="pipeline-company">HSBC <span class="badge b-amber" style="margin-left:8px;">Strongest Signal</span></div>
+    <div class="pipeline-meta">CS Lai (HSBC Ventures Director) + Bianca Caban (Innovation Banking). 211,000+ employees globally.</div>
+    <div class="pipeline-status">Met April 30. Ben ran the demo on HSBC's actual live open roles. CS Lai provided a direct ROI quote on the cost of fraudulent hires in global service centres. He identified two internal contacts for navigation: their IAM/CISO team lead and Head of Workforce Architecture. Both introductions being scheduled. Converting from warm conversation to formal design partner agreement. NY Tech Week (June 1-7) is the target for the next conversion meeting.</div>
+  </div>
+
+  <div class="pipeline-row">
+    <div class="pipeline-company">Booking Holdings <span class="badge b-amber" style="margin-left:8px;">Active</span></div>
+    <div class="pipeline-meta">VP People Programs, global scope. Former CPO of Agoda.</div>
+    <div class="pipeline-status">Warm intro via personal connection. The Booking Holdings CISO had already issued an internal mandate to find a hiring fraud solution after a technical hire exfiltrated data from their system. The VP People Programs was handed this mandate. Samuel's introduction arrived at exactly the right moment. Design partner conversion in motion.</div>
+  </div>
+
+  <div class="pipeline-row">
+    <div class="pipeline-company">Advisory Board <span class="badge b-dim" style="margin-left:8px;">Forming</span></div>
+    <div class="pipeline-meta">Gilad Rabinovich (former SQLink CEO, current Mizrahi-Tefahot External Director) confirmed May 2026.</div>
+    <div class="pipeline-status">Gilad is pursuing SQLink (Israel's largest IT staffing group), Ness Technology, Matrix, Amdocs, and Nice on Sentriq's behalf. Board-level access at major Israeli enterprises. Ronit Benbasat (35 years HR leadership: Team8, Check Point, Intuit Security R&D) being introduced via Gilad. This is the chapter where Roi fits.</div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-val" style="color:var(--amber);">$3.5M</div><div class="kpi-label">Seed raise target. SAFE structure. Q2-Q3 2026 close.</div></div>
+    <div class="kpi"><div class="kpi-val" style="color:var(--white);">8 wks</div><div class="kpi-label">Time to first pilot from signed design partner agreement</div></div>
+    <div class="kpi"><div class="kpi-val" style="color:var(--amber);">$10K</div><div class="kpi-label">Pilot price per month, 6-week engagement, 1-3 open roles per company</div></div>
+  </div>
+</section>
+
+<!-- SECTION 7: EXIT THESIS -->
+<section class="doc-section" id="s7">
+  <div class="doc-header">
+    <div class="doc-num">Section 07</div>
+    <h2 class="doc-title">The Exit Thesis</h2>
+    <p class="doc-subtitle">You heard this in our call. Here it is in full. The path to SAP is not a dream. It is an architectural argument.</p>
+  </div>
+
+  <div class="callout roi">
+    <div class="callout-label">Why we told you this directly</div>
+    <p>Samuel told you in our call that the real goal is to sell in 6-12 months. That is the honest version. We are not building for a 10-year journey. We are building for a fast, strategic exit to a buyer who has already assembled every adjacent layer and only needs the pre-application piece to complete the stack. Here is why SAP is that buyer.</p>
+  </div>
+
+  <div class="exit-card">
+    <div class="exit-step">Step 1: SAP acquires 8fold</div>
+    <div class="exit-title">SAP already owns the talent intelligence layer</div>
+    <div class="exit-desc">8fold does skills-based matching: it maps internal talent against open roles, and when no internal match exists, evaluates inbound candidates against the job description. SAP acquired it via SuccessFactors integration. 8fold operates at the APPLICATION layer and downstream. It does not operate at FORM FILL. It receives submissions; it does not analyze the behavioral moment of submission itself.</div>
+  </div>
+
+  <div class="exit-card">
+    <div class="exit-step">Step 2: SAP acquires SmartRecruiter</div>
+    <div class="exit-title">SAP already owns an ATS</div>
+    <div class="exit-desc">SmartRecruiter is now part of the SAP SuccessFactors HCM suite. SAP has the ATS layer: where candidates are managed after submission. And the talent intelligence layer (8fold): where candidates are scored after submission. The one layer SAP does not have is PRE-submission. That is the application integrity layer. That is Sentriq.</div>
+  </div>
+
+  <div class="exit-card" style="border-color:rgba(232,160,32,0.3);background:rgba(232,160,32,0.04);">
+    <div class="exit-step" style="color:var(--amber);">The Gap: Pre-Application</div>
+    <div class="exit-title" style="color:var(--white);">The only layer SAP does not own</div>
+    <div class="exit-desc">Sentriq captures the behavioral signal at the moment of form fill, before the application enters the ATS, before 8fold evaluates it, before SmartRecruiter manages it. If Sentriq is deployed before 8fold, every application that 8fold evaluates has already been integrity-checked. The SAP stack goes from "post-submission" to "pre-submission" in one acquisition. That is the deal. That is what we are building toward. 8fold's direct competitors also include some of our competitors, which means Sentriq and 8fold are not competing: Sentriq is what 8fold needs upstream to complete the value proposition for SAP enterprise customers.</div>
+  </div>
+
+  <div class="body-text">The trigger is not a cold outreach to SAP. The trigger is HSBC or Booking Holdings signing a design partner agreement. When a Tier 1 bank is live on Sentriq, the story writes itself. SAP hears about it from their own enterprise customer base. The acquisition conversation starts from a position of demonstrated value, not a pitch.</div>
+</section>
+
+<!-- SECTION 8: THE TEAM -->
+<section class="doc-section" id="s8">
+  <div class="doc-header">
+    <div class="doc-num">Section 08</div>
+    <h2 class="doc-title">Samuel and Ben</h2>
+    <p class="doc-subtitle">Two founders. The product is built. The pipeline is live. What is missing is the right people in the right rooms.</p>
+  </div>
+
+  <div class="person-card">
+    <div class="person-avatar">SK</div>
+    <div>
+      <div class="person-name">Samuel Kemper</div>
+      <div class="person-role">Co-Founder, CEO: GTM, Product, Market</div>
+      <div class="person-bio">Innovation Officer in IDF Unit 81 (elite intelligence technology unit). Founder of TechRuiter IL (talent acquisition, team of 7). Earlier: raised $1.1M for CYou Retail (Nielsen Innovate Fund). Operations at Upword and ReaLo. Spent 18 months operating inside Greenhouse, Comeet, and Workday as a professional recruiter. That domain expertise became the product research. Samuel lived inside the ATS. Ben built the engine to defend it.</div>
+    </div>
+  </div>
+
+  <div class="person-card">
+    <div class="person-avatar">BC</div>
+    <div>
+      <div class="person-name">Ben Czarninski</div>
+      <div class="person-role">Co-Founder, CTO: Detection Engine, Architecture, Security</div>
+      <div class="person-bio">Two IDF intelligence units: Tamar (elite offensive cyber) and Yachlam (full-stack intelligence engineering). Penetration tester at KPMG (international engagements). Senior AppSec Engineer at AppsFlyer (trained 25 developers on secure coding practices). CPA, TAU MBA, BSc Computer Science. Ran 30+ live ATS attack experiments alongside Samuel. Built the seven-layer detection engine from scratch. The challenge generation and behavioral verification system is his core IP.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9: YOUR CHAPTER -->
+<section class="doc-section" id="s9">
+  <div class="doc-header">
+    <div class="doc-num">Section 09</div>
+    <h2 class="doc-title">Your Chapter: Market Connector</h2>
+    <p class="doc-subtitle">You do not build for us. You open doors that we cannot open alone. You know who must know about Sentriq before they know they need to hear about it.</p>
+  </div>
+
+  <div class="callout roi">
+    <div class="callout-label">Why you specifically</div>
+    <p>Samuel reached out to you because you are a connector, not because you have capital or a title. You built a trusted community from scratch and applied real filters to keep the quality high. You identified people worth knowing before they proved it to the market. You did this at Elbit at 29: 300,000 dollars, four people, and you built it into 160 people and 60 projects across 6 countries in 9 years. That judgment is the rarest thing in a network. That is what we need. Not introductions. Judgment about which introductions are worth making.</p>
+  </div>
+
+  <h3 class="sh">Three specific asks</h3>
+
+  <div class="role-block">
+    <div class="role-title">1. Dror at Kaltura (NY Tech Week, June 1-7)</div>
+    <div class="role-list">
+      <li>You mentioned Dror, Chief of Staff at Kaltura, based in New York. You described him as someone from the Levnat family, connected to fundraising circles.</li>
+      <li>Samuel is in New York for NY Tech Week the week of June 1. A 30-minute coffee with Dror during that week is the most direct use of this connection.</li>
+      <li>The ask is not a pitch meeting. It is a warm introduction that Samuel can convert into a conversation. The ask to Dror would be: does he know 2-3 angels or early-stage investors who care about the future of work and hiring integrity?</li>
+      <li>If you can connect Roi to Samuel and Dror via WhatsApp or email before June 1, that is the entire ask for this item.</li>
+    </div>
+  </div>
+
+  <div class="role-block">
+    <div class="role-title">2. After reading this: who in your network must know Sentriq?</div>
+    <div class="role-list">
+      <li>You told Samuel in the call: "After you send me the deck, I want to sit with it and tell you which 2-3 people in my network are the ones who must know about this."</li>
+      <li>That is the ask. Not a list of 20. Two or three people where the introduction from you specifically would open a door that a cold outreach cannot.</li>
+      <li>The profile we are looking for: senior HR, People Programs, or CISO at a financial services company or large enterprise tech company, ideally with global hiring volume. Someone who has felt this problem from the inside and would immediately recognize the solution.</li>
+      <li>Alternatively: a seed-stage investor who focuses on future of work, HR tech, or enterprise security who is looking for something in this exact category.</li>
+    </div>
+  </div>
+
+  <div class="role-block">
+    <div class="role-title">3. Innovators Hub Iberia: the community angle</div>
+    <div class="role-list">
+      <li>500 curated Israeli hi-tech operators in Spain and Portugal. Many of them have run HR at enterprise scale, have CISO relationships, or have built companies that sold into exactly the buyer profile Sentriq is targeting.</li>
+      <li>We are not asking to present to the community. We are asking whether there are 1-2 people in that community who you think should know about Sentriq on a personal level.</li>
+      <li>This is light touch. One conversation with the right person from that network could open a door that months of outreach cannot.</li>
+    </div>
+  </div>
+
+  <h3 class="sh">What is in it for you</h3>
+
+  <div class="body-text">We want to compensate meaningful introductions fairly. For introductions that convert to a signed design partner or investor, a standard finder's arrangement applies. If at any point the relationship evolves into something more formal (advisory role, cap table participation), that conversation is one we are happy to have after the first pilot is signed. We are not trying to lock you in now. We are trying to earn the relationship first.</div>
+
+  <div style="margin-top:40px;padding:28px 32px;background:rgba(80,200,150,0.06);border:1px solid rgba(80,200,150,0.2);border-radius:16px;text-align:center;">
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--roi-text);margin-bottom:12px;">Questions, pushback, or just a reaction</div>
+    <div style="font-size:26px;font-weight:800;color:var(--white);letter-spacing:-0.02em;"><a href="mailto:samuel@sentriq.co" style="color:var(--white);">samuel@sentriq.co</a></div>
+    <div style="font-size:13px;color:var(--muted);margin-top:8px;">Or WhatsApp. You have the number.</div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+(function(){
+  var sideLinks = document.querySelectorAll('.sidebar-link[href^="#"]');
+  var sections = [];
+  sideLinks.forEach(function(l){ var id = l.getAttribute('href').slice(1); var s = document.getElementById(id); if(s) sections.push({el:s,link:l}); });
+  function onScroll(){
+    var y = window.scrollY + 100;
+    var active = sections[0];
+    sections.forEach(function(s){ if(s.el.offsetTop <= y) active = s; });
+    sideLinks.forEach(function(l){ l.classList.remove('active'); });
+    if(active) active.link.classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  var toggle = document.getElementById('mn-toggle');
+  var menu = document.getElementById('mn-menu');
+  if(toggle && menu){
+    toggle.addEventListener('click', function(){
+      var open = menu.classList.toggle('open');
+      toggle.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+    });
+    menu.querySelectorAll('.mn-link').forEach(function(a){
+      a.addEventListener('click', function(){
+        menu.classList.remove('open');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded','false');
+        menu.setAttribute('aria-hidden','true');
+      });
+    });
+  }
+})();
+</script>
+
+</div><!-- /doc-wrap -->
+
+<script>
+function checkPass(){
+  var v = document.getElementById('gate-pw').value;
+  if(btoa(v) === 'cm9pemFtaXIyMDI2'){
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('doc-wrap').style.display = 'block';
+    if(sessionStorage.getItem('roi-pinged')) return;
+    sessionStorage.setItem('roi-pinged','1');
+    fetch('https://ipapi.co/json/')
+      .then(function(r){return r.json();})
+      .then(function(geo){
+        var loc = (geo.city||'')+(geo.country_name?', '+geo.country_name:'')+(geo.ip?' ('+geo.ip+')':'');
+        var msg = 'Roi opened his Sentriq briefing\n'+loc+'\n'+(geo.org||'')+'\n'+new Date().toISOString();
+        fetch('https://ntfy.sh/sentriq-roi-onb-j8m4',{method:'POST',mode:'no-cors',body:msg,headers:{'Priority':'4'}}).catch(function(){});
+      })
+      .catch(function(){
+        fetch('https://ntfy.sh/sentriq-roi-onb-j8m4',{method:'POST',mode:'no-cors',body:'Roi opened his Sentriq briefing\n'+new Date().toISOString(),headers:{'Priority':'4'}}).catch(function(){});
+      });
+  } else {
+    document.getElementById('gate-err').style.display = 'block';
+    document.getElementById('gate-pw').value = '';
+    document.getElementById('gate-pw').focus();
+  }
+}
+</script>
+
+</body>
+</html>
