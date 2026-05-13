@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Sentriq x AMS</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+    :root {
+        --bg:      #09090F;
+        --card:    #0D0E1A;
+        --border:  #161728;
+        --muted:   #8080A8;
+        --amber:   #E8A020;
+        --amber-d: #B87010;
+        --text:    #ffffff;
+        --text-sub: rgba(255,255,255,0.72);
+        --green:   #44CC88;
+        --red:     #E05555;
+        --text-dim: rgba(255,255,255,0.52);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+        font-family: 'Space Grotesk', system-ui, sans-serif;
+        background: var(--bg); color: var(--text);
+        overflow: hidden; height: 100%; height: -webkit-fill-available; width: 100%;
+    }
+    @supports (height: 100dvh) { html, body { height: 100dvh; } }
+    body::after {
+        content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        pointer-events: none; z-index: 9999; opacity: 0.02;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-repeat: repeat; background-size: 256px;
+    }
+    .deck { width: 100%; height: 100%; position: relative; }
+    .slide {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        display: flex; flex-direction: column;
+        justify-content: flex-start; align-items: center;
+        padding: clamp(24px, 3.5vh, 48px) clamp(28px, 5vw, 80px) 78px;
+        overflow-y: auto; overflow-x: hidden;
+        opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+    }
+    .slide > .slide-inner { margin: auto 0; }
+    .slide.active { opacity: 1; pointer-events: all; }
+    .slide .slide-inner { transition: opacity 0.4s ease, transform 0.4s ease; opacity: 0; transform: translateY(10px); }
+    .slide.active .slide-inner { opacity: 1; transform: translateY(0); }
+    .slide-inner { max-width: 1080px; width: 100%; position: relative; z-index: 1; }
+    .bg-dark { background: linear-gradient(135deg, #09090F 0%, #0D0E1A 100%); }
+    .bg-cover {
+        background:
+            radial-gradient(ellipse 40% 35% at 50% 32%, rgba(232,160,32,0.38) 0%, rgba(232,160,32,0.10) 55%, transparent 100%),
+            radial-gradient(ellipse 85% 65% at 50% 35%, rgba(26,26,53,0.55) 0%, #09090F 70%);
+    }
+    .nav-bar {
+        position: fixed; bottom: 0; left: 0; right: 0;
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 14px 40px; padding-bottom: calc(14px + env(safe-area-inset-bottom));
+        background: rgba(9,9,15,0.92); backdrop-filter: blur(12px);
+        border-top: 1px solid var(--border); z-index: 100;
+    }
+    .nav-logo { font-weight: 500; font-size: 13px; color: #ffffff; letter-spacing: -0.01em; display: flex; align-items: center; gap: 7px; }
+    .nav-controls { display: flex; align-items: center; gap: 14px; }
+    .nav-btn {
+        background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.11);
+        color: #ffffff; width: 38px; height: 38px; border-radius: 8px;
+        cursor: pointer; display: flex; align-items: center; justify-content: center;
+        font-size: 17px; transition: all 0.25s;
+    }
+    .nav-btn:hover { background: var(--amber); border-color: var(--amber); }
+    .slide-counter { font-size: 12px; color: var(--muted); font-weight: 500; min-width: 52px; text-align: center; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 10px; }
+    .progress-bar {
+        position: fixed; top: 0; left: 0; height: 2px;
+        background: var(--amber); box-shadow: 0 0 8px rgba(232,160,32,0.45);
+        transition: width 0.35s ease; z-index: 100;
+    }
+    .confidential { position: fixed; top: 16px; right: 22px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.2); z-index: 100; }
+    .meeting-badge { position: fixed; top: 16px; left: 22px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(232,160,32,0.7); z-index: 100; background: rgba(232,160,32,0.12); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(232,160,32,0.25); }
+    .label {
+        font-size: 11px; font-weight: 600; text-transform: uppercase;
+        letter-spacing: 0.15em; color: var(--amber); margin-bottom: 12px;
+        display: flex; align-items: center; gap: 9px;
+    }
+    .label::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--amber); opacity: 0.5; }
+    .center .label { justify-content: center; }
+    .center .label::before { display: none; }
+    h1 { font-size: clamp(36px, 5.5vw, 72px); font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; margin-bottom: 18px; }
+    h2 { font-size: clamp(22px, 3.2vw, 42px); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 16px; }
+    h3 { font-size: clamp(14px, 1.6vw, 18px); font-weight: 700; line-height: 1.3; margin-bottom: 8px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: clamp(16px, 2vw, 24px); }
+    .card p { font-size: 13px; color: var(--text-sub); line-height: 1.65; }
+    .pill { display: inline-block; padding: 5px 13px; border-radius: 20px; font-size: 12px; font-weight: 600; border: 1px solid; }
+    .pill-amber { background: rgba(232,160,32,0.08); color: var(--amber); border-color: rgba(232,160,32,0.2); }
+    .pill-green { background: rgba(68,204,136,0.08); color: #44CC88; border-color: rgba(68,204,136,0.2); }
+    .stat-num { font-size: clamp(36px, 5vw, 72px); font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+    .value-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .value-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 24px; }
+    .value-card.ams { border-color: rgba(232,160,32,0.3); background: rgba(232,160,32,0.04); }
+    .value-card.sentriq { border-color: rgba(68,204,136,0.3); background: rgba(68,204,136,0.04); }
+    .value-card h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+    .value-card.ams h3 { color: var(--amber); }
+    .value-card.sentriq h3 { color: #44CC88; }
+    .value-item { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
+    .value-item:last-child { margin-bottom: 0; }
+    .value-icon { width: 28px; height: 28px; border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 13px; margin-top: 1px; }
+    .value-icon.amber { background: rgba(232,160,32,0.12); }
+    .value-icon.green { background: rgba(68,204,136,0.12); }
+    .value-text h4 { font-size: 13px; font-weight: 700; color: #ffffff; margin-bottom: 3px; }
+    .value-text p { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.55; }
+    .stack-row { display: flex; align-items: center; gap: 10px; padding: 13px 16px; border-radius: 9px; border: 1px solid rgba(255,255,255,0.07); background: rgba(255,255,255,0.03); margin-bottom: 6px; }
+    .stack-row.sentriq-row { border: 2px solid rgba(232,160,32,0.7); background: rgba(232,160,32,0.08); box-shadow: 0 0 20px rgba(232,160,32,0.08); }
+    .stack-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.35); width: 160px; flex-shrink: 0; }
+    .stack-row.sentriq-row .stack-label { color: var(--amber); font-size: 12px; }
+    .stack-tools { font-size: 12px; color: rgba(255,255,255,0.4); }
+    .stack-row.sentriq-row .stack-tools { color: rgba(255,255,255,0.9); font-weight: 600; }
+    .stack-badge { margin-left: auto; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 4px; }
+    .stack-badge.new { background: rgba(232,160,32,0.15); color: var(--amber); border: 1px solid rgba(232,160,32,0.3); }
+    .stack-badge.existing { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.08); }
+    .econ-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .econ-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+    .econ-card.highlight { border-color: rgba(232,160,32,0.4); background: rgba(232,160,32,0.06); }
+    .econ-card .clients { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+    .econ-card .revenue { font-size: 32px; font-weight: 800; letter-spacing: -0.04em; color: var(--amber); }
+    .econ-card.highlight .revenue { font-size: 40px; }
+    .econ-card .sub { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 6px; line-height: 1.5; }
+    .pilot-step { display: flex; gap: 16px; align-items: flex-start; padding: 18px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 8px; }
+    .pilot-num { width: 32px; height: 32px; border-radius: 8px; background: rgba(232,160,32,0.12); border: 1px solid rgba(232,160,32,0.25); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: var(--amber); flex-shrink: 0; }
+    .pilot-body h4 { font-size: 13px; font-weight: 700; color: #ffffff; margin-bottom: 4px; }
+    .pilot-body p { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.55; }
+    .quote-block { margin-top: 20px; padding: 20px 28px; background: rgba(232,160,32,0.05); border-left: 3px solid var(--amber); border-radius: 0 10px 10px 0; }
+    .quote-block p { font-size: 17px; font-weight: 700; color: rgba(255,255,255,0.92); letter-spacing: -0.02em; line-height: 1.45; }
+    .quote-block small { display: block; font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; letter-spacing: 0.02em; }
+    .divider { display: flex; align-items: center; gap: 10px; margin: 20px 0; }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.07); }
+    .divider span { font-size: 10px; color: rgba(255,255,255,0.25); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+    @media (max-width: 900px) {
+        .slide { padding: 22px 16px 70px; }
+        h1 { font-size: 24px; } h2 { font-size: 18px; }
+        .nav-bar { padding: 10px 16px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+        .value-row { grid-template-columns: 1fr; }
+        .econ-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+        h2 { font-size: 16px !important; }
+        .slide { padding: 16px 12px 68px; }
+        .card { padding: 12px; }
+        .stack-label { width: 110px; }
+    }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="gate" style="position:fixed;inset:0;z-index:99999;background:#09090F;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',system-ui,sans-serif;">
+  <div style="width:100%;max-width:360px;padding:0 24px;text-align:center;">
+    <div style="margin-bottom:32px;">
+      <div style="display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:6px;">
+        <svg width="36" height="36" viewBox="0 0 56 56" fill="none">
+          <circle cx="28" cy="7" r="4" fill="#E8A020"/>
+          <rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+          <rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+          <rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+          <rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+        </svg>
+        <span style="font-size:22px;font-weight:500;color:#ffffff;letter-spacing:-0.01em;">Sentriq<span style="color:#E8A020;">.</span></span>
+      </div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:4px;font-weight:500;">Partnership Briefing: Confidential</div>
+    </div>
+    <input id="gateInput" type="password" placeholder="Enter access code" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onkeydown="if(event.key==='Enter')checkPass()" style="width:100%;padding:14px 18px;border-radius:10px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.06);color:#fff;font-size:15px;font-family:inherit;outline:none;margin-bottom:12px;text-align:center;letter-spacing:0.05em;"/>
+    <button onclick="checkPass()" style="width:100%;padding:14px;border-radius:10px;border:none;background:#E8A020;color:#09090F;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;" onmouseover="this.style.background='#B87010'" onmouseout="this.style.background='#E8A020'">View Briefing</button>
+    <div id="gateError" style="font-size:12px;color:rgba(224,85,85,0.9);margin-top:10px;opacity:0;transition:opacity 0.3s;">Incorrect access code. Please try again.</div>
+    <div style="margin-top:32px;font-size:11px;color:rgba(255,255,255,0.2);line-height:1.6;">Prepared for AMS. Confidential and proprietary.</div>
+  </div>
+</div>
+
+<script>
+function pingOpen() {
+    var t = new Date().toISOString();
+    fetch('https://ipapi.co/json/')
+        .then(function(r){ return r.json(); })
+        .then(function(geo) {
+            var loc = (geo.city||'') + ', ' + (geo.country_name||'') + ' (' + (geo.ip||'') + ')';
+            var org = geo.org || '';
+            var msg = 'AMS partnership deck opened\n' + loc + '\n' + org + '\n' + t;
+            fetch('https://ntfy.sh/sentriq-ams-k3j7', { method:'POST', mode:'no-cors', body:msg }).catch(function(){});
+        })
+        .catch(function(){
+            fetch('https://ntfy.sh/sentriq-ams-k3j7', { method:'POST', mode:'no-cors', body:'AMS deck opened (location unavailable)\n' + t }).catch(function(){});
+        });
+}
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('deck').style.display = 'none';
+    if (sessionStorage.getItem('ams-pinged')) {
+        document.getElementById('gate').style.display = 'none';
+        document.getElementById('deck').style.display = '';
+    }
+});
+function checkPass() {
+    var val = document.getElementById('gateInput').value;
+    if (val === atob('c2VudHJpcWFtczIwMjY=')) {
+        document.getElementById('gate').style.display = 'none';
+        document.getElementById('deck').style.display = '';
+        if (!sessionStorage.getItem('ams-pinged')) {
+            pingOpen();
+            sessionStorage.setItem('ams-pinged', '1');
+        }
+    } else {
+        var err = document.getElementById('gateError');
+        err.style.opacity = '1';
+        setTimeout(function(){ err.style.opacity = '0'; }, 2500);
+        document.getElementById('gateInput').value = '';
+    }
+}
+</script>
+
+<div class="progress-bar" id="progressBar"></div>
+<div class="confidential">Confidential</div>
+<div class="meeting-badge">AMS Partnership</div>
+
+<div class="deck" id="deck">
+
+<!-- SLIDE 1: COVER -->
+<div class="slide bg-cover active" data-index="0">
+<div class="slide-inner center" style="text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100%;">
+  <div style="display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:36px;">
+    <svg width="48" height="48" viewBox="0 0 56 56" fill="none">
+      <circle cx="28" cy="7" r="4" fill="#E8A020"/>
+      <rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+      <rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+      <rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+      <rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+    </svg>
+    <div style="width:1px;height:36px;background:rgba(255,255,255,0.15);"></div>
+    <span style="font-size:28px;font-weight:800;color:rgba(255,255,255,0.9);letter-spacing:-0.02em;">AMS</span>
+  </div>
+  <div class="label" style="justify-content:center;">A conversation between two HR tech leaders</div>
+  <h1>The layer missing<br>from enterprise RPO.</h1>
+  <p style="font-size:17px;color:rgba(255,255,255,0.55);max-width:560px;line-height:1.6;margin:0 auto;">What changes when application integrity becomes a standard layer in every AMS engagement.</p>
+  <div style="margin-top:40px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+    <span class="pill pill-amber">Jonathan Kestenbaum, AMS</span>
+    <span class="pill pill-amber">Samuel Kemper, Sentriq</span>
+    <span class="pill" style="background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.4);border-color:rgba(255,255,255,0.1);">May 2026</span>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 2: THE BROKEN PIPE -->
+<div class="slide bg-dark" data-index="1">
+<div class="slide-inner">
+  <div class="label">The problem</div>
+  <h2>The hiring pipe is broken.<br>Everyone processes it anyway.</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:28px 0;">
+    <div class="card" style="text-align:center;padding:28px 20px;">
+      <div class="stat-num" style="color:var(--amber);">86%</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:8px;line-height:1.55;">of recruiters are now encountering candidate fraud in the hiring process</div>
+      <div style="margin-top:10px;font-size:10px;color:rgba(255,255,255,0.25);">Greenhouse, 2026 AI in Hiring Report</div>
+    </div>
+    <div class="card" style="text-align:center;padding:28px 20px;">
+      <div class="stat-num" style="color:var(--amber);">36%</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:8px;line-height:1.55;">of assessed candidates flagged as high risk, including fabricated credentials and organized proxy operations</div>
+      <div style="margin-top:10px;font-size:10px;color:rgba(255,255,255,0.25);">Ropes, 2026 (tens of thousands assessed)</div>
+    </div>
+    <div class="card" style="text-align:center;padding:28px 20px;">
+      <div class="stat-num" style="color:var(--amber);">25%</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:8px;line-height:1.55;">of candidate profiles will contain AI-fabricated or AI-enhanced credentials by 2028</div>
+      <div style="margin-top:10px;font-size:10px;color:rgba(255,255,255,0.25);">Gartner, 2024</div>
+    </div>
+  </div>
+  <div class="quote-block">
+    <p>Every ATS, every HRIS, every RPO delivery model processes this intake without touching authenticity. The application arrives. The workflow begins. Nobody checked whether it was real.</p>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 3: AMS'S SPECIFIC EXPOSURE -->
+<div class="slide bg-dark" data-index="2">
+<div class="slide-inner">
+  <div class="label">Why this matters to AMS specifically</div>
+  <h2>When fraud gets through on your watch, the damage is shared.</h2>
+  <p style="font-size:16px;color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:28px;max-width:760px;">AMS manages the hiring pipeline for 400+ enterprise clients globally. When a credential-fabricated hire causes a security incident, a compliance failure, or an operational disruption at an AMS-managed company, the reputational event belongs to AMS as much as it belongs to the client. You own the process. You own the outcome.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+    <div class="card">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--red);margin-bottom:10px;">Current exposure</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.65;">AMS screens candidates after submission. The intake pipe is not validated. Fabricated credentials, AI-generated experience histories, and coordinated proxy applications flow through unchecked before AMS's process even begins.</div>
+    </div>
+    <div class="card">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--amber);margin-bottom:10px;">What changes with Sentriq</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.65;">Sentriq runs before submission. AMS receives a shortlist that has already been validated for application authenticity. The intake pipe is clean before AMS's workflow starts. The tail risk moves upstream where it belongs.</div>
+    </div>
+  </div>
+  <div style="margin-top:20px;padding:16px 20px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.15);border-radius:10px;display:flex;align-items:center;gap:12px;">
+    <div style="font-size:22px;">&#9888;</div>
+    <div style="font-size:13px;color:rgba(255,255,255,0.65);line-height:1.55;">No other RPO provider has built this layer. The first to do so sets a new standard. The rest explain why they did not.</div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 4: WHAT SENTRIQ IS -->
+<div class="slide bg-dark" data-index="3">
+<div class="slide-inner">
+  <div class="label">The product</div>
+  <h2>Sentriq is the application integrity layer for enterprise hiring.</h2>
+  <p style="font-size:16px;color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:28px;max-width:720px;">It runs before a candidate submits. It surfaces trust signals on the application itself: behavioral patterns, credential consistency, role-fit authenticity. It does not make decisions. It cleans the signal before the workflow begins.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px;">
+    <div class="card" style="text-align:center;padding:20px 16px;">
+      <div style="font-size:28px;margin-bottom:10px;">&#128203;</div>
+      <h3 style="font-size:13px;margin-bottom:6px;">Application-layer signals</h3>
+      <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.55;">Behavioral patterns from the application process, not the candidate's identity</p>
+    </div>
+    <div class="card" style="text-align:center;padding:20px 16px;">
+      <div style="font-size:28px;margin-bottom:10px;">&#128279;</div>
+      <h3 style="font-size:13px;margin-bottom:6px;">Platform-agnostic</h3>
+      <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.55;">Works across Workday, Greenhouse, Lever, SuccessFactors, iCIMS and every ATS in AMS's client portfolio</p>
+    </div>
+    <div class="card" style="text-align:center;padding:20px 16px;">
+      <div style="font-size:28px;margin-bottom:10px;">&#9889;</div>
+      <h3 style="font-size:13px;margin-bottom:6px;">Pre-submission</h3>
+      <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.55;">Upstream of everything AMS does. Validates what AMS receives before the pipeline begins</p>
+    </div>
+  </div>
+  <div class="quote-block">
+    <p>The analogy that consistently lands: Cloudflare for enterprise hiring. A layer that cleans the pipe before it reaches the tools.</p>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 5: WHERE IT FITS IN AMS WORKFLOW -->
+<div class="slide bg-dark" data-index="4">
+<div class="slide-inner">
+  <div class="label">Where it sits</div>
+  <h2>Upstream of every ATS. Downstream of nothing.</h2>
+  <p style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:24px;">Sentriq is the only layer in AMS's delivery stack that runs before everything else. It does not replace any tool AMS or its clients already use.</p>
+
+  <div class="stack-row sentriq-row">
+    <div class="stack-label">Layer 0: Sentriq</div>
+    <div class="stack-tools">Application integrity signals run before submission. Every AMS engagement.</div>
+    <div class="stack-badge new">New capability</div>
+  </div>
+
+  <div style="height:8px;"></div>
+
+  <div class="stack-row">
+    <div class="stack-label">ATS / HRIS</div>
+    <div class="stack-tools">Workday, SuccessFactors, Greenhouse, Lever, iCIMS, Taleo, SmartRecruiters...</div>
+    <div class="stack-badge existing">Existing</div>
+  </div>
+  <div class="stack-row">
+    <div class="stack-label">Skill inference</div>
+    <div class="stack-tools">Eightfold, TechWolf, Beamery, Phenom...</div>
+    <div class="stack-badge existing">Existing</div>
+  </div>
+  <div class="stack-row">
+    <div class="stack-label">Background verification</div>
+    <div class="stack-tools">HireRight, Sterling, First Advantage, Checkr...</div>
+    <div class="stack-badge existing">Existing</div>
+  </div>
+  <div class="stack-row">
+    <div class="stack-label">Interview assessment</div>
+    <div class="stack-tools">HireVue, Modern Hire, Pymetrics, Karat...</div>
+    <div class="stack-badge existing">Existing</div>
+  </div>
+  <div class="stack-row">
+    <div class="stack-label">AMS delivery</div>
+    <div class="stack-tools">RPO, CWS, Early Careers. AMS One platform.</div>
+    <div class="stack-badge existing">Existing</div>
+  </div>
+
+  <div style="margin-top:16px;font-size:12px;color:rgba(255,255,255,0.35);line-height:1.7;">Sentriq does not compete with any layer above it. It validates the intake before any of them receive it. Every tool AMS uses gets cleaner input.</div>
+</div>
+</div>
+
+<!-- SLIDE 6: MUTUAL VALUE -->
+<div class="slide bg-dark" data-index="5">
+<div class="slide-inner">
+  <div class="label">The partnership value</div>
+  <h2>What each side gets.</h2>
+  <div class="value-row" style="margin-top:24px;">
+    <div class="value-card ams">
+      <h3>AMS gets</h3>
+      <div class="value-item">
+        <div class="value-icon amber">&#127919;</div>
+        <div class="value-text">
+          <h4>A differentiator no RPO competitor has</h4>
+          <p>Randstad, Korn Ferry, Allegis do not offer application integrity as a standard layer. AMS is first. That is a competitive claim that belongs in every RPO proposal.</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon amber">&#128737;</div>
+        <div class="value-text">
+          <h4>Reduced tail risk on every AMS-managed hire</h4>
+          <p>Fraudulent hires on AMS-managed engagements create client complaints and reputational events. Sentriq moves that risk upstream, before AMS's process begins.</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon amber">&#9889;</div>
+        <div class="value-text">
+          <h4>A native fit inside AMS One</h4>
+          <p>AMS One is AI-native and actively being built out. Sentriq is an API-first signal layer that integrates into any platform architecture. It is the application integrity module AMS One does not yet have.</p>
+        </div>
+      </div>
+    </div>
+    <div class="value-card sentriq">
+      <h3>Sentriq gets</h3>
+      <div class="value-item">
+        <div class="value-icon green">&#127760;</div>
+        <div class="value-text">
+          <h4>Distribution at scale without enterprise sales cycles</h4>
+          <p>AMS's 400+ enterprise client relationships are already built. Sentriq reaches those clients through AMS's existing delivery, without running 400 separate procurement processes.</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon green">&#127942;</div>
+        <div class="value-text">
+          <h4>Named enterprise reference clients</h4>
+          <p>One AMS pilot with a Fortune 500 client produces the design partner reference that anchors Sentriq's Series A. The logo matters. The path is AMS.</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon green">&#128200;</div>
+        <div class="value-text">
+          <h4>Category credibility from the world's leading RPO</h4>
+          <p>If the #1 global RPO provider makes application integrity a standard, the category is defined. Every other RPO and every enterprise TA leader will follow.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 7: THE CHANNEL MODEL -->
+<div class="slide bg-dark" data-index="6">
+<div class="slide-inner">
+  <div class="label">How the commercial relationship works</div>
+  <h2>This is a channel model, not a vendor procurement.</h2>
+  <p style="font-size:15px;color:rgba(255,255,255,0.55);margin-bottom:28px;line-height:1.7;max-width:700px;">AMS does not procure Sentriq as a tool and bill it back to clients. AMS embeds Sentriq as a capability within its RPO delivery, charges clients a premium for the enhanced service, and shares in the value created. This is the model that scales.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;">
+    <div class="card" style="padding:20px;text-align:center;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:10px;">Option A</div>
+      <div style="font-size:14px;font-weight:700;margin-bottom:8px;">White-label module</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;">Sentriq runs under AMS branding as an AMS One capability. AMS owns the client relationship. Sentriq receives a per-application or per-engagement fee.</div>
+    </div>
+    <div class="card" style="padding:20px;text-align:center;border-color:rgba(232,160,32,0.3);background:rgba(232,160,32,0.04);">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:10px;">Option B (recommended)</div>
+      <div style="font-size:14px;font-weight:700;margin-bottom:8px;">Co-branded layer</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;">Sentriq is surfaced as a named capability in AMS's RPO delivery: "Application integrity, powered by Sentriq." AMS charges a premium per engagement. Revenue share to Sentriq.</div>
+    </div>
+    <div class="card" style="padding:20px;text-align:center;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:10px;">Option C</div>
+      <div style="font-size:14px;font-weight:700;margin-bottom:8px;">Client-direct with AMS intro</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.6;">AMS introduces Sentriq to clients. Sentriq runs a separate commercial relationship with each client. AMS receives a referral fee or equity participation.</div>
+    </div>
+  </div>
+  <div style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.6;">The right structure is built together. The shared objective is that AMS clients get the capability and both sides capture the value created.</div>
+</div>
+</div>
+
+<!-- SLIDE 8: THE ECONOMICS -->
+<div class="slide bg-dark" data-index="7">
+<div class="slide-inner">
+  <div class="label">What it looks like at scale</div>
+  <h2>The opportunity inside AMS's existing book of business.</h2>
+  <p style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:28px;">Based on Sentriq's Scale tier pricing ($84K/client/year). AMS has 400+ enterprise clients.</p>
+  <div class="econ-row">
+    <div class="econ-card">
+      <div class="clients">10 AMS clients</div>
+      <div class="revenue">$840K</div>
+      <div class="sub">ARR channel contribution<br>Pilot-to-scale phase</div>
+    </div>
+    <div class="econ-card highlight">
+      <div class="clients">50 AMS clients</div>
+      <div class="revenue">$4.2M</div>
+      <div class="sub">ARR channel contribution<br>Series A milestone cleared</div>
+    </div>
+    <div class="econ-card">
+      <div class="clients">100 AMS clients</div>
+      <div class="revenue">$8.4M</div>
+      <div class="sub">ARR channel contribution<br>Series B narrative ready</div>
+    </div>
+  </div>
+  <div style="margin-top:20px;padding:16px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);margin-bottom:10px;">What makes this model different from a standard enterprise sale</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div style="font-size:12px;color:rgba(255,255,255,0.55);line-height:1.65;"><strong style="color:rgba(255,255,255,0.8);">Without AMS:</strong> Sentriq runs 400 separate enterprise sales cycles, each taking 6-12 months, each requiring CISO and HR alignment.</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.55);line-height:1.65;"><strong style="color:rgba(255,255,255,0.8);">With AMS:</strong> AMS's existing client relationships and procurement trust compress that cycle from months to weeks. One partner, one integration, 400 clients.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 9: THE PILOT -->
+<div class="slide bg-dark" data-index="8">
+<div class="slide-inner">
+  <div class="label">First move</div>
+  <h2>One client. Six weeks. No separate procurement.</h2>
+  <p style="font-size:15px;color:rgba(255,255,255,0.55);margin-bottom:28px;line-height:1.7;max-width:700px;">The fastest path from conversation to proof is a single AMS enterprise client, introduced by Jonathan, where Sentriq runs alongside AMS's existing RPO delivery. No separate procurement by the end client. AMS introduces it as a capability within the engagement.</p>
+  <div style="margin-bottom:12px;">
+    <div class="pilot-step">
+      <div class="pilot-num">1</div>
+      <div class="pilot-body">
+        <h4>Jonathan identifies one AMS client</h4>
+        <p>Financial services or enterprise technology. Active hiring on 2-5 open roles. An existing AMS RPO or project engagement. No separate introduction needed.</p>
+      </div>
+    </div>
+    <div class="pilot-step">
+      <div class="pilot-num">2</div>
+      <div class="pilot-body">
+        <h4>Sentriq runs upstream of AMS's existing workflow</h4>
+        <p>Integrated into the application intake process. Trust signals surfaced to AMS's delivery team alongside the standard candidate shortlist. No new tools for the client to adopt.</p>
+      </div>
+    </div>
+    <div class="pilot-step">
+      <div class="pilot-num">3</div>
+      <div class="pilot-body">
+        <h4>Six-week results review</h4>
+        <p>What percentage of applications showed integrity signals? Did the shortlist quality change? Was recruiter time per screened application reduced? These are the KPIs AMS already tracks.</p>
+      </div>
+    </div>
+    <div class="pilot-step">
+      <div class="pilot-num">4</div>
+      <div class="pilot-body">
+        <h4>Model the commercial structure for the next 10 clients</h4>
+        <p>One pilot with clean data is the proof of concept that unlocks the channel model discussion. That is the only outcome we need from the first six weeks.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SLIDE 10: THE BIGGER PICTURE -->
+<div class="slide bg-dark" data-index="9">
+<div class="slide-inner center" style="text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100%;">
+  <div class="label" style="justify-content:center;">The category</div>
+  <h2 style="max-width:700px;margin:0 auto 20px;">AMS becomes the only RPO provider in the world that guarantees application integrity.</h2>
+  <p style="font-size:16px;color:rgba(255,255,255,0.55);max-width:620px;line-height:1.7;margin:0 auto 36px;">In a market where 86% of recruiters are experiencing fraud and nobody has built the upstream fix, AMS can claim the category. That is not a feature. That is a competitive position that takes years to replicate.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;max-width:800px;width:100%;margin-bottom:36px;">
+    <div style="padding:18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);margin-bottom:8px;">For AMS</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.75);line-height:1.6;">First-mover in application integrity. A standard that competitors cannot match without their own partner.</div>
+    </div>
+    <div style="padding:18px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.2);border-radius:12px;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:8px;">Together</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.75);line-height:1.6;">The first RPO-native application integrity standard. A new category definition that neither side can build alone.</div>
+    </div>
+    <div style="padding:18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);margin-bottom:8px;">For Sentriq</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.75);line-height:1.6;">The world's leading RPO as a channel. Distribution at the scale of the global enterprise hiring market.</div>
+    </div>
+  </div>
+  <div style="font-size:14px;color:rgba(255,255,255,0.4);margin-bottom:6px;">One named client. Six weeks.</div>
+  <div style="font-size:22px;font-weight:800;color:#ffffff;letter-spacing:-0.02em;">That is the only decision we need to make today.</div>
+  <div style="margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);display:flex;gap:32px;justify-content:center;flex-wrap:wrap;">
+    <div style="text-align:center;">
+      <div style="font-size:11px;color:rgba(255,255,255,0.3);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Sentriq</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.7);">samuel@sentriq.co</div>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-size:11px;color:rgba(255,255,255,0.3);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Traction</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.7);">HSBC + Booking Holdings</div>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-size:11px;color:rgba(255,255,255,0.3);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Stage</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.7);">$3.5M seed, looking for lead</div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div><!-- end deck -->
+
+<nav class="nav-bar">
+  <div class="nav-logo">
+    <svg width="22" height="22" viewBox="0 0 56 56" fill="none">
+      <circle cx="28" cy="7" r="4" fill="#E8A020"/>
+      <rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+      <rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+      <rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+      <rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+    </svg>
+    <span>Sentriq<span style="color:var(--amber);">.</span></span>
+  </div>
+  <div class="nav-controls">
+    <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">&#8592;</button>
+    <span class="slide-counter" id="slideCounter">1 / 10</span>
+    <button class="nav-btn" id="nextBtn" onclick="navigate(1)">&#8594;</button>
+  </div>
+</nav>
+
+<script>
+var slides = document.querySelectorAll('.slide');
+var total = slides.length;
+var current = 0;
+function showSlide(n) {
+    slides[current].classList.remove('active');
+    current = (n + total) % total;
+    slides[current].classList.add('active');
+    document.getElementById('slideCounter').textContent = (current + 1) + ' / ' + total;
+    document.getElementById('progressBar').style.width = ((current + 1) / total * 100) + '%';
+}
+function navigate(dir) { showSlide(current + dir); }
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); navigate(1); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); navigate(-1); }
+});
+var touchStartX = 0;
+document.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+document.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 40) navigate(dx < 0 ? 1 : -1);
+}, { passive: true });
+showSlide(0);
+document.getElementById('progressBar').style.width = (1 / total * 100) + '%';
+</script>
+</body>
+</html>
