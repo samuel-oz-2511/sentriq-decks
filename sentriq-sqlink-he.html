@@ -142,7 +142,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
         font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
         color: var(--text-dim); margin-bottom: 6px; text-align: right; direction: rtl;
     }
-    .output-text { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; line-height: 1.4; direction: ltr; text-align: left; unicode-bidi: isolate; }
+    .output-text { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; line-height: 1.4; direction: ltr; text-align: right; unicode-bidi: isolate; }
     .output-sub { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; }
 
     /* Lifecycle */
@@ -209,6 +209,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
         font-size: 13px; color: var(--text-sub); line-height: 1.5;
         border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;
     }
+    .roi-static-row span:first-child { min-width: 0; flex: 1; }
     .roi-static-row:last-child { border-bottom: none; }
     .roi-static-row span:last-child { font-weight: 700; color: rgba(255,255,255,0.88); white-space: nowrap; direction: ltr; unicode-bidi: isolate; }
     .roi-result-block { margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(232,160,32,0.2); }
@@ -313,7 +314,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
     <div class="hero">
         <div class="label">בקרת איכות הגשות | גיוס BPO</div>
         <h1>ב-SQLink, <em>ה-Shortlist הוא המוצר.</em><br>Sentriq מוודא שכל Shortlist שיוצא ללקוח נשען על Signal אמיתי.</h1>
-        <p>בכל תפקיד שמפורסם מגיעות עשרות הגשות שנראות מקצועיות על פניהן. חלקן נכתבו בעזרת AI, חלקן משקפות ניסיון שלא ניתן לאמת על סמך ההגשה בלבד. שתיהן נראות אותו דבר על פני השטח. המגייס מבלה שעות כדי להבין מי בכלל מתקדם לשלב הבא, ואז הלקוח מקבל Shortlist שנבנה על מידע חלקי. Sentriq מזהה Signal אמיתי (אותות איכות המבוססים על ניתוח ההגשה) בכל הגשה, לפני שמגייס פותח קורות חיים.</p>
+        <p>בכל תפקיד שמפורסם מגיעות עשרות הגשות שנראות מקצועיות על פניהן. חלקן משקפות ניסיון שלא ניתן לאמת על סמך ההגשה בלבד. חלקן נכתבו בעזרת AI. שתיהן נראות אותו דבר על פני השטח. המגייס מבלה שעות כדי להבין מי בכלל מתקדם לשלב הבא, ואז הלקוח מקבל Shortlist שנבנה על מידע חלקי. Sentriq מזהה Signal אמיתי (אותות איכות המבוססים על ניתוח ההגשה) בכל הגשה, לפני שמגייס פותח קורות חיים.</p>
     </div>
 
     <hr class="divider"/>
@@ -339,7 +340,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
             </div>
         </div>
         <div style="margin-top:14px;padding:18px 22px;background:var(--card);border:1px solid var(--border);border-radius:12px;">
-            <p style="font-size:13px;color:var(--text-sub);line-height:1.85;">בארגון פנימי, הגשה עם Signal נמוך מבזבזת זמן מגייסים. ב-SQLink, הגשה שלא נסננה כראוי מגיעה ללקוח ומשקפת ישירות על איכות השירות. ב-300,000 הגשות בשנה (אומדן), כל שיפור בדיוק ה-Shortlist מתורגם ישירות לשעות עבודה שנחסכות ולמוניטין שנשמר מול הלקוחות.</p>
+            <p style="font-size:13px;color:var(--text-sub);line-height:1.85;">בארגון פנימי, הגשה עם Signal נמוך מבזבזת זמן מגייסים. ב-SQLink, הגשה שלא נסננה כראוי מגיעה ללקוח ומשקפת ישירות על איכות השירות. במאות אלפי הגשות בשנה, כל שיפור בדיוק ה-Shortlist מתורגם ישירות לשעות עבודה שנחסכות ולמוניטין שנשמר מול הלקוחות.</p>
         </div>
     </div>
 
@@ -354,23 +355,23 @@ ntfy topic: sentriq-sqlink-he-n4k8
                 <ul class="layer-bullets">
                     <li>פריסה מהירה עם ליווי טכני מלא</li>
                     <li>עובד עם כל ATS או טופס הגשה</li>
-                    <li>רוב המועמדים לא חשים שום הבדל בתהליך</li>
+                    <li>תהליך ההגשה נשאר זהה לחלוטין מבחינת המועמד</li>
                 </ul>
             </div>
             <div class="layer-card">
                 <div class="layer-num">שלב 2</div>
                 <h3>שלב הבהרה</h3>
-                <p class="layer-desc">כשמתגלים פערים בהגשה, Sentriq שולח למועמד סט של שאלות קצרות ומותאמות אישית. שאלות שמאפשרות למועמד להדגים ניסיון אמיתי בשניים-שלושה משפטים. המועמד מרגיש שמישהו קרא את ה-CV שלו ברצינות.</p>
+                <p class="layer-desc">כשמתגלים פערים בהגשה, המגייס יכול לשלוח למועמד סט של שאלות קצרות ומותאמות אישית. שאלות שמאפשרות למועמד להדגים ניסיון אמיתי בשניים-שלושה משפטים. המועמד מרגיש שמישהו קרא את ה-CV שלו ברצינות.</p>
                 <ul class="layer-bullets">
-                    <li>רק לאחוז קטן מההגשות (5-20%)</li>
+                    <li>רק לאחוז קטן מההגשות שבהן נמצאו פערים</li>
                     <li>פחות מ-2 דקות לביצוע</li>
-                    <li>המועמד מרגיש מכובד לאורך כל התהליך</li>
+                    <li>חוויית מועמד נמדדת ומדווחת בפיילוט</li>
                 </ul>
             </div>
             <div class="layer-card">
                 <div class="layer-num">שלב 3</div>
                 <h3>Signal ב-ATS</h3>
-                <p class="layer-desc">כל הגשה מגיעה למערכת המועמדים הקיימת עם תיוג ברור של כל פער שנמצא ומה נדרש להבהיר בשלב הבא מול המועמד. כל זה בלי שתצטרכו לנתח או לפתוח קו"ח.<br><br>בכל שלב שהמועמד מתקדם בתהליך, המערכת בודקת שוב האם יש פערים חדשים, על ידי ניתוח סיכומי ראיון ו/או תוצאות תרגיל מקצועי. אנחנו מלווים אתכם עד תום תהליך הגיוס.</p>
+                <p class="layer-desc">כל הגשה מגיעה למערכת המועמדים הקיימת עם תיוג ברור של כל פער שנמצא ומה נדרש להבהיר בשלב הבא מול המועמד. כל זה בלי שתצטרכו לנתח או לפתוח קו"ח.<br><br>לאורך התהליך, Sentriq מאפשר למגייס לסמן פערים נוספים שעולים בשיחת מיון, בתרגיל מקצועי, או בראיון, ולשמור הכל ב-Record אחד. כך כל המידע שמצטבר בתהליך נשמר במקום אחד ומוצג לפני שה-Shortlist יוצא ללקוח.</p>
                 <ul class="layer-bullets">
                     <li>ישירות בתוך ה-ATS הקיים</li>
                     <li>הסבר ברור לכל תיוג</li>
@@ -403,7 +404,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
                 <div class="lc-stage lc-sentriq" style="border-bottom-color:rgba(232,160,32,0.35);">
                     <div class="lc-badge" style="color:rgba(232,160,32,0.45);">Sentriq</div>
                     <div class="lc-name">שיחת מיון</div>
-                    <div class="lc-sub"><bdi dir="ltr">Gap Assessor</bdi> רץ</div>
+                    <div class="lc-sub"><bdi dir="ltr">Gap Assessor</bdi> (בדיקת פערים) רץ</div>
                 </div>
                 <div class="lc-stage lc-sentriq" style="border-bottom-color:rgba(232,160,32,0.35);">
                     <div class="lc-badge" style="color:rgba(232,160,32,0.45);">Sentriq</div>
@@ -430,7 +431,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
         <div class="lc-callouts">
             <div class="lc-callout lc-amber">
                 <h4>Signal מתחיל מרגע ההגשה</h4>
-                <p>כל פרט שרשם המועמד בהגשה מתועד. ה-<bdi dir="ltr">Gap Assessor</bdi> עוקב אחריו מול כל מידע שמצטבר לאורך התהליך.</p>
+                <p>כל פרט שרשם המועמד בהגשה מתועד. ה-<bdi dir="ltr">Gap Assessor</bdi> מאפשר לבדוק פערים מול כל מידע שמוסיפים לאורך התהליך.</p>
             </div>
             <div class="lc-callout">
                 <h4>פערים צפים לפני ה-Shortlist</h4>
@@ -512,7 +513,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
             </div>
         </div>
         <p style="font-size:11px;color:var(--text-dim);line-height:1.8;">
-            הנתונים מבוססים על: 800 השמות לשנה לצוות (אומדן לצורך ההמחשה) × 9 שעות שנחסכות לתפקיד (23 שע' &rarr; 14 שע', Shortlist 2025) × &#8362;84 עלות שעתית (עלות מעסיק). עלות השמה כושלת: &#8362;61K עמלה שאבדה + &#8362;25K גיוס חוזר. עלות Sentriq: תוכנית Scale בכ-&#8362;360K לשנה. כל הנתונים להמחשה בלבד; ROI בפועל נגזר מנפח הצוות.
+            הנתונים מבוססים על: 800 השמות לשנה לצוות (אומדן לצורך ההמחשה) × 9 שעות שנחסכות לתפקיד (23 שע' &rarr; 14 שע', Shortlist 2025) × &#8362;84 עלות שעתית (עלות מעסיק). 8 השמות כושלות שנמנעות: ניחה של ~1% משיפור דיוק ה-Shortlist, על בסיס 800 השמות לשנה. עלות השמה כושלת: &#8362;61K עמלה שאבדה + &#8362;25K גיוס חוזר. עלות Sentriq: תוכנית Scale בכ-&#8362;360K לשנה (תמחור לפי נפח מותאם לצוות). כל הנתונים להמחשה בלבד; ROI בפועל נגזר מנפח הצוות ומהתנאים המוסכמים.
         </p>
     </div>
 
@@ -529,8 +530,8 @@ ntfy topic: sentriq-sqlink-he-n4k8
         </div>
         <div class="ask-grid">
             <div class="ask-card highlight">
-                <h3><bdi dir="ltr">37,000 &#8362; /</bdi> פיילוט 6 שבועות</h3>
-                <p>2-3 תפקידים פעילים, Signal מלא, Candidate Signal Profiles ישירות ל-ATS הקיים. מדדי ההצלחה מוגדרים ומוסכמים לפני תחילת הפיילוט. ללא החלפת מערכות. בסוף אתם מחליטים אם ממשיכים.</p>
+                <h3><bdi dir="ltr">37,000 &#8362;</bdi> / פיילוט 6 שבועות</h3>
+                <p>2-3 תפקידים פעילים, Signal מלא, Candidate Signal Profiles ישירות ל-ATS הקיים. מדדי ההצלחה מוגדרים ומוסכמים לפני תחילת הפיילוט. ללא החלפת מערכות. הפיילוט מוכיח שהאינטגרציה עובדת בסביבה שלכם לפני שמתחייבים לשיחה הבאה.</p>
             </div>
             <div class="ask-card">
                 <h3>מה שנגדיר יחד לפני</h3>
