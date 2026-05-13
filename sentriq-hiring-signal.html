@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Signal Gap in Hiring | Sentriq</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #09090F;
+    --surface: rgba(255,255,255,0.03);
+    --amber: #E8A020;
+    --text: #FFFFFF;
+    --body: rgba(255,255,255,0.80);
+    --muted: rgba(255,255,255,0.45);
+    --border: rgba(255,255,255,0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: var(--bg); }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 64px 24px 80px;
+  }
+  .page {
+    max-width: 660px;
+    width: 100%;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 72px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-name {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--text);
+  }
+  .tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+  }
+
+  /* Headline block */
+  .kicker {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-size: clamp(26px, 5vw, 40px);
+    font-weight: 700;
+    line-height: 1.18;
+    margin-bottom: 36px;
+    color: var(--text);
+  }
+  h1 em {
+    font-style: normal;
+    color: var(--amber);
+  }
+
+  /* Body */
+  p {
+    font-size: 16px;
+    line-height: 1.78;
+    color: var(--body);
+    margin-bottom: 22px;
+  }
+  p strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .section-break {
+    margin: 48px 0 32px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-break::before {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .section-break-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    white-space: nowrap;
+  }
+  .section-break::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Pull quote */
+  .pull-quote {
+    margin: 40px 0;
+    padding: 22px 24px;
+    border-left: 3px solid var(--amber);
+    background: rgba(232,160,32,0.04);
+    border-radius: 0 8px 8px 0;
+  }
+  .pull-quote p {
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.90);
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 72px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .footer-about {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 380px;
+  }
+  .footer-domain {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--amber);
+    letter-spacing: 0.03em;
+  }
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.6;
+    flex-shrink: 0;
+  }
+  .footer-logo-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  @media (max-width: 560px) {
+    body { padding: 44px 18px 60px; }
+    .header { margin-bottom: 52px; }
+    .footer { flex-direction: column; }
+    .footer-logo { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="logo">
+      <svg width="32" height="32" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+        <rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+        <rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+        <rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+        <circle cx="28" cy="7" r="3" fill="#E8A020"/>
+      </svg>
+      <span class="logo-name">sentriq</span>
+    </div>
+    <span class="tag">For Talent Leaders</span>
+  </div>
+
+  <div class="kicker">The Hiring Integrity Gap</div>
+  <h1>The home assignment<br>used to be the<br><em>part you could trust.</em></h1>
+
+  <p>
+    For most recruiters, the home assignment was the honest part of the process. Not because the output was always impressive, but because it showed something a resume never could: how a person thinks when no one is guiding them. The structure they choose. What they leave out. Whether the depth is actually there or just performed.
+  </p>
+
+  <p>
+    That signal is eroding. Not because candidates are less capable, but because the gap between what someone submits and what they can genuinely do has never been easier to close from the outside. An application that looks strong at every stage, including the assignment, may still not reflect the person who sent it.
+  </p>
+
+  <div class="pull-quote">
+    <p>"The output lands in your inbox. But you have no signal about the process that produced it."</p>
+  </div>
+
+  <p>
+    Home assignments are just the latest layer to break. The resume lost its reliability first. Then the cover letter. Then the skills section. Each step that used to tell you something real has become easier to optimize around. The assignment held out longer because it required actual work. Now that work can be outsourced too, without leaving a trace in the output.
+  </p>
+
+  <div class="section-break"><span class="section-break-label">What's actually missing</span></div>
+
+  <p>
+    There is a layer that has never existed in the hiring stack. Something that sits before the recruiter and before the ATS, and asks a different question: <strong>does this submission genuinely represent the person who sent it?</strong> Not identity verification. Not a skills test. Something earlier than all of that, at the moment the application is submitted.
+  </p>
+
+  <p>
+    The home assignment problem is a version of this. The output arrives polished, but there are no signals about the process behind it: whether the thinking connects to what was claimed elsewhere in the application, whether the approach is consistent with how the person describes themselves, whether the depth in the assignment is real or reflected. Those questions have no answer today because no one is looking at the submission layer.
+  </p>
+
+  <div class="section-break"><span class="section-break-label">What we're building</span></div>
+
+  <p>
+    Sentriq is the application integrity layer for enterprise hiring. We sit at the submission step and surface trust signals on every application before any human on the team sees it. Not a score. Not an automated decision. A signal that gives recruiters the context to ask better questions, prioritize the right conversations, and make better use of the time they spend in the process.
+  </p>
+
+  <p>
+    The same behavioral layer that works on written applications extends to the home assignment: the consistency between the assignment and the rest of what was submitted, the signals that distinguish a genuinely authored response from a well-optimized one, the patterns that indicate the thinking in the assignment is actually theirs.
+  </p>
+
+  <p>
+    The goal is not to catch anyone. It is to give the people making hiring decisions back the signal they used to have, and to rebuild the confidence that what they are reading is real.
+  </p>
+
+  <div class="footer">
+    <div class="footer-left">
+      <span class="footer-domain">sentriq.co</span>
+      <span class="footer-about">Two IDF intelligence veterans. Israeli-founded. Building the integrity layer that enterprise hiring was always going to need.</span>
+    </div>
+    <div class="footer-logo">
+      <svg width="24" height="24" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+        <rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+        <rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
+        <rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
+        <circle cx="28" cy="7" r="3" fill="#E8A020"/>
+      </svg>
+      <span class="footer-logo-name">sentriq</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
