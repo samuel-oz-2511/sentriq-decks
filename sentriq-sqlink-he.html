@@ -105,7 +105,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
         font-size: clamp(34px, 5vw, 52px); font-weight: 800;
         color: var(--amber); margin-bottom: 6px;
         letter-spacing: -0.04em; line-height: 1;
-        direction: ltr; display: inline-block;
+        display: block; unicode-bidi: plaintext;
     }
     .pain-label { font-size: 13px; color: var(--text-sub); line-height: 1.65; }
     .pain-source { font-size: 10px; color: var(--text-dim); margin-top: 8px; text-align: start; }
@@ -140,7 +140,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
     }
     .output-label {
         font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
-        color: var(--text-dim); margin-bottom: 6px; text-align: right;
+        color: var(--text-dim); margin-bottom: 6px; text-align: right; direction: rtl;
     }
     .output-text { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; line-height: 1.4; direction: ltr; text-align: left; unicode-bidi: isolate; }
     .output-sub { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; }
@@ -210,9 +210,9 @@ ntfy topic: sentriq-sqlink-he-n4k8
         border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;
     }
     .roi-static-row:last-child { border-bottom: none; }
-    .roi-static-row span:last-child { font-weight: 700; color: rgba(255,255,255,0.88); white-space: nowrap; unicode-bidi: isolate; }
+    .roi-static-row span:last-child { font-weight: 700; color: rgba(255,255,255,0.88); white-space: nowrap; direction: ltr; unicode-bidi: isolate; }
     .roi-result-block { margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(232,160,32,0.2); }
-    .roi-big-num { font-size: clamp(28px, 4vw, 44px); font-weight: 800; color: var(--amber); letter-spacing: -0.04em; line-height: 1; margin-bottom: 4px; direction: ltr; unicode-bidi: isolate; }
+    .roi-big-num { font-size: clamp(28px, 4vw, 44px); font-weight: 800; color: var(--amber); letter-spacing: -0.04em; line-height: 1; margin-bottom: 4px; direction: ltr; unicode-bidi: isolate; display: block; }
     .roi-result-label { font-size: 11px; color: rgba(255,255,255,0.45); }
     .roi-ratio-strip { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 12px; }
     .roi-ratio-cell { background: rgba(232,160,32,0.06); border: 1px solid rgba(232,160,32,0.15); border-radius: 10px; padding: 16px 18px; text-align: center; }
@@ -256,7 +256,8 @@ ntfy topic: sentriq-sqlink-he-n4k8
         .roi-ratio-strip { grid-template-columns: 1fr; }
         .ask-grid { grid-template-columns: 1fr; }
         .cta { flex-direction: column; gap: 24px; padding: 28px 20px; }
-        .cta-right { text-align: start; }
+        .cta-right { text-align: right; direction: rtl; width: 100%; }
+        .cta-right .contact-sub { direction: rtl; text-align: right; }
         .hero h1 { max-width: 100%; }
     }
     @media (max-width: 380px) {
@@ -305,14 +306,14 @@ ntfy topic: sentriq-sqlink-he-n4k8
             </svg>
             Sentriq<span>.</span>
         </div>
-        <div class="logo-for">עבור SQLink Group</div>
+        <div class="logo-for">עבור <bdi dir="ltr">SQLink Group</bdi></div>
     </div>
 
     <!-- HERO -->
     <div class="hero">
         <div class="label">בקרת איכות הגשות | גיוס BPO</div>
         <h1>ב-SQLink, <em>ה-Shortlist הוא המוצר.</em><br>Sentriq מוודא שכל Shortlist שיוצא ללקוח נשען על Signal אמיתי.</h1>
-        <p>בכל תפקיד שמפורסם מגיעות עשרות הגשות שנראות מקצועיות על פניהן. חלקן נכתבו בעזרת AI, חלקן מייצגות ניסיון שלא תואם את המציאות. שתיהן נראות אותו דבר על פני השטח. המגייס מבלה שעות כדי להבין מי בכלל מתקדם לשלב הבא, ואז הלקוח מקבל Shortlist שנבנה על ניחוש. Sentriq מזהה Signal אמיתי בכל הגשה, לפני שמגייס פותח קורות חיים.</p>
+        <p>בכל תפקיד שמפורסם מגיעות עשרות הגשות שנראות מקצועיות על פניהן. חלקן נכתבו בעזרת AI, חלקן משקפות ניסיון שלא ניתן לאמת על סמך ההגשה בלבד. שתיהן נראות אותו דבר על פני השטח. המגייס מבלה שעות כדי להבין מי בכלל מתקדם לשלב הבא, ואז הלקוח מקבל Shortlist שנבנה על מידע חלקי. Sentriq מזהה Signal אמיתי (אותות איכות המבוססים על ניתוח ההגשה) בכל הגשה, לפני שמגייס פותח קורות חיים.</p>
     </div>
 
     <hr class="divider"/>
@@ -328,12 +329,12 @@ ntfy topic: sentriq-sqlink-he-n4k8
             </div>
             <div class="pain-card amber-border">
                 <div class="pain-num">40-80%</div>
-                <div class="pain-label">מהמועמדים משתמשים ב-AI לכתיבה או לשיפור ההגשה. ב-staffing, מועמדים יודעים לנסח בדיוק מה שהלקוח רוצה לשמוע, גם כשאינם עומדים בדרישות בפועל.</div>
+                <div class="pain-label">מהמועמדים כותבים את ההגשה בעזרת AI. בשוק staffing תחרותי, ההגשות נוטות להישמע זהה, גם כשהניסיון האמיתי שונה מאוד.</div>
                 <div class="pain-source">Resume Now, 2024</div>
             </div>
             <div class="pain-card">
                 <div class="pain-num">1:50</div>
-                <div class="pain-label">יחס Signal לרעש בתפקידים טכנולוגיים תחרותיים. מועמד חזק אחד לכל 50 הגשות שנבדקות. עבור BPO שמגייס בסדר גודל, הנזק מצטבר בכל תפקיד.</div>
+                <div class="pain-label">יחס Signal לרעש בתפקידים טכנולוגיים תחרותיים. הגשה אחת עם Signal גבוה לכל 50 הגשות שמגיעות לתיבה. עבור BPO שמגייס בסדר גודל, הנזק מצטבר בכל תפקיד.</div>
                 <div class="pain-source">Pin Research, 2026</div>
             </div>
         </div>
@@ -349,21 +350,21 @@ ntfy topic: sentriq-sqlink-he-n4k8
             <div class="layer-card">
                 <div class="layer-num">שלב 1</div>
                 <h3>Signal בהגשה</h3>
-                <p class="layer-desc">בזמן שמועמד ממלא את טופס ההגשה, Sentriq אוסף אותות פסיביים (Signals): כמה זמן בילה על כל שדה, האם התוכן הועתק ישירות, כיצד ההגשה נוצרה. אין שינויים בטופס ההגשה ואין צורך בהסכמת מועמד.</p>
+                <p class="layer-desc">בזמן שמועמד ממלא את טופס ההגשה, Sentriq אוסף אותות פסיביים (Signals): כמה זמן בילה על כל שדה, האם התוכן הועתק ישירות, כיצד ההגשה נוצרה. אין שינויים בטופס ההגשה.</p>
                 <ul class="layer-bullets">
-                    <li>פריסה בתוך יום עבודה אחד</li>
+                    <li>פריסה מהירה עם ליווי טכני מלא</li>
                     <li>עובד עם כל ATS או טופס הגשה</li>
-                    <li>ללא שינוי בחוויית המועמד</li>
+                    <li>רוב המועמדים לא חשים שום הבדל בתהליך</li>
                 </ul>
             </div>
             <div class="layer-card">
                 <div class="layer-num">שלב 2</div>
                 <h3>שלב הבהרה</h3>
-                <p class="layer-desc">כשמתגלים פערים בהגשה, Sentriq שולח למועמד סט של שאלות קצרות ומותאמות אישית. שאלה שמי שבאמת עבד בתחום עונה עליה תוך דקה. המועמד לא מרגיש חשוד. הוא מרגיש שמישהו קרא את ה-CV שלו ברצינות.</p>
+                <p class="layer-desc">כשמתגלים פערים בהגשה, Sentriq שולח למועמד סט של שאלות קצרות ומותאמות אישית. שאלות שמאפשרות למועמד להדגים ניסיון אמיתי בשניים-שלושה משפטים. המועמד מרגיש שמישהו קרא את ה-CV שלו ברצינות.</p>
                 <ul class="layer-bullets">
                     <li>רק לאחוז קטן מההגשות (5-20%)</li>
                     <li>פחות מ-2 דקות לביצוע</li>
-                    <li>המועמד מרגיש מכובד, לא חשוד</li>
+                    <li>המועמד מרגיש מכובד לאורך כל התהליך</li>
                 </ul>
             </div>
             <div class="layer-card">
@@ -407,12 +408,12 @@ ntfy topic: sentriq-sqlink-he-n4k8
                 <div class="lc-stage lc-sentriq" style="border-bottom-color:rgba(232,160,32,0.35);">
                     <div class="lc-badge" style="color:rgba(232,160,32,0.45);">Sentriq</div>
                     <div class="lc-name">מבחן טכני</div>
-                    <div class="lc-sub">ציון מול הצהרות</div>
+                    <div class="lc-sub">ציון מול מה שנרשם</div>
                 </div>
                 <div class="lc-stage lc-sentriq" style="border-bottom-color:rgba(232,160,32,0.35);">
                     <div class="lc-badge" style="color:rgba(232,160,32,0.45);">Sentriq</div>
                     <div class="lc-name">ראיון</div>
-                    <div class="lc-sub">תמלול מול הצהרות</div>
+                    <div class="lc-sub">תמלול מול מה שנרשם</div>
                 </div>
                 <div class="lc-stage lc-sentriq" style="border-bottom-color:rgba(232,160,32,0.35);">
                     <div class="lc-badge" style="color:rgba(232,160,32,0.45);">Sentriq</div>
@@ -449,8 +450,8 @@ ntfy topic: sentriq-sqlink-he-n4k8
             <div class="value-card">
                 <div class="value-card-label">עבור מגייסי SQLink</div>
                 <div class="value-bullets">
-                    <div class="value-bullet">25-40% קיצור בזמן סקירה ראשונית לכל הגשה. המגייס יודע היכן להתחיל לפני שפותח קורות חיים.</div>
-                    <div class="value-bullet">20-40% מהיר יותר מהגשה ל-Shortlist לכל תפקיד.</div>
+                    <div class="value-bullet">25-40% קיצור בזמן סקירה ראשונית לכל הגשה (הערכה). המגייס יודע היכן להתחיל לפני שפותח קורות חיים.</div>
+                    <div class="value-bullet">20-40% מהיר יותר מהגשה ל-Shortlist לכל תפקיד (הערכה).</div>
                     <div class="value-bullet">מגייס שחוסך זמן יכול לנהל יותר תפקידים במקביל בלי לפגוע באיכות ה-Shortlist.</div>
                     <div class="value-bullet">Signal גלוי ב-ATS לפני שסקירת המגייס מתחילה. הסבר ברור לכל תיוג, ללא לוגיקה סמויה.</div>
                 </div>
@@ -458,10 +459,9 @@ ntfy topic: sentriq-sqlink-he-n4k8
             <div class="value-card">
                 <div class="value-card-label">עבור לקוחות SQLink</div>
                 <div class="value-bullets">
-                    <div class="value-bullet">10-20% שיפור בשיעור קבלת ה-Shortlist. פחות סיבובים מול הלקוח, יותר אמון.</div>
-                    <div class="value-bullet">פחות החלפות בתוך חלון הגרנטיה. פחות שיחות כעס מלקוחות.</div>
+                    <div class="value-bullet">פחות החלפות בתוך חלון הגרנטיה. כל השמה כושלת שנמנעת חוסכת עמלה, גיוס חוזר, ומשבר יחסים עם הלקוח.</div>
+                    <div class="value-bullet">10-20% שיפור בשיעור קבלת ה-Shortlist על ידי הלקוח (הערכה). פחות סיבובים, יותר אמון.</div>
                     <div class="value-bullet">Candidate Signal Profile הוא כלי פנימי למגייס. מה שיוצא ללקוח הוא Shortlist נקי עם מועמדים שעברו סינון.</div>
-                    <div class="value-bullet">יתרון תחרותי שעדיין לא קיים בשוק ה-staffing המקומי.</div>
                 </div>
             </div>
         </div>
@@ -474,7 +474,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
             <div class="roi-static-card">
                 <div class="roi-static-card-label">חיסכון בזמן מגייסים</div>
                 <div class="roi-static-rows">
-                    <div class="roi-static-row"><span>תפקידים מאוישים בשנה (אומדן)</span><span>800</span></div>
+                    <div class="roi-static-row"><span>תפקידים מאוישים בשנה לצוות (אומדן)</span><span>800</span></div>
                     <div class="roi-static-row"><span>שעות סינון שנחסכות לתפקיד</span><span>9 שע'</span></div>
                     <div class="roi-static-row"><span>עלות מגייס לשעה</span><span>84 &#8362;</span></div>
                 </div>
@@ -512,7 +512,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
             </div>
         </div>
         <p style="font-size:11px;color:var(--text-dim);line-height:1.8;">
-            הנתונים מבוססים על: 800 השמות לשנה × 9 שעות שנחסכות לתפקיד (23 שע' → 14 שע', Shortlist 2025) × &#8362;84 עלות שעתית (עלות מעסיק). עלות השמה כושלת: &#8362;61K עמלה שאבדה + &#8362;25K גיוס חוזר. עלות Sentriq: תוכנית Scale בכ-&#8362;360K לשנה. כל הנתונים להמחשה בלבד.
+            הנתונים מבוססים על: 800 השמות לשנה לצוות (אומדן לצורך ההמחשה) × 9 שעות שנחסכות לתפקיד (23 שע' &rarr; 14 שע', Shortlist 2025) × &#8362;84 עלות שעתית (עלות מעסיק). עלות השמה כושלת: &#8362;61K עמלה שאבדה + &#8362;25K גיוס חוזר. עלות Sentriq: תוכנית Scale בכ-&#8362;360K לשנה. כל הנתונים להמחשה בלבד; ROI בפועל נגזר מנפח הצוות.
         </p>
     </div>
 
@@ -524,12 +524,12 @@ ntfy topic: sentriq-sqlink-he-n4k8
                 <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);">חינם: ניתוח על תפקיד סגור</span>
                 <span style="font-size:11px;background:rgba(232,160,32,0.15);color:var(--amber);border-radius:20px;padding:2px 10px;font-weight:700;">ללא התחייבות</span>
             </div>
-            <p style="font-size:14px;font-weight:700;color:#ffffff;margin-bottom:8px;line-height:1.6;">תנו לנו תפקיד אחד שאוייש. נראה לכם מה היינו תופסים.</p>
-            <p style="font-size:13px;color:var(--text-sub);line-height:1.75;">קחו כל תפקיד שאיישתם ב-90 הימים האחרונים. אנחנו מריצים את ניתוח ה-Signal המלא על כלל ההגשות לאותה משרה ומספקים Candidate Signal Profile לכל הגשה. תראו בדיוק אילו מועמדים היו מסומנים, אילו פערים הופעלו, ואת ה-ROI שנובע מנתוני ה-Shortlist שלכם. אף מידע לא יוצא מהשליטה שלכם. לוקח פגישה אחת להגדיר.</p>
+            <p style="font-size:14px;font-weight:700;color:#ffffff;margin-bottom:8px;line-height:1.6;">תנו לנו תפקיד אחד שאוייש. נראה לכם אילו פערים היינו מסמנים.</p>
+            <p style="font-size:13px;color:var(--text-sub);line-height:1.75;">קחו כל תפקיד שאיישתם ב-90 הימים האחרונים. אנחנו מריצים ניתוח Signal על נתוני ההגשות שתשתפו ומספקים Candidate Signal Profile לכל הגשה, כדי שתראו בדיוק איך המערכת הייתה פועלת על תהליך אמיתי שלכם. כל מידע שמשותף מכוסה בהסכם עיבוד נתונים (DPA) לפני כל שיתוף. לוקח פגישה אחת להגדיר.</p>
         </div>
         <div class="ask-grid">
             <div class="ask-card highlight">
-                <h3>35,000 &#8362; / פיילוט 6 שבועות</h3>
+                <h3><bdi dir="ltr">37,000 &#8362; /</bdi> פיילוט 6 שבועות</h3>
                 <p>2-3 תפקידים פעילים, Signal מלא, Candidate Signal Profiles ישירות ל-ATS הקיים. מדדי ההצלחה מוגדרים ומוסכמים לפני תחילת הפיילוט. ללא החלפת מערכות. בסוף אתם מחליטים אם ממשיכים.</p>
             </div>
             <div class="ask-card">
@@ -543,7 +543,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
     <div class="cta">
         <div class="cta-left">
             <h2>בואו נקבע שיחה.</h2>
-            <p>30 דקות. נעבור יחד על ניתוח Signal לתפקיד אמיתי שלכם, כדי שתבינו בדיוק מה אתם מקבלים לפני שמתחילים.</p>
+            <p>30 דקות. נעבור יחד על ניתוח Signal לתפקיד לדוגמה מהתחום שלכם, כדי שתבינו בדיוק מה אתם מקבלים לפני שמתחילים.</p>
         </div>
         <div class="cta-right">
             <div class="contact">שמוליק קמפר</div>
