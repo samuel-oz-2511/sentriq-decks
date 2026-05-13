@@ -8,12 +8,16 @@
 <style>
   :root {
     --bg: #09090F;
-    --surface: rgba(255,255,255,0.03);
+    --card: #0F0F18;
     --amber: #E8A020;
+    --amber-dim: rgba(232,160,32,0.12);
+    --amber-border: rgba(232,160,32,0.25);
     --text: #FFFFFF;
-    --body: rgba(255,255,255,0.80);
-    --muted: rgba(255,255,255,0.45);
-    --border: rgba(255,255,255,0.08);
+    --body: rgba(255,255,255,0.78);
+    --sub: rgba(255,255,255,0.50);
+    --muted: rgba(255,255,255,0.32);
+    --border: rgba(255,255,255,0.07);
+    --border-soft: rgba(255,255,255,0.05);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { background: var(--bg); }
@@ -24,205 +28,312 @@
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    padding: 48px 24px 80px;
+    padding: 48px 24px 96px;
   }
-  .page {
-    max-width: 660px;
-    width: 100%;
-  }
+  .page { max-width: 720px; width: 100%; }
 
-  /* Header */
+  /* ── HEADER ── */
   .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 56px;
+    margin-bottom: 64px;
     flex-wrap: wrap;
     gap: 12px;
   }
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .logo-name {
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    color: var(--text);
-  }
+  .logo { display: flex; align-items: center; gap: 10px; }
+  .logo-name { font-size: 15px; font-weight: 600; letter-spacing: 0.03em; }
   .tag {
-    font-size: 10px;
-    font-weight: 700;
+    font-size: 10px; font-weight: 700;
     color: rgba(232,160,32,0.75);
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+    letter-spacing: 0.16em; text-transform: uppercase;
     padding: 5px 12px;
-    border: 1px solid rgba(232,160,32,0.25);
-    border-radius: 20px;
-    white-space: nowrap;
-    flex-shrink: 0;
+    border: 1px solid var(--amber-border);
+    border-radius: 20px; white-space: nowrap; flex-shrink: 0;
   }
 
-  /* Kicker */
+  /* ── KICKER + H1 ── */
   .kicker {
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--amber);
-    text-transform: uppercase;
-    letter-spacing: 0.22em;
+    font-size: 10px; font-weight: 700; color: var(--amber);
+    text-transform: uppercase; letter-spacing: 0.22em;
     margin-bottom: 18px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    display: flex; align-items: center; gap: 12px;
   }
   .kicker::before {
-    content: '';
-    display: inline-block;
-    width: 24px;
-    height: 2px;
-    background: var(--amber);
-    flex-shrink: 0;
+    content: ''; display: inline-block; width: 24px; height: 2px;
+    background: var(--amber); flex-shrink: 0;
   }
-
-  /* Headline */
   h1 {
-    font-size: clamp(32px, 6.5vw, 52px);
-    font-weight: 700;
-    line-height: 1.12;
-    letter-spacing: -0.02em;
-    margin-bottom: 40px;
-    color: var(--text);
+    font-size: clamp(30px, 6vw, 50px); font-weight: 700;
+    line-height: 1.12; letter-spacing: -0.02em;
+    margin-bottom: 36px; color: var(--text);
   }
-  h1 em {
-    font-style: italic;
-    color: var(--amber);
-  }
+  h1 em { font-style: italic; color: var(--amber); }
 
-  /* Body */
+  /* ── BODY TEXT ── */
   p {
-    font-size: 16px;
-    line-height: 1.78;
-    color: var(--body);
-    margin-bottom: 22px;
+    font-size: 16px; line-height: 1.78;
+    color: var(--body); margin-bottom: 20px;
   }
-  p strong {
-    color: var(--text);
-    font-weight: 600;
-  }
+  p strong { color: var(--text); font-weight: 600; }
+  p.lead { font-size: 17px; }
 
-  /* Section break */
+  /* ── SECTION BREAK ── */
   .section-break {
-    margin: 56px 0 28px;
-    display: flex;
-    align-items: center;
+    margin: 56px 0 32px;
+    display: flex; align-items: center;
   }
-  .section-break::before {
-    display: none;
-  }
+  .section-break::before { display: none; }
   .section-break-label {
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--amber);
-    text-transform: uppercase;
-    letter-spacing: 0.22em;
-    white-space: nowrap;
+    font-size: 10px; font-weight: 700; color: var(--amber);
+    text-transform: uppercase; letter-spacing: 0.22em; white-space: nowrap;
   }
   .section-break::after {
-    content: '';
-    flex: 1;
-    height: 1px;
+    content: ''; flex: 1; height: 1px; margin-left: 16px;
     background: linear-gradient(to right, rgba(232,160,32,0.3), var(--border));
-    margin-left: 16px;
   }
 
-  /* Pull quote */
+  /* ── PULL QUOTE ── */
   .pull-quote {
-    margin: 48px 0;
-    padding: 28px 32px;
+    margin: 44px 0;
+    padding: 26px 30px;
     border-left: 4px solid var(--amber);
-    background: rgba(232,160,32,0.06);
+    background: var(--amber-dim);
     border-radius: 0 12px 12px 0;
     position: relative;
   }
   .pull-quote::before {
-    content: '\201C';
-    position: absolute;
-    top: -8px;
-    left: 28px;
-    font-size: 72px;
-    line-height: 1;
-    color: var(--amber);
-    opacity: 0.25;
-    font-family: Georgia, serif;
-    pointer-events: none;
+    content: '\201C'; position: absolute; top: -6px; left: 26px;
+    font-size: 68px; line-height: 1; color: var(--amber);
+    opacity: 0.2; font-family: Georgia, serif; pointer-events: none;
   }
   .pull-quote p {
-    font-size: 19px;
-    font-weight: 500;
-    line-height: 1.6;
-    color: rgba(255,255,255,0.95);
-    margin: 0;
-    font-style: italic;
-    letter-spacing: -0.01em;
+    font-size: 19px; font-weight: 500; line-height: 1.58;
+    color: rgba(255,255,255,0.95); margin: 0;
+    font-style: italic; letter-spacing: -0.01em;
   }
 
-  /* Footer */
-  .footer {
-    margin-top: 72px;
-    padding-top: 28px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 24px;
-    flex-wrap: wrap;
+  /* ── VISUAL 1: DEGRADATION GRID ── */
+  .degradation-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 36px 0 44px;
   }
-  .footer-left {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+  .degrade-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 14px 14px;
+    display: flex; flex-direction: column; gap: 10px;
+    position: relative; overflow: hidden;
   }
-  .footer-domain {
-    font-size: 14px;
-    font-weight: 600;
+  .degrade-card.breaking {
+    border-color: var(--amber-border);
+    background: rgba(232,160,32,0.04);
+  }
+  .degrade-card-icon {
+    font-size: 22px; line-height: 1; margin-bottom: 2px;
+  }
+  .degrade-card-name {
+    font-size: 12px; font-weight: 700; color: var(--text); letter-spacing: 0.01em;
+  }
+  .degrade-bars {
+    display: flex; gap: 3px; align-items: flex-end;
+  }
+  .degrade-bar {
+    width: 6px; border-radius: 2px;
+    background: var(--border);
+  }
+  .degrade-bar.h1 { height: 8px; }
+  .degrade-bar.h2 { height: 13px; }
+  .degrade-bar.h3 { height: 18px; }
+  .degrade-bar.h4 { height: 24px; }
+  .degrade-bar.lit { background: var(--amber); }
+  .degrade-bar.dim { background: rgba(232,160,32,0.25); }
+  .degrade-status {
+    font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--muted);
+    padding: 2px 7px; border-radius: 10px;
+    border: 1px solid var(--border);
+    display: inline-block; align-self: flex-start;
+  }
+  .degrade-card.breaking .degrade-status {
+    color: var(--amber); border-color: var(--amber-border);
+    background: var(--amber-dim);
+  }
+  .degrade-note {
+    font-size: 10px; line-height: 1.5; color: var(--sub);
+  }
+
+  /* ── VISUAL 2: STATS ROW ── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 40px 0;
+  }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 16px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .stat-number {
+    font-size: 28px; font-weight: 700; color: var(--amber);
+    letter-spacing: -0.03em; line-height: 1;
+  }
+  .stat-label {
+    font-size: 12px; color: var(--body); line-height: 1.45;
+  }
+  .stat-source {
+    font-size: 9px; font-weight: 600; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+
+  /* ── VISUAL 3: STACK GAP ── */
+  .stack-visual {
+    margin: 36px 0 44px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .stack-row {
+    display: flex; align-items: center;
+    padding: 11px 16px;
+    border-radius: 8px;
+    gap: 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+  }
+  .stack-row.undefended {
+    border-color: var(--amber-border);
+    background: rgba(232,160,32,0.05);
+    padding: 16px 16px;
+  }
+  .stack-dot {
+    width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+    background: rgba(255,255,255,0.15);
+  }
+  .stack-row.undefended .stack-dot {
+    background: var(--amber);
+    box-shadow: 0 0 8px rgba(232,160,32,0.5);
+  }
+  .stack-name {
+    font-size: 12px; font-weight: 600; color: var(--text); flex: 1;
+  }
+  .stack-row.undefended .stack-name {
     color: var(--amber);
-    letter-spacing: 0.04em;
-    margin-bottom: 4px;
   }
-  .footer-about {
-    font-size: 13px;
-    color: rgba(255,255,255,0.55);
-    line-height: 1.65;
-    max-width: 380px;
+  .stack-badge {
+    font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--muted); padding: 2px 8px;
+    border: 1px solid var(--border); border-radius: 10px;
+    background: transparent;
   }
-  .footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    opacity: 0.6;
-    flex-shrink: 0;
+  .stack-row.undefended .stack-badge {
+    color: var(--amber); border-color: var(--amber-border);
+    background: var(--amber-dim);
   }
-  .footer-logo-name {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text);
+  .stack-connector {
+    height: 4px;
+    width: 1px;
+    background: var(--border);
+    margin: 0 auto;
+    display: none;
   }
 
-  @media (max-width: 560px) {
-    body { padding: 36px 20px 56px; }
-    .header { margin-bottom: 44px; }
-    .footer { flex-direction: column; gap: 20px; }
+  /* ── VISUAL 4: FLOW DIAGRAM ── */
+  .flow-diagram {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin: 36px 0 44px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .flow-node {
+    flex: 1;
+    padding: 20px 18px;
+    background: var(--card);
+    display: flex; flex-direction: column; gap: 6px;
+    position: relative;
+  }
+  .flow-node.sentriq {
+    background: rgba(232,160,32,0.06);
+    border-left: 1px solid var(--amber-border);
+    border-right: 1px solid var(--amber-border);
+  }
+  .flow-node-label {
+    font-size: 9px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.16em; color: var(--muted);
+  }
+  .flow-node.sentriq .flow-node-label { color: var(--amber); }
+  .flow-node-title {
+    font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.3;
+  }
+  .flow-node-sub {
+    font-size: 11px; color: var(--sub); line-height: 1.45;
+  }
+  .flow-arrow {
+    display: flex; align-items: center; justify-content: center;
+    width: 24px; flex-shrink: 0;
+    background: var(--card);
+    color: var(--muted);
+    font-size: 14px;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 80px; padding-top: 28px;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: flex-start;
+    justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  }
+  .footer-left { display: flex; flex-direction: column; gap: 6px; }
+  .footer-domain { font-size: 14px; font-weight: 600; color: var(--amber); letter-spacing: 0.04em; }
+  .footer-about { font-size: 13px; color: rgba(255,255,255,0.50); line-height: 1.65; max-width: 380px; }
+  .footer-logo { display: flex; align-items: center; gap: 8px; opacity: 0.5; flex-shrink: 0; }
+  .footer-logo-name { font-size: 13px; font-weight: 600; color: var(--text); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    body { padding: 36px 16px 72px; }
+    .header { margin-bottom: 48px; }
+    .degradation-grid { grid-template-columns: 1fr 1fr; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .stats-row .stat-card:last-child { grid-column: 1 / -1; }
+    .flow-diagram {
+      flex-direction: column;
+      border-radius: 12px;
+    }
+    .flow-arrow {
+      width: 100%; height: 20px; border-left: none; border-right: none;
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      transform: rotate(90deg) scaleX(-1);
+      font-size: 12px;
+    }
+    .flow-node.sentriq { border-left: none; border-right: none; border-top: 1px solid var(--amber-border); border-bottom: 1px solid var(--amber-border); }
+    .footer { flex-direction: column; gap: 16px; }
     .footer-logo { display: none; }
-    .pull-quote { padding: 24px 24px; }
+    .pull-quote { padding: 22px 22px; }
     .pull-quote p { font-size: 17px; }
-    .pull-quote::before { left: 20px; }
+    .pull-quote::before { left: 18px; }
+  }
+  @media (max-width: 380px) {
+    .degradation-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 1fr; }
+    .stats-row .stat-card:last-child { grid-column: auto; }
   }
 </style>
 </head>
 <body>
 <div class="page">
 
+  <!-- HEADER -->
   <div class="header">
     <div class="logo">
       <svg width="36" height="36" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -237,49 +348,172 @@
     <span class="tag">For Talent Leaders</span>
   </div>
 
+  <!-- KICKER + HEADLINE -->
   <div class="kicker">The Hiring Integrity Gap</div>
   <h1>The home assignment used to be the <em>part you could trust.</em></h1>
 
-  <p>
-    For most recruiters, the home assignment was the honest part of the process. Not because the output was always impressive, but because it showed something a resume never could: how a person thinks when no one is guiding them. The structure they choose. What they leave out. Whether the depth is actually there or just performed.
-  </p>
+  <p class="lead">For most recruiters, the home assignment was the honest part of the process. Not because the output was always impressive, but because it showed something a resume never could: how a person thinks when no one is guiding them. The structure they choose. What they leave out. Whether the depth is actually there or just performed.</p>
 
-  <p>
-    That signal is eroding. Not because the people applying are less capable, but because the gap between what someone submits and what they can genuinely do has never been easier to close. An application that looks strong at every stage, including the assignment, may still not reflect the person who sent it.
-  </p>
+  <p>That signal is eroding. Not because the people applying are less capable, but because the gap between what someone submits and what they can genuinely do has never been easier to close. An application that looks strong at every stage, including the assignment, may still not reflect the person who sent it.</p>
 
+  <!-- VISUAL 1: DEGRADATION SEQUENCE -->
+  <div class="degradation-grid">
+
+    <div class="degrade-card">
+      <div class="degrade-card-name">Resume</div>
+      <div class="degrade-bars">
+        <div class="degrade-bar h1"></div>
+        <div class="degrade-bar h2"></div>
+        <div class="degrade-bar h3"></div>
+        <div class="degrade-bar h4"></div>
+      </div>
+      <span class="degrade-status">Degraded</span>
+      <div class="degrade-note">Rewrites now indistinguishable from authentic in seconds</div>
+    </div>
+
+    <div class="degrade-card">
+      <div class="degrade-card-name">Cover Letter</div>
+      <div class="degrade-bars">
+        <div class="degrade-bar h1"></div>
+        <div class="degrade-bar h2"></div>
+        <div class="degrade-bar h3"></div>
+        <div class="degrade-bar h4"></div>
+      </div>
+      <span class="degrade-status">Degraded</span>
+      <div class="degrade-note">First signal that used to show voice and intent</div>
+    </div>
+
+    <div class="degrade-card">
+      <div class="degrade-card-name">Skills Section</div>
+      <div class="degrade-bars">
+        <div class="degrade-bar h1"></div>
+        <div class="degrade-bar h2"></div>
+        <div class="degrade-bar h3 dim"></div>
+        <div class="degrade-bar h4 dim"></div>
+      </div>
+      <span class="degrade-status">Degraded</span>
+      <div class="degrade-note">Claimed competencies increasingly untethered from proof</div>
+    </div>
+
+    <div class="degrade-card breaking">
+      <div class="degrade-card-name">Home Assignment</div>
+      <div class="degrade-bars">
+        <div class="degrade-bar h1"></div>
+        <div class="degrade-bar h2 dim"></div>
+        <div class="degrade-bar h3 lit"></div>
+        <div class="degrade-bar h4 lit"></div>
+      </div>
+      <span class="degrade-status">Breaking now</span>
+      <div class="degrade-note">The last layer that showed actual thinking. Holding for now.</div>
+    </div>
+
+  </div>
+
+  <!-- PULL QUOTE -->
   <div class="pull-quote">
     <p>"The output looks exactly right. That's the problem."</p>
   </div>
 
-  <p>
-    Home assignments are just the latest layer to break. The resume lost its reliability first. Then the cover letter. Then the skills section. Each step that used to tell you something real has become easier to work around. The assignment lasted longer because it required actual work. Now that work can be outsourced too, and the result looks identical.
-  </p>
+  <p>Home assignments are just the latest layer to break. The resume lost its reliability first. Then the cover letter. Then the skills section. Each step that used to tell you something real has become easier to work around. The assignment lasted longer because it required actual work. Now that work can be outsourced too, and the result looks identical.</p>
 
+  <!-- VISUAL 2: STATS -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-number">75%</div>
+      <div class="stat-label">of hiring teams found discrepancies between applications and reality last year</div>
+      <div class="stat-source">HireRight Global Benchmark, 2025</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">85%</div>
+      <div class="stat-label">of employers have found misrepresentations on a resume or application</div>
+      <div class="stat-source">SHRM</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">1 in 4</div>
+      <div class="stat-label">candidate profiles worldwide will show integrity gaps by 2028</div>
+      <div class="stat-source">Gartner, 2025</div>
+    </div>
+  </div>
+
+  <!-- SECTION: WHAT'S MISSING -->
   <div class="section-break"><span class="section-break-label">What's actually missing</span></div>
 
-  <p>
-    There is a layer that has never existed in the hiring stack. Something that sits upstream of the recruiter and the ATS, and asks one question: <strong>does this submission reflect the applicant who sent it?</strong> Not identity verification. Not a skills test. Something earlier than all of that, at the moment the application is submitted.
-  </p>
+  <p>There is a layer that has never existed in the hiring stack. Something that sits upstream of the recruiter and the ATS, and asks one question: <strong>does this submission reflect the applicant who sent it?</strong> Not identity verification. Not a skills test. Something earlier than all of that, at the moment the application is submitted.</p>
 
-  <p>
-    The home assignment problem is a version of this. The output arrives polished, but there are no signals about the process behind it: whether the thinking connects to what was claimed elsewhere in the application, whether the depth in the assignment belongs to the person or was borrowed from somewhere else. Those questions have no answer today because no one is looking at the submission layer.
-  </p>
+  <p>The home assignment problem is a version of this. The output arrives polished, but there are no signals about the process behind it: whether the thinking connects to what was claimed elsewhere in the application, whether the depth in the assignment belongs to the person or was borrowed from somewhere else. Those questions have no answer today because no one is looking at the submission layer.</p>
 
+  <!-- VISUAL 3: THE STACK GAP -->
+  <div class="stack-visual">
+
+    <div class="stack-row">
+      <div class="stack-dot"></div>
+      <div class="stack-name">Offer and onboarding</div>
+      <span class="stack-badge">End of funnel</span>
+    </div>
+
+    <div class="stack-row">
+      <div class="stack-dot"></div>
+      <div class="stack-name">Final interview and references</div>
+      <span class="stack-badge">Human reviewed</span>
+    </div>
+
+    <div class="stack-row">
+      <div class="stack-dot"></div>
+      <div class="stack-name">Technical screen and assessments</div>
+      <span class="stack-badge">Tools available</span>
+    </div>
+
+    <div class="stack-row undefended">
+      <div class="stack-dot"></div>
+      <div class="stack-name">Application submission layer</div>
+      <span class="stack-badge">No integrity signal</span>
+    </div>
+
+    <div class="stack-row">
+      <div class="stack-dot"></div>
+      <div class="stack-name">ATS routing and keyword filter</div>
+      <span class="stack-badge">Automated</span>
+    </div>
+
+  </div>
+
+  <!-- SECTION: WHAT WE'RE BUILDING -->
   <div class="section-break"><span class="section-break-label">What we're building</span></div>
 
-  <p>
-    Sentriq is the application integrity layer for enterprise hiring. We sit at the submission step and surface integrity signals on every application before any human on the team sees it. The signal gives recruiters context to ask better questions and spend their time on the conversations that are worth having.
-  </p>
+  <p>Sentriq is the application integrity layer for enterprise hiring. We sit at the submission step and surface integrity signals on every application before any human on the team sees it. The signal gives recruiters context to ask better questions and spend their time on the conversations that are worth having.</p>
 
-  <p>
-    The same behavioral layer that works on written applications extends to the home assignment: the consistency between the assignment and the rest of what was submitted, the signals that distinguish a response the person actually wrote from one that merely reads well.
-  </p>
+  <!-- VISUAL 4: FLOW DIAGRAM -->
+  <div class="flow-diagram">
 
-  <p>
-    The goal is to give hiring teams back the signal they used to have, so that when they choose to move forward with someone, that decision means something.
-  </p>
+    <div class="flow-node">
+      <div class="flow-node-label">Step 1</div>
+      <div class="flow-node-title">Application submitted</div>
+      <div class="flow-node-sub">Resume, cover letter, home assignment arrive at submission layer</div>
+    </div>
 
+    <div class="flow-arrow">&#8594;</div>
+
+    <div class="flow-node sentriq">
+      <div class="flow-node-label">Sentriq</div>
+      <div class="flow-node-title">Integrity signals surface here</div>
+      <div class="flow-node-sub">Consistency, authorship patterns, and depth signals analyzed before human review</div>
+    </div>
+
+    <div class="flow-arrow">&#8594;</div>
+
+    <div class="flow-node">
+      <div class="flow-node-label">Step 3</div>
+      <div class="flow-node-title">Recruiter sees a signal-tagged application</div>
+      <div class="flow-node-sub">Better questions, better decisions, time spent where it is worth spending</div>
+    </div>
+
+  </div>
+
+  <p>The same behavioral layer that works on written applications extends to the home assignment: the consistency between the assignment and the rest of what was submitted, the signals that distinguish a response the person actually wrote from one that merely reads well.</p>
+
+  <p>The goal is to give hiring teams back the signal they used to have, so that when they choose to move forward with someone, that decision means something.</p>
+
+  <!-- FOOTER -->
   <div class="footer">
     <div class="footer-left">
       <span class="footer-domain">sentriq.co</span>
