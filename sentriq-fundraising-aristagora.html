@@ -200,8 +200,63 @@
         .lc-grid-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
     }
 </style>
+<style>
+    #pw-gate {
+        position:fixed;inset:0;z-index:9999;background:#09090F;
+        display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+    }
+    #pw-gate svg { margin-bottom:6px; }
+    #pw-gate h2 { font-size:20px;font-weight:700;color:#fff;margin:0;letter-spacing:-0.01em; }
+    #pw-gate p { font-size:13px;color:rgba(255,255,255,0.4);margin:0; }
+    #pw-gate input {
+        width:260px;padding:12px 16px;background:rgba(255,255,255,0.05);
+        border:1px solid rgba(255,255,255,0.15);border-radius:10px;
+        color:#fff;font-size:15px;font-family:inherit;text-align:center;outline:none;
+    }
+    #pw-gate input:focus { border-color:rgba(232,160,32,0.6); }
+    #pw-gate button {
+        padding:12px 32px;background:#E8A020;border:none;border-radius:10px;
+        font-size:14px;font-weight:700;color:#09090F;cursor:pointer;font-family:inherit;
+    }
+    #pw-gate button:hover { background:#d09018; }
+    #pw-error { font-size:12px;color:#E05555;height:16px;margin:-8px 0; }
+</style>
 </head>
 <body>
+
+<div id="pw-gate">
+    <svg width="44" height="44" viewBox="0 0 56 56" fill="none"><rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><circle cx="28" cy="7" r="3" fill="#E8A020"/></svg>
+    <h2>Sentriq<span style="color:#E8A020;">.</span></h2>
+    <p>Confidential. Enter access code to continue.</p>
+    <input id="pw-input" type="password" placeholder="Access code" autocomplete="off"/>
+    <div id="pw-error"></div>
+    <button onclick="checkPw()">Continue</button>
+</div>
+
+<script>
+    (function() {
+        if (sessionStorage.getItem('arst-auth') === '1') {
+            document.addEventListener('DOMContentLoaded', function() {
+                var g = document.getElementById('pw-gate');
+                if (g) g.style.display = 'none';
+            });
+        }
+    })();
+    function checkPw() {
+        var v = document.getElementById('pw-input').value;
+        if (v === 'aristagora2026') {
+            sessionStorage.setItem('arst-auth', '1');
+            document.getElementById('pw-gate').style.display = 'none';
+        } else {
+            document.getElementById('pw-error').textContent = 'Incorrect code.';
+            document.getElementById('pw-input').value = '';
+            document.getElementById('pw-input').focus();
+        }
+    }
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && document.getElementById('pw-gate').style.display !== 'none') checkPw();
+    });
+</script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
