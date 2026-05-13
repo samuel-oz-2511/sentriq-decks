@@ -48,7 +48,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
     .page { max-width: 1100px; margin: 0 auto; padding: 64px 48px 80px; }
 
     .confidential {
-        position: fixed; top: 16px; right: 22px;
+        position: fixed; top: 16px; left: 22px; right: auto;
         font-size: 10px; font-weight: 600; text-transform: uppercase;
         letter-spacing: 0.12em; color: rgba(255,255,255,0.2); z-index: 100;
     }
@@ -73,22 +73,22 @@ ntfy topic: sentriq-sqlink-he-n4k8
         letter-spacing: 0.12em; color: var(--amber); margin-bottom: 18px;
         display: flex; align-items: center; gap: 9px;
     }
-    .label::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--amber); opacity: 0.5; }
+    .label::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--amber); opacity: 0.5; order: 1; }
 
     .section { margin-bottom: 64px; }
     .divider { border: none; border-top: 1px solid var(--border); margin: 0 0 64px; }
 
     /* Hero */
-    .hero { margin-bottom: 64px; }
+    .hero { margin-bottom: 40px; }
     .hero h1 {
         font-size: clamp(28px, 4vw, 50px); font-weight: 800;
         line-height: 1.2; letter-spacing: -0.02em;
-        color: #ffffff; margin-bottom: 22px; max-width: 820px;
+        color: #ffffff; margin-bottom: 22px; max-width: 800px;
     }
     .hero h1 em { font-style: normal; color: var(--amber); }
     .hero p {
         font-size: 16px; color: var(--text-sub); line-height: 1.85;
-        max-width: 780px;
+        max-width: 800px;
     }
 
     /* Stat cards */
@@ -108,7 +108,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
         direction: ltr; display: inline-block;
     }
     .pain-label { font-size: 13px; color: var(--text-sub); line-height: 1.65; }
-    .pain-source { font-size: 10px; color: var(--text-dim); margin-top: 8px; direction: ltr; text-align: left; }
+    .pain-source { font-size: 10px; color: var(--text-dim); margin-top: 8px; text-align: start; }
 
     /* How it works */
     .layers-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 14px; }
@@ -127,7 +127,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
     .layer-bullets { list-style: none; padding: 0; margin-top: 12px; }
     .layer-bullets li {
         font-size: 12px; color: var(--text-sub);
-        padding: 4px 16px 4px 0;
+        padding: 4px 16px 4px 8px;
         position: relative; line-height: 1.5;
     }
     .layer-bullets li::before {
@@ -142,7 +142,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
         font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
         color: var(--text-dim); margin-bottom: 6px; text-align: right;
     }
-    .output-text { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; line-height: 1.4; direction: ltr; text-align: right; }
+    .output-text { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; line-height: 1.4; direction: ltr; text-align: left; unicode-bidi: isolate; }
     .output-sub { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; }
 
     /* Lifecycle */
@@ -156,6 +156,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
     .lc-stage {
         padding: 14px 8px; border-right: 1px solid var(--border);
         text-align: center; background: rgba(255,255,255,0.03);
+        direction: rtl; unicode-bidi: isolate;
     }
     .lc-stage:last-child { border-right: none; }
     .lc-badge {
@@ -176,7 +177,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
     .lc-callout.lc-amber { background: rgba(232,160,32,0.06); border-color: rgba(232,160,32,0.18); }
     .lc-callout h4 { font-size: 12px; font-weight: 700; color: #ffffff; margin-bottom: 5px; }
     .lc-callout.lc-amber h4 { color: rgba(232,160,32,0.9); }
-    .lc-callout p { font-size: 13px; color: var(--text-sub); line-height: 1.65; }
+    .lc-callout p { font-size: 12px; color: var(--text-sub); line-height: 1.7; }
 
     /* Value cards */
     .value-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -209,13 +210,13 @@ ntfy topic: sentriq-sqlink-he-n4k8
         border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;
     }
     .roi-static-row:last-child { border-bottom: none; }
-    .roi-static-row span:last-child { font-weight: 700; color: rgba(255,255,255,0.88); white-space: nowrap; direction: ltr; unicode-bidi: isolate; }
+    .roi-static-row span:last-child { font-weight: 700; color: rgba(255,255,255,0.88); white-space: nowrap; unicode-bidi: isolate; }
     .roi-result-block { margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(232,160,32,0.2); }
     .roi-big-num { font-size: clamp(28px, 4vw, 44px); font-weight: 800; color: var(--amber); letter-spacing: -0.04em; line-height: 1; margin-bottom: 4px; direction: ltr; unicode-bidi: isolate; }
     .roi-result-label { font-size: 11px; color: rgba(255,255,255,0.45); }
     .roi-ratio-strip { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 12px; }
     .roi-ratio-cell { background: rgba(232,160,32,0.06); border: 1px solid rgba(232,160,32,0.15); border-radius: 10px; padding: 16px 18px; text-align: center; }
-    .roi-ratio-num { font-size: clamp(22px, 3vw, 34px); font-weight: 800; color: var(--amber); letter-spacing: -0.03em; line-height: 1; margin-bottom: 4px; direction: ltr; unicode-bidi: isolate; }
+    .roi-ratio-num { font-size: clamp(20px, 2.8vw, 30px); font-weight: 800; color: var(--amber); letter-spacing: -0.03em; line-height: 1; margin-bottom: 4px; direction: ltr; unicode-bidi: isolate; white-space: nowrap; }
     .roi-ratio-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
 
     /* Pilot / Ask */
@@ -235,12 +236,13 @@ ntfy topic: sentriq-sqlink-he-n4k8
         background: var(--card); border: 1px solid var(--border);
         border-radius: 16px; padding: 40px 44px;
         display: flex; align-items: center; justify-content: space-between; gap: 32px;
+        direction: rtl;
     }
     .cta-left h2 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px; }
-    .cta-left p { font-size: 14px; color: var(--text-dim); line-height: 1.7; max-width: 400px; }
-    .cta-right { flex-shrink: 0; text-align: left; }
+    .cta-left p { font-size: 14px; color: var(--text-dim); line-height: 1.7; max-width: 420px; }
+    .cta-right { flex-shrink: 0; direction: ltr; unicode-bidi: isolate; text-align: start; }
     .cta-right .contact { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-    .cta-right .contact-sub { font-size: 13px; color: rgba(255,255,255,0.45); direction: ltr; text-align: left; }
+    .cta-right .contact-sub { font-size: 13px; color: rgba(255,255,255,0.45); direction: ltr; text-align: start; }
 
     @media (max-width: 640px) {
         body { overflow-x: hidden; }
@@ -254,7 +256,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
         .roi-ratio-strip { grid-template-columns: 1fr; }
         .ask-grid { grid-template-columns: 1fr; }
         .cta { flex-direction: column; gap: 24px; padding: 28px 20px; }
-        .cta-right { text-align: left; }
+        .cta-right { text-align: start; }
         .hero h1 { max-width: 100%; }
     }
     @media (max-width: 380px) {
@@ -309,8 +311,8 @@ ntfy topic: sentriq-sqlink-he-n4k8
     <!-- HERO -->
     <div class="hero">
         <div class="label">בקרת איכות הגשות | גיוס BPO</div>
-        <h1>ב-SQLink, <em>ה-Shortlist הוא המוצר.</em><br>Sentriq מוודא שהוא יוצא עם Signal.</h1>
-        <p>בכל תפקיד שמפורסם מגיעות עשרות הגשות מועמדות שנראות מקצועיות. חלקן נכתבו בעזרת AI, חלקן מייצגות ניסיון שלא תואם את המציאות. שתי הבעיות נראות זהות מבחוץ. המגייס מבלה שעות כדי לגלות מי באמת ראוי לעבור לשלב הבא, ואז הלקוח מקבל Shortlist שנבנה על ניחוש. Sentriq מזהה אות אמיתי (Signal) בכל הגשה, לפני שמגייס פותח קורות חיים.</p>
+        <h1>ב-SQLink, <em>ה-Shortlist הוא המוצר.</em><br>Sentriq מוודא שכל Shortlist שיוצא ללקוח נשען על Signal אמיתי.</h1>
+        <p>בכל תפקיד שמפורסם מגיעות עשרות הגשות שנראות מקצועיות על פניהן. חלקן נכתבו בעזרת AI, חלקן מייצגות ניסיון שלא תואם את המציאות. שתיהן נראות אותו דבר על פני השטח. המגייס מבלה שעות כדי להבין מי בכלל מתקדם לשלב הבא, ואז הלקוח מקבל Shortlist שנבנה על ניחוש. Sentriq מזהה Signal אמיתי בכל הגשה, לפני שמגייס פותח קורות חיים.</p>
     </div>
 
     <hr class="divider"/>
@@ -331,12 +333,12 @@ ntfy topic: sentriq-sqlink-he-n4k8
             </div>
             <div class="pain-card">
                 <div class="pain-num">1:50</div>
-                <div class="pain-label">יחס Signal לרעש בתפקידים עם נפח הגשות גבוה. מועמד חזק אחד לכל 50 הגשות שנבדקות. עבור BPO שמגייס בסדר גודל, הנזק מצטבר בכל תפקיד.</div>
+                <div class="pain-label">יחס Signal לרעש בתפקידים טכנולוגיים תחרותיים. מועמד חזק אחד לכל 50 הגשות שנבדקות. עבור BPO שמגייס בסדר גודל, הנזק מצטבר בכל תפקיד.</div>
                 <div class="pain-source">Pin Research, 2026</div>
             </div>
         </div>
         <div style="margin-top:14px;padding:18px 22px;background:var(--card);border:1px solid var(--border);border-radius:12px;">
-            <p style="font-size:13px;color:var(--text-sub);line-height:1.85;">בארגון פנימי, הגשה עם Signal נמוך מבזבזת זמן מגייסים. ב-SQLink, הגשה שלא נסננה כראוי מגיעה ללקוח ומשקפת ישירות על איכות השירות. ב-300,000 הגשות בשנה, כל שיפור בדיוק ה-Shortlist שווה עשרות אלפי שעות עבודה ומוניטין שנשמר.</p>
+            <p style="font-size:13px;color:var(--text-sub);line-height:1.85;">בארגון פנימי, הגשה עם Signal נמוך מבזבזת זמן מגייסים. ב-SQLink, הגשה שלא נסננה כראוי מגיעה ללקוח ומשקפת ישירות על איכות השירות. ב-300,000 הגשות בשנה (אומדן), כל שיפור בדיוק ה-Shortlist מתורגם ישירות לשעות עבודה שנחסכות ולמוניטין שנשמר מול הלקוחות.</p>
         </div>
     </div>
 
@@ -347,7 +349,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
             <div class="layer-card">
                 <div class="layer-num">שלב 1</div>
                 <h3>Signal בהגשה</h3>
-                <p class="layer-desc">בזמן שמועמד ממלא את טופס ההגשה, Sentriq אוסף אותות פסיביים (Signals): כמה זמן בילה על כל שדה, האם התוכן הועתק ישירות, כיצד ההגשה נוצרה. ללא שינויים בטפסי ההגשה. ללא שינויים בחוויית המועמד.</p>
+                <p class="layer-desc">בזמן שמועמד ממלא את טופס ההגשה, Sentriq אוסף אותות פסיביים (Signals): כמה זמן בילה על כל שדה, האם התוכן הועתק ישירות, כיצד ההגשה נוצרה. אין שינויים בטופס ההגשה ואין צורך בהסכמת מועמד.</p>
                 <ul class="layer-bullets">
                     <li>פריסה בתוך יום עבודה אחד</li>
                     <li>עובד עם כל ATS או טופס הגשה</li>
@@ -357,7 +359,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
             <div class="layer-card">
                 <div class="layer-num">שלב 2</div>
                 <h3>שלב הבהרה</h3>
-                <p class="layer-desc">כשמתגלים פערים בהגשה, Sentriq שולח למועמד סט של שאלות קצרות ומותאמות אישית. שאלה שמי שבאמת עבד בתחום יענה עליה תוך דקה, בתהליך ישיר ומכבד.</p>
+                <p class="layer-desc">כשמתגלים פערים בהגשה, Sentriq שולח למועמד סט של שאלות קצרות ומותאמות אישית. שאלה שמי שבאמת עבד בתחום עונה עליה תוך דקה. המועמד לא מרגיש חשוד. הוא מרגיש שמישהו קרא את ה-CV שלו ברצינות.</p>
                 <ul class="layer-bullets">
                     <li>רק לאחוז קטן מההגשות (5-20%)</li>
                     <li>פחות מ-2 דקות לביצוע</li>
@@ -378,7 +380,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
         <div class="layer-output">
             <div class="output-label">מה המגייס רואה ב-ATS</div>
             <div class="output-text">Candidate Signal Profile</div>
-            <div class="output-sub">הפרופיל מציג לכל הגשה תיוג ברור, הסבר בשפה פשוטה, והדגשות של פערים שכדאי לברר לפני שה-Shortlist יוצא ללקוח. מגייסי SQLink ממשיכים לעבוד ב-ATS שלהם. Sentriq עובד מאחורי הקלעים.</div>
+            <div class="output-sub">הפרופיל מציג לכל הגשה תיוג ברור, הסבר בשפה פשוטה, והדגשות של פערים שכדאי לברר לפני שה-Shortlist יוצא ללקוח. מגייסי SQLink ממשיכים לעבוד ב-ATS שלהם. לא צריך להיכנס למערכת נוספת.</div>
         </div>
     </div>
 
@@ -434,7 +436,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
                 <p>אם פער זוהה בהגשה, Sentriq בודק אם הוא טופל בראיון. הלקוח רואה Shortlist נקי, לא הפתעות.</p>
             </div>
             <div class="lc-callout">
-                <h4>כל שלב מזין את אותו Record</h4>
+                <h4>כל שלב מתועד באותו Record</h4>
                 <p>שיחת מיון, מבחן טכני, ראיון. כולם נבדקים מול מה שהמועמד הצהיר ביום ההגשה.</p>
             </div>
         </div>
@@ -457,9 +459,9 @@ ntfy topic: sentriq-sqlink-he-n4k8
                 <div class="value-card-label">עבור לקוחות SQLink</div>
                 <div class="value-bullets">
                     <div class="value-bullet">10-20% שיפור בשיעור קבלת ה-Shortlist. פחות סיבובים מול הלקוח, יותר אמון.</div>
-                    <div class="value-bullet">20-30% פחות מועמדים עם Signal נמוך מגיעים לראיון אצל הלקוח.</div>
-                    <div class="value-bullet">כל Shortlist שנשלח ללקוח מגיע עם Candidate Signal Profile. לא רק שמות, גם הקשר.</div>
-                    <div class="value-bullet">יתרון תחרותי שעוד אין לאף חברת השמה בישראל.</div>
+                    <div class="value-bullet">פחות החלפות בתוך חלון הגרנטיה. פחות שיחות כעס מלקוחות.</div>
+                    <div class="value-bullet">Candidate Signal Profile הוא כלי פנימי למגייס. מה שיוצא ללקוח הוא Shortlist נקי עם מועמדים שעברו סינון.</div>
+                    <div class="value-bullet">יתרון תחרותי שעדיין לא קיים בשוק ה-staffing המקומי.</div>
                 </div>
             </div>
         </div>
@@ -523,16 +525,16 @@ ntfy topic: sentriq-sqlink-he-n4k8
                 <span style="font-size:11px;background:rgba(232,160,32,0.15);color:var(--amber);border-radius:20px;padding:2px 10px;font-weight:700;">ללא התחייבות</span>
             </div>
             <p style="font-size:14px;font-weight:700;color:#ffffff;margin-bottom:8px;line-height:1.6;">תנו לנו תפקיד אחד שאוייש. נראה לכם מה היינו תופסים.</p>
-            <p style="font-size:13px;color:var(--text-sub);line-height:1.75;">קחו כל תפקיד שאיישתם ב-90 הימים האחרונים. אנחנו מריצים את ניתוח ה-Signal המלא על pool ההגשות ומספקים Candidate Signal Profile לכל הגשה. תראו בדיוק אילו מועמדים היו מסומנים, אילו פערים הופעלו, ואת ה-ROI שנובע מנתוני ה-Shortlist שלכם. אף מידע לא יוצא מהשליטה שלכם. לוקח פגישה אחת להגדיר.</p>
+            <p style="font-size:13px;color:var(--text-sub);line-height:1.75;">קחו כל תפקיד שאיישתם ב-90 הימים האחרונים. אנחנו מריצים את ניתוח ה-Signal המלא על כלל ההגשות לאותה משרה ומספקים Candidate Signal Profile לכל הגשה. תראו בדיוק אילו מועמדים היו מסומנים, אילו פערים הופעלו, ואת ה-ROI שנובע מנתוני ה-Shortlist שלכם. אף מידע לא יוצא מהשליטה שלכם. לוקח פגישה אחת להגדיר.</p>
         </div>
         <div class="ask-grid">
             <div class="ask-card highlight">
                 <h3>35,000 &#8362; / פיילוט 6 שבועות</h3>
-                <p>2-3 תפקידים פעילים, Signal מלא, Candidate Signal Profiles ישירות ל-ATS הקיים. קריטריוני הצלחה מוסכמים לפני תחילת הפיילוט. ללא החלפת מערכות. בסוף אתם מחליטים אם ממשיכים.</p>
+                <p>2-3 תפקידים פעילים, Signal מלא, Candidate Signal Profiles ישירות ל-ATS הקיים. מדדי ההצלחה מוגדרים ומוסכמים לפני תחילת הפיילוט. ללא החלפת מערכות. בסוף אתם מחליטים אם ממשיכים.</p>
             </div>
             <div class="ask-card">
                 <h3>מה שנגדיר יחד לפני</h3>
-                <p>לפני שהפיילוט מתחיל: המדד שמוכיח ערך. זמן מגייס ל-Shortlist, שיעור קבלת Shortlist על ידי הלקוח, או מספר ההשמות הכושלות שנמנעו. מסכימים על ה-Benchmark מראש. אין הפתעות בסוף הפיילוט.</p>
+                <p>לפני שהפיילוט מתחיל: המדד שמוכיח ערך. זמן מגייס ל-Shortlist, שיעור קבלת Shortlist על ידי הלקוח, או מספר ההשמות הכושלות שנמנעו. מסכימים על ה-Benchmark מראש.</p>
             </div>
         </div>
     </div>
@@ -541,7 +543,7 @@ ntfy topic: sentriq-sqlink-he-n4k8
     <div class="cta">
         <div class="cta-left">
             <h2>בואו נקבע שיחה.</h2>
-            <p>30 דקות. נריץ את המוצר על משרה פעילה שלכם. רק Signal על הגשות שכבר יש לכם.</p>
+            <p>30 דקות. נעבור יחד על ניתוח Signal לתפקיד אמיתי שלכם, כדי שתבינו בדיוק מה אתם מקבלים לפני שמתחילים.</p>
         </div>
         <div class="cta-right">
             <div class="contact">שמוליק קמפר</div>
