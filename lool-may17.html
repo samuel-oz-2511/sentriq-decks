@@ -741,8 +741,8 @@
 <div class="slide bg-dark" data-index="9">
 <div class="slide-inner">
     <span class="label">Gap Assessor</span>
-    <h2>Claims are made at application. <span style="color:var(--amber);">Every stage after tests them.</span></h2>
-    <p style="font-size:14px;color:var(--text-sub);margin-bottom:16px;max-width:720px;line-height:1.7;">Sentriq decomposes every application at submission into atomic claim records: roles, dates, skills, scopes. Each subsequent data point, from HR screen through manager assessment, is evaluated against that record.</p>
+    <h2>Gap detected at skills test. <span style="color:var(--amber);">Challenge fires. Interview never happens.</span></h2>
+    <p style="font-size:14px;color:var(--text-sub);margin-bottom:16px;max-width:720px;line-height:1.7;">Sentriq decomposes every application into atomic claim records at submission. When a downstream signal contradicts a claim, a challenge is automatically constructed for that specific gap and issued before the next expensive stage runs.</p>
 
     <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;overflow-x:auto;padding-bottom:2px;">
         <div style="padding:7px 13px;background:rgba(232,160,32,0.12);border:1px solid rgba(232,160,32,0.35);border-radius:8px;font-size:11px;font-weight:700;color:var(--amber);white-space:nowrap;">Application</div>
@@ -751,9 +751,9 @@
         <div style="font-size:14px;color:rgba(255,255,255,0.22);flex-shrink:0;">→</div>
         <div style="padding:7px 13px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Skills Test</div>
         <div style="font-size:14px;color:rgba(255,255,255,0.22);flex-shrink:0;">→</div>
-        <div style="padding:7px 13px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Interview</div>
+        <div style="padding:7px 13px;background:rgba(232,160,32,0.18);border:1px solid rgba(232,160,32,0.5);border-radius:8px;font-size:11px;font-weight:700;color:var(--amber);white-space:nowrap;">Challenge</div>
         <div style="font-size:14px;color:rgba(255,255,255,0.22);flex-shrink:0;">→</div>
-        <div style="padding:7px 13px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Manager Review</div>
+        <div style="padding:7px 13px;background:rgba(255,255,255,0.02);border:1px dashed rgba(255,255,255,0.12);border-radius:8px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.22);white-space:nowrap;">Interview (avoided)</div>
     </div>
 
     <div style="background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.18);border-left:4px solid rgba(232,160,32,0.5);border-radius:0 10px 10px 0;padding:11px 18px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
@@ -761,54 +761,58 @@
             <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:var(--amber);white-space:nowrap;">Gap Assessor</div>
             <div style="font-size:12px;color:var(--text-sub);">Runs across every stage. Feeds from: interview notes, test results, call transcripts, manager assessments.</div>
         </div>
-        <div style="font-size:11px;color:rgba(232,160,32,0.65);white-space:nowrap;">Gap detected : challenge option : updated signal</div>
+        <div style="font-size:11px;color:rgba(232,160,32,0.65);white-space:nowrap;">Gap detected : challenge auto-fires : evidence delivered</div>
     </div>
 
     <div style="display:grid;grid-template-columns:3fr 2fr;gap:14px;">
         <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;">
-            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-dim);margin-bottom:12px;">Example: senior finance role at an Israeli enterprise company</div>
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-dim);margin-bottom:12px;">Example: senior finance role. Challenge fires, $1,800 panel avoided.</div>
             <div style="display:flex;flex-direction:column;gap:6px;">
                 <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 10px;background:rgba(232,160,32,0.06);border-radius:6px;">
                     <div style="font-size:10px;font-weight:700;color:rgba(232,160,32,0.6);white-space:nowrap;padding-top:1px;min-width:90px;">Application</div>
-                    <div style="font-size:11px;color:var(--text-sub);">Claims 6 years FP&A and Series B fundraise experience. Claim record created.</div>
+                    <div style="font-size:11px;color:var(--text-sub);">Claims 6 years FP&amp;A and Series B fundraise experience. Claim record created at submission.</div>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 10px;background:rgba(255,255,255,0.02);border-radius:6px;">
                     <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.28);white-space:nowrap;padding-top:1px;min-width:90px;">HR Screen</div>
-                    <div style="font-size:11px;color:var(--text-sub);">Verbal confirmation of fundraise background. Consistent with claim record.</div>
+                    <div style="font-size:11px;color:var(--text-sub);">Verbal confirmation of fundraise background. Consistent. Monitoring continues.</div>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 10px;background:rgba(255,255,255,0.02);border-radius:6px;">
                     <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.28);white-space:nowrap;padding-top:1px;min-width:90px;">Skills Test</div>
-                    <div style="font-size:11px;color:var(--text-sub);">Financial modeling task below expected range for claimed seniority. <span style="color:var(--amber);font-weight:700;">Gap detected.</span></div>
+                    <div style="font-size:11px;color:var(--text-sub);">Financial modeling 40% below expected range for claimed seniority. <span style="color:var(--amber);font-weight:700;">Gap detected. Challenge auto-constructed and issued.</span></div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:10px;padding:9px 12px;background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.3);border-radius:6px;">
+                    <div style="font-size:10px;font-weight:700;color:var(--amber);white-space:nowrap;padding-top:1px;min-width:90px;">Challenge</div>
+                    <div style="font-size:11px;color:rgba(232,160,32,0.9);">"Walk through the cap table mechanics of a $15M Series B with a prior SAFE at an $8M cap." Built for this exact gap. 48 hours. Requires experiential knowledge no LLM can generate in context.</div>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 10px;background:rgba(255,255,255,0.02);border-radius:6px;">
-                    <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.28);white-space:nowrap;padding-top:1px;min-width:90px;">Interview</div>
-                    <div style="font-size:11px;color:var(--text-sub);">Cannot walk through prior fundraise structure under follow-up questions. <span style="color:var(--amber);font-weight:700;">Gap confirmed.</span></div>
+                    <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.28);white-space:nowrap;padding-top:1px;min-width:90px;">Result</div>
+                    <div style="font-size:11px;color:var(--text-sub);">Submitted work is incomplete. Series B mechanics incorrect. A 6-year FP&amp;A professional completes this in under an hour. <span style="color:var(--amber);font-weight:700;">Signal: high confidence.</span></div>
                 </div>
-                <div style="display:flex;align-items:flex-start;gap:10px;padding:9px 12px;background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.22);border-radius:6px;">
-                    <div style="font-size:10px;font-weight:700;color:var(--amber);white-space:nowrap;padding-top:1px;min-width:90px;">Sentriq</div>
-                    <div style="font-size:11px;color:rgba(232,160,32,0.85);">Gap surfaced before offer. Async challenge option available. Recruiter decides. Zero automated rejections.</div>
+                <div style="display:flex;align-items:flex-start;gap:10px;padding:9px 12px;background:rgba(68,204,136,0.06);border:1px solid rgba(68,204,136,0.22);border-radius:6px;">
+                    <div style="font-size:10px;font-weight:700;color:#44CC88;white-space:nowrap;padding-top:1px;min-width:90px;">Sentriq</div>
+                    <div style="font-size:11px;color:rgba(68,204,136,0.9);">Evidence delivered before the interview is scheduled. $500 tech interview and $1,800 final panel never happen. Recruiter decides with proof, not a hunch. Candidate had a fair opportunity. Zero automated rejections.</div>
                 </div>
             </div>
         </div>
 
         <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;padding:18px 20px;">
-            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-dim);margin-bottom:12px;">You control the rigor</div>
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:12px;">Why the challenge is irreplaceable</div>
             <div style="display:flex;flex-direction:column;gap:12px;">
                 <div>
-                    <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px;">Which stages trigger assessment</div>
-                    <div style="font-size:11px;color:var(--text-sub);line-height:1.5;">HR screen only, or all the way through manager review.</div>
+                    <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px;">It fires automatically</div>
+                    <div style="font-size:11px;color:var(--text-sub);line-height:1.5;">No recruiter would have thought to issue a targeted test at the exact moment the gap appeared. Sentriq does it for every candidate, at scale, without adding to the recruiter's workload.</div>
                 </div>
                 <div>
-                    <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px;">Gap threshold to fire a challenge</div>
-                    <div style="font-size:11px;color:var(--text-sub);line-height:1.5;">Tighter for senior roles, lighter for volume hiring.</div>
+                    <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px;">Built for the specific gap</div>
+                    <div style="font-size:11px;color:var(--text-sub);line-height:1.5;">Not a generic assessment. It targets the exact claim that was inconsistent. No LLM can answer in context on the candidate's behalf.</div>
                 </div>
                 <div>
-                    <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px;">Re-assessments per candidate</div>
-                    <div style="font-size:11px;color:var(--text-sub);line-height:1.5;">One maximum, or unlimited for critical access roles.</div>
+                    <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px;">Resolves before you spend</div>
+                    <div style="font-size:11px;color:var(--text-sub);line-height:1.5;">The interview would have caught this at $500-$1,800 per candidate. The challenge catches it before the calendar invite goes out.</div>
                 </div>
                 <div>
-                    <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px;">Data sources</div>
-                    <div style="font-size:11px;color:var(--text-sub);line-height:1.5;">ATS notes, test platforms, transcripts, manager feedback fields.</div>
+                    <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px;">Fair and audit-ready</div>
+                    <div style="font-size:11px;color:var(--text-sub);line-height:1.5;">Candidate had a full opportunity to prove the claim. Recruiter's decision is evidence-based. EU AI Act compliant by design.</div>
                 </div>
             </div>
         </div>
