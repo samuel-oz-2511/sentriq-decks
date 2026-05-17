@@ -1047,7 +1047,7 @@
             <div style="font-size:10.5px;color:var(--text-sub);line-height:1.6;margin-bottom:10px;">Already has: recruiter-facing product, ATS relationships, fraud detection bolt-on live. Worst case: behavioral SDK deployed on Gem-tracked job postings, anonymized fraud pattern sharing across Gem's customer network.</div>
             <div style="padding:10px 12px;background:rgba(68,204,136,0.05);border:1px solid rgba(68,204,136,0.18);border-radius:8px;">
                 <div style="font-size:9.5px;font-weight:700;color:#44CC88;margin-bottom:4px;">What they still can't do</div>
-                <div style="font-size:10px;color:var(--text-sub);line-height:1.6;">Coverage ceiling is Gem's installed base -- blind to every application that doesn't flow through a Gem-integrated pipeline. No cross-employer graph beyond the Gem network. No candidate consent model (Gem is employer-side). An application submitted via LinkedIn Easy Apply, a direct careers page, or any non-Gem ATS is invisible to them.</div>
+                <div style="font-size:10px;color:var(--text-sub);line-height:1.6;">Coverage ceiling is Gem's installed base. A company not using Gem as their CRM is entirely outside Gem's network -- their fraud graph only covers Gem customers talking to each other. No cross-employer candidate tracking (Gem sees what enters Gem, not what the same candidate submits across employers who use different tools). No candidate-consent model: Gem is employer-side, so any cross-customer sharing requires employer permission, not candidate permission.</div>
             </div>
         </div>
 
@@ -1073,7 +1073,7 @@
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
             <div style="text-align:center;padding:8px;">
                 <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px;">Pre-submission capture</div>
-                <div style="font-size:10px;color:var(--muted);">Fires during form fill, before any ATS SDK. Requires instrumentation of every application surface.</div>
+                <div style="font-size:10px;color:var(--muted);">Fires during form fill on instrumented surfaces. LinkedIn Easy Apply is a shared blind spot -- nobody captures behavioral signal there without LinkedIn's cooperation.</div>
             </div>
             <div style="text-align:center;padding:8px;border-left:1px solid var(--border);border-right:1px solid var(--border);">
                 <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px;">Candidate-consented graph</div>
