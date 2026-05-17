@@ -994,6 +994,100 @@
 </div>
 </div>
 
+<!-- SLIDE: WORST CASE COMPETITIVE -->
+<div class="slide bg-dark" data-index="10b">
+<div class="slide-inner">
+    <span class="label">Competitive -- Worst Case</span>
+    <h2>What happens if each player <span style="color:var(--amber);">sprints directly at this category?</span></h2>
+    <p style="font-size:11.5px;color:var(--text-sub);margin-top:6px;margin-bottom:16px;line-height:1.65;">We mapped the maximum realistic build for each threat. In every scenario, a competitor reaches one or two of the three layers. Nobody gets all three without becoming a different company.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+
+        <!-- Sardine -->
+        <div style="padding:16px 18px;border-radius:12px;border:1px solid rgba(200,80,80,0.3);background:rgba(200,80,80,0.04);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                <div style="font-size:13px;font-weight:700;color:var(--text);">Sardine</div>
+                <div style="display:flex;gap:6px;align-items:center;">
+                    <span style="font-size:9px;font-weight:700;color:rgba(200,80,80,0.9);background:rgba(200,80,80,0.12);border:1px solid rgba(200,80,80,0.25);padding:2px 7px;border-radius:4px;">Highest technical threat</span>
+                    <span style="font-size:9px;color:var(--muted);">12-18 mo</span>
+                </div>
+            </div>
+            <div style="font-size:10.5px;color:var(--text-sub);line-height:1.6;margin-bottom:10px;">Already has: behavioral biometrics, device fingerprinting, cross-entity fraud graphs proven in fintech. Worst case: they apply the fraud graph directly to job applications, hire HR-domain experts, partner with 2-3 ATS for distribution.</div>
+            <div style="padding:10px 12px;background:rgba(68,204,136,0.05);border:1px solid rgba(68,204,136,0.18);border-radius:8px;">
+                <div style="font-size:9.5px;font-weight:700;color:#44CC88;margin-bottom:4px;">What they still can't do</div>
+                <div style="font-size:10px;color:var(--text-sub);line-height:1.6;">Sardine sells to employers, not candidates -- their consent model is transaction-side, not candidate-side. They have no form-fill behavioral capture (they intercept at account creation and checkout, not at job form fill). HR-native signal taxonomy -- application as unit of analysis, not transaction -- requires a full product rebuild.</div>
+            </div>
+        </div>
+
+        <!-- Persona -->
+        <div style="padding:16px 18px;border-radius:12px;border:1px solid rgba(200,80,80,0.2);background:rgba(200,80,80,0.03);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                <div style="font-size:13px;font-weight:700;color:var(--text);">Persona</div>
+                <div style="display:flex;gap:6px;align-items:center;">
+                    <span style="font-size:9px;font-weight:700;color:rgba(180,130,50,0.9);background:rgba(180,130,50,0.1);border:1px solid rgba(180,130,50,0.22);padding:2px 7px;border-radius:4px;">Consent model threat</span>
+                    <span style="font-size:9px;color:var(--muted);">12-18 mo</span>
+                </div>
+            </div>
+            <div style="font-size:10.5px;color:var(--text-sub);line-height:1.6;margin-bottom:10px;">Already has: neutral infrastructure, direct candidate consent, enterprise-grade deployment across fintech, crypto, HR. Worst case: they add application integrity signals on top of IDV, build a hiring-specific graph alongside their identity graph.</div>
+            <div style="padding:10px 12px;background:rgba(68,204,136,0.05);border:1px solid rgba(68,204,136,0.18);border-radius:8px;">
+                <div style="font-size:9.5px;font-weight:700;color:#44CC88;margin-bottom:4px;">What they still can't do</div>
+                <div style="font-size:10px;color:var(--text-sub);line-height:1.6;">Persona runs after the candidate decides to verify -- not during form fill. They have no pre-submission behavioral baseline. Their graph is horizontal across 10+ industries with no hiring-specific signal taxonomy. Pivoting to hiring-native means abandoning the horizontal model that drives their valuation.</div>
+            </div>
+        </div>
+
+        <!-- Gem -->
+        <div style="padding:16px 18px;border-radius:12px;border:1px solid rgba(160,120,40,0.25);background:rgba(160,120,40,0.03);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                <div style="font-size:13px;font-weight:700;color:var(--text);">Gem</div>
+                <div style="display:flex;gap:6px;align-items:center;">
+                    <span style="font-size:9px;font-weight:700;color:rgba(160,120,40,0.9);background:rgba(160,120,40,0.1);border:1px solid rgba(160,120,40,0.22);padding:2px 7px;border-radius:4px;">Distribution threat</span>
+                    <span style="font-size:9px;color:var(--muted);">6-9 mo</span>
+                </div>
+            </div>
+            <div style="font-size:10.5px;color:var(--text-sub);line-height:1.6;margin-bottom:10px;">Already has: recruiter-facing product, ATS relationships, fraud detection bolt-on live. Worst case: behavioral SDK deployed on Gem-tracked job postings, anonymized fraud pattern sharing across Gem's customer network.</div>
+            <div style="padding:10px 12px;background:rgba(68,204,136,0.05);border:1px solid rgba(68,204,136,0.18);border-radius:8px;">
+                <div style="font-size:9.5px;font-weight:700;color:#44CC88;margin-bottom:4px;">What they still can't do</div>
+                <div style="font-size:10px;color:var(--text-sub);line-height:1.6;">Coverage ceiling is Gem's installed base -- blind to every application that doesn't flow through a Gem-integrated pipeline. No cross-employer graph beyond the Gem network. No candidate consent model (Gem is employer-side). An application submitted via LinkedIn Easy Apply, a direct careers page, or any non-Gem ATS is invisible to them.</div>
+            </div>
+        </div>
+
+        <!-- Greenhouse / Workday -->
+        <div style="padding:16px 18px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                <div style="font-size:13px;font-weight:700;color:var(--text);">Greenhouse / Workday</div>
+                <div style="display:flex;gap:6px;align-items:center;">
+                    <span style="font-size:9px;font-weight:700;color:rgba(150,150,160,0.9);background:rgba(150,150,160,0.1);border:1px solid rgba(150,150,160,0.2);padding:2px 7px;border-radius:4px;">Scale threat</span>
+                    <span style="font-size:9px;color:var(--muted);">18-24 mo</span>
+                </div>
+            </div>
+            <div style="font-size:10.5px;color:var(--text-sub);line-height:1.6;margin-bottom:10px;">Already has: full enterprise distribution, hosted apply flows, existing cross-customer benchmark infrastructure. Worst case: behavioral SDK on native hosted apply pages, within-platform anomaly detection, anonymized fraud pattern sharing between customers via existing benchmark channel.</div>
+            <div style="padding:10px 12px;background:rgba(68,204,136,0.05);border:1px solid rgba(68,204,136,0.18);border-radius:8px;">
+                <div style="font-size:9.5px;font-weight:700;color:#44CC88;margin-bottom:4px;">What they still can't do</div>
+                <div style="font-size:10px;color:var(--text-sub);line-height:1.6;">Hosted apply coverage only -- misses LinkedIn Easy Apply, third-party job boards, direct email applications. Customer isolation clauses prevent tracking the same candidate across two different enterprise customers. Their benchmark infrastructure shares anonymized employer data, not candidate-level behavioral signal across employers -- a fundamentally different data model requiring renegotiation of every enterprise contract.</div>
+            </div>
+        </div>
+    </div>
+
+    <div style="padding:14px 20px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.2);border-radius:10px;">
+        <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">The three-layer gap no sprint closes</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+            <div style="text-align:center;padding:8px;">
+                <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px;">Pre-submission capture</div>
+                <div style="font-size:10px;color:var(--muted);">Fires during form fill, before any ATS SDK. Requires instrumentation of every application surface.</div>
+            </div>
+            <div style="text-align:center;padding:8px;border-left:1px solid var(--border);border-right:1px solid var(--border);">
+                <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px;">Candidate-consented graph</div>
+                <div style="font-size:10px;color:var(--muted);">Data belongs to the candidate, not the employer. Requires a neutral position no ATS can hold.</div>
+            </div>
+            <div style="text-align:center;padding:8px;">
+                <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:3px;">HR-native signal layer</div>
+                <div style="font-size:10px;color:var(--muted);">Application as unit of analysis. Recruiter-facing output. Not fraud score -- trust signal.</div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
 <!-- SLIDE 11: TRACTION -->
 <div class="slide bg-dark" data-index="11">
 <div class="slide-inner">
