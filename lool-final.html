@@ -973,9 +973,19 @@
         <td style="padding:7px 10px;color:var(--amber);">Sentriq flags the anomaly at form fill. If flagged, Clarity never needs to run. Entry 10x earlier in the funnel, at a fraction of the downstream cost.</td>
       </tr>
       <tr style="border-bottom:1px solid var(--border);">
-        <td style="padding:7px 10px;font-weight:700;color:var(--text);">Workday / Greenhouse / iCIMS <span style="font-size:8px;font-weight:600;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.12);margin-left:4px;">Cannot Enter</span></td>
-        <td style="padding:7px 10px;color:var(--text-sub);">ATS incumbents are single-employer data silos by design. Their moat is data lock-in: every employer's hiring data stays inside their walls. Sharing cross-employer signal would require exposing one customer's data to another -- that is antithetical to the product model they sell. It is an economic impossibility, not a policy choice.</td>
-        <td style="padding:7px 10px;color:var(--amber);">Sentriq is neutral infrastructure. Candidate-consented. No employer data leaves the employer. The cross-company graph is built on behavioral signal, not ATS records -- a layer ATS vendors cannot replicate without destroying what makes them valuable.</td>
+        <td style="padding:7px 10px;font-weight:700;color:var(--text);">Workday / Greenhouse / iCIMS <span style="font-size:8px;font-weight:600;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.12);margin-left:4px;">Different Layer</span></td>
+        <td style="padding:7px 10px;color:var(--text-sub);">
+          <div style="margin-bottom:6px;">Greenhouse and Workday share anonymized employer benchmarks: aggregate time-to-hire, pipeline conversion rates, offer acceptance by role. One employer's data flows into a market report. No candidate is tracked across employers.</div>
+          <div style="font-size:9.5px;color:rgba(255,255,255,0.35);">Anonymized employer data != cross-employer candidate signal.</div>
+        </td>
+        <td style="padding:7px 10px;color:var(--amber);">
+          <div style="margin-bottom:5px;">Sentriq's graph tracks the same candidate's behavioral fingerprint across multiple employers -- with candidate consent, not employer data sharing. Three things ATS cannot replicate:</div>
+          <div style="font-size:10px;color:rgba(255,220,120,0.85);line-height:1.6;">
+            1. <strong>Consent model:</strong> ATS data belongs to employers. Sentriq's signal belongs to candidates -- captured with direct candidate consent before the application is submitted.<br>
+            2. <strong>Capture point:</strong> Behavioral baseline fires during form fill, before the ATS SDK sees anything. ATS would need to instrument every careers page, job board, and Easy Apply surface -- a separate infrastructure product, not an ATS feature.<br>
+            3. <strong>Customer isolation:</strong> Greenhouse enterprise contracts guarantee data isolation between customers. An ATS sharing candidate data across two of its employer customers would breach every enterprise agreement it has signed.
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>
