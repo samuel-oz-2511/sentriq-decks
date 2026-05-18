@@ -244,13 +244,13 @@
             .then(function(geo) {
                 var loc = (geo.city || '') + ', ' + (geo.country_name || '') + ' (' + (geo.ip || '') + ')';
                 var org = geo.org || '';
-                var msg = 'Sentriq Lool deck opened\n' + loc + '\n' + org + '\n' + t;
+                var msg = 'Sentriq Masaryk deck opened\n' + loc + '\n' + org + '\n' + t;
                 fetch('https://ntfy.sh/sentriq-masaryk-p2w7', { method: 'POST', mode: 'no-cors', body: msg }).catch(function(){});
             })
             .catch(function() {
                 fetch('https://ntfy.sh/sentriq-masaryk-p2w7', {
                     method: 'POST', mode: 'no-cors',
-                    body: 'Sentriq Lool deck opened (location unavailable)\n' + ua.substring(0,80) + '\n' + t
+                    body: 'Sentriq Masaryk deck opened (location unavailable)\n' + ua.substring(0,80) + '\n' + t
                 }).catch(function(){});
             });
     }
@@ -368,7 +368,7 @@
         </div>
         <div style="padding:16px 18px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.15);border-radius:12px;">
             <div style="font-size:10px;font-weight:700;color:rgba(232,160,32,0.85);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Why 2026 is the moment</div>
-            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;"><strong style="color:var(--text);">Force 1:</strong> AI destroyed application signal quality in 18 months. <strong style="color:var(--text);">Force 2:</strong> The EU AI Act classifies hiring AI as high-risk from August 2, 2026. <strong style="color:var(--text);">Force 3:</strong> ATS incumbents are legally barred from filling the gap -- cross-employer data sharing violates their customer contracts, and that is a constraint they cannot reverse. All three peak simultaneously.</p>
+            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;"><strong style="color:var(--text);">Force 1:</strong> AI destroyed application signal quality in 18 months. <strong style="color:var(--text);">Force 2:</strong> The EU AI Act classifies hiring AI as high-risk from August 2, 2026. <strong style="color:var(--text);">Force 3:</strong> ATS incumbents are single-employer data silos by design -- their moat is data lock-in. Sharing cross-employer candidate signal would expose one customer's data to another, undermining the trust model they sell. This is economic and architectural, not just contractual. All three forces peak simultaneously.</p>
         </div>
     </div>
     <div style="padding:14px 20px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.18);border-radius:12px;display:flex;align-items:flex-start;gap:12px;">
@@ -449,7 +449,7 @@
     </div>
     <div style="margin-top:10px;padding:14px 18px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.2);border-radius:12px;">
         <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">The Israeli Advantage</div>
-        <p style="font-size:12px;color:rgba(255,255,255,0.85);line-height:1.6;margin-bottom:10px;">The product requires founder-market fit in two domains simultaneously: someone who ran recruiting from the inside (Samuel: TechRuiter, 30+ ATS experiments, daily Greenhouse/Workday) and someone who detects behavioral anomalies at scale (Ben: offensive cyber, AppSec at AppsFlyer, behavioral signal work). No competitor has this pairing. This is the Lool pattern, not a fit exercise.</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.85);line-height:1.6;margin-bottom:10px;">The product requires founder-market fit in two domains simultaneously: someone who ran recruiting from the inside (Samuel: TechRuiter, 30+ ATS experiments, daily Greenhouse/Workday) and someone who detects behavioral anomalies at scale (Ben: offensive cyber, AppSec at AppsFlyer, behavioral signal work). No competitor has this pairing. This is the pattern: operator who lived the problem, engineer who can detect at scale.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
             <div style="padding:10px 16px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.15);border-radius:10px;text-align:center;">
                 <div style="font-size:22px;font-weight:700;color:var(--amber);">30+</div>
@@ -485,8 +485,8 @@
 <div class="slide bg-dark" data-index="3">
 <div class="slide-inner">
     <span class="label">The Missing Layer</span>
-    <h2>The incumbents cannot fill this gap. <span style="color:var(--amber);">Not as a product decision. As a contract obligation.</span></h2>
-    <p style="font-size:14px;color:rgba(255,255,255,0.55);max-width:760px;line-height:1.6;margin-bottom:16px;">ATS contracts prohibit cross-employer data sharing. Assessment and background check tools run after the submission already exists. Building The Hiring Captcha requires neutral ground, pre-submission timing, and direct candidate consent: no adjacent player has all three.</p>
+    <h2>The incumbents cannot fill this gap. <span style="color:var(--amber);">Not as a product decision. As an architectural reality.</span></h2>
+    <p style="font-size:14px;color:rgba(255,255,255,0.55);max-width:760px;line-height:1.6;margin-bottom:16px;">ATS incumbents are single-employer data silos -- their moat is data lock-in, and sharing cross-employer candidate signal would undermine it. Assessment and background check tools run after the submission already exists. Building The Hiring Captcha requires neutral ground, pre-submission timing, and direct candidate consent: no adjacent player has all three.</p>
 
     <div style="margin-bottom:14px;">
         <div class="stack-layer">
@@ -836,14 +836,14 @@
         <div style="padding:20px;background:rgba(232,160,32,0.03);border:1px solid rgba(232,160,32,0.15);border-radius:14px;display:flex;flex-direction:column;gap:10px;">
             <h3 style="font-size:13px;color:var(--amber);margin-bottom:4px;">What Sentriq becomes at scale</h3>
             <p style="font-size:12px;color:var(--text-sub);line-height:1.65;">At 15 customers, the graph returns signal no single employer can see alone. At 100, coordinated campaigns are detected before reaching any one company.</p>
-            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;">Greenhouse's contracts legally prohibit cross-employer data sharing across their entire enterprise customer base, a permanent structural constraint. Sentriq requires neutral ground and direct candidate consent: neither is available to any ATS.</p>
+            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;">ATS incumbents are single-employer data silos -- their entire business model depends on keeping each customer's data inside their walls. Sharing cross-employer candidate signal would expose one customer's data to another, destroying the trust model they sell. Sentriq requires neutral ground and direct candidate consent: neither is available to any ATS.</p>
             <div style="padding:10px 14px;background:rgba(232,160,32,0.08);border-radius:8px;border:1px solid rgba(232,160,32,0.2);">
                 <p style="font-size:12px;color:var(--amber);font-weight:600;text-align:center;">The more companies join the network, the harder it becomes to game any of them. Network density is the moat.</p>
             </div>
         </div>
     </div>
     <div style="margin-top:14px;background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.22);border-radius:10px;padding:12px 18px;">
-        <p style="font-size:12px;color:rgba(255,255,255,0.85);line-height:1.6;">Lool's portfolio and network = early node supply. Every company that joins strengthens the graph for every other company on it.</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.85);line-height:1.6;">Every enterprise customer that joins strengthens the graph for all others. An investor with an enterprise software portfolio accelerates the seed node supply -- portfolio companies become the first nodes.</p>
     </div>
 </div>
 </div>
@@ -944,8 +944,8 @@
     <tbody>
       <tr style="border-bottom:1px solid var(--border);">
         <td style="padding:7px 10px;font-weight:700;color:var(--text);">Gem <span style="font-size:8px;font-weight:600;padding:1px 5px;border-radius:3px;background:rgba(232,160,32,0.15);color:var(--amber);border:1px solid rgba(232,160,32,0.3);margin-left:4px;">Direct</span></td>
-        <td style="padding:7px 10px;color:var(--text-sub);">Fraud detection inside Gem's platform. Runs after submission. No form-fill behavioral baseline. No cross-company graph across other tools.</td>
-        <td style="padding:7px 10px;color:var(--amber);">Platform-agnostic entry before the application exists. Catches what Gem's network never sees because Sentriq operates upstream of every ATS.</td>
+        <td style="padding:7px 10px;color:var(--text-sub);">Recruiting CRM with a fraud detection feature bolted on. Gem sees applications after they land inside Gem accounts -- the form-fill behavioral window is architecturally closed to them before the first API call fires. Signal is static, post-submission, and Gem-account-only.</td>
+        <td style="padding:7px 10px;color:var(--amber);">Sentriq captures behavioral signal during form fill -- before the application object exists. No Gem adoption required, no ATS dependency. Works on every submission regardless of downstream tooling.</td>
       </tr>
       <tr style="border-bottom:1px solid var(--border);background:rgba(255,255,255,0.015);">
         <td style="padding:7px 10px;font-weight:700;color:var(--text);">Crosschq <span style="font-size:8px;font-weight:600;padding:1px 5px;border-radius:3px;background:rgba(232,160,32,0.15);color:var(--amber);border:1px solid rgba(232,160,32,0.3);margin-left:4px;">Direct</span></td>
@@ -973,9 +973,19 @@
         <td style="padding:7px 10px;color:var(--amber);">Sentriq flags the anomaly at form fill. If flagged, Clarity never needs to run. Entry 10x earlier in the funnel, at a fraction of the downstream cost.</td>
       </tr>
       <tr style="border-bottom:1px solid var(--border);">
-        <td style="padding:7px 10px;font-weight:700;color:var(--text);">Workday / Greenhouse / iCIMS <span style="font-size:8px;font-weight:600;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.12);margin-left:4px;">Structurally Blocked</span></td>
-        <td style="padding:7px 10px;color:var(--text-sub);">ATS customer contracts prohibit cross-employer data sharing. The cross-company graph requires neutral ground. This is not a policy decision they can reverse.</td>
-        <td style="padding:7px 10px;color:var(--amber);">Neutral infrastructure model. Direct candidate consent model. The cross-company graph is architecturally unavailable to any ATS vendor, permanently.</td>
+        <td style="padding:7px 10px;font-weight:700;color:var(--text);">Workday / Greenhouse / iCIMS <span style="font-size:8px;font-weight:600;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.12);margin-left:4px;">Different Layer</span></td>
+        <td style="padding:7px 10px;color:var(--text-sub);">
+          <div style="margin-bottom:6px;">Greenhouse and Workday share anonymized employer benchmarks: aggregate time-to-hire, pipeline conversion rates, offer acceptance by role. No candidate is tracked across employers.</div>
+          <div style="font-size:9.5px;color:rgba(255,255,255,0.35);">Anonymized employer data != cross-employer candidate signal.</div>
+        </td>
+        <td style="padding:7px 10px;color:var(--amber);">
+          <div style="margin-bottom:5px;">Sentriq's graph tracks the same candidate's behavioral fingerprint across employers -- with candidate consent. Three things ATS cannot replicate:</div>
+          <div style="font-size:10px;color:rgba(255,220,120,0.85);line-height:1.6;">
+            1. <strong>Consent model:</strong> ATS data belongs to employers. Sentriq's signal belongs to candidates -- captured with direct candidate consent before submission.<br>
+            2. <strong>Capture point:</strong> Behavioral baseline fires during form fill, before the ATS SDK sees anything.<br>
+            3. <strong>Customer isolation:</strong> Enterprise contracts guarantee data isolation between customers -- an ATS cannot share one customer's candidate data with another.
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -1036,8 +1046,8 @@
                     <p style="font-size:11px;color:var(--text-sub);line-height:1.55;"><strong style="color:var(--text);">Eliana Carmel Gilboa</strong>, CPO at Booking Holdings, validates the problem at board level, opens Fortune 500 CPO doors, and makes the compliance case that HR teams alone cannot make.</p>
                 </div>
                 <div style="padding:14px 16px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.18);border-radius:10px;">
-                    <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:5px;">Lool's angle.</div>
-                    <p style="font-size:11px;color:var(--text-sub);line-height:1.55;">Israel-first plus US anchor. Lool's portfolio and network = early node supply for the Israeli side. The pipeline proves the model works in both directions.</p>
+                    <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:5px;">Masaryk's angle.</div>
+                    <p style="font-size:11px;color:var(--text-sub);line-height:1.55;">Enterprise Software + M&A lens. Masaryk's enterprise portfolio = early node supply. SAP SuccessFactors has bought solutions at every HR infrastructure stage. The application integrity layer is the gap in their stack. Building toward that exit starts with the first enterprise nodes.</p>
                 </div>
             </div>
         </div>
@@ -1219,7 +1229,7 @@
                 </div>
                 <div style="display:flex;gap:10px;align-items:flex-start;">
                     <div style="width:5px;height:5px;border-radius:50%;background:var(--amber);margin-top:5px;flex-shrink:0;"></div>
-                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">M&amp;A pattern recognition.</strong> The exit thesis is legible: identity verification players expanding to HR, ATS consolidators, HR tech roll-ups. Maryana's M&amp;A background at Elron and MEDX makes this category readable at the acquisition layer.</p>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">M&amp;A pattern recognition.</strong> SAP has bought solutions at every enterprise HR infrastructure stage -- SuccessFactors ($3.4B), Fieldglass ($1B), Qualtrics ($8B). The application integrity layer is the one gap in their stack. The exit thesis is named, not hypothetical.</p>
                 </div>
                 <div style="display:flex;gap:10px;align-items:flex-start;">
                     <div style="width:5px;height:5px;border-radius:50%;background:var(--amber);margin-top:5px;flex-shrink:0;"></div>
