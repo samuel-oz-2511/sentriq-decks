@@ -300,7 +300,7 @@
 
     <div class="sources">
         <button class="src-toggle" onclick="this.parentElement.classList.toggle('open')">Source</button>
-        <div class="src-content"><p>Hickman, L., Liff, J., Willis, C., Kim, E. (2025). "Can Interviewees Fake Out AI? Comparing the Susceptibility and Mechanisms of Faking Across Self-Reports, Human Interview Ratings, and AI Interview Ratings." International Journal of Selection and Assessment, 33:e70014.</p></div>
+        <div class="src-content"><p>Hickman, L., Liff, J., Willis, C., Kim, E. (2025). "Can Interviewees Fake Out AI? Comparing the Susceptibility and Mechanisms of Faking Across Self-Reports, Human Interview Ratings, and AI Interview Ratings." International Journal of Selection and Assessment, 33:e70014. Within-subjects design, n=237 (Prolific), three conditions: honest, applicant-like, faking-good. Co-authors Liff and Willis are employed at HireVue.</p></div>
     </div>
 </div>
 </div>
@@ -440,31 +440,41 @@
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
-        <div style="padding:18px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.18);border-radius:12px;">
+        <div style="padding:18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:12px;">
             <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Layer 1: Behavioral Baseline</div>
-            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;margin-bottom:10px;">Behavioral metadata captured while the form is filled. Timing, edit patterns, paste events, field interaction sequences. Invisible to the applicant. No friction added.</p>
+            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;margin-bottom:10px;">Starts before identity exists: typing rhythm, mouse movement, paste events, field focus/blur, tab switching, idle periods, device fingerprint, and AI content markers in submitted text are all recorded anonymously while the visitor browses the job posting. At submission the anonymous record binds to the named applicant, producing a pre-identity behavioral baseline that no ATS can replicate.</p>
             <div style="display:flex;flex-wrap:wrap;gap:4px;">
-                <span class="signal-tag">Bot activity</span>
-                <span class="signal-tag">Profile overfitting</span>
-                <span class="signal-tag">Paste patterns</span>
+                <span class="signal-tag">Pre-identity capture</span>
+                <span class="signal-tag">Typing dynamics</span>
+                <span class="signal-tag">Mouse movement</span>
+                <span class="signal-tag">Mass-apply fingerprint</span>
+                <span class="signal-tag">AI content markers</span>
+                <span class="signal-tag">Device fingerprint</span>
             </div>
         </div>
-        <div style="padding:18px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.18);border-radius:12px;">
+        <div style="padding:18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:12px;">
             <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Layer 2: Async Challenge</div>
-            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;margin-bottom:10px;">Only triggered when Layer 1 flags anomalies. A short task framed as part of the application. Scoring combines behavioral signals and content quality, calibrated to the claimed profile.</p>
+            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;margin-bottom:10px;">Triggered on Layer 1 anomaly: a short task scored on behavioral signals and content quality calibrated to the claimed profile. The applicant also uploads their LinkedIn export: the delta between generic LinkedIn self-presentation and the role-optimized resume is a high-value fabrication signal.</p>
             <div style="display:flex;flex-wrap:wrap;gap:4px;">
                 <span class="signal-tag">Proxy detection</span>
                 <span class="signal-tag">AI-assisted content</span>
+                <span class="signal-tag">LinkedIn delta</span>
                 <span class="signal-tag">Profile distortion</span>
             </div>
         </div>
         <div style="padding:18px;background:rgba(68,204,136,0.05);border:1px solid rgba(68,204,136,0.18);border-radius:12px;">
             <div style="font-size:10px;font-weight:700;color:#44CC88;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Layer 3: Human Review</div>
-            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;margin-bottom:10px;">Analyst reviews the full signal stack. Employer makes the final decision. Sentriq never rejects automatically. Full audit trail by design.</p>
-            <div style="padding:8px 12px;background:rgba(68,204,136,0.07);border-radius:8px;border:1px solid rgba(68,204,136,0.18);">
-                <p style="font-size:11px;color:#44CC88;font-weight:600;text-align:center;">Human in the loop is architecture, not a disclaimer.</p>
+            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;margin-bottom:10px;">Analyst reviews the full signal stack; employer makes the final call. Full audit trail for regulatory defense: EU AI Act Annex III requires human oversight for all hiring AI systems, deadline August 2026.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;">
+                <span class="signal-tag">EU AI Act compliant</span>
+                <span class="signal-tag">Full audit trail</span>
+                <span class="signal-tag">Employer decides</span>
             </div>
         </div>
+    </div>
+
+    <div style="padding:10px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:8px;margin-top:10px;">
+        <p style="font-size:11px;color:rgba(255,255,255,0.45);line-height:1.6;"><span style="color:var(--amber);font-weight:700;">Easy Apply exception:</span> LinkedIn Easy Apply and API submissions bypass Layer 1 entirely (no form surface exists). Layer 2 triggers automatically for all Easy Apply applications.</p>
     </div>
 </div>
 </div>
@@ -507,7 +517,7 @@
         </div>
     </div>
 
-    <div style="padding:14px 20px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.2);border-radius:12px;border-left:3px solid var(--amber);">
+    <div style="padding:14px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:12px;border-left:3px solid rgba(255,255,255,0.2);">
         <p style="font-size:13px;color:rgba(255,255,255,0.8);line-height:1.7;">These questions sit at the intersection of I/O psychology and applied ML. Neither field has addressed them independently, and the data to answer them has to come from live hiring pipelines that do not yet exist in any lab context.</p>
     </div>
 </div>
@@ -559,24 +569,24 @@
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:10px;">
                     <div style="width:6px;height:6px;border-radius:50%;background:#44CC88;margin-top:5px;flex-shrink:0;"></div>
-                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;">Participant recruitment experience via Prolific and within-subjects faking study designs already validated in peer-reviewed work</p>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;">I/O psychology grounding for experiment design, validity analysis, and IRB navigation: the full academic scaffolding the study needs</p>
                 </div>
             </div>
         </div>
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
-        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;text-align:center;">
+        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;text-align:left;">
             <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:6px;">Study 1: Construct Validity</div>
-            <p style="font-size:12px;color:var(--text-sub);line-height:1.55;">Can behavioral and content signals distinguish LLM-optimized from human-authored applications? What do submission-time signals actually measure?</p>
+            <p style="font-size:12px;color:var(--text-sub);line-height:1.55;">Can behavioral and content signals distinguish LLM-optimized from human-authored applications at the moment of submission?</p>
         </div>
-        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;text-align:center;">
+        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;text-align:left;">
             <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:6px;">Study 2: Adversarial Conditions</div>
-            <p style="font-size:12px;color:var(--text-sub);line-height:1.55;">Within-subjects design: honest application vs. LLM-optimized vs. explicit gaming. How much can signals detect when the applicant knows what is being measured?</p>
+            <p style="font-size:12px;color:var(--text-sub);line-height:1.55;">Within-subjects design: honest vs. LLM-optimized vs. explicit gaming, extending your paper's faking paradigm to the submission layer.</p>
         </div>
-        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;text-align:center;">
+        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;text-align:left;">
             <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:6px;">Study 3: Predictive Validity</div>
-            <p style="font-size:12px;color:var(--text-sub);line-height:1.55;">Do submission-time signals predict downstream outcomes? Manager ratings, performance reviews, or early attrition as ground truth. Requires live hiring pipeline access.</p>
+            <p style="font-size:12px;color:var(--text-sub);line-height:1.55;">Do submission-time signals predict downstream hire quality, performance ratings, or early attrition?</p>
         </div>
     </div>
 </div>
@@ -626,7 +636,7 @@
             <div style="text-align:center;padding:10px;border-left:1px solid var(--border);">
                 <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Pipeline</div>
                 <div style="font-size:13px;font-weight:700;color:var(--text);">Design partners</div>
-                <div style="font-size:10px;color:var(--muted);margin-top:2px;">HR-entry GTM</div>
+                <div style="font-size:10px;color:var(--muted);margin-top:2px;">Enterprise HR / TA</div>
             </div>
             <div style="text-align:center;padding:10px;border-left:1px solid var(--border);">
                 <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Funding</div>
