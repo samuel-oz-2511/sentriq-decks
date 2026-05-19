@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>The Application Signal Problem — Sentriq</title>
+<title>The Application Signal Problem - Sentriq</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -89,7 +89,7 @@
     gap: 12px;
   }
   .stat-card {
-    padding: 18px 16px;
+    padding: 20px 18px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 10px;
@@ -140,13 +140,13 @@
   .capability-list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 16px;
   }
   .capability-item {
     display: flex;
     gap: 12px;
     align-items: flex-start;
-    padding: 12px 14px;
+    padding: 14px 16px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 8px;
@@ -176,13 +176,13 @@
     display: flex;
     gap: 14px;
     align-items: flex-start;
-    padding: 12px 16px;
+    padding: 16px 18px;
     background: var(--green-bg);
     border: 1px solid var(--green-border);
     border-radius: 8px;
   }
   .traction-co {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 700;
     color: var(--text);
     min-width: 140px;
@@ -240,7 +240,7 @@
   /* DISCUSSION PROMPT */
   .discussion-box {
     padding: 22px 24px;
-    background: rgba(232,160,32,0.05);
+    background: rgba(232,160,32,0.08);
     border: 1px solid rgba(232,160,32,0.25);
     border-radius: 10px;
   }
@@ -271,6 +271,28 @@
     border-left: 2px solid var(--amber);
   }
 
+  /* DISCUSSION QUESTIONS */
+  .discussion-question {
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .question-label {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .question-label.amber { color: var(--amber); }
+  .question-text {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
   /* FOOTER */
   .doc-footer {
     margin-top: 40px;
@@ -298,7 +320,7 @@
   }
 
   @media (max-width: 620px) {
-    .page { padding: 28px 18px 48px; }
+    .page { padding: 28px 22px 48px; }
     .stats-grid { grid-template-columns: 1fr; }
     .doc-header { flex-direction: column-reverse; }
     .traction-co { min-width: unset; }
@@ -316,7 +338,7 @@
     <div>
       <div class="doc-type">Industry Brief &middot; Talent Acquisition Intelligence</div>
       <div class="doc-title">The Application <span>Signal Problem</span></div>
-      <div class="doc-sub">Most hiring tools evaluate what a candidate submitted. None of them run before the first recruiter opens a file. This brief is about the tooling gap at the point of submission, and why closing it changes where wasted interview spend disappears.</div>
+      <div class="doc-sub">Most hiring tools evaluate what a candidate submitted. None of them run before the first recruiter opens a file. This brief covers the tooling gap at the point of submission, and why catching mismatches before the first interview reduces the cost of a wrong shortlist.</div>
     </div>
     <div class="logo-wrap">
       <svg class="logo-svg" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -353,8 +375,8 @@
 
   <!-- CONCEPT ANCHOR -->
   <section>
-    <div class="section-label">The pre-application layer — what it means</div>
-    <div style="padding:22px 24px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.3);border-left:3px solid var(--amber);border-radius:0 10px 10px 0;">
+    <div class="section-label">What the submission layer means in practice</div>
+    <div style="padding:24px 28px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.3);border-left:3px solid var(--amber);border-radius:0 10px 10px 0;">
       <div class="concept-cols" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
         <div>
           <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-muted);margin-bottom:8px;">Without it</div>
@@ -375,7 +397,7 @@
     <p class="body-text">Every tool in the TA stack evaluates what a candidate submitted. None of them observe how it was submitted.</p>
     <p class="body-text" style="margin-top:12px;">The behavioral context present during the application itself, the signals that would tell a recruiter whether the work in front of them reflects the person behind it, disappears the moment the file is uploaded. What remains is a polished output that looks like every other polished output, and must be evaluated on its own terms by a recruiter who has dozens more in the same queue.</p>
     <div class="callout" style="margin-top:16px;">
-      <p>AI application tooling has made it trivially easy to produce a well-formatted, keyword-optimized application with no direct connection to the experience being claimed. The ATS scores it highly. The recruiter opens it. Six rounds later, a mismatch surfaces that was visible from the first interaction, but only in hindsight.</p>
+      <p>AI application tooling has made it easy to produce polished, keyword-optimized applications with no direct connection to the experience being claimed. The ATS scores it highly. The recruiter opens it. Six rounds later, a mismatch surfaces that was visible from the first interaction, but only in hindsight.</p>
     </div>
     <p class="body-text">The gap is not a people problem. It is a tooling gap: no layer in the current stack is designed to surface signal at the point of submission, before any human time is spent.</p>
   </section>
@@ -389,7 +411,7 @@
     <div class="capability-list">
       <div class="capability-item">
         <div class="cap-dot"></div>
-        <div class="cap-text"><strong>Behavioral signal at form fill.</strong> How an application is completed, not just what it contains. Keystroke patterns, edit frequency, session behavior, copy-paste ratio. Observed passively, without any change to the candidate experience.</div>
+        <div class="cap-text"><strong>Application completion patterns.</strong> Session duration, edit behavior, and paste activity during form fill, observed passively as metadata. Not what the application contains. How it was produced.</div>
       </div>
       <div class="capability-item">
         <div class="cap-dot"></div>
@@ -401,11 +423,11 @@
       </div>
       <div class="capability-item">
         <div class="cap-dot"></div>
-        <div class="cap-text"><strong>Human decision at every gate.</strong> No automated rejections. The system surfaces evidence. The recruiter or hiring manager decides. Full audit trail for any compliance review. EU AI Act compliant by design.</div>
+        <div class="cap-text"><strong>Human decision at every gate.</strong> No automated rejections. The system surfaces evidence. The recruiter or hiring manager decides. Full audit trail for any compliance review. Designed for transparency and human oversight, aligned with EU AI Act requirements.</div>
       </div>
       <div class="capability-item">
         <div class="cap-dot"></div>
-        <div class="cap-text"><strong>Cross-company pattern detection.</strong> Over time, behavioral patterns seen across multiple employers produce a signal baseline no single employer can build alone. A candidate who has applied to 50 companies in 6 weeks looks different from one who applied to 3.</div>
+        <div class="cap-text"><strong>Cross-company signal baseline.</strong> Over time, application patterns seen across multiple employers produce a baseline no single employer can build alone. An applicant submitting to 50 roles in 6 weeks shows different engagement characteristics than one who applied to 3.</div>
       </div>
     </div>
   </section>
@@ -427,7 +449,7 @@
       </div>
       <div class="capability-item">
         <div class="cap-dot"></div>
-        <div class="cap-text"><strong>No IT review required at pilot stage.</strong> Pre-employment data never touches internal systems. There is no enterprise integration at the pilot. Procurement sits in the TA tools budget line, same sign-off path as LinkedIn Recruiter or HireVue. No CISO review gate.</div>
+        <div class="cap-text"><strong>No IT review required at pilot stage.</strong> Pre-employment data never touches internal systems. There is no enterprise integration at the pilot. Procurement sits in the TA tools budget line. Same sign-off path as LinkedIn Recruiter or HireVue.</div>
       </div>
       <div class="capability-item">
         <div class="cap-dot"></div>
@@ -445,7 +467,7 @@
     <div class="traction-grid">
       <div class="traction-item">
         <div class="traction-co">HSBC</div>
-        <div class="traction-detail">Innovation Banking team engaged. ROI framing confirmed by Director, HSBC Innovation Banking: "Every call costs the bank quite a bit of money. If you can screen more of these out before they even get to the call, that would be great." Production-grade demo built on live HSBC job posting context.</div>
+        <div class="traction-detail">Innovation Banking team engaged. ROI framing confirmed by Director, HSBC Innovation Banking: "Every call costs the bank quite a bit of money. If you can screen more of these out before they even get to the call, that would be great." Demo built on live HSBC job posting context.</div>
       </div>
       <div class="traction-item">
         <div class="traction-co">NVIDIA</div>
@@ -479,17 +501,17 @@
     <div class="prompt-label">For discussion: three questions</div>
     <p>This brief is a starting point for a conversation, not a conclusion. The three questions below are designed to surface whether the problem, the approach, and the adoption path each make sense from your team's vantage point.</p>
     <div class="questions" style="margin-top:16px;gap:12px;">
-      <div style="padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;">
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-muted);margin-bottom:6px;">On the problem</div>
-        <div class="q" style="border-left:none;padding-left:0;font-size:13px;color:var(--text);">Where in your current hiring pipeline do you feel the most uncertainty about what you are actually evaluating, and what does it typically cost your team when a mismatch surfaces late?</div>
+      <div class="discussion-question">
+        <div class="question-label">On the problem</div>
+        <div class="question-text">When a hire has not worked out in the first 90 days, what misalignment typically surfaced, and how far into the process did it take to discover it?</div>
       </div>
-      <div style="padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;">
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--amber);margin-bottom:6px;">On the approach</div>
-        <div class="q" style="border-left:none;padding-left:0;font-size:13px;color:var(--text);">If a signal layer ran before your team reviewed a single application, what would it need to tell you, and how would you know whether to trust it?</div>
+      <div class="discussion-question">
+        <div class="question-label amber">On the approach</div>
+        <div class="question-text">What single output from a submission would change how your team prioritizes the queue, and what would you need to see in the first month to trust that output against your actual hiring outcomes?</div>
       </div>
-      <div style="padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;">
-        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-muted);margin-bottom:6px;">On adoption</div>
-        <div class="q" style="border-left:none;padding-left:0;font-size:13px;color:var(--text);">What would have to be true about deployment, procurement, and candidate experience for a 6-week pilot to run without becoming a project in itself?</div>
+      <div class="discussion-question">
+        <div class="question-label">On adoption</div>
+        <div class="question-text">For a 6-week pilot to run without becoming a project, what is the single biggest constraint: timeline, budget, legal review, or ATS integration, and what would unblock it?</div>
       </div>
     </div>
   </div>
