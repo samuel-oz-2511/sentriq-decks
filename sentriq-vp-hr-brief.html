@@ -249,7 +249,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.16em;
-    color: var(--amber);
+    color: var(--text-muted);
     margin-bottom: 10px;
   }
   .discussion-box p {
@@ -269,6 +269,36 @@
     line-height: 1.6;
     padding-left: 14px;
     border-left: 2px solid var(--amber);
+  }
+
+  /* CONCEPT BLOCK */
+  .concept-box {
+    padding: 24px 28px;
+    background: rgba(232,160,32,0.06);
+    border: 1px solid rgba(232,160,32,0.3);
+    border-left: 3px solid var(--amber);
+    border-radius: 0 10px 10px 0;
+  }
+  .concept-label {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .concept-label.with-it { color: var(--amber); }
+  .concept-text {
+    font-size: 12px;
+    color: var(--text-sub);
+    line-height: 1.7;
+  }
+  .concept-footer {
+    margin-top: 14px;
+    font-size: 11px;
+    color: var(--text-muted);
+    border-top: 1px solid rgba(232,160,32,0.2);
+    padding-top: 12px;
   }
 
   /* DISCUSSION QUESTIONS */
@@ -376,25 +406,25 @@
   <!-- CONCEPT ANCHOR -->
   <section>
     <div class="section-label">What the submission layer means in practice</div>
-    <div style="padding:24px 28px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.3);border-left:3px solid var(--amber);border-radius:0 10px 10px 0;">
+    <div class="concept-box">
       <div class="concept-cols" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
         <div>
-          <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-muted);margin-bottom:8px;">Without it</div>
-          <p style="font-size:12px;color:var(--text-sub);line-height:1.7;">A team posts a role, receives 200 applications, and begins reviewing. A phone screen costs $150. A technical assessment costs $300. A panel costs $1,800. Somewhere in that sequence, a mismatch surfaces. The team paid for every step between submission and discovery.</p>
+          <div class="concept-label">Without it</div>
+          <p class="concept-text">A team posts a role, receives 200 applications, and begins reviewing. A phone screen costs $150. A technical assessment costs $300. A panel costs $1,800. Somewhere in that sequence, a mismatch surfaces. The team paid for every step between submission and discovery.</p>
         </div>
         <div>
-          <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--amber);margin-bottom:8px;">With it</div>
-          <p style="font-size:12px;color:var(--text-sub);line-height:1.7;">By the time the recruiter opens the first file, a signal is already attached. The application that claimed four years of experience but was completed in nine minutes with 80% paste activity is flagged. A targeted challenge fires automatically. The recruiter knows before the phone screen.</p>
+          <div class="concept-label with-it">With it</div>
+          <p class="concept-text">By the time the recruiter opens the first file, a signal is already attached. The application that claimed four years of experience but showed rush completion and heavy copying is flagged for review. A targeted challenge fires. The recruiter has context before the phone screen.</p>
         </div>
       </div>
-      <p style="margin-top:14px;font-size:11px;color:var(--text-muted);border-top:1px solid rgba(232,160,32,0.2);padding-top:12px;">No automated rejections. The system surfaces evidence. The recruiter decides. Human oversight at every gate.</p>
+      <p class="concept-footer">No automated rejections. The system surfaces evidence. The recruiter decides. Human oversight at every gate.</p>
     </div>
   </section>
 
   <!-- SECTION 2: THE GAP -->
   <section>
     <div class="section-label">The structural gap</div>
-    <p class="body-text">Every tool in the TA stack evaluates what a candidate submitted. None of them observe how it was submitted.</p>
+    <p class="body-text">Every tool in the TA stack evaluates what a candidate submitted. None of them capture the behavioral context visible during submission itself: session duration, editing patterns, paste activity.</p>
     <p class="body-text" style="margin-top:12px;">The behavioral context present during the application itself, the signals that would tell a recruiter whether the work in front of them reflects the person behind it, disappears the moment the file is uploaded. What remains is a polished output that looks like every other polished output, and must be evaluated on its own terms by a recruiter who has dozens more in the same queue.</p>
     <div class="callout" style="margin-top:16px;">
       <p>AI application tooling has made it easy to produce polished, keyword-optimized applications with no direct connection to the experience being claimed. The ATS scores it highly. The recruiter opens it. Six rounds later, a mismatch surfaces that was visible from the first interaction, but only in hindsight.</p>
@@ -415,7 +445,7 @@
       </div>
       <div class="capability-item">
         <div class="cap-dot"></div>
-        <div class="cap-text"><strong>Claim consistency tracking across stages.</strong> What was stated at application is held against what surfaces in a screen, a test result, or an interview transcript. Gaps auto-flag without requiring a recruiter to remember or cross-reference manually.</div>
+        <div class="cap-text"><strong>Claim consistency tracking across stages.</strong> What was stated at application is available as a reference point through each subsequent stage. When an inconsistency surfaces, the recruiter has the original submission context to compare against. No automated decisions.</div>
       </div>
       <div class="capability-item">
         <div class="cap-dot"></div>
@@ -423,11 +453,11 @@
       </div>
       <div class="capability-item">
         <div class="cap-dot"></div>
-        <div class="cap-text"><strong>Human decision at every gate.</strong> No automated rejections. The system surfaces evidence. The recruiter or hiring manager decides. Full audit trail for any compliance review. Designed for transparency and human oversight, aligned with EU AI Act requirements.</div>
+        <div class="cap-text"><strong>Human decision at every gate.</strong> No automated rejections. The system surfaces evidence. The recruiter or hiring manager decides. Full audit trail maintained. All decisions transparent and human-driven.</div>
       </div>
       <div class="capability-item">
         <div class="cap-dot"></div>
-        <div class="cap-text"><strong>Cross-company signal baseline.</strong> Over time, application patterns seen across multiple employers produce a baseline no single employer can build alone. An applicant submitting to 50 roles in 6 weeks shows different engagement characteristics than one who applied to 3.</div>
+        <div class="cap-text"><strong>Cross-company signal baseline.</strong> Over time, application patterns across multiple employers build a baseline no single employer can construct alone. Cohort-level data, not individual tracking. An applicant submitting to 50 roles in 6 weeks sits in a different distribution than one who applied to 3.</div>
       </div>
     </div>
   </section>
@@ -445,7 +475,7 @@
       </div>
       <div class="capability-item">
         <div class="cap-dot"></div>
-        <div class="cap-text"><strong>No change to how candidates apply.</strong> The signal layer is passive. Candidates complete the same application they always have, on the same platform. Nothing is added to the candidate experience. There is nothing to disclose or explain.</div>
+        <div class="cap-text"><strong>No change to how candidates apply.</strong> The layer is passive. Candidates complete the same form, on the same platform. No new fields, no new steps, no disclosure required.</div>
       </div>
       <div class="capability-item">
         <div class="cap-dot"></div>
@@ -462,7 +492,7 @@
 
   <!-- SECTION 5: TRACTION / VALIDATION -->
   <section>
-    <div class="section-label">Early validation conversations</div>
+    <div class="section-label">Early design partner conversations</div>
     <p class="body-text" style="margin-bottom:14px;">The companies below have each initiated conversations about piloting this layer in their live hiring pipelines.</p>
     <div class="traction-grid">
       <div class="traction-item">
@@ -490,7 +520,7 @@
         Sentriq
         <span class="company-tag">Seed Stage</span>
       </div>
-      <p>Sentriq is building the application integrity layer for enterprise TA teams. The product operates at the point of application submission, before the first recruiter opens a file, and surfaces a signal stack across behavioral, consistency, and role-fit dimensions. No automated rejections. Human oversight at every gate. Platform-agnostic and deployable alongside any ATS.</p>
+      <p>Sentriq is building the application integrity layer for enterprise TA teams. The product operates at the point of application submission, before the first recruiter opens a file, and surfaces integrity signals across behavioral, consistency, and role-fit dimensions. No automated rejections. Human oversight at every gate. Platform-agnostic and deployable alongside any ATS.</p>
       <p style="margin-top:8px;">Founded by Samuel Kemper (enterprise TA operator, former founder of TechRuiter IL, daily Greenhouse and Workday user) and Ben Czarninski (IDF intelligence engineering, AppSec at AppsFlyer, behavioral systems). Pre-revenue, demo stage, raising seed.</p>
       <div class="contact-line">Design partner inquiries: <a href="mailto:samuel@sentriq.co">samuel@sentriq.co</a> &middot; <a href="https://sentriq.co" target="_blank">sentriq.co</a></div>
     </div>
@@ -511,7 +541,7 @@
       </div>
       <div class="discussion-question">
         <div class="question-label">On adoption</div>
-        <div class="question-text">For a 6-week pilot to run without becoming a project, what is the single biggest constraint: timeline, budget, legal review, or ATS integration, and what would unblock it?</div>
+        <div class="question-text">What would your team need from a vendor in the first 30 days of a pilot to move from exploration to full deployment, and what is the one thing that would make that path shorter?</div>
       </div>
     </div>
   </div>
