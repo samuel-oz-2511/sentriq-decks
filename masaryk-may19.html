@@ -181,6 +181,7 @@
     .moat-watermark { position:absolute; bottom:-10px; right:8px; font-size:72px; font-weight:800; color:rgba(255,255,255,0.07); letter-spacing:-0.04em; line-height:1; pointer-events:none; user-select:none; }
 
     .hero-quote { margin-top:18px; padding:22px 32px; background:rgba(232,160,32,0.06); border-left:3px solid #E8A020; border-radius:0 12px 12px 0; }
+    @media (max-width: 640px) { .hero-quote { padding:14px 16px; } }
     .hero-quote p { font-size:20px; color:rgba(255,255,255,0.94); font-weight:700; letter-spacing:-0.02em; line-height:1.4; }
     .hero-quote small { display:block; font-size:12px; color:rgba(255,255,255,0.38); margin-top:8px; letter-spacing:0.02em; }
 
@@ -339,11 +340,11 @@
 </div>
 </div>
 
-<!-- SLIDE 4: THE PROBLEM -->
+<!-- SLIDE 3: THE PROBLEM -->
 <div class="slide bg-dark" data-index="2">
 <div class="slide-inner">
     <span class="label">The Problem</span>
-    <h2>Application signal has collapsed. <span style="color:var(--amber);">Recruiters advance candidates based on what looks real, not what is.</span></h2>
+    <h2>Application signal has collapsed. <span style="color:rgba(255,255,255,0.75);">Recruiters advance candidates based on what looks real, not what is.</span></h2>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px;">
         <div style="padding:18px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.15);border-radius:12px;text-align:center;">
             <div class="stat-num" style="color:var(--amber);">25%</div>
@@ -362,19 +363,19 @@
         </div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
-        <div style="padding:16px 18px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.15);border-radius:12px;">
-            <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">The signal destruction economy</div>
-            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;">AI resume tools and mass-apply bots form a fast-growing market. YC-funded Tsenta sends 1,500 applications per day for a single candidate. Every ATS ingests them without distinction.</p>
+        <div style="padding:16px 18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:12px;">
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">The signal destruction economy</div>
+            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;">AI resume tools and mass-apply scripts form a fast-growing market. YC-funded Tsenta sends 1,500 applications per day for a single candidate. Every ATS ingests them without distinction.</p>
         </div>
         <div style="padding:16px 18px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.15);border-radius:12px;">
             <div style="font-size:10px;font-weight:700;color:rgba(232,160,32,0.85);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Why 2026 is the moment</div>
-            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;"><strong style="color:var(--text);">Force 1:</strong> AI destroyed application signal quality in 18 months. <strong style="color:var(--text);">Force 2:</strong> The EU AI Act classifies hiring AI as high-risk from August 2, 2026. <strong style="color:var(--text);">Force 3:</strong> ATS incumbents are single-employer data silos by design -- their moat is data lock-in. Sharing cross-employer candidate signal would expose one customer's data to another, undermining the trust model they sell. This is economic and architectural, not just contractual. All three forces peak simultaneously.</p>
+            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;"><strong style="color:var(--text);">Force 1:</strong> AI destroyed application signal quality in 18 months. <strong style="color:var(--text);">Force 2:</strong> The EU AI Act classifies hiring AI as high-risk from August 2, 2026. <strong style="color:var(--text);">Force 3:</strong> ATS incumbents are single-employer data silos by design: their moat is data lock-in. Sharing cross-employer candidate signal would expose one customer's data to another, undermining the trust model they sell. This is economic and architectural, not just contractual. All three forces peak simultaneously.</p>
         </div>
     </div>
     <div style="padding:14px 20px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.18);border-radius:12px;display:flex;align-items:flex-start;gap:12px;">
         <div style="flex-shrink:0;width:3px;min-height:36px;background:var(--amber);border-radius:2px;align-self:stretch;"></div>
         <div>
-            <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">The problem is not volume. It is missing signal at the source.</div>
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">The problem is not volume. It is missing signal at the source.</div>
             <p style="font-size:12px;color:var(--text-sub);line-height:1.65;margin:0;">Every ATS shows what was submitted. None tell the recruiter, before opening a single file, whether the submission deserves their time. The gap is structural. Every adjacent player can see it. None of them can fill it.</p>
         </div>
     </div>
@@ -384,7 +385,7 @@
 </div>
 </div>
 
-<!-- SLIDE 12: TEAM -->
+<!-- SLIDE 4: TEAM -->
 <div class="slide bg-dark" data-index="12">
 <div class="slide-inner">
     <span class="label">The Team</span>
@@ -402,11 +403,11 @@
             <div style="display:flex;flex-direction:column;gap:8px;">
                 <div style="display:flex;gap:10px;align-items:flex-start;">
                     <div style="width:5px;height:5px;border-radius:50%;background:var(--amber);margin-top:5px;flex-shrink:0;"></div>
-                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">IDF Unit 81.</strong> Special operations tech unit. Innovation Officer interfacing with cyber and intelligence units on classified defense missions.</p>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">Hands-on recruiter: Greenhouse, Comeet, Workday.</strong> Founded TechRuiter IL, 7 headhunters, defense and tech placements.</p>
                 </div>
                 <div style="display:flex;gap:10px;align-items:flex-start;">
                     <div style="width:5px;height:5px;border-radius:50%;background:var(--amber);margin-top:5px;flex-shrink:0;"></div>
-                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">Hands-on recruiter: Greenhouse, Comeet, Workday.</strong> Founded TechRuiter IL, 7 headhunters, defense and tech placements.</p>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">Enterprise GTM, HR operator.</strong> HSBC conversations active from week one.</p>
                 </div>
                 <div style="display:flex;gap:10px;align-items:flex-start;">
                     <div style="width:5px;height:5px;border-radius:50%;background:var(--amber);margin-top:5px;flex-shrink:0;"></div>
@@ -414,7 +415,7 @@
                 </div>
                 <div style="display:flex;gap:10px;align-items:flex-start;">
                     <div style="width:5px;height:5px;border-radius:50%;background:var(--amber);margin-top:5px;flex-shrink:0;"></div>
-                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">Enterprise GTM, HR operator.</strong> HSBC conversations active from week one.</p>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">IDF Unit 81.</strong> Special operations technology. Built the operational discipline to drive complex programs under pressure.</p>
                 </div>
             </div>
         </div>
@@ -430,7 +431,7 @@
             <div style="display:flex;flex-direction:column;gap:8px;">
                 <div style="display:flex;gap:10px;align-items:flex-start;">
                     <div style="width:5px;height:5px;border-radius:50%;background:#44CC88;margin-top:5px;flex-shrink:0;"></div>
-                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">Two IDF intelligence units:</strong> Tamar (offensive cyber) and Yachlam (full-stack engineering).</p>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">Two IDF intelligence units:</strong> Tamar and Yachlam (full-stack engineering).</p>
                 </div>
                 <div style="display:flex;gap:10px;align-items:flex-start;">
                     <div style="width:5px;height:5px;border-radius:50%;background:#44CC88;margin-top:5px;flex-shrink:0;"></div>
@@ -449,7 +450,7 @@
     </div>
     <div style="margin-top:10px;padding:14px 18px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.2);border-radius:12px;">
         <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">The Israeli Advantage</div>
-        <p style="font-size:12px;color:rgba(255,255,255,0.85);line-height:1.6;margin-bottom:10px;">The product requires founder-market fit in two domains simultaneously: someone who ran recruiting from the inside (Samuel: TechRuiter, 30+ ATS experiments, daily Greenhouse/Workday) and someone who detects behavioral anomalies at scale (Ben: offensive cyber, AppSec at AppsFlyer, behavioral signal work). No competitor has this pairing. This is the pattern: operator who lived the problem, engineer who can detect at scale.</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.85);line-height:1.6;margin-bottom:10px;">The product requires founder-market fit in two domains simultaneously: someone who ran recruiting from the inside (Samuel: TechRuiter, 30+ ATS experiments, daily Greenhouse/Workday) and someone who engineers behavioral signal systems at scale (Ben: IDF intelligence, AppSec at AppsFlyer, behavioral signal work). No competitor has this pairing. This is the pattern: operator who lived the problem, engineer who can build the detection layer.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
             <div style="padding:10px 16px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.15);border-radius:10px;text-align:center;">
                 <div style="font-size:22px;font-weight:700;color:var(--amber);">30+</div>
@@ -459,18 +460,13 @@
                 <div style="font-size:22px;font-weight:700;color:var(--amber);">25</div>
                 <div style="font-size:10px;color:var(--muted);">Devs trained</div>
             </div>
-            <div style="padding:10px 16px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.15);border-radius:10px;text-align:center;">
-                <div style="font-size:22px;font-weight:700;color:var(--amber);">$160K+</div>
-                <div style="font-size:10px;color:var(--muted);">HSBC: cost per fraudulent tech hire</div>
-                <div style="font-size:9px;color:var(--muted);margin-top:2px;opacity:0.7;">C.S. Lai, Director, HSBC Innovation Banking</div>
-            </div>
         </div>
     </div>
     <div style="margin-top:10px;padding:14px 18px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.25);border-radius:12px;">
         <div style="display:grid;grid-template-columns:1fr;gap:12px;">
             <div>
-                <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px;">Product Advisor</div>
-                <p style="font-size:12px;color:var(--text-sub);line-height:1.55;"><span style="font-weight:700;color:var(--text);">Eliana Carmel Gilboa</span> <span style="color:var(--amber);">CPO, Booking Holdings. Former CPO, Agoda (40+ countries).</span> Validates at CPO scale, opens Fortune 500 doors, makes the compliance case to boards.</p>
+                <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px;">Chief People Officer Perspective</div>
+                <p style="font-size:12px;color:var(--text-sub);line-height:1.55;"><span style="font-weight:700;color:var(--text);">Eliana Carmel Gilboa</span> <span style="color:var(--amber);">Chief People Officer, Booking Holdings. Former Chief People Officer, Agoda (40+ countries).</span> Validated the problem at CPO scale independently. Positioned to open Fortune 500 People leader doors and make the compliance case HR teams alone cannot make. Advisory discussion underway.</p>
             </div>
         </div>
     </div>
@@ -482,7 +478,7 @@
 <div class="slide-inner">
     <span class="label">The Missing Layer</span>
     <h2>The incumbents cannot fill this gap. <span style="color:var(--amber);">Not as a product decision. As an architectural reality.</span></h2>
-    <p style="font-size:14px;color:rgba(255,255,255,0.55);max-width:760px;line-height:1.6;margin-bottom:16px;">ATS incumbents are single-employer data silos -- their moat is data lock-in, and sharing cross-employer candidate signal would undermine it. Assessment and background check tools run after the submission already exists. Building The Hiring Captcha requires neutral ground, pre-submission timing, and direct candidate consent: no adjacent player has all three.</p>
+    <p style="font-size:14px;color:rgba(255,255,255,0.55);max-width:760px;line-height:1.6;margin-bottom:16px;">ATS incumbents are single-employer data silos. Their moat is data lock-in, and sharing cross-employer candidate signal would undermine it. Assessment and background check tools run after the submission already exists. Building The Hiring Captcha requires neutral ground, pre-submission timing, and direct candidate consent: no adjacent player has all three.</p>
 
     <div style="margin-bottom:14px;">
         <div class="stack-layer">
@@ -544,16 +540,16 @@
     </div>
     <div style="margin-top:12px;padding:13px 18px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.18);border-radius:10px;border-left:3px solid var(--amber);">
         <div style="font-size:9px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Bottoms-up milestone</div>
-        <p style="font-size:12px;color:rgba(255,255,255,0.8);line-height:1.65;">20 logos. $984K ARR. 19 months from close. Founder-led, US financial services + enterprise tech. Blended across Pilot, Growth, and Scale tiers -- customers sign at lower tiers and expand. Every employer added to the graph makes detection more accurate for every other.</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.8);line-height:1.65;">20 logos. $984K ARR. 19 months from close. Founder-led, US financial services + enterprise tech. Blended across Pilot, Growth, and Scale tiers. Customers sign at lower tiers and expand. Every employer added to the graph makes detection more accurate for every other.</p>
         <p style="font-size:12px;font-weight:700;color:var(--amber);margin-top:6px;">Network returns compound before Series A.</p>
     </div>
 </div>
 </div>
 
-<!-- SLIDE 4: LIFECYCLE -->
+<!-- SLIDE 6: LIFECYCLE -->
 <div class="slide bg-dark" data-index="4">
 <div class="slide-inner">
-    <span class="label">The Shift-Left Advantage</span>
+    <span class="label">Signal Before the Spend</span>
     <h2>Enterprises verify integrity <span style="color:var(--amber);">after $1,900+ per finalist is already invested.</span></h2>
     <p style="font-size:15px;color:rgba(255,255,255,0.55);max-width:700px;margin:10px 0 18px;line-height:1.6;">Sentriq operates at the moment of application. Before a single recruiter, engineer, or executive minute is committed.</p>
     <div class="lc-grid-wrap">
@@ -618,8 +614,8 @@
             <div style="font-size:12px;color:rgba(255,255,255,0.55);line-height:1.6;">After 6+ interview rounds. After $1,900+ in recruiter, engineer, and executive time is already gone.</div>
         </div>
         <div style="padding:14px 18px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;">
-            <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px;">The shift-left principle</div>
-            <div style="font-size:12px;color:rgba(255,255,255,0.55);line-height:1.6;">In security, defects caught at origin cost 6x less to fix than those caught post-deployment (IBM Systems Sciences Institute, 2002). Sentriq applies shift-left to hiring: detect at the source, not after the damage.</div>
+            <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px;">Every stage after submission costs money</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.55);line-height:1.6;">A phone screen costs $150. A skills test costs $300. A panel costs $1,800. Knowing at submission saves every dollar that follows. Sentriq is the only layer that runs before any of it.</div>
         </div>
     </div>
     <div style="margin-top:10px;padding:11px 18px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.15);border-radius:8px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
@@ -632,7 +628,7 @@
 </div>
 </div>
 
-<!-- SLIDE 6: THE PRODUCT -->
+<!-- SLIDE 7: THE PRODUCT -->
 <div class="slide bg-dark" data-index="6">
 <div class="slide-inner">
     <span class="label">The Product</span>
@@ -665,7 +661,7 @@
         <div style="padding:16px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.18);border-radius:12px;">
             <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Layer 1</div>
             <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px;">Behavioral Baseline</div>
-            <p style="font-size:11px;color:var(--text-sub);line-height:1.6;margin-bottom:10px;">Behavioral metadata captured as the application is filled: keystroke dynamics, field edit frequency, copy-paste ratio, session entropy, time-on-field. Invisible. No friction. Detects bot activity, overfitting, skills anomalies, and synthetic submissions before they enter the ATS.</p>
+            <p style="font-size:11px;color:var(--text-sub);line-height:1.6;margin-bottom:10px;">Behavioral metadata captured as the application is filled: keystroke dynamics, field edit frequency, copy-paste ratio, session entropy, time-on-field. Invisible. No friction. Detects automated submissions, overfitting, skills anomalies, and synthetic applications before they enter the ATS.</p>
             <div style="display:flex;flex-wrap:wrap;gap:4px;">
                 <span class="signal-tag">Automated submissions</span>
                 <span class="signal-tag">CV overfitting</span>
@@ -708,7 +704,7 @@
         <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;">Live demos</div>
         <a href="https://demo.sentriq.co/hsbc/threat-intel-analyst/sentriq" target="_blank" style="display:flex;align-items:center;gap:7px;padding:8px 14px;background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.25);border-radius:8px;text-decoration:none;">
             <span style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.08em;">Candidate side</span>
-            <span style="font-size:10px;color:rgba(255,255,255,0.45);">demo.sentriq.co/hsbc/threat-intel-analyst/sentriq</span>
+            <span style="font-size:10px;color:rgba(255,255,255,0.45);">demo.sentriq.co — HSBC hiring pipeline</span>
         </a>
         <a href="https://demo.sentriq.co/workday" target="_blank" style="display:flex;align-items:center;gap:7px;padding:8px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;text-decoration:none;">
             <span style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:0.08em;">Recruiter side</span>
@@ -719,7 +715,7 @@
 </div>
 
 
-<!-- SLIDE 9: GAP ASSESSOR -->
+<!-- SLIDE 8: GAP ASSESSOR -->
 <div class="slide bg-dark" data-index="9">
 <div class="slide-inner">
     <span class="label">Gap Assessor</span>
@@ -748,31 +744,31 @@
 
     <div style="display:grid;grid-template-columns:3fr 2fr;gap:14px;">
         <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;">
-            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-dim);margin-bottom:12px;">Example: senior finance role. Challenge fires, $1,800 panel avoided.</div>
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-dim);margin-bottom:12px;">Example: mid-level backend engineer, remote. Challenge fires, $1,400 panel avoided.</div>
             <div style="display:flex;flex-direction:column;gap:6px;">
                 <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 10px;background:rgba(232,160,32,0.06);border-radius:6px;">
                     <div style="font-size:10px;font-weight:700;color:rgba(232,160,32,0.6);white-space:nowrap;padding-top:1px;min-width:90px;">Application</div>
-                    <div style="font-size:11px;color:var(--text-sub);">Claims 6 years FP&amp;A and Series B fundraise experience. Claim record created at submission.</div>
+                    <div style="font-size:11px;color:var(--text-sub);">Claims 4 years Python and REST API development, including async service work at scale. Claim record created at submission.</div>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 10px;background:rgba(255,255,255,0.02);border-radius:6px;">
                     <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.28);white-space:nowrap;padding-top:1px;min-width:90px;">HR Screen</div>
-                    <div style="font-size:11px;color:var(--text-sub);">Verbal confirmation of fundraise background. Consistent. Monitoring continues.</div>
+                    <div style="font-size:11px;color:var(--text-sub);">Verbal confirmation of remote work history and async systems experience. Consistent. Monitoring continues.</div>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 10px;background:rgba(255,255,255,0.02);border-radius:6px;">
                     <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.28);white-space:nowrap;padding-top:1px;min-width:90px;">Skills Test</div>
-                    <div style="font-size:11px;color:var(--text-sub);">Financial modeling 40% below expected range for claimed seniority. <span style="color:var(--amber);font-weight:700;">Gap detected. Challenge auto-constructed and issued.</span></div>
+                    <div style="font-size:11px;color:var(--text-sub);">Async Python task handles concurrent writes incorrectly. Expected pattern is trivial for claimed seniority. <span style="color:var(--amber);font-weight:700;">Gap detected. Challenge auto-constructed and issued.</span></div>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:10px;padding:9px 12px;background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.3);border-radius:6px;">
                     <div style="font-size:10px;font-weight:700;color:var(--amber);white-space:nowrap;padding-top:1px;min-width:90px;">Challenge</div>
-                    <div style="font-size:11px;color:rgba(232,160,32,0.9);">"Walk through the cap table mechanics of a $15M Series B with a prior SAFE at an $8M cap." Built for this exact gap. 48 hours. Requires experiential knowledge no LLM can generate in context.</div>
+                    <div style="font-size:11px;color:rgba(232,160,32,0.9);">"This async service has a race condition under concurrent writes. Identify the bug and submit the corrected version." Built for this exact gap. 48 hours. Requires working knowledge no LLM can reliably produce in context.</div>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 10px;background:rgba(255,255,255,0.02);border-radius:6px;">
                     <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.28);white-space:nowrap;padding-top:1px;min-width:90px;">Result</div>
-                    <div style="font-size:11px;color:var(--text-sub);">Submitted work is incomplete. Series B mechanics incorrect. A 6-year FP&amp;A professional completes this in under an hour. <span style="color:var(--amber);font-weight:700;">Signal: high confidence.</span></div>
+                    <div style="font-size:11px;color:var(--text-sub);">Submitted fix introduces a second bug. A 4-year Python engineer resolves this in under 20 minutes. <span style="color:var(--amber);font-weight:700;">Signal: high confidence.</span></div>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:10px;padding:9px 12px;background:rgba(68,204,136,0.06);border:1px solid rgba(68,204,136,0.22);border-radius:6px;">
                     <div style="font-size:10px;font-weight:700;color:#44CC88;white-space:nowrap;padding-top:1px;min-width:90px;">Sentriq</div>
-                    <div style="font-size:11px;color:rgba(68,204,136,0.9);">Evidence delivered before the interview is scheduled. $500 tech interview and $1,800 final panel never happen. Recruiter decides with proof, not a hunch. Candidate had a fair opportunity. Zero automated rejections.</div>
+                    <div style="font-size:11px;color:rgba(68,204,136,0.9);">Evidence delivered before the technical interview is scheduled. $600 pair programming screen and $1,400 final panel never happen. Recruiter decides with proof, not a hunch. Candidate had a fair opportunity. Zero automated rejections.</div>
                 </div>
             </div>
         </div>
@@ -802,7 +798,7 @@
 </div>
 </div>
 
-<!-- SLIDE 8: NETWORK EFFECTS -->
+<!-- SLIDE 9: NETWORK EFFECTS -->
 <div class="slide bg-dark" data-index="8">
 <div class="slide-inner">
     <span class="label">Network Effects</span>
@@ -826,20 +822,20 @@
                 </div>
             </div>
             <div style="padding:14px 18px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;text-align:center;">
-                <p style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.6;"><strong style="color:var(--amber);">Network signal threshold: 15 companies.</strong><br/><span style="font-size:11px;color:var(--muted);">At 15 customers, cross-employer behavioral patterns become consistently detectable -- signals no single employer sees alone. Ben's model demonstrates the threshold. Target: end of year 1.</span></p>
+                <p style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.6;"><strong style="color:var(--amber);">Network signal threshold: 15 companies.</strong><br/><span style="font-size:11px;color:var(--muted);">At 15 customers, cross-employer behavioral patterns become consistently detectable: signals no single employer sees alone. Ben's model demonstrates the threshold. Target: end of year 1.</span></p>
             </div>
         </div>
         <div style="padding:20px;background:rgba(232,160,32,0.03);border:1px solid rgba(232,160,32,0.15);border-radius:14px;display:flex;flex-direction:column;gap:10px;">
             <h3 style="font-size:13px;color:var(--amber);margin-bottom:4px;">What Sentriq becomes at scale</h3>
             <p style="font-size:12px;color:var(--text-sub);line-height:1.65;">At 15 customers, the graph returns signal no single employer can see alone. At 100, coordinated campaigns are detected before reaching any one company.</p>
-            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;">ATS incumbents are single-employer data silos -- their entire business model depends on keeping each customer's data inside their walls. Sharing cross-employer candidate signal would expose one customer's data to another, destroying the trust model they sell. Sentriq requires neutral ground and direct candidate consent: neither is available to any ATS.</p>
+            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;">ATS incumbents are single-employer data silos. Their entire business model depends on keeping each customer's data inside their walls. Sharing cross-employer candidate signal would expose one customer's data to another, destroying the trust model they sell. Sentriq requires neutral ground and direct candidate consent: neither is available to any ATS.</p>
             <div style="padding:10px 14px;background:rgba(232,160,32,0.08);border-radius:8px;border:1px solid rgba(232,160,32,0.2);">
                 <p style="font-size:12px;color:var(--amber);font-weight:600;text-align:center;">The more companies join the network, the harder it becomes to game any of them. Network density is the moat.</p>
             </div>
         </div>
     </div>
     <div style="margin-top:14px;background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.22);border-radius:10px;padding:12px 18px;">
-        <p style="font-size:12px;color:rgba(255,255,255,0.85);line-height:1.6;">Every enterprise customer that joins strengthens the graph for all others. An investor with an enterprise software portfolio accelerates the seed node supply -- portfolio companies become the first nodes.</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.85);line-height:1.6;">Every enterprise customer that joins strengthens the graph for all others. An investor with an enterprise software portfolio accelerates the seed node supply: portfolio companies become the first nodes.</p>
     </div>
 </div>
 </div>
@@ -877,11 +873,11 @@
     <rect x="198" y="53" width="420" height="12" rx="2" fill="rgba(224,85,85,0.22)"/>
     <text x="86" y="63" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.65)">Crosschq</text>
     <text x="408" y="63" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.45)">ApplicantX</text>
-    <!-- ROW 3: Tofu (APPLICATION to SCREENING) -->
+    <!-- ROW 3: Phenom (APPLICATION to HIRE) -->
     <rect x="0" y="70" width="620" height="22" fill="rgba(255,255,255,0.01)"/>
-    <text x="86" y="85" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.65)">Tofu</text>
-    <rect x="198" y="75" width="212" height="12" rx="2" fill="rgba(200,120,60,0.28)"/>
-    <text x="304" y="85" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.45)">CV forensics</text>
+    <text x="86" y="85" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.65)">Phenom</text>
+    <rect x="198" y="75" width="420" height="12" rx="2" fill="rgba(200,120,60,0.28)"/>
+    <text x="408" y="85" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(255,255,255,0.45)">AI talent experience</text>
     <!-- ROW 4: Endorsed (APPLICATION to SCREENING) -->
     <text x="86" y="107" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9.5" font-weight="600" fill="rgba(255,255,255,0.65)">Endorsed</text>
     <rect x="198" y="97" width="212" height="12" rx="2" fill="rgba(200,120,60,0.22)"/>
@@ -927,6 +923,7 @@
     <!-- SUBMIT boundary label -->
     <text x="196" y="282" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7" font-weight="700" fill="rgba(232,160,32,0.4)">SUBMIT</text>
   </svg>
+  <div style="font-size:9px;color:var(--muted);margin-top:5px;text-align:right;opacity:0.6;">All market players shown by funnel stage. Primary competitive analysis in table below.</div>
 </div>
 <div style="overflow-x:auto;margin-top:14px;margin-bottom:16px;">
   <table style="width:100%;border-collapse:collapse;font-size:10.5px;">
@@ -940,8 +937,8 @@
     <tbody>
       <tr style="border-bottom:1px solid var(--border);">
         <td style="padding:7px 10px;font-weight:700;color:var(--text);">Gem <span style="font-size:8px;font-weight:600;padding:1px 5px;border-radius:3px;background:rgba(232,160,32,0.15);color:var(--amber);border:1px solid rgba(232,160,32,0.3);margin-left:4px;">Direct</span></td>
-        <td style="padding:7px 10px;color:var(--text-sub);">Recruiting CRM with a fraud detection feature bolted on. Gem sees applications after they land inside Gem accounts -- the form-fill behavioral window is architecturally closed to them before the first API call fires. Signal is static, post-submission, and Gem-account-only.</td>
-        <td style="padding:7px 10px;color:var(--amber);">Sentriq captures behavioral signal during form fill -- before the application object exists. No Gem adoption required, no ATS dependency. Works on every submission regardless of downstream tooling.</td>
+        <td style="padding:7px 10px;color:var(--text-sub);">Recruiting CRM with a fraud detection feature bolted on. Gem sees applications after they land inside Gem accounts: the form-fill behavioral window is architecturally closed to them before the first API call fires. Signal is static, post-submission, and Gem-account-only.</td>
+        <td style="padding:7px 10px;color:var(--amber);">Sentriq captures behavioral signal during form fill, before the application object exists. No Gem adoption required, no ATS dependency. Works on every submission regardless of downstream tooling.</td>
       </tr>
       <tr style="border-bottom:1px solid var(--border);background:rgba(255,255,255,0.015);">
         <td style="padding:7px 10px;font-weight:700;color:var(--text);">Crosschq <span style="font-size:8px;font-weight:600;padding:1px 5px;border-radius:3px;background:rgba(232,160,32,0.15);color:var(--amber);border:1px solid rgba(232,160,32,0.3);margin-left:4px;">Direct</span></td>
@@ -949,39 +946,14 @@
         <td style="padding:7px 10px;color:var(--amber);">Behavioral baseline during form fill captures what no static signal can. Cross-company graph requires neutral ground: architecturally unavailable to Crosschq.</td>
       </tr>
       <tr style="border-bottom:1px solid var(--border);">
-        <td style="padding:7px 10px;font-weight:700;color:var(--text);">Tofu <span style="font-size:8px;font-weight:600;padding:1px 5px;border-radius:3px;background:rgba(232,160,32,0.15);color:var(--amber);border:1px solid rgba(232,160,32,0.3);margin-left:4px;">Direct</span></td>
-        <td style="padding:7px 10px;color:var(--text-sub);">CV forensics and a static Fraudbase. Signatures limited to fraud patterns Tofu has already catalogued. No behavioral challenge. No live cross-company network.</td>
-        <td style="padding:7px 10px;color:var(--amber);">Behavioral baseline catches zero-day fraud. Cross-company graph catches repeating attack patterns across organizations Tofu cannot connect.</td>
+        <td style="padding:7px 10px;font-weight:700;color:var(--text);">Phenom <span style="font-size:8px;font-weight:600;padding:1px 5px;border-radius:3px;background:rgba(224,85,85,0.15);color:rgba(224,120,120,0.95);border:1px solid rgba(224,85,85,0.4);margin-left:4px;">Primary Risk</span></td>
+        <td style="padding:7px 10px;color:var(--text-sub);">AI talent experience platform: candidate engagement, ATS integration, internal mobility, pipeline analytics. Operates entirely after the application exists. No pre-submission behavioral signal. No cross-company graph. Competes for the same enterprise Head of TA relationship.</td>
+        <td style="padding:7px 10px;color:var(--amber);">Phenom's value stack starts after submission. Sentriq's behavioral baseline fires during form fill, before Phenom's first interaction. Eightfold accounts running Phenom downstream still need the pre-submission layer Phenom cannot provide. Upstream of Phenom, not competing for the same ATS slot.</td>
       </tr>
       <tr style="border-bottom:1px solid var(--border);background:rgba(255,255,255,0.015);">
         <td style="padding:7px 10px;font-weight:700;color:var(--text);">Persona <span style="font-size:8px;font-weight:600;padding:1px 5px;border-radius:3px;background:rgba(232,160,32,0.15);color:var(--amber);border:1px solid rgba(232,160,32,0.3);margin-left:4px;">Distribution Risk</span></td>
         <td style="padding:7px 10px;color:var(--text-sub);">Confirms the person is real. Cannot tell you if the application is real. No hiring-specific signal graph. Identity verification is a different question from application authenticity.</td>
         <td style="padding:7px 10px;color:var(--amber);">Complementary, not competing. You have Persona: you know the person is real. Sentriq tells you if the application is real. Both signals together, neither alone is enough.</td>
-      </tr>
-      <tr style="border-bottom:1px solid var(--border);">
-        <td style="padding:7px 10px;font-weight:700;color:var(--text);">Endorsed <span style="font-size:8px;font-weight:600;padding:1px 5px;border-radius:3px;background:rgba(232,160,32,0.15);color:var(--amber);border:1px solid rgba(232,160,32,0.3);margin-left:4px;">Direct</span></td>
-        <td style="padding:7px 10px;color:var(--text-sub);">Identity check plus AI ranking, inside the ATS after the application exists. No pre-submission behavioral signal. No cross-company graph. Three products competing for one ATS integration slot.</td>
-        <td style="padding:7px 10px;color:var(--amber);">Pre-submission behavioral baseline captures signals Endorsed will never have access to. Sentriq entry happens before Endorsed ever runs.</td>
-      </tr>
-      <tr style="border-bottom:1px solid var(--border);background:rgba(255,255,255,0.015);">
-        <td style="padding:7px 10px;font-weight:700;color:var(--text);">Clarity <span style="font-size:8px;font-weight:600;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.12);margin-left:4px;">Complement</span></td>
-        <td style="padding:7px 10px;color:var(--text-sub);">Interview-stage deepfake detection. By the time Clarity runs, over $1,700 in process cost per candidate has already been spent reviewing a potentially fraudulent application.</td>
-        <td style="padding:7px 10px;color:var(--amber);">Sentriq flags the anomaly at form fill. If flagged, Clarity never needs to run. Entry 10x earlier in the funnel, at a fraction of the downstream cost.</td>
-      </tr>
-      <tr style="border-bottom:1px solid var(--border);">
-        <td style="padding:7px 10px;font-weight:700;color:var(--text);">Workday / Greenhouse / iCIMS <span style="font-size:8px;font-weight:600;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.12);margin-left:4px;">Different Layer</span></td>
-        <td style="padding:7px 10px;color:var(--text-sub);">
-          <div style="margin-bottom:6px;">Greenhouse and Workday share anonymized employer benchmarks: aggregate time-to-hire, pipeline conversion rates, offer acceptance by role. No candidate is tracked across employers.</div>
-          <div style="font-size:9.5px;color:rgba(255,255,255,0.35);">Anonymized employer data != cross-employer candidate signal.</div>
-        </td>
-        <td style="padding:7px 10px;color:var(--amber);">
-          <div style="margin-bottom:5px;">Sentriq's graph tracks the same candidate's behavioral fingerprint across employers -- with candidate consent. Three things ATS cannot replicate:</div>
-          <div style="font-size:10px;color:rgba(255,220,120,0.85);line-height:1.6;">
-            1. <strong>Consent model:</strong> ATS data belongs to employers. Sentriq's signal belongs to candidates -- captured with direct candidate consent before submission.<br>
-            2. <strong>Capture point:</strong> Behavioral baseline fires during form fill, before the ATS SDK sees anything.<br>
-            3. <strong>Customer isolation:</strong> Enterprise contracts guarantee data isolation between customers -- an ATS cannot share one customer's candidate data with another.
-          </div>
-        </td>
       </tr>
     </tbody>
   </table>
@@ -994,11 +966,24 @@
 <div class="slide bg-dark" data-index="11">
 <div class="slide-inner">
     <span class="label">Traction</span>
-    <h2>HSBC. Booking Holdings CPO. A leading researcher. <span style="color:var(--amber);">All active conversations.</span></h2>
+    <h2>NVIDIA Talent reached out. HSBC engaged. Booking Holdings Chief People Officer. <span style="color:var(--amber);">The problem pulls at every level.</span></h2>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;">
         <div>
             <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.18em;margin-bottom:10px;">Pipeline and advisory</div>
             <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="padding:12px 14px;background:rgba(68,204,136,0.07);border:1px solid rgba(68,204,136,0.28);border-radius:10px;">
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                        <div style="width:8px;height:8px;border-radius:50%;background:#44CC88;flex-shrink:0;"></div>
+                        <div style="font-size:12px;font-weight:700;color:var(--text);">NVIDIA</div>
+                        <div style="font-size:9px;color:#44CC88;">$3T market cap · 36K employees · Israel HQ post-Mellanox</div>
+                    </div>
+                    <p style="font-size:11px;color:var(--text-sub);line-height:1.55;margin-bottom:6px;">NVIDIA's Recruiting team reached out via a warm intro and requested a meeting to explore a design partner conversation. Champions: <strong style="color:var(--text);">Yael Aviram Rosenfeld</strong> (Director, Israel Recruiting, 8 years at NVIDIA) and <strong style="color:var(--text);">Ella Lamdani</strong> (Manager and Tech Lead, Recruiting, Sourcing and Coordination).</p>
+                    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(68,204,136,0.08);border:1px solid rgba(68,204,136,0.2);border-left:2px solid rgba(68,204,136,0.5);border-radius:6px;padding:6px 12px;margin-bottom:6px;">
+                        <span style="font-size:20px;font-weight:700;color:#44CC88;line-height:1;">4,000+</span>
+                        <span style="font-size:9px;color:rgba(255,255,255,0.55);">engineers in Israel post-Mellanox. One of the country's largest technical hiring pipelines.</span>
+                    </div>
+                    <div style="font-size:9px;font-weight:700;color:var(--amber);margin-top:2px;">Director + Manager level. Meeting being scheduled.</div>
+                </div>
                 <div style="padding:12px 14px;background:rgba(68,204,136,0.05);border:1px solid rgba(68,204,136,0.18);border-radius:10px;">
                     <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
                         <div style="width:8px;height:8px;border-radius:50%;background:#44CC88;flex-shrink:0;"></div>
@@ -1017,7 +1002,7 @@
                         <div style="font-size:12px;font-weight:700;color:var(--text);">Prof. Louis Hickman</div>
                     </div>
                     <div style="font-size:9px;color:rgba(255,255,255,0.35);margin-bottom:6px;">Virginia Tech · Wharton People Analytics · Visiting Scholar, Amazon</div>
-                    <p style="font-size:11px;color:var(--text-sub);line-height:1.55;">His 2025 peer-reviewed research documented the attack vectors Sentriq defends: LLM exploitation of unproctored hiring assessments and susceptibility to faking in AI-rated interviews. Sentriq is the detection infrastructure his research implies should exist. In active conversation about scientific collaboration.</p>
+                    <p style="font-size:11px;color:var(--text-sub);line-height:1.55;">His 2025 peer-reviewed research documented the application integrity failures Sentriq is built to surface: LLM exploitation of unproctored assessments and AI-faking in automated interviews. Sentriq is the signal layer his research implies should exist. In active conversation about scientific collaboration.</p>
                 </div>
             </div>
         </div>
@@ -1026,12 +1011,12 @@
             <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:14px;">
                 <div style="padding:14px 16px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.18);border-radius:10px;">
                     <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:5px;">Global pain validation.</div>
-                    <p style="font-size:11px;color:var(--text-sub);line-height:1.55;">HSBC Innovation Banking (US) engaged through a direct warm connection. Booking Holdings CPO validated the problem independently at board level. The problem lands the same way across financial services and enterprise tech globally. Commercial target is US-first.</p>
+                    <p style="font-size:11px;color:var(--text-sub);line-height:1.55;">NVIDIA's Recruiting team requested a meeting via a warm intro. Director and Manager level, Israel Recruiting. HSBC Innovation Banking (US) engaged through a direct warm connection. Booking Holdings Chief People Officer validated the problem at CPO scale, independently of the HSBC conversation. Enterprise tech and financial services are pulled to the same problem. Commercial target is US-first.</p>
                 </div>
                 <div style="padding:14px 16px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.18);border-radius:10px;">
                     <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:8px;">Strategic partners as unfair advantage.</div>
-                    <p style="font-size:11px;color:var(--text-sub);line-height:1.55;margin-bottom:7px;"><strong style="color:var(--text);">Eliana Carmel Gilboa</strong>, CPO at Booking Holdings, validates the problem at board level, opens Fortune 500 CPO doors, and makes the compliance case that HR teams alone cannot make.</p>
-                    <p style="font-size:11px;color:var(--text-sub);line-height:1.55;"><strong style="color:var(--text);">Prof. Louis Hickman</strong> (Virginia Tech, Wharton People Analytics, Amazon) published the peer-reviewed proof that the attack vectors exist. His 2025 papers are the academic foundation for why the category is necessary. He sees Sentriq as the commercial layer that makes his research actionable at scale.</p>
+                    <p style="font-size:11px;color:var(--text-sub);line-height:1.55;margin-bottom:7px;"><strong style="color:var(--text);">Eliana Carmel Gilboa</strong>, Chief People Officer at Booking Holdings, validated the problem at CPO scale independently. Positioned to open Fortune 500 People leader doors and make the compliance case HR teams alone cannot make.</p>
+                    <p style="font-size:11px;color:var(--text-sub);line-height:1.55;"><strong style="color:var(--text);">Prof. Louis Hickman</strong> (Virginia Tech, Wharton People Analytics, Amazon) published the peer-reviewed research documenting these application integrity failures at scale. His 2025 papers are the academic foundation for why this category is necessary. He sees Sentriq as the commercial layer that makes his research actionable at scale.</p>
                 </div>
                 <div style="padding:14px 16px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.18);border-radius:10px;">
                     <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:5px;">Masaryk's angle.</div>
@@ -1043,7 +1028,7 @@
 </div>
 </div>
 
-<!-- SLIDE 5: THE DEAL CYCLE -->
+<!-- SLIDE 12: THE DEAL CYCLE -->
 <div class="slide bg-dark" data-index="5">
 <div class="slide-inner">
     <span class="label">The Deal Cycle</span>
@@ -1054,7 +1039,7 @@
             <div style="padding:14px;background:rgba(232,160,32,0.05);border-radius:10px;border:1px solid rgba(232,160,32,0.18);">
                 <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Step 1</div>
                 <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px;">Head of TA starts a POC</div>
-                <p style="font-size:10px;color:var(--muted);line-height:1.5;">Near-zero cost. Head of TA owns the POC -- no CISO budget or approval required. "Show us what is actually in our live applicant data."</p>
+                <p style="font-size:10px;color:var(--muted);line-height:1.5;">Head of TA owns the POC. Same sign-off as LinkedIn Recruiter or HireVue. "Show us what is actually in our live applicant data."</p>
             </div>
             <div class="step-arrow" style="text-align:center;font-size:18px;color:#44CC88;">&#8594;</div>
             <div style="padding:14px;background:rgba(232,160,32,0.05);border-radius:10px;border:1px solid rgba(232,160,32,0.18);">
@@ -1070,7 +1055,7 @@
             </div>
         </div>
         <div style="margin-top:10px;padding:8px 14px;background:rgba(68,204,136,0.07);border-radius:8px;">
-            <p style="font-size:11px;color:#44CC88;text-align:center;font-weight:600;">HR initiates without a CISO approval gate. The ROI is immediate and measurable. Procurement follows the POC, not the other way around.</p>
+            <p style="font-size:11px;color:#44CC88;text-align:center;font-weight:600;">Head of TA initiates. The ROI is immediate and measurable. Procurement follows the POC, not the other way around.</p>
         </div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
@@ -1086,20 +1071,17 @@
 </div>
 </div>
 
-<!-- SLIDE 14: GTM -->
+<!-- SLIDE 13: GTM -->
 <div class="slide bg-dark" data-index="14">
 <div class="slide-inner">
     <span class="label">Go-to-Market</span>
     <h2>HR-first. Pilot-led. <span style="color:var(--amber);">Ecosystem-accelerated.</span></h2>
-    <div style="padding:10px 18px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.18);border-radius:8px;margin-top:14px;margin-bottom:16px;">
-        <p style="font-size:11px;color:var(--text-sub);line-height:1.6;">Three forces peak simultaneously in 2026: AI collapsed application signal quality, the EU AI Act mandates human oversight in hiring AI from August 2, and ATS incumbents are architecturally barred from building the cross-company graph -- their business model depends on keeping each customer's data isolated from every other. The category is structurally unoccupied.</p>
-    </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
         <div style="padding:16px 18px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.22);border-radius:12px;">
             <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Buyer Path 1: Direct Hiring</div>
             <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px;">Head of TA / VP People</div>
-            <p style="font-size:11px;color:var(--text-sub);line-height:1.6;margin-bottom:8px;">The champion who feels the signal collapse daily. Signs a $10K pilot without a CISO approval gate. The ROI is visible in the first week: hours saved, shortlist quality up, hiring manager acceptance rate improved.</p>
-            <div style="font-size:10px;color:var(--amber);font-weight:700;">Head of TA owns the decision. Budget already allocated. No CISO sign-off required for a $10K POC.</div>
+            <p style="font-size:11px;color:var(--text-sub);line-height:1.6;margin-bottom:8px;">The champion who feels the signal collapse daily. Signs a $10K pilot the same way they sign any TA tool. The ROI is visible in the first week: hours saved, shortlist quality up, hiring manager acceptance rate improved.</p>
+            <div style="font-size:10px;color:var(--amber);font-weight:700;">Head of TA owns the decision. Budget line: TA tools. Same contract path as LinkedIn Recruiter.</div>
         </div>
         <div style="padding:16px 18px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;">
             <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Buyer Path 2: Vendor / BPO Oversight</div>
@@ -1128,7 +1110,7 @@
 </div>
 </div>
 
-<!-- SLIDE 13: UNIT ECONOMICS -->
+<!-- SLIDE 14: UNIT ECONOMICS -->
 <div class="slide bg-dark" data-index="13">
 <div class="slide-inner">
     <span class="label">Unit Economics</span>
@@ -1195,7 +1177,7 @@
                 <div style="font-size:9px;color:var(--muted);margin-top:3px;">of Scale MRR<br>immaterial to 78% gross margin</div>
             </div>
         </div>
-        <p style="font-size:10px;color:var(--muted);line-height:1.6;">Behavioral baseline (Layer 1) runs on-device: zero LLM cost. LLM fires only when Layer 1 flags an anomaly and triggers the async challenge. Cost scales with fraud volume, not hiring volume -- fewer fraudulent applications means lower COGS, not higher.</p>
+        <p style="font-size:10px;color:var(--muted);line-height:1.6;">Behavioral baseline (Layer 1) runs on-device: zero LLM cost. LLM fires only when Layer 1 flags an anomaly and triggers the async challenge. Cost scales with low-signal application volume, not hiring volume. Fewer flagged applications means lower COGS, not higher.</p>
     </div>
 </div>
 </div>
@@ -1235,15 +1217,15 @@
             <div style="display:flex;flex-direction:column;gap:9px;">
                 <div style="display:flex;gap:10px;align-items:flex-start;">
                     <div style="width:5px;height:5px;border-radius:50%;background:var(--amber);margin-top:5px;flex-shrink:0;"></div>
-                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">Exact thesis fit.</strong> Enterprise Software + SaaS at seed stage. Application integrity is infrastructure, not a feature -- the category Masaryk backs.</p>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">Exact thesis fit.</strong> Enterprise Software + SaaS at seed stage. Application integrity is infrastructure, not a feature: the category Masaryk backs.</p>
                 </div>
                 <div style="display:flex;gap:10px;align-items:flex-start;">
                     <div style="width:5px;height:5px;border-radius:50%;background:var(--amber);margin-top:5px;flex-shrink:0;"></div>
-                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">M&amp;A pattern recognition.</strong> SAP has bought solutions at every enterprise HR infrastructure stage -- SuccessFactors ($3.4B), Fieldglass ($1B), Qualtrics ($8B). The application integrity layer is the one gap in their stack. The exit thesis is named, not hypothetical.</p>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">M&amp;A pattern recognition.</strong> SAP has bought solutions at every enterprise HR infrastructure stage: SuccessFactors ($3.4B), Fieldglass ($1B), Qualtrics ($8B). The application integrity layer is the one gap in their stack. The exit thesis is named, not hypothetical.</p>
                 </div>
                 <div style="display:flex;gap:10px;align-items:flex-start;">
                     <div style="width:5px;height:5px;border-radius:50%;background:var(--amber);margin-top:5px;flex-shrink:0;"></div>
-                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">Technical diligence in the room.</strong> Ben's behavioral baseline model -- keystroke dynamics, session entropy, behavioral biometrics -- is built on measurable signal, not heuristics. Masaryk can evaluate the technical claims where most funds take them on faith.</p>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;"><strong style="color:var(--text);">Technical diligence in the room.</strong> Ben's behavioral baseline model (keystroke dynamics, session entropy, behavioral biometrics) is built on measurable signal, not heuristics. Pre-network, the baseline anchors against population-level behavioral distributions from published keystroke dynamics and session entropy research. Prof. Hickman's 2025 peer-reviewed work independently establishes that the application integrity failures creating demand for this baseline are real and measurable at scale. Masaryk can evaluate the technical claims where most funds take them on faith.</p>
                 </div>
             </div>
         </div>
@@ -1259,7 +1241,7 @@
         <span style="font-size:22px;font-weight:500;color:#ffffff;letter-spacing:-0.01em;">Sentriq<span style="color:#E8A020;">.</span></span>
     </div>
     <h2 style="font-size:clamp(22px,3.5vw,42px);margin-bottom:12px;">Every company that hires<br/>is a node waiting to join.<br/><span style="color:var(--amber);">The Hiring Captcha is the network.</span></h2>
-    <p style="font-size:clamp(14px,1.8vw,18px);color:rgba(255,255,255,0.55);max-width:600px;line-height:1.7;margin-bottom:32px;">The window to own the application layer closes as well-funded entrants -- Endorsed, Sardine, Metaview -- move in from the edges. ATS incumbents cannot enter: their business model depends on keeping each customer's data isolated from every other -- the cross-company graph destroys the trust model they sell. The first infrastructure player to reach network density defines the category.</p>
+    <p style="font-size:clamp(14px,1.8vw,18px);color:rgba(255,255,255,0.55);max-width:600px;line-height:1.7;margin-bottom:32px;">The first infrastructure player to reach network density defines the category.</p>
     <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;">
         <div style="padding:14px 24px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;">
             <p style="font-size:15px;font-weight:700;color:var(--text);">samuel@sentriq.co</p>
@@ -1283,7 +1265,7 @@
     </div>
     <div class="nav-controls">
         <button class="nav-btn" onclick="navigate(-1)">&#8592;</button>
-        <span class="slide-counter" id="slideCounter">1 / 17</span>
+        <span class="slide-counter" id="slideCounter">1 / 16</span>
         <button class="nav-btn" onclick="navigate(1)">&#8594;</button>
     </div>
 </div>

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Application Signal Problem — Sentriq</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --amber: #E8A020;
+    --bg: #FAFAF8;
+    --surface: #FFFFFF;
+    --border: #E8E6E0;
+    --text: #111110;
+    --text-sub: #444440;
+    --text-muted: #888880;
+    --green: #1A7A48;
+    --green-bg: rgba(26,122,72,0.07);
+    --green-border: rgba(26,122,72,0.2);
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 0;
+  }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 32px 64px;
+  }
+
+  /* HEADER */
+  .doc-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 36px;
+    padding-bottom: 24px;
+    border-bottom: 2px solid var(--text);
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .doc-type {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .doc-title {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .doc-title span { color: var(--amber); }
+  .doc-sub {
+    font-size: 13px;
+    color: var(--text-sub);
+    margin-top: 6px;
+    max-width: 480px;
+    line-height: 1.55;
+  }
+  .logo-wrap { flex-shrink: 0; padding-top: 4px; }
+
+  /* SECTION LABELS */
+  .section-label {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+
+  section { margin-bottom: 36px; }
+
+  /* STATS */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .stat-card {
+    padding: 18px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .stat-num {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--amber);
+    line-height: 1;
+    margin-bottom: 7px;
+  }
+  .stat-desc {
+    font-size: 12px;
+    color: var(--text-sub);
+    line-height: 1.5;
+    margin-bottom: 6px;
+  }
+  .stat-source {
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+
+  /* BODY TEXT */
+  .body-text {
+    font-size: 13px;
+    color: var(--text-sub);
+    line-height: 1.75;
+  }
+  .body-text + .body-text { margin-top: 12px; }
+
+  /* CALLOUT */
+  .callout {
+    padding: 18px 22px;
+    background: var(--surface);
+    border-left: 3px solid var(--amber);
+    border-radius: 0 8px 8px 0;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--amber);
+    margin: 16px 0;
+  }
+  .callout p {
+    font-size: 13px;
+    color: var(--text-sub);
+    line-height: 1.7;
+  }
+
+  /* CAPABILITY LIST */
+  .capability-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .capability-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .cap-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--amber);
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+  .cap-text {
+    font-size: 12px;
+    color: var(--text-sub);
+    line-height: 1.6;
+  }
+  .cap-text strong { color: var(--text); font-weight: 700; }
+
+  /* TRACTION */
+  .traction-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .traction-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 12px 16px;
+    background: var(--green-bg);
+    border: 1px solid var(--green-border);
+    border-radius: 8px;
+  }
+  .traction-co {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text);
+    min-width: 140px;
+    flex-shrink: 0;
+  }
+  .traction-detail {
+    font-size: 12px;
+    color: var(--text-sub);
+    line-height: 1.55;
+  }
+
+  /* COMPANY BIO */
+  .company-bio {
+    padding: 20px 22px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .company-name {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .company-tag {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--amber);
+    background: rgba(232,160,32,0.1);
+    border: 1px solid rgba(232,160,32,0.25);
+    border-radius: 4px;
+    padding: 2px 7px;
+  }
+  .company-bio p {
+    font-size: 12px;
+    color: var(--text-sub);
+    line-height: 1.65;
+    margin-top: 8px;
+  }
+  .company-bio .contact-line {
+    margin-top: 12px;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .company-bio .contact-line a {
+    color: var(--amber);
+    text-decoration: none;
+  }
+
+  /* DISCUSSION PROMPT */
+  .discussion-box {
+    padding: 22px 24px;
+    background: rgba(232,160,32,0.05);
+    border: 1px solid rgba(232,160,32,0.25);
+    border-radius: 10px;
+  }
+  .discussion-box .prompt-label {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--amber);
+    margin-bottom: 10px;
+  }
+  .discussion-box p {
+    font-size: 13px;
+    color: var(--text-sub);
+    line-height: 1.7;
+  }
+  .discussion-box .questions {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .discussion-box .q {
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.6;
+    padding-left: 14px;
+    border-left: 2px solid var(--amber);
+  }
+
+  /* FOOTER */
+  .doc-footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .doc-footer span {
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+
+  /* LOGO SVG */
+  .logo-svg { width: 32px; height: 32px; }
+
+  /* DIVIDER */
+  hr.section-div {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+
+  @media (max-width: 620px) {
+    .page { padding: 28px 18px 48px; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .doc-header { flex-direction: column-reverse; }
+    .traction-co { min-width: unset; }
+    .traction-item { flex-direction: column; gap: 4px; }
+    .doc-title { font-size: 20px; }
+    .concept-cols { grid-template-columns: 1fr !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div>
+      <div class="doc-type">Industry Brief &middot; Talent Acquisition Intelligence</div>
+      <div class="doc-title">The Application <span>Signal Problem</span></div>
+      <div class="doc-sub">Most hiring tools evaluate what a candidate submitted. None of them run before the first recruiter opens a file. This brief is about the tooling gap at the point of submission, and why closing it changes where wasted interview spend disappears.</div>
+    </div>
+    <div class="logo-wrap">
+      <svg class="logo-svg" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="12" height="40" rx="4" fill="#E8A020"/>
+        <rect x="0" y="0" width="32" height="12" rx="4" fill="#E8A020"/>
+        <rect x="44" y="0" width="12" height="40" rx="4" fill="#E8A020"/>
+        <rect x="0" y="28" width="32" height="12" rx="4" fill="#E8A020"/>
+        <circle cx="28" cy="7" r="3.5" fill="#09090F"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- SECTION 1: SCALE -->
+  <section>
+    <div class="section-label">What the data shows</div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">25%</div>
+        <div class="stat-desc">of all job applications will be AI-generated or AI-altered by 2028.</div>
+        <div class="stat-source">Gartner, Jul 2025</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">23 hrs</div>
+        <div class="stat-desc">Median recruiter time to build a quality shortlist, even with AI tooling.</div>
+        <div class="stat-source">LinkedIn Talent Insights, 2025</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3:1</div>
+        <div class="stat-desc">Interviews per hire. One in three candidates advanced does not match the role.</div>
+        <div class="stat-source">SHRM, 2025</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCEPT ANCHOR -->
+  <section>
+    <div class="section-label">The pre-application layer — what it means</div>
+    <div style="padding:22px 24px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.3);border-left:3px solid var(--amber);border-radius:0 10px 10px 0;">
+      <div class="concept-cols" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div>
+          <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-muted);margin-bottom:8px;">Without it</div>
+          <p style="font-size:12px;color:var(--text-sub);line-height:1.7;">A team posts a role, receives 200 applications, and begins reviewing. A phone screen costs $150. A technical assessment costs $300. A panel costs $1,800. Somewhere in that sequence, a mismatch surfaces. The team paid for every step between submission and discovery.</p>
+        </div>
+        <div>
+          <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:var(--amber);margin-bottom:8px;">With it</div>
+          <p style="font-size:12px;color:var(--text-sub);line-height:1.7;">By the time the recruiter opens the first file, a signal is already attached. The application that claimed four years of experience but was completed in nine minutes with 80% paste activity is flagged. A targeted challenge fires automatically. The recruiter knows before the phone screen.</p>
+        </div>
+      </div>
+      <p style="margin-top:14px;font-size:11px;color:var(--text-muted);border-top:1px solid rgba(232,160,32,0.2);padding-top:12px;">No automated rejections. The system surfaces evidence. The recruiter decides. Human oversight at every gate.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 2: THE GAP -->
+  <section>
+    <div class="section-label">The structural gap</div>
+    <p class="body-text">Every tool in the TA stack evaluates what a candidate submitted. None of them observe how it was submitted.</p>
+    <p class="body-text" style="margin-top:12px;">The behavioral context present during the application itself, the signals that would tell a recruiter whether the work in front of them reflects the person behind it, disappears the moment the file is uploaded. What remains is a polished output that looks like every other polished output, and must be evaluated on its own terms by a recruiter who has dozens more in the same queue.</p>
+    <div class="callout" style="margin-top:16px;">
+      <p>AI application tooling has made it trivially easy to produce a well-formatted, keyword-optimized application with no direct connection to the experience being claimed. The ATS scores it highly. The recruiter opens it. Six rounds later, a mismatch surfaces that was visible from the first interaction, but only in hindsight.</p>
+    </div>
+    <p class="body-text">The gap is not a people problem. It is a tooling gap: no layer in the current stack is designed to surface signal at the point of submission, before any human time is spent.</p>
+  </section>
+
+  <hr class="section-div"/>
+
+  <!-- SECTION 3: WHAT A SOLUTION LOOKS LIKE -->
+  <section>
+    <div class="section-label">What an application integrity layer does</div>
+    <p class="body-text" style="margin-bottom:14px;">A new category of tooling is forming around this gap. The defining characteristic is that it operates at submission, not at evaluation. It does not replace the recruiter's judgment. It gives the recruiter something to exercise judgment on.</p>
+    <div class="capability-list">
+      <div class="capability-item">
+        <div class="cap-dot"></div>
+        <div class="cap-text"><strong>Behavioral signal at form fill.</strong> How an application is completed, not just what it contains. Keystroke patterns, edit frequency, session behavior, copy-paste ratio. Observed passively, without any change to the candidate experience.</div>
+      </div>
+      <div class="capability-item">
+        <div class="cap-dot"></div>
+        <div class="cap-text"><strong>Claim consistency tracking across stages.</strong> What was stated at application is held against what surfaces in a screen, a test result, or an interview transcript. Gaps auto-flag without requiring a recruiter to remember or cross-reference manually.</div>
+      </div>
+      <div class="capability-item">
+        <div class="cap-dot"></div>
+        <div class="cap-text"><strong>Targeted clarification challenges.</strong> When a gap appears, a specific, narrow challenge fires automatically before the next expensive stage runs. Not a generic assessment. A question built for the exact inconsistency. 48 hours to respond.</div>
+      </div>
+      <div class="capability-item">
+        <div class="cap-dot"></div>
+        <div class="cap-text"><strong>Human decision at every gate.</strong> No automated rejections. The system surfaces evidence. The recruiter or hiring manager decides. Full audit trail for any compliance review. EU AI Act compliant by design.</div>
+      </div>
+      <div class="capability-item">
+        <div class="cap-dot"></div>
+        <div class="cap-text"><strong>Cross-company pattern detection.</strong> Over time, behavioral patterns seen across multiple employers produce a signal baseline no single employer can build alone. A candidate who has applied to 50 companies in 6 weeks looks different from one who applied to 3.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-div"/>
+
+  <!-- SECTION 4: TRACTION / VALIDATION -->
+  <section>
+    <div class="section-label">Early validation conversations</div>
+    <p class="body-text" style="margin-bottom:14px;">The companies below have each initiated conversations about piloting this layer in their live hiring pipelines.</p>
+    <div class="traction-grid">
+      <div class="traction-item">
+        <div class="traction-co">HSBC</div>
+        <div class="traction-detail">Innovation Banking team engaged. ROI framing confirmed by Director, HSBC Innovation Banking: "Every call costs the bank quite a bit of money. If you can screen more of these out before they even get to the call, that would be great." Production-grade demo built on live HSBC job posting context.</div>
+      </div>
+      <div class="traction-item">
+        <div class="traction-co">NVIDIA</div>
+        <div class="traction-detail">Israel Recruiting team reached out via warm intro to explore a design partner conversation. Champions: Director of Israel Recruiting (8 years at NVIDIA) and Manager and Tech Lead, Recruiting. Meeting being scheduled. 4,000+ engineers in Israel post-Mellanox acquisition.</div>
+      </div>
+      <div class="traction-item">
+        <div class="traction-co">Booking Holdings</div>
+        <div class="traction-detail">Chief People Officer (former Chief People Officer at Agoda, 40+ countries) validated the problem independently at CPO scale. Advisory conversation underway.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-div"/>
+
+  <!-- SECTION 5: THE COMPANY -->
+  <section>
+    <div class="section-label">The company building this</div>
+    <div class="company-bio">
+      <div class="company-name">
+        Sentriq
+        <span class="company-tag">Seed Stage</span>
+      </div>
+      <p>Sentriq is building the application integrity layer for enterprise TA teams. The product operates at the point of application submission, before the first recruiter opens a file, and surfaces a signal stack across behavioral, consistency, and role-fit dimensions. No automated rejections. Human oversight at every gate. Platform-agnostic and deployable alongside any ATS.</p>
+      <p style="margin-top:8px;">Founded by Samuel Kemper (enterprise TA operator, former founder of TechRuiter IL, daily Greenhouse and Workday user) and Ben Czarninski (IDF intelligence engineering, AppSec at AppsFlyer, behavioral systems). Pre-revenue, demo stage, raising seed.</p>
+      <div class="contact-line">Design partner inquiries: <a href="mailto:samuel@sentriq.co">samuel@sentriq.co</a> &middot; <a href="https://sentriq.co" target="_blank">sentriq.co</a></div>
+    </div>
+  </section>
+
+  <!-- DISCUSSION PROMPT -->
+  <div class="discussion-box">
+    <div class="prompt-label">For discussion</div>
+    <p>This brief is intended as a starting point for a conversation, not a conclusion. The question being tested is whether enterprise TA leaders are experiencing this signal problem in a way that justifies a dedicated tooling layer, and what that layer needs to do to earn a place in the stack.</p>
+    <div class="questions">
+      <div class="q">Where in your current pipeline do you feel the least confident about the quality of what you are evaluating?</div>
+      <div class="q">Has AI-assisted application tooling changed the volume or composition of your applicant pool in the last 12 months?</div>
+      <div class="q">What would a trusted signal at submission be worth to your team, in time saved per open role?</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span>Sentriq &middot; sentriq.co &middot; May 2026</span>
+    <span>Confidential. For discussion purposes only.</span>
+  </div>
+
+</div>
+</body>
+</html>
