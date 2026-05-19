@@ -329,11 +329,11 @@
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
         <div style="padding:16px 18px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;">
             <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">What makes AI resistant</div>
-            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;">AI trained on BARS-anchored structured human ratings behaves like a structured human rater. It evaluates content, not presentation. Deceptive impression management tactics did not lift scores, and extensive image creation actively hurt them. Honest self-promotion helped, but only modestly.</p>
+            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;">AI trained on BARS-anchored structured human ratings evaluates content, not presentation. Deceptive tactics did not lift scores; extensive image creation actively hurt them.</p>
         </div>
         <div style="padding:16px 18px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.18);border-radius:12px;">
             <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">What the paper does not resolve</div>
-            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;">Participants were not told they would be AI-scored, so adversarial inputs were not studied. The paper explicitly flags this: applicants who know an AI is scoring may "game" systems with keyword-dense, nonsensical responses. That threat is real. That is what we are working on.</p>
+            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;">Participants were not told they would be AI-scored, so adversarial inputs were not studied. The paper explicitly flags this as the open problem: applicants aware of AI scoring may game it with keyword-dense, nonsensical responses.</p>
         </div>
     </div>
 
@@ -362,16 +362,16 @@
         </div>
         <div style="padding:16px 18px;background:rgba(224,85,85,0.06);border:1px solid rgba(224,85,85,0.18);border-radius:12px;">
             <div style="font-size:10px;font-weight:700;color:#E05555;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Mass-apply automation</div>
-            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;">Purpose-built tools (LazyApply, Massive, Simplify) advertise 1,000+ applications per day per user. Each application is customized per job description using LLM rewriting. The profile an AI interview scorer sees has already been optimized for that role's language.</p>
+            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;">Purpose-built tools (LazyApply, Massive, Simplify) advertise 1,000+ applications per day, each rewritten per job description. The profile an AI interview scorer sees has already been optimized for that role's language.</p>
         </div>
         <div style="padding:16px 18px;background:rgba(224,85,85,0.06);border:1px solid rgba(224,85,85,0.18);border-radius:12px;">
             <div style="font-size:10px;font-weight:700;color:#E05555;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Profile fabrication at scale</div>
-            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;">Credential inflation, fabricated roles, AI-polished portfolios. The Gartner projection: 25% of applications will contain AI-fabricated or AI-inflated content by 2028. The interview sees the output. Nobody sees the input.</p>
+            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;">Gartner projects 25% of applications will contain AI-fabricated or AI-inflated content by 2028. The interview scores the output. Nobody has instrumented the input.</p>
         </div>
     </div>
 
-    <div style="padding:14px 20px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.2);border-radius:12px;border-left:3px solid var(--amber);">
-        <p style="font-size:13px;color:rgba(255,255,255,0.8);line-height:1.7;">Your study measured faking by people performing as applicants. The real adversarial case is applicants who have already optimized their profile and submission before entering the interview pipeline. The behavioral trace at submission time is the only layer that precedes that curation.</p>
+    <div style="padding:14px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:12px;border-left:3px solid rgba(255,255,255,0.2);">
+        <p style="font-size:13px;color:rgba(255,255,255,0.75);line-height:1.7;">Your study measured faking by people performing as applicants. The real adversarial case is applicants who have already optimized their submission before entering the pipeline, at the one moment where no instrument is running.</p>
     </div>
 
     <div class="sources">
@@ -434,7 +434,7 @@
     </div>
 
     <div style="padding:14px 20px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.18);border-radius:12px;">
-        <p style="font-size:13px;color:rgba(255,255,255,0.75);line-height:1.7;">The research tradition in I/O psychology has built rigorous tools for evaluating what applicants produce in assessments. The equivalent tradition for evaluating the integrity of what applicants present at submission does not yet exist. That is the gap we are working to close, and the one we want to build with academic partners.</p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.75);line-height:1.7;">I/O psychology has built rigorous tools for evaluating what applicants produce in assessments. The equivalent tradition for the integrity of what they present at submission does not yet exist.</p>
     </div>
 </div>
 </div>
@@ -444,7 +444,7 @@
 <div class="slide-inner">
     <span class="label">Our Approach</span>
     <h2>Sentriq operates at the moment of submission. <span style="color:var(--amber);">Before any evaluator sees anything.</span></h2>
-    <p style="font-size:14px;color:rgba(255,255,255,0.55);max-width:820px;line-height:1.65;margin-bottom:18px;">Where interview scoring measures how someone performs under evaluation, Sentriq measures the integrity of the application artifact submitted for evaluation. The two are complementary, not competing. They measure different things at different moments.</p>
+    <p style="font-size:14px;color:rgba(255,255,255,0.55);max-width:820px;line-height:1.65;margin-bottom:18px;">Interview scoring measures how someone performs under evaluation. Sentriq measures the integrity of the artifact they submitted to get there. Complementary, not competing.</p>
 
     <div style="margin-bottom:16px;padding:12px 20px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.2);border-radius:12px;">
         <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
@@ -474,7 +474,7 @@
                 <div style="font-size:12px;font-weight:700;">Decides</div>
             </div>
         </div>
-        </div></div>
+        </div>
         <p style="font-size:10px;color:var(--muted);margin-top:10px;text-align:center;">Sentriq signals travel through the pipeline. We do not block. We annotate.</p>
     </div>
 
@@ -520,13 +520,13 @@
             <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px;">Measurement questions</div>
             <div style="display:flex;flex-direction:column;gap:10px;">
                 <div style="padding:10px 14px;background:rgba(232,160,32,0.05);border-radius:8px;border-left:2px solid rgba(232,160,32,0.3);">
-                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;">Do submission-time behavioral signals predict downstream assessment performance? Can behavioral anomalies at application predict interview score inflation?</p>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;">Do submission-time behavioral signals predict downstream assessment performance?</p>
                 </div>
                 <div style="padding:10px 14px;background:rgba(232,160,32,0.05);border-radius:8px;border-left:2px solid rgba(232,160,32,0.3);">
-                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;">How distinguishable is LLM-assisted content from human-authored content at the application stage? Does that distinction carry predictive validity for job performance?</p>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;">How distinguishable is LLM-assisted content from human-authored content at the application stage?</p>
                 </div>
                 <div style="padding:10px 14px;background:rgba(232,160,32,0.05);border-radius:8px;border-left:2px solid rgba(232,160,32,0.3);">
-                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;">What is the construct validity of application-layer signals? Are they measuring the same constructs as interview-layer assessments, or something orthogonal?</p>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;">What is the construct validity of application-layer signals?</p>
                 </div>
             </div>
         </div>
@@ -534,13 +534,13 @@
             <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px;">Design questions</div>
             <div style="display:flex;flex-direction:column;gap:10px;">
                 <div style="padding:10px 14px;background:rgba(232,160,32,0.05);border-radius:8px;border-left:2px solid rgba(232,160,32,0.3);">
-                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;">Within-subjects vs. between-subjects for application faking studies. Does the honest/applicant-like design from your interview research translate to the application context?</p>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;">Within-subjects or between-subjects for application faking studies?</p>
                 </div>
                 <div style="padding:10px 14px;background:rgba(232,160,32,0.05);border-radius:8px;border-left:2px solid rgba(232,160,32,0.3);">
                     <p style="font-size:12px;color:var(--text-sub);line-height:1.6;">How do you operationalize "honest" vs. "optimized" application conditions when the optimization tools are openly available and widely used?</p>
                 </div>
                 <div style="padding:10px 14px;background:rgba(232,160,32,0.05);border-radius:8px;border-left:2px solid rgba(232,160,32,0.3);">
-                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;">What is the right ground truth? Downstream hire quality? Manager ratings? Survival at 6 months? The answer shapes everything about study design.</p>
+                    <p style="font-size:12px;color:var(--text-sub);line-height:1.6;">What is the right ground truth for application-layer validity?</p>
                 </div>
             </div>
         </div>
@@ -633,7 +633,7 @@
                 <div style="font-size:16px;font-weight:800;color:var(--text);letter-spacing:-0.02em;">Samuel Kemper</div>
                 <div style="font-size:11px;color:var(--amber);font-weight:600;margin-top:3px;text-transform:uppercase;letter-spacing:0.08em;">CEO, Sentriq</div>
             </div>
-            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;margin-bottom:12px;">Ran TechRuiter IL, a technical recruiting firm. Sat inside ATS workflows daily: Comeet, Greenhouse, Lever. Watched the problem emerge from the inside as AI-optimized applications made shortlisting increasingly unreliable. The signal destruction is not theoretical for this team.</p>
+            <p style="font-size:12px;color:var(--text-sub);line-height:1.65;margin-bottom:12px;">Ran TechRuiter IL and sat inside ATS workflows daily across Comeet, Greenhouse, and Lever. Watched AI-optimized applications make shortlisting increasingly unreliable from the inside.</p>
             <div style="display:flex;flex-wrap:wrap;gap:6px;">
                 <span class="signal-tag">HR Operations</span>
                 <span class="signal-tag">GTM</span>
