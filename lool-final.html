@@ -849,6 +849,9 @@
 <div class="slide-inner">
     <span class="label">Competitive Landscape</span>
     <h2>Well-funded players are converging on this category from every direction. <span style="color:var(--amber);">Nobody has claimed the application layer.</span></h2>
+<div style="padding:10px 16px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.15);border-radius:8px;margin-top:10px;margin-bottom:14px;">
+    <p style="font-size:11px;color:var(--text-sub);line-height:1.65;">The gap is structural, not accidental. Every existing player optimized for one of two positions: employer workflow (ATS, CRM) or post-submission signal (background check, IDV, interview). Nobody built at the submission moment because it requires a neutral, candidate-permissioned data layer -- architecturally incompatible with ATS (employer data ownership) and economically unviable as a point solution without the cross-company graph. Sentriq is the only viable infrastructure position at that layer.</p>
+</div>
 <!-- COMPETITIVE GANTT MAP -->
 <div style="margin-bottom:14px;">
   <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">Where every player operates</div>
@@ -940,8 +943,11 @@
     <tbody>
       <tr style="border-bottom:1px solid var(--border);">
         <td style="padding:7px 10px;font-weight:700;color:var(--text);">Gem <span style="font-size:8px;font-weight:600;padding:1px 5px;border-radius:3px;background:rgba(232,160,32,0.15);color:var(--amber);border:1px solid rgba(232,160,32,0.3);margin-left:4px;">Direct</span></td>
-        <td style="padding:7px 10px;color:var(--text-sub);">Recruiting CRM with a fraud detection feature bolted on. Gem sees applications after they land inside Gem accounts -- the form-fill behavioral window is architecturally closed to them before the first API call fires. Signal is static, post-submission, and Gem-account-only.</td>
-        <td style="padding:7px 10px;color:var(--amber);">Sentriq captures behavioral signal during form fill -- before the application object exists. No Gem adoption required, no ATS dependency. Works on every submission regardless of downstream tooling.</td>
+        <td style="padding:7px 10px;color:var(--text-sub);">
+            <div style="margin-bottom:5px;">Recruiting CRM with a fraud detection feature bolted on. Gem sees applications only after they land inside Gem accounts -- the form-fill window is closed before their first API call fires. Signal is static and post-submission.</div>
+            <div style="font-size:9.5px;color:rgba(255,255,255,0.38);line-height:1.55;">More structurally: Gem is employer-only. The cross-company graph requires a candidate relationship -- consent, TOS, data ownership. Building that means competing with their own customers for the candidate. Their $100M+ raise funded a CRM; fraud detection is a churn-prevention checkbox. Even if they added form-fill instrumentation tomorrow: a behavioral baseline model needs millions of labeled sessions. Sentriq is collecting that data now. Gem starts from zero with an 18-month training data deficit.</div>
+        </td>
+        <td style="padding:7px 10px;color:var(--amber);">Sentriq captures behavioral signal during form fill -- before the application object exists. No Gem adoption required. The cross-company graph is built on candidate-permissioned signal, a data model Gem cannot replicate without abandoning their employer-only positioning.</td>
       </tr>
       <tr style="border-bottom:1px solid var(--border);background:rgba(255,255,255,0.015);">
         <td style="padding:7px 10px;font-weight:700;color:var(--text);">Crosschq <span style="font-size:8px;font-weight:600;padding:1px 5px;border-radius:3px;background:rgba(232,160,32,0.15);color:var(--amber);border:1px solid rgba(232,160,32,0.3);margin-left:4px;">Direct</span></td>
@@ -972,14 +978,14 @@
         <td style="padding:7px 10px;font-weight:700;color:var(--text);">Workday / Greenhouse / iCIMS <span style="font-size:8px;font-weight:600;padding:1px 5px;border-radius:3px;background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.12);margin-left:4px;">Different Layer</span></td>
         <td style="padding:7px 10px;color:var(--text-sub);">
           <div style="margin-bottom:6px;">Greenhouse and Workday share anonymized employer benchmarks: aggregate time-to-hire, pipeline conversion rates, offer acceptance by role. One employer's data flows into a market report. No candidate is tracked across employers.</div>
-          <div style="font-size:9.5px;color:rgba(255,255,255,0.35);">Anonymized employer data != cross-employer candidate signal.</div>
+          <div style="font-size:9.5px;color:rgba(255,255,255,0.35);line-height:1.55;">The cross-company candidate signal Sentriq builds is not a policy gap -- it is a legal infrastructure problem. Every enterprise ATS agreement guarantees per-customer data isolation as a security commitment. Amending those contracts to permit cross-customer candidate signal requires renegotiating 10,000+ enterprise agreements simultaneously. Most enterprise legal teams would refuse. This is not a roadmap item for Workday or Greenhouse -- it is a foundational breach of what they sell.</div>
         </td>
         <td style="padding:7px 10px;color:var(--amber);">
-          <div style="margin-bottom:5px;">Sentriq's graph tracks the same candidate's behavioral fingerprint across multiple employers -- with candidate consent, not employer data sharing. Three things ATS cannot replicate:</div>
+          <div style="margin-bottom:5px;">Sentriq's graph tracks the same candidate's behavioral fingerprint across employers -- with candidate consent, not employer data sharing. Three things ATS cannot replicate:</div>
           <div style="font-size:10px;color:rgba(255,220,120,0.85);line-height:1.6;">
             1. <strong>Consent model:</strong> ATS data belongs to employers. Sentriq's signal belongs to candidates -- captured with direct candidate consent before the application is submitted.<br>
-            2. <strong>Capture point:</strong> Behavioral baseline fires during form fill, before the ATS SDK sees anything. ATS would need to instrument every careers page, job board, and Easy Apply surface -- a separate infrastructure product, not an ATS feature.<br>
-            3. <strong>Customer isolation:</strong> Greenhouse enterprise contracts guarantee data isolation between customers. An ATS sharing candidate data across two of its employer customers would breach every enterprise agreement it has signed.
+            2. <strong>Capture point:</strong> Behavioral baseline fires during form fill, before the ATS SDK sees anything. ATS would need to instrument every careers page, job board, and Easy Apply surface -- a separate infrastructure product incompatible with their ATS positioning.<br>
+            3. <strong>Signed contracts:</strong> Greenhouse enterprise agreements guarantee isolation between customers. Sharing candidate signal across employer accounts would breach every enterprise contract they have signed -- not a feature gap, a legal impossibility at their current scale.
           </div>
         </td>
       </tr>
@@ -1282,26 +1288,50 @@
         <p style="font-size:12px;color:var(--text-sub);line-height:1.65;">78% gross margin. API-first infrastructure with costs that amortize as the network grows: cross-company signal spreads across all customers. $8K blended CAC reflects founder-led, zero-paid-acquisition at seed.</p>
     </div>
     <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:14px 18px;">
-        <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">LLM COGS: Async Challenge Generation</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:10px;">
+        <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">LLM COGS: Async Challenge Generation</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:12px;">
             <div style="text-align:center;">
-                <div style="font-size:15px;font-weight:700;color:var(--text);">$0.08</div>
-                <div style="font-size:9px;color:var(--muted);margin-top:3px;">per challenge<br>blended (Gemini Flash + Claude Haiku)</div>
+                <div style="font-size:15px;font-weight:700;color:var(--text);">~$0.006</div>
+                <div style="font-size:9px;color:var(--muted);margin-top:3px;">per challenge cycle<br>4 calls: Gemini 2.5 Flash + Haiku 4.5 blended</div>
             </div>
             <div style="text-align:center;">
                 <div style="font-size:15px;font-weight:700;color:var(--text);">15%</div>
                 <div style="font-size:9px;color:var(--muted);margin-top:3px;">anomaly rate<br>challenges triggered per submission</div>
             </div>
             <div style="text-align:center;">
-                <div style="font-size:15px;font-weight:700;color:var(--text);">$6 / mo</div>
-                <div style="font-size:9px;color:var(--muted);margin-top:3px;">per Scale customer<br>75 challenges x $0.08</div>
+                <div style="font-size:15px;font-weight:700;color:var(--text);">$0.45 / mo</div>
+                <div style="font-size:9px;color:var(--muted);margin-top:3px;">per Scale customer<br>75 challenges x $0.006</div>
             </div>
             <div style="text-align:center;">
-                <div style="font-size:15px;font-weight:700;color:var(--amber);">&lt;0.1%</div>
-                <div style="font-size:9px;color:var(--muted);margin-top:3px;">of Scale MRR<br>immaterial to 78% gross margin</div>
+                <div style="font-size:15px;font-weight:700;color:var(--amber);">&lt;0.01%</div>
+                <div style="font-size:9px;color:var(--muted);margin-top:3px;">of Scale MRR<br>78% gross margin structurally defended</div>
             </div>
         </div>
-        <p style="font-size:10px;color:var(--muted);line-height:1.6;">Behavioral baseline (Layer 1) runs on-device: zero LLM cost. LLM fires only when Layer 1 flags an anomaly and triggers the async challenge. Cost scales with fraud volume, not hiring volume -- fewer fraudulent applications means lower COGS, not higher.</p>
+        <div style="background:rgba(255,255,255,0.02);border-radius:8px;padding:10px 14px;margin-bottom:10px;">
+            <div style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:7px;">Token math per cycle</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:9.5px;color:var(--muted);line-height:1.7;">
+                <div><span style="color:rgba(255,255,255,0.5);">4 calls:</span> anomaly confirm, challenge gen, response eval, scoring<br>~2,500 input + 400 output (gen) / ~3,200 input + 200 output (eval)</div>
+                <div><span style="color:rgba(255,255,255,0.5);">Models:</span> Gemini 2.5 Flash batch $0.15/$1.25 per 1M tokens<br>Haiku 4.5 batch $0.50/$2.50 per 1M tokens</div>
+            </div>
+        </div>
+        <div style="background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.15);border-radius:8px;padding:10px 14px;margin-bottom:10px;">
+            <div style="font-size:9px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">3-phase cost reduction roadmap</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+                <div>
+                    <div style="font-size:10px;font-weight:700;color:var(--text);margin-bottom:3px;">Phase 1 -- Now</div>
+                    <div style="font-size:9px;color:var(--muted);line-height:1.5;">Gemini 2.5 Flash + Haiku 4.5 batch API. ~$0.006/cycle.</div>
+                </div>
+                <div>
+                    <div style="font-size:10px;font-weight:700;color:var(--text);margin-bottom:3px;">Phase 2 -- 6 mo post-seed</div>
+                    <div style="font-size:9px;color:var(--muted);line-height:1.5;">Fine-tuned Llama 3.1 8B on Sentriq challenge pairs. ~$0.001/cycle. 85% reduction.</div>
+                </div>
+                <div>
+                    <div style="font-size:10px;font-weight:700;color:var(--text);margin-bottom:3px;">Phase 3 -- 12-18 mo</div>
+                    <div style="font-size:9px;color:var(--muted);line-height:1.5;">Quantized on-device inference. ~$0.0002/cycle. Near-zero marginal cost.</div>
+                </div>
+            </div>
+        </div>
+        <p style="font-size:10px;color:var(--muted);line-height:1.6;">Layer 1 behavioral baseline runs on-device: zero LLM cost. LLM fires only when Layer 1 flags an anomaly. As the baseline matures, it flags fewer false positives -- fewer challenges triggered, COGS drops automatically as the model improves. Cost scales with fraud volume, not hiring volume.</p>
     </div>
 </div>
 </div>
