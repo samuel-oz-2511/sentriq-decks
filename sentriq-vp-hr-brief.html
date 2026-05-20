@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>The Application Signal Problem - Sentriq</title>
+<title>The Hiring Signal Problem - Sentriq</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -69,6 +69,7 @@
     line-height: 1.55;
   }
   .logo-wrap { flex-shrink: 0; padding-top: 4px; }
+  .logo-svg { width: 32px; height: 32px; }
 
   /* SECTION LABELS */
   .section-label {
@@ -81,6 +82,14 @@
   }
 
   section { margin-bottom: 36px; }
+
+  /* BODY TEXT */
+  .body-text {
+    font-size: 13px;
+    color: var(--text-sub);
+    line-height: 1.75;
+  }
+  .body-text + .body-text { margin-top: 12px; }
 
   /* STATS */
   .stats-grid {
@@ -112,28 +121,113 @@
     color: var(--text-muted);
   }
 
-  /* BODY TEXT */
-  .body-text {
-    font-size: 13px;
-    color: var(--text-sub);
-    line-height: 1.75;
-  }
-  .body-text + .body-text { margin-top: 12px; }
-
   /* CALLOUT */
   .callout {
     padding: 18px 22px;
     background: var(--surface);
-    border-left: 3px solid var(--amber);
-    border-radius: 0 8px 8px 0;
     border: 1px solid var(--border);
     border-left: 3px solid var(--amber);
+    border-radius: 0 8px 8px 0;
     margin: 16px 0;
   }
   .callout p {
     font-size: 13px;
     color: var(--text-sub);
     line-height: 1.7;
+  }
+
+  /* COST CASCADE */
+  .cost-cascade {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 16px 0;
+  }
+  .cost-item {
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .cost-stage {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .cost-price {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .cost-note {
+    font-size: 10px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* ATS EXPLANATION */
+  .ats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .ats-card {
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .ats-card.what-it-is { background: var(--surface); }
+  .ats-card.what-it-misses { background: rgba(232,160,32,0.04); border-color: rgba(232,160,32,0.25); }
+  .ats-card-label {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .ats-card.what-it-misses .ats-card-label { color: var(--text-muted); }
+  .ats-card p {
+    font-size: 12px;
+    color: var(--text-sub);
+    line-height: 1.65;
+  }
+
+  /* CONCEPT BLOCK */
+  .concept-box {
+    padding: 24px 28px;
+    background: rgba(232,160,32,0.06);
+    border: 1px solid rgba(232,160,32,0.3);
+    border-left: 3px solid var(--amber);
+    border-radius: 0 10px 10px 0;
+  }
+  .concept-label {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .concept-label.with-it { color: var(--amber); }
+  .concept-text {
+    font-size: 12px;
+    color: var(--text-sub);
+    line-height: 1.7;
+  }
+  .concept-footer {
+    margin-top: 14px;
+    font-size: 11px;
+    color: var(--text-muted);
+    border-top: 1px solid rgba(232,160,32,0.2);
+    padding-top: 12px;
   }
 
   /* CAPABILITY LIST */
@@ -258,50 +352,11 @@
     line-height: 1.7;
   }
   .discussion-box .questions {
-    margin-top: 12px;
+    margin-top: 16px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
   }
-  .discussion-box .q {
-    font-size: 12px;
-    color: var(--text);
-    line-height: 1.6;
-    padding-left: 14px;
-    border-left: 2px solid var(--amber);
-  }
-
-  /* CONCEPT BLOCK */
-  .concept-box {
-    padding: 24px 28px;
-    background: rgba(232,160,32,0.06);
-    border: 1px solid rgba(232,160,32,0.3);
-    border-left: 3px solid var(--amber);
-    border-radius: 0 10px 10px 0;
-  }
-  .concept-label {
-    font-size: 9px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-  }
-  .concept-label.with-it { color: var(--amber); }
-  .concept-text {
-    font-size: 12px;
-    color: var(--text-sub);
-    line-height: 1.7;
-  }
-  .concept-footer {
-    margin-top: 14px;
-    font-size: 11px;
-    color: var(--text-muted);
-    border-top: 1px solid rgba(232,160,32,0.2);
-    padding-top: 12px;
-  }
-
-  /* DISCUSSION QUESTIONS */
   .discussion-question {
     padding: 14px 16px;
     background: var(--surface);
@@ -339,9 +394,6 @@
     color: var(--text-muted);
   }
 
-  /* LOGO SVG */
-  .logo-svg { width: 32px; height: 32px; }
-
   /* DIVIDER */
   hr.section-div {
     border: none;
@@ -352,6 +404,8 @@
   @media (max-width: 620px) {
     .page { padding: 28px 22px 48px; }
     .stats-grid { grid-template-columns: 1fr; }
+    .cost-cascade { grid-template-columns: 1fr; }
+    .ats-grid { grid-template-columns: 1fr; }
     .doc-header { flex-direction: column-reverse; }
     .traction-co { min-width: unset; }
     .traction-item { flex-direction: column; gap: 4px; }
@@ -367,8 +421,8 @@
   <div class="doc-header">
     <div>
       <div class="doc-type">Industry Brief &middot; Talent Acquisition Intelligence</div>
-      <div class="doc-title">The Application <span>Signal Problem</span></div>
-      <div class="doc-sub">Most hiring tools evaluate what a candidate submitted. None of them run before the first recruiter opens a file. This brief covers the tooling gap at the point of submission, and why catching mismatches before the first interview reduces the cost of a wrong shortlist.</div>
+      <div class="doc-title">The Hiring <span>Signal Problem</span></div>
+      <div class="doc-sub">Hiring runs on text. AI made that text cheap to produce. This brief covers what that shift broke in the current TA stack, where the gap lives, and what early tooling is doing about it.</div>
     </div>
     <div class="logo-wrap">
       <svg class="logo-svg" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -381,31 +435,96 @@
     </div>
   </div>
 
-  <!-- SECTION 1: SCALE -->
+  <!-- SECTION 1: THE WORLD THEY LIVE IN -->
+  <section>
+    <div class="section-label">The vertical you work in</div>
+    <p class="body-text">Every hiring workflow runs on text. Job descriptions, applications, screening notes, assessment results, interview transcripts, offer letters. Text from first post to hire. That is not an accident and it is not changing. Compliance requires documented records. Hiring decisions require audit trails. The regulatory direction across major markets makes the text workflow more required, not less.</p>
+    <p class="body-text">What changed in 2023 and accelerated through 2025: AI tools made it cheap to produce perfect text. A polished, keyword-optimized application that precisely mirrors the job description now takes under 60 seconds to generate. Your ATS scores it highly. It reads like a strong candidate. Your team opens it.</p>
+    <div class="callout">
+      <p>The quality of the application no longer tells you anything about the quality of the applicant. The signal that used to live in the effort and authenticity of a real application is gone. What replaces it is a uniform surface that every screening tool in your stack was designed to evaluate at face value.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 2: THE DATA -->
   <section>
     <div class="section-label">What the data shows</div>
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-num">25%</div>
-        <div class="stat-desc">of all job applications will be AI-generated or AI-altered by 2028.</div>
+        <div class="stat-desc">of all job applications projected to be AI-generated or AI-altered by 2028. The current share is already material.</div>
         <div class="stat-source">Gartner, Jul 2025</div>
       </div>
       <div class="stat-card">
         <div class="stat-num">23 hrs</div>
-        <div class="stat-desc">Median recruiter time to build a quality shortlist, even with AI tooling.</div>
+        <div class="stat-desc">Median recruiter time to build a quality shortlist, even with AI-assisted screening tools in place.</div>
         <div class="stat-source">LinkedIn Talent Insights, 2025</div>
       </div>
       <div class="stat-card">
         <div class="stat-num">3:1</div>
-        <div class="stat-desc">Interviews per hire. One in three candidates advanced does not match the role.</div>
+        <div class="stat-desc">Interviews conducted per hire. One in three candidates advanced by the team does not match the role.</div>
         <div class="stat-source">SHRM, 2025</div>
       </div>
     </div>
   </section>
 
-  <!-- CONCEPT ANCHOR -->
+  <!-- SECTION 3: WHAT MISMATCHES COST -->
   <section>
-    <div class="section-label">What the submission layer means in practice</div>
+    <div class="section-label">What it costs when the mismatch surfaces late</div>
+    <p class="body-text">Most hiring teams do not track the cost of advancing the wrong candidate. They track time-to-hire and offer acceptance. The cost of the intermediate stages — the screens, tests, and panels that run on candidates who do not end up matching the role — is absorbed invisibly into team time.</p>
+    <div class="cost-cascade">
+      <div class="cost-item">
+        <div class="cost-stage">Phone Screen</div>
+        <div class="cost-price">$150</div>
+        <div class="cost-note">Recruiter + coordinator time per candidate</div>
+      </div>
+      <div class="cost-item">
+        <div class="cost-stage">Skills Test</div>
+        <div class="cost-price">$300</div>
+        <div class="cost-note">Assessment setup, review, and follow-up</div>
+      </div>
+      <div class="cost-item">
+        <div class="cost-stage">Panel Interview</div>
+        <div class="cost-price">$1,800</div>
+        <div class="cost-note">3-5 interviewers, prep, debrief, coordination</div>
+      </div>
+    </div>
+    <div class="callout">
+      <p>Most teams discover the mismatch at or after the panel stage. By that point, $2,250 in team time has been spent on a single candidate. Multiplied across the two in three candidates who do not result in a hire, the cost is not a recruiting problem. It is a signal problem. The information that would have changed the decision was available earlier and nobody captured it.</p>
+    </div>
+  </section>
+
+  <hr class="section-div"/>
+
+  <!-- SECTION 4: WHY THE ATS MISSES IT -->
+  <section>
+    <div class="section-label">Why your current stack cannot catch this</div>
+    <p class="body-text">The most common response to this problem is: "Our ATS handles screening." It does not, and the reason is structural, not a product gap.</p>
+    <div class="ats-grid">
+      <div class="ats-card what-it-is">
+        <div class="ats-card-label">What the ATS was built to do</div>
+        <p>Track candidates through a compliance workflow. Create audit trails. Manage headcount approvals. Score applications against job descriptions using keyword matching. The ATS was designed before AI tools existed to game keyword scoring. It was not built to evaluate whether the application in front of you reflects the person behind it.</p>
+      </div>
+      <div class="ats-card what-it-misses">
+        <div class="ats-card-label">What the ATS structurally cannot see</div>
+        <p>The ATS receives an application after it is submitted. It evaluates the output. It has no access to the process that produced the output. Assessments fire later, after screens, after human review. Every evaluation tool in the current stack sits downstream of submission. None of them observe what happens during submission itself.</p>
+      </div>
+    </div>
+    <p class="body-text" style="margin-top:14px;">This is not a missing feature. No roadmap update closes it. The gap is structural: there is no layer in the current stack that sits at the point of submission, before any human time is spent.</p>
+  </section>
+
+  <!-- SECTION 5: THE SUBMISSION WINDOW -->
+  <section>
+    <div class="section-label">The moment nobody is watching</div>
+    <p class="body-text">Between the moment an applicant clicks Apply and the moment their submission enters the ATS, there is a window that every tool in the current stack ignores. The applicant is completing the form. No recruiter is watching. No scoring system is running. No signal is being captured.</p>
+    <p class="body-text">That window contains more information about whether the application reflects the applicant's actual capability than any downstream evaluation can recover. It is the only moment in the hiring process when the applicant is acting alone. Session duration, editing patterns, paste activity — the behavioral context visible during form completion disappears the moment the file is uploaded. What arrives in the ATS is a polished output with no record of how it was produced.</p>
+    <p class="body-text">A new category of tooling is forming specifically around this window. The defining characteristic: it operates at submission, not at evaluation. It does not replace what comes after. It gives the recruiter something to work with before they open the first file.</p>
+  </section>
+
+  <hr class="section-div"/>
+
+  <!-- SECTION 6: WHAT CHANGES (CONCEPT BLOCK) -->
+  <section>
+    <div class="section-label">What the submission layer changes in practice</div>
     <div class="concept-box">
       <div class="concept-cols" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
         <div>
@@ -421,23 +540,10 @@
     </div>
   </section>
 
-  <!-- SECTION 2: THE GAP -->
-  <section>
-    <div class="section-label">The structural gap</div>
-    <p class="body-text">Every tool in the TA stack evaluates what a candidate submitted. None of them capture the behavioral context visible during submission itself: session duration, editing patterns, paste activity.</p>
-    <p class="body-text" style="margin-top:12px;">The behavioral context present during the application itself, the signals that would tell a recruiter whether the work in front of them reflects the person behind it, disappears the moment the file is uploaded. What remains is a polished output that looks like every other polished output, and must be evaluated on its own terms by a recruiter who has dozens more in the same queue.</p>
-    <div class="callout" style="margin-top:16px;">
-      <p>AI application tooling has made it easy to produce polished, keyword-optimized applications with no direct connection to the experience being claimed. The ATS scores it highly. The recruiter opens it. Six rounds later, a mismatch surfaces that was visible from the first interaction, but only in hindsight.</p>
-    </div>
-    <p class="body-text">The gap is not a people problem. It is a tooling gap: no layer in the current stack is designed to surface signal at the point of submission, before any human time is spent.</p>
-  </section>
-
-  <hr class="section-div"/>
-
-  <!-- SECTION 3: WHAT A SOLUTION LOOKS LIKE -->
+  <!-- SECTION 7: WHAT THE LAYER DOES -->
   <section>
     <div class="section-label">What an application integrity layer does</div>
-    <p class="body-text" style="margin-bottom:14px;">A new category of tooling is forming around this gap. The defining characteristic is that it operates at submission, not at evaluation. It does not replace the recruiter's judgment. It gives the recruiter something to exercise judgment on.</p>
+    <p class="body-text" style="margin-bottom:14px;">The category is defined by five capabilities, all of which operate without changing the candidate experience or touching internal systems.</p>
     <div class="capability-list">
       <div class="capability-item">
         <div class="cap-dot"></div>
@@ -445,7 +551,7 @@
       </div>
       <div class="capability-item">
         <div class="cap-dot"></div>
-        <div class="cap-text"><strong>Claim consistency tracking across stages.</strong> What was stated at application is available as a reference point through each subsequent stage. When an inconsistency surfaces, the recruiter has the original submission context to compare against. No automated decisions.</div>
+        <div class="cap-text"><strong>Continuous gap assessment across the funnel.</strong> The integrity signal does not fire once and go silent. As the application moves through phone screens, skills tests, and interviews, each new data point is compared against the original submission. When a gap surfaces — a claimed skill not reflected in a test result, a timeline inconsistency that emerges in an interview — a targeted challenge fires before the next expensive stage begins. The recruiter is not working off a first impression from 10 days ago. The signal is current at every gate.</div>
       </div>
       <div class="capability-item">
         <div class="cap-dot"></div>
@@ -464,10 +570,10 @@
 
   <hr class="section-div"/>
 
-  <!-- SECTION 4: ADOPTION / FRICTION -->
+  <!-- SECTION 8: HOW IT FITS -->
   <section>
     <div class="section-label">How it fits into what you already have</div>
-    <p class="body-text" style="margin-bottom:14px;">The most common question from TA leaders is whether adding a layer means replacing something, retraining the team, or running a months-long IT procurement. None of those apply here.</p>
+    <p class="body-text" style="margin-bottom:14px;">The most common concern from TA leaders is whether adding a layer means replacing something, retraining the team, or running a months-long IT procurement. None of those apply.</p>
     <div class="capability-list">
       <div class="capability-item">
         <div class="cap-dot"></div>
@@ -490,10 +596,10 @@
 
   <hr class="section-div"/>
 
-  <!-- SECTION 5: TRACTION / VALIDATION -->
+  <!-- SECTION 9: EARLY CONVERSATIONS -->
   <section>
     <div class="section-label">Early design partner conversations</div>
-    <p class="body-text" style="margin-bottom:14px;">The companies below have each initiated conversations about piloting this layer in their live hiring pipelines.</p>
+    <p class="body-text" style="margin-bottom:14px;">The organizations below have each initiated conversations about running this layer in their live hiring pipelines.</p>
     <div class="traction-grid">
       <div class="traction-item">
         <div class="traction-co">HSBC</div>
@@ -501,7 +607,7 @@
       </div>
       <div class="traction-item">
         <div class="traction-co">NVIDIA</div>
-        <div class="traction-detail">Israel Recruiting team reached out via warm intro to explore a design partner conversation. Champions: Director of Israel Recruiting (8 years at NVIDIA) and Manager and Tech Lead, Recruiting. Meeting being scheduled. 4,000+ engineers in Israel post-Mellanox acquisition.</div>
+        <div class="traction-detail">Israel Recruiting team reached out via warm intro to explore a design partner conversation. Champions: Director of Israel Recruiting (8 years at NVIDIA) and Manager and Tech Lead, Recruiting. Meeting being scheduled. NVIDIA operates one of the largest engineering centers in Israel, significantly expanded through the Mellanox acquisition.</div>
       </div>
       <div class="traction-item">
         <div class="traction-co">Booking Holdings</div>
@@ -512,7 +618,7 @@
 
   <hr class="section-div"/>
 
-  <!-- SECTION 6: THE COMPANY -->
+  <!-- SECTION 10: THE COMPANY -->
   <section>
     <div class="section-label">The company building this</div>
     <div class="company-bio">
@@ -529,14 +635,14 @@
   <!-- DISCUSSION PROMPT -->
   <div class="discussion-box">
     <div class="prompt-label">For discussion: three questions</div>
-    <p>This brief is a starting point for a conversation, not a conclusion. The three questions below are designed to surface whether the problem, the approach, and the adoption path each make sense from your team's vantage point.</p>
-    <div class="questions" style="margin-top:16px;gap:12px;">
+    <p>This brief is intended to start a conversation, not conclude one. The three questions below are designed to test whether the problem, the approach, and the path forward each ring true from where you sit. The answers to these questions are what the next conversation would be built around.</p>
+    <div class="questions">
       <div class="discussion-question">
         <div class="question-label">On the problem</div>
         <div class="question-text">When a hire has not worked out in the first 90 days, what misalignment typically surfaced, and how far into the process did it take to discover it?</div>
       </div>
       <div class="discussion-question">
-        <div class="question-label amber">On the approach</div>
+        <div class="question-label">On the approach</div>
         <div class="question-text">What single output from a submission would change how your team prioritizes the queue, and what would you need to see in the first month to trust that output against your actual hiring outcomes?</div>
       </div>
       <div class="discussion-question">
