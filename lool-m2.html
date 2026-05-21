@@ -639,50 +639,215 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <!-- =====================================================
-     A1: COMPETITIVE MAP (Ofir's Boston Matrix)
+     A1: COMPETITIVE MAP — Option B (Scope x Timing)
      ===================================================== -->
 <div class="slide bg-dark" data-index="8">
-<div class="slide-inner">
+<div class="slide-inner" style="display:flex;flex-direction:column;height:100%;padding-bottom:0;">
 
-    <div class="eyebrow" style="color:rgba(255,255,255,0.28);"><span style="color:rgba(232,160,32,0.5);">A1</span> &nbsp;Competitive Map</div>
-    <p class="mid" style="margin-bottom:6px;">The submission layer <span class="amber">is unclaimed.</span></p>
-    <p class="body dim" style="margin-bottom:24px;font-size:12px;">Every existing player is either upstream in sourcing or downstream in interview. Nobody owns the moment the application is submitted.</p>
-
-    <div style="margin:0 0 14px;">
-        <div style="display:grid;grid-template-columns:90px 1fr 1fr;gap:8px;margin-bottom:8px;">
-            <div></div>
-            <div style="text-align:center;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.28);padding-bottom:6px;">Outbound<br><span style="font-size:9px;font-weight:500;opacity:0.65;text-transform:none;letter-spacing:0;">Recruiter sources you</span></div>
-            <div style="text-align:center;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:var(--amber);padding-bottom:6px;">Inbound<br><span style="font-size:9px;font-weight:500;text-transform:none;letter-spacing:0;color:rgba(232,160,32,0.65);">Candidate applies</span></div>
+    <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px;flex-shrink:0;">
+        <div>
+            <div class="eyebrow" style="color:rgba(255,255,255,0.28);margin-bottom:6px;"><span style="color:rgba(232,160,32,0.5);">A1</span> &nbsp;Competitive Map</div>
+            <p style="font-size:clamp(18px,2.2vw,26px);font-weight:800;letter-spacing:-0.03em;line-height:1.1;">We know exactly <span style="color:var(--amber);">where everyone stands.</span></p>
         </div>
-        <div style="display:grid;grid-template-columns:90px 1fr 1fr;gap:8px;margin-bottom:8px;">
-            <div style="display:flex;align-items:center;justify-content:flex-end;padding-right:12px;">
-                <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:var(--amber);">Early</span>
-            </div>
-            <div style="padding:18px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;text-align:center;">
-                <div style="font-size:14px;font-weight:700;color:rgba(255,255,255,0.48);margin-bottom:4px;">Gem</div>
-                <div style="font-size:11px;color:rgba(255,255,255,0.28);line-height:1.5;">Sourcing fraud. Fake profiles before any application exists.</div>
-            </div>
-            <div style="padding:18px 14px;background:rgba(232,160,32,0.10);border:2px solid rgba(232,160,32,0.40);border-radius:10px;text-align:center;box-shadow:0 0 28px rgba(232,160,32,0.12);">
-                <div style="font-size:14px;font-weight:800;color:var(--amber);margin-bottom:4px;">Sentriq</div>
-                <div style="font-size:11px;color:rgba(255,255,255,0.58);line-height:1.5;margin-bottom:8px;">Application integrity at submission.</div>
-                <span style="padding:3px 10px;border-radius:20px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:var(--amber);border:1px solid rgba(232,160,32,0.40);">Alone here</span>
-            </div>
-        </div>
-        <div style="display:grid;grid-template-columns:90px 1fr 1fr;gap:8px;">
-            <div style="display:flex;align-items:center;justify-content:flex-end;padding-right:12px;">
-                <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.28);">Late</span>
-            </div>
-            <div style="padding:18px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:10px;text-align:center;">
-                <div style="font-size:11px;color:rgba(255,255,255,0.18);">No players</div>
-            </div>
-            <div style="padding:18px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;text-align:center;">
-                <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.42);margin-bottom:4px;">Greenhouse RT, Endorsed</div>
-                <div style="font-size:11px;color:rgba(255,255,255,0.28);line-height:1.5;">Post-submission text analysis. HireVue, Persona: identity verification at interview stage.</div>
+        <div style="text-align:right;flex-shrink:0;margin-left:20px;">
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);margin-bottom:4px;">14 players mapped</div>
+            <div style="display:flex;gap:10px;align-items:center;justify-content:flex-end;">
+                <span style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.28);"><span style="width:8px;height:8px;border-radius:2px;background:rgba(232,160,32,0.40);display:inline-block;border:1px solid rgba(232,160,32,0.60);"></span>Sentriq zone</span>
+                <span style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.28);"><span style="width:8px;height:8px;border-radius:2px;background:rgba(255,255,255,0.08);display:inline-block;border:1px solid rgba(255,255,255,0.15);"></span>Competitors</span>
             </div>
         </div>
     </div>
 
-    <p style="font-size:11px;color:rgba(255,255,255,0.20);text-align:center;margin-top:8px;">The deception happens at submission. Every tool above arrives after it is already done.</p>
+    <!-- Y top label -->
+    <div style="text-align:center;margin-bottom:3px;flex-shrink:0;">
+        <span style="font-size:8.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:var(--amber);">&#9650; At Submission</span>
+    </div>
+
+    <!-- Axis row -->
+    <div style="display:flex;align-items:stretch;flex:1;min-height:0;gap:4px;">
+
+        <!-- Left axis label -->
+        <div style="width:52px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+            <span style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.22);white-space:nowrap;">Single Employer</span>
+        </div>
+
+        <!-- THE QUADRANT -->
+        <div style="position:relative;flex:1;border:1px solid rgba(255,255,255,0.09);border-radius:6px;overflow:hidden;min-height:clamp(240px,42vh,390px);">
+
+            <!-- Quadrant backgrounds -->
+            <div style="position:absolute;right:0;top:0;width:50%;height:50%;background:rgba(232,160,32,0.08);box-shadow:inset -20px -20px 60px rgba(232,160,32,0.06);pointer-events:none;"></div>
+            <div style="position:absolute;left:0;top:0;width:50%;height:50%;background:rgba(255,255,255,0.01);pointer-events:none;"></div>
+            <div style="position:absolute;left:0;bottom:0;width:50%;height:50%;background:rgba(255,255,255,0.01);pointer-events:none;"></div>
+            <div style="position:absolute;right:0;bottom:0;width:50%;height:50%;background:rgba(255,255,255,0.015);pointer-events:none;"></div>
+
+            <!-- Axis lines -->
+            <div style="position:absolute;top:50%;left:0;right:0;height:1px;background:rgba(255,255,255,0.13);pointer-events:none;"></div>
+            <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.13);pointer-events:none;"></div>
+
+            <!-- Quadrant corner labels -->
+            <div style="position:absolute;left:9px;top:7px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.13);pointer-events:none;">Sourcing Intel</div>
+            <div style="position:absolute;right:9px;top:7px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(232,160,32,0.35);text-align:right;pointer-events:none;">Application Intelligence</div>
+            <div style="position:absolute;left:9px;bottom:7px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.13);pointer-events:none;">Screening Tools</div>
+            <div style="position:absolute;right:9px;bottom:7px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.13);text-align:right;pointer-events:none;">Identity Networks</div>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- COMPANY NODES                           -->
+            <!-- Coordinates: left% from left, top% from top -->
+            <!-- ═══════════════════════════════════════ -->
+
+            <!-- ★ SENTRIQ (80%, 10%) — top-right dominant -->
+            <div style="position:absolute;left:80%;top:10%;transform:translate(-50%,-50%);z-index:10;">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="padding:5px 11px;background:rgba(232,160,32,0.20);border:1.5px solid rgba(232,160,32,0.65);border-radius:8px;box-shadow:0 0 28px rgba(232,160,32,0.40),0 0 6px rgba(232,160,32,0.25);display:flex;align-items:center;gap:5px;">
+                        <svg width="11" height="11" viewBox="0 0 56 56" fill="none"><rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><circle cx="28" cy="7" r="3" fill="#E8A020"/></svg>
+                        <span style="font-size:11px;font-weight:800;color:var(--amber);letter-spacing:-0.01em;">Sentriq</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ENDORSED (57%, 41%) — approaching top-right -->
+            <div style="position:absolute;left:57%;top:41%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
+                        <img src="https://logo.clearbit.com/endorsed.ai" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=endorsed.ai&sz=32';this.onerror=null;" alt="E"/>
+                    </div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;letter-spacing:0.02em;">Endorsed</div>
+                </div>
+            </div>
+
+            <!-- TOFU (46%, 47%) — center, approaching -->
+            <div style="position:absolute;left:46%;top:47%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
+                        <img src="https://logo.clearbit.com/usetofu.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=usetofu.com&sz=32';this.onerror=null;" alt="T"/>
+                    </div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;letter-spacing:0.02em;">Tofu</div>
+                </div>
+            </div>
+
+            <!-- GEM (15%, 18%) — top-left: sourcing intel -->
+            <div style="position:absolute;left:15%;top:18%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
+                        <img src="https://logo.clearbit.com/gem.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=gem.com&sz=32';this.onerror=null;" alt="G"/>
+                    </div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;letter-spacing:0.02em;">Gem</div>
+                </div>
+            </div>
+
+            <!-- ASHBY (27%, 33%) — top-left: native detection -->
+            <div style="position:absolute;left:27%;top:33%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
+                        <img src="https://logo.clearbit.com/ashbyhq.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=ashbyhq.com&sz=32';this.onerror=null;" alt="A"/>
+                    </div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;letter-spacing:0.02em;">Ashby</div>
+                </div>
+            </div>
+
+            <!-- GREENHOUSE RT (33%, 49%) — on center line -->
+            <div style="position:absolute;left:33%;top:49%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
+                        <img src="https://logo.clearbit.com/greenhouse.io" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=greenhouse.io&sz=32';this.onerror=null;" alt="G"/>
+                    </div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;letter-spacing:0.02em;">Greenhouse</div>
+                </div>
+            </div>
+
+            <!-- CROSSCHQ (67%, 71%) — bottom-right: reference network -->
+            <div style="position:absolute;left:67%;top:71%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
+                        <img src="https://logo.clearbit.com/crosschq.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=crosschq.com&sz=32';this.onerror=null;" alt="C"/>
+                    </div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;letter-spacing:0.02em;">Crosschq</div>
+                </div>
+            </div>
+
+            <!-- SOCURE (77%, 80%) — bottom-right: identity fraud graph -->
+            <div style="position:absolute;left:77%;top:80%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
+                        <img src="https://logo.clearbit.com/socure.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=socure.com&sz=32';this.onerror=null;" alt="S"/>
+                    </div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;letter-spacing:0.02em;">Socure</div>
+                </div>
+            </div>
+
+            <!-- VALIDIA (61%, 77%) — bottom-right: credential DB -->
+            <div style="position:absolute;left:61%;top:77%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
+                        <img src="https://logo.clearbit.com/validia.ai" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=validia.ai&sz=32';this.onerror=null;" alt="V"/>
+                    </div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;letter-spacing:0.02em;">Validia</div>
+                </div>
+            </div>
+
+            <!-- HIREVUE (18%, 62%) — bottom-left: video interview -->
+            <div style="position:absolute;left:18%;top:62%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
+                        <img src="https://logo.clearbit.com/hirevue.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=hirevue.com&sz=32';this.onerror=null;" alt="H"/>
+                    </div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;letter-spacing:0.02em;">HireVue</div>
+                </div>
+            </div>
+
+            <!-- METAVIEW (28%, 67%) — bottom-left: interview AI -->
+            <div style="position:absolute;left:28%;top:67%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
+                        <img src="https://logo.clearbit.com/metaview.ai" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=metaview.ai&sz=32';this.onerror=null;" alt="M"/>
+                    </div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;letter-spacing:0.02em;">Metaview</div>
+                </div>
+            </div>
+
+            <!-- WILLO (10%, 73%) — bottom-left: video screening -->
+            <div style="position:absolute;left:10%;top:73%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
+                        <img src="https://logo.clearbit.com/willo.video" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=willo.video&sz=32';this.onerror=null;" alt="W"/>
+                    </div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;letter-spacing:0.02em;">Willo</div>
+                </div>
+            </div>
+
+            <!-- PERSONA (8%, 80%) — bottom-left: identity -->
+            <div style="position:absolute;left:8%;top:80%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
+                        <img src="https://logo.clearbit.com/withpersona.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=withpersona.com&sz=32';this.onerror=null;" alt="P"/>
+                    </div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;letter-spacing:0.02em;">Persona</div>
+                </div>
+            </div>
+
+            <!-- CHECKR (20%, 88%) — bottom-left corner: BGC -->
+            <div style="position:absolute;left:20%;top:88%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
+                        <img src="https://logo.clearbit.com/checkr.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=checkr.com&sz=32';this.onerror=null;" alt="C"/>
+                    </div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;letter-spacing:0.02em;">Checkr</div>
+                </div>
+            </div>
+
+        </div><!-- /quadrant -->
+
+        <!-- Right axis label -->
+        <div style="width:52px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+            <span style="writing-mode:vertical-rl;font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(232,160,32,0.65);white-space:nowrap;">Cross-Employer Intel</span>
+        </div>
+
+    </div><!-- /axis row -->
+
+    <!-- Y bottom label -->
+    <div style="text-align:center;margin-top:3px;flex-shrink:0;">
+        <span style="font-size:8.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.25);">&#9660; Post-Submission</span>
+    </div>
 
 </div>
 </div>
