@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hiring Pipeline as a Security Problem -- Source Library | Sentriq</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #09090F;
+    --bg-card: rgba(255,255,255,0.025);
+    --bg-card-hover: rgba(255,255,255,0.04);
+    --amber: #E8A020;
+    --amber-dim: rgba(232,160,32,0.15);
+    --amber-border: rgba(232,160,32,0.25);
+    --text: rgba(255,255,255,0.92);
+    --text-sub: rgba(255,255,255,0.58);
+    --muted: rgba(255,255,255,0.32);
+    --border: rgba(255,255,255,0.07);
+    --border-strong: rgba(255,255,255,0.12);
+    --sidebar-w: 240px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* ── LAYOUT ── */
+  .layout {
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    min-height: 100vh;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid var(--border);
+    background: rgba(9,9,15,0.97);
+    padding: 28px 0 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.1) transparent;
+  }
+  .sidebar-logo {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+  .sidebar-logo svg { width: 28px; height: 28px; }
+  .sidebar-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    padding: 16px 20px 6px;
+  }
+  .nav-item {
+    display: block;
+    padding: 7px 20px;
+    color: var(--text-sub);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+  }
+  .nav-item:hover, .nav-item.active {
+    color: var(--text);
+    border-left-color: var(--amber);
+    background: rgba(232,160,32,0.05);
+  }
+  .nav-count {
+    font-size: 10px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-left: 4px;
+  }
+
+  /* ── MAIN ── */
+  .main {
+    padding: 0;
+    max-width: 900px;
+  }
+
+  /* ── HEADER ── */
+  .page-header {
+    padding: 48px 48px 36px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(9,9,15,0.96);
+    backdrop-filter: blur(12px);
+  }
+  .page-header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 20px;
+  }
+  .page-title {
+    font-size: clamp(18px, 2.2vw, 24px);
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  .page-title span { color: var(--amber); }
+  .page-meta {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+    font-weight: 500;
+  }
+  .search-wrap {
+    position: relative;
+    flex-shrink: 0;
+    width: 240px;
+  }
+  .search-wrap svg {
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.38;
+    pointer-events: none;
+  }
+  #search {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    padding: 9px 12px 9px 34px;
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  #search::placeholder { color: var(--muted); }
+  #search:focus { border-color: rgba(232,160,32,0.4); }
+  .stat-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .stat-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .stat-chip strong { color: var(--amber); font-weight: 700; }
+
+  /* ── CONTENT ── */
+  .content { padding: 40px 48px 80px; }
+
+  /* ── EXECUTIVE SUMMARY ── */
+  .exec-summary {
+    background: rgba(232,160,32,0.04);
+    border: 1px solid var(--amber-border);
+    border-left: 3px solid var(--amber);
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin-bottom: 48px;
+  }
+  .exec-summary h2 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 14px;
+  }
+  .exec-summary p {
+    font-size: 13.5px;
+    color: var(--text-sub);
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+  .exec-summary p:last-child { margin-bottom: 0; }
+
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: 56px;
+    scroll-margin-top: 120px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: var(--amber-dim);
+    border: 1px solid var(--amber-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--amber);
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .section-subtitle {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* ── CARDS ── */
+  .cards { display: flex; flex-direction: column; gap: 10px; }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-strong);
+  }
+  .card.market-signal {
+    background: rgba(232,160,32,0.02);
+    border-color: rgba(232,160,32,0.1);
+  }
+  .card.market-signal:hover {
+    background: rgba(232,160,32,0.04);
+    border-color: rgba(232,160,32,0.18);
+  }
+  .card-id {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  .card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.35;
+    margin-bottom: 10px;
+  }
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .meta-item {
+    font-size: 11px;
+    color: var(--text-sub);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .meta-sep {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--muted);
+    opacity: 0.4;
+    flex-shrink: 0;
+  }
+  .card-url {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--muted);
+    text-decoration: none;
+    word-break: break-all;
+    display: block;
+    margin-bottom: 10px;
+    transition: color 0.15s;
+  }
+  .card-url:hover { color: var(--amber); }
+  .card-urls { display: flex; flex-direction: column; gap: 3px; margin-bottom: 10px; }
+  .card-summary {
+    font-size: 13px;
+    color: var(--text-sub);
+    line-height: 1.7;
+  }
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 12px;
+  }
+  .tag {
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .tag-government  { background: rgba(232,160,32,0.12); color: #E8A020; border: 1px solid rgba(232,160,32,0.25); }
+  .tag-regulatory  { background: rgba(232,160,32,0.08); color: rgba(232,160,32,0.8); border: 1px solid rgba(232,160,32,0.18); }
+  .tag-incident    { background: rgba(220,70,70,0.12); color: rgba(240,100,100,0.9); border: 1px solid rgba(220,70,70,0.22); }
+  .tag-report      { background: rgba(80,140,230,0.12); color: rgba(120,170,240,0.9); border: 1px solid rgba(80,140,230,0.22); }
+  .tag-press       { background: rgba(80,140,230,0.08); color: rgba(120,170,240,0.75); border: 1px solid rgba(80,140,230,0.15); }
+  .tag-conference  { background: rgba(150,80,230,0.12); color: rgba(180,130,240,0.9); border: 1px solid rgba(150,80,230,0.22); }
+  .tag-thought-leader { background: rgba(150,80,230,0.08); color: rgba(180,130,240,0.75); border: 1px solid rgba(150,80,230,0.15); }
+  .tag-hr-crossover  { background: rgba(60,200,120,0.1); color: rgba(80,210,140,0.9); border: 1px solid rgba(60,200,120,0.2); }
+  .tag-market-signal { background: rgba(30,200,200,0.1); color: rgba(60,210,210,0.9); border: 1px solid rgba(30,200,200,0.2); }
+
+  /* ── OBJECTION KILLERS ── */
+  .killers { display: flex; flex-direction: column; gap: 10px; }
+  .killer {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.15s;
+  }
+  .killer:hover { border-color: var(--border-strong); }
+  .killer-num {
+    background: var(--amber-dim);
+    border-right: 1px solid var(--amber-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--amber);
+    flex-shrink: 0;
+  }
+  .killer-body { padding: 16px 20px; }
+  .killer-headline {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+  .killer-evidence {
+    font-size: 12.5px;
+    color: var(--text-sub);
+    line-height: 1.65;
+  }
+
+  /* ── SEARCH HIDDEN ── */
+  .card.hidden { display: none; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: auto;
+      top: auto;
+      border-right: none;
+      border-top: 1px solid var(--border);
+      flex-direction: row;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 0;
+      z-index: 100;
+    }
+    .sidebar-logo, .sidebar-label { display: none; }
+    .nav-item {
+      white-space: nowrap;
+      border-left: none;
+      border-top: 2px solid transparent;
+      padding: 12px 14px;
+      font-size: 11px;
+    }
+    .nav-item:hover, .nav-item.active {
+      border-left-color: transparent;
+      border-top-color: var(--amber);
+    }
+    .page-header { padding: 24px 20px 20px; }
+    .page-header-top { flex-direction: column; gap: 14px; }
+    .search-wrap { width: 100%; }
+    .content { padding: 24px 20px 120px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="4" width="7" height="28" rx="2" fill="#E8A020"/>
+      <rect x="0" y="4" width="14" height="7" rx="2" fill="#E8A020"/>
+      <rect x="0" y="25" width="14" height="7" rx="2" fill="#E8A020"/>
+      <circle cx="28" cy="7" r="4" fill="#E8A020"/>
+    </svg>
+  </div>
+  <div class="sidebar-label">Jump to</div>
+  <a class="nav-item" href="#exec-summary">Executive Summary</a>
+  <div class="sidebar-label">Sources</div>
+  <a class="nav-item" href="#s1">1. Government &amp; Law Enforcement <span class="nav-count">13</span></a>
+  <a class="nav-item" href="#s2">2. Named Incidents <span class="nav-count">6</span></a>
+  <a class="nav-item" href="#s3">3. Security Press <span class="nav-count">11</span></a>
+  <a class="nav-item" href="#s4">4. Conference Talks <span class="nav-count">4</span></a>
+  <a class="nav-item" href="#s5">5. Thought Leaders <span class="nav-count">5</span></a>
+  <a class="nav-item" href="#s6">6. Industry Reports <span class="nav-count">18</span></a>
+  <a class="nav-item" href="#s7">7. Legal &amp; Regulatory <span class="nav-count">4</span></a>
+  <a class="nav-item" href="#s8">8. HR-Security Crossover <span class="nav-count">6</span></a>
+  <a class="nav-item" href="#s9">9. LinkedIn Market Signals <span class="nav-count">7</span></a>
+  <div class="sidebar-label">Rebuttals</div>
+  <a class="nav-item" href="#killers">12 Objection Killers</a>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <div class="page-header-top">
+      <div>
+        <div class="page-title">The Hiring Pipeline as a <span>Security Problem</span><br>Source Library</div>
+        <div class="page-meta">Sentriq internal reference &nbsp;·&nbsp; Last updated May 21, 2026 &nbsp;·&nbsp; Investor conversations &middot; Design partner meetings &middot; CISO briefings</div>
+      </div>
+      <div class="search-wrap">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4.5" stroke="white" stroke-width="1.4"/><line x1="9.5" y1="9.5" x2="13" y2="13" stroke="white" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <input type="text" id="search" placeholder="Search sources..." autocomplete="off">
+      </div>
+    </div>
+    <div class="stat-row">
+      <div class="stat-chip"><strong>74</strong> sources</div>
+      <div class="stat-chip"><strong>9</strong> categories</div>
+      <div class="stat-chip"><strong>12</strong> objection killers</div>
+      <div class="stat-chip"><strong>FBI &nbsp;· DOJ · CISA · Gartner · CrowdStrike · Mandiant · Microsoft</strong></div>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- EXEC SUMMARY -->
+    <div class="exec-summary" id="exec-summary">
+      <h2>Executive Summary</h2>
+      <p>The weight of evidence is unambiguous: the hiring pipeline is not an HR problem that happens to create security risk. It is an active attack surface, systematically exploited by nation-states, organized criminal networks, and opportunistic insiders. The evidence spans every authoritative category: FBI public service announcements, DOJ indictments with prison sentences, CISA advisories co-signed by allied governments, named Fortune 500 breaches, major threat intelligence reports from CrowdStrike, Mandiant, Microsoft, Palo Alto, Okta, and SentinelOne, formal regulatory guidance from the New York DFS, and a Gartner prediction that 1 in 4 job applicants will be fake by 2028.</p>
+      <p>The single most authoritative rebuttal anchor is the U.S. Department of Justice. The DOJ has indicted North Korean nationals and their American facilitators, prosecuted a US citizen to 102 months in federal prison, seized laptop farms across 16 states, and publicly named Fortune 500 companies including an American automaker, an aerospace manufacturer, and a Silicon Valley tech company as victims. This is not threat research. This is criminal prosecution. When a CISO says "that's HR's problem," the correct answer is: the DOJ disagrees, and they have the indictments to prove it.</p>
+      <p>Gartner predicts 25% of all candidate profiles will be fake by 2028. CrowdStrike responded to 304 FAMOUS CHOLLIMA insider threat incidents in 2024 alone. Amazon's Chief Security Officer -- not their Head of HR -- personally leads the company's defense against over 1,800 North Korean job applications intercepted since April 2024. Every other enterprise perimeter has a security owner and a product category. The hiring funnel does not. That is the gap Sentriq closes.</p>
+    </div>
+
+    <!-- SECTION 1 -->
+    <section class="section" id="s1">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <div>
+          <div class="section-title">Government and Law Enforcement Advisories</div>
+          <div class="section-subtitle">FBI, DOJ, CISA, NYDFS, NIST -- the highest-authority sources available</div>
+        </div>
+      </div>
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-id">1.1</div>
+          <div class="card-title">FBI IC3: North Korean IT Workers Conducting Data Extortion</div>
+          <div class="card-meta">
+            <span class="meta-item">Federal Bureau of Investigation / IC3</span>
+            <span class="meta-sep"></span>
+            <span class="meta-item">January 23, 2025</span>
+          </div>
+          <a class="card-url" href="https://www.ic3.gov/PSA/2025/PSA250123" target="_blank">ic3.gov/PSA/2025/PSA250123</a>
+          <div class="card-summary">FBI warns that North Korean IT workers are now exfiltrating proprietary data and extorting victim companies with ransom demands after being discovered. Over 300 US companies victimized as of the advisory. Establishes extortion as the second-stage threat -- not just sanctions violation.</div>
+          <div class="card-tags"><span class="tag tag-government">Government</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-id">1.2</div>
+          <div class="card-title">FBI IC3: North Korean IT Worker Threats to U.S. Businesses</div>
+          <div class="card-meta">
+            <span class="meta-item">Federal Bureau of Investigation / IC3</span>
+            <span class="meta-sep"></span>
+            <span class="meta-item">July 23, 2025</span>
+          </div>
+          <a class="card-url" href="https://www.ic3.gov/PSA/2025/PSA250723-4" target="_blank">ic3.gov/PSA/2025/PSA250723-4</a>
+          <div class="card-summary">Updated FBI advisory documenting the escalating scale of DPRK remote IT worker infiltration, including use of AI to maintain multiple simultaneous jobs and increasingly sophisticated identity fraud. Includes victim notification data.</div>
+          <div class="card-tags"><span class="tag tag-government">Government</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-id">1.3</div>
+          <div class="card-title">FBI and CISA Joint Advisory: North Korean Cyber Espionage Activity</div>
+          <div class="card-meta">
+            <span class="meta-item">FBI, CISA, and Five Allied Governments</span>
+            <span class="meta-sep"></span>
+            <span class="meta-item">July 25, 2024</span>
+          </div>
+          <a class="card-url" href="https://www.cisa.gov/news-events/alerts/2024/07/25/fbi-cisa-and-partners-release-advisory-highlighting-north-korean-cyber-espionage-activity" target="_blank">cisa.gov -- fbi-cisa-and-partners-advisory</a>
+          <div class="card-summary">Joint advisory co-signed by Australia, Canada, Germany, Japan, and the United Kingdom. Documents DPRK IT worker schemes as a sanctioned state program, not opportunistic fraud. Five allied governments signing elevates this from US-only concern to allied intelligence consensus.</div>
+          <div class="card-tags"><span class="tag tag-government">Government</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-id">1.4</div>
+          <div class="card-title">CISA: North Korea State-Sponsored Cyber Threat Publications Hub</div>
+          <div class="card-meta">
+            <span class="meta-item">Cybersecurity and Infrastructure Security Agency</span>
+            <span class="meta-sep"></span>
+            <span class="meta-item">Ongoing (2020-2025)</span>
+          </div>
+          <a class="card-url" href="https://www.cisa.gov/topics/cyber-threats-and-advisories/nation-state-cyber-actors/north-korea/publications" target="_blank">cisa.gov -- north-korea publications hub</a>
+          <div class="card-summary">CISA's aggregated advisory page for all North Korea cyber threats, including IT worker infiltration. CISA explicitly frames hiring-based infiltration as a national security threat requiring cross-functional response across HR, security, and legal.</div>
+          <div class="card-tags"><span class="tag tag-government">Government</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-id">1.5</div>
+          <div class="card-title">DOJ: Coordinated, Nationwide Actions Against North Korean IT Worker Schemes</div>
+          <div class="card-meta">
+            <span class="meta-item">U.S. Department of Justice</span>
+            <span class="meta-sep"></span>
+            <span class="meta-item">May 2024</span>
+          </div>
+          <a class="card-url" href="https://www.justice.gov/opa/pr/justice-department-announces-coordinated-nationwide-actions-combat-north-korean-remote" target="_blank">justice.gov -- coordinated-nationwide-actions</a>
+          <div class="card-summary">DOJ announced simultaneous indictments, arrests, searches of 29 laptop farms across 16 states, and seizure of 29 financial accounts and 21 fraudulent websites. Establishes hiring-based infiltration as a criminal enterprise requiring law enforcement response at scale.</div>
+          <div class="card-tags"><span class="tag tag-government">Government</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-id">1.6</div>
+          <div class="card-title">DOJ Indictment: Two North Korean Nationals and Three Facilitators</div>
+          <div class="card-meta">
+            <span class="meta-item">U.S. Department of Justice</span>
+            <span class="meta-sep"></span>
+            <span class="meta-item">January 2025</span>
+          </div>
+          <a class="card-url" href="https://www.justice.gov/opa/pr/two-north-korean-nationals-and-three-facilitators-indicted-multi-year-fraudulent-remote" target="_blank">justice.gov -- two-north-korean-nationals-indicted</a>
+          <div class="card-summary">Indicts Jin Sung-Il, Pak Jin-Song (North Korean nationals), and three US-citizen facilitators. From approximately April 2018 through August 2024, the defendants obtained fraudulent employment from at least 64 US companies. Named indictment with specific dates, defendants, and victim counts.</div>
+          <div class="card-tags"><span class="tag tag-government">Government</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-id">1.7</div>
+          <div class="card-title">DOJ Indictment: 14 North Korean Nationals -- Major Fraudulent IT Worker Scheme</div>
+          <div class="card-meta">
+            <span class="meta-item">U.S. Department of Justice</span>
+            <span class="meta-sep"></span>
+            <span class="meta-item">December 2024</span>
+          </div>
+          <a class="card-url" href="https://www.whitecollarlawblog.com/2024/12/doj-indicts-14-north-korean-nationals-in-major-fraudulent-it-worker-scheme/" target="_blank">whitecollarlawblog.com -- doj-indicts-14-north-korean-nationals</a>
+          <div class="card-summary">DOJ indicts 14 North Korean nationals in a major expansion of enforcement. Underscores the industrial scale of the scheme and the US government's escalating prosecution posture.</div>
+          <div class="card-tags"><span class="tag tag-government">Government</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-id">1.8</div>
+          <div class="card-title">DOJ Sentencing: Arizona Woman Gets 102 Months for $17M North Korean IT Worker Scheme</div>
+          <div class="card-meta">
+            <span class="meta-item">U.S. Department of Justice</span>
+            <span class="meta-sep"></span>
+            <span class="meta-item">July 24, 2025</span>
+          </div>
+          <a class="card-url" href="https://www.justice.gov/opa/pr/arizona-woman-sentenced-17m-information-technology-worker-fraud-scheme-generated-revenue" target="_blank">justice.gov -- arizona-woman-sentenced-17m</a>
+          <div class="card-summary">Christina Marie Chapman, 50, of Litchfield Park, AZ, sentenced to 102 months in federal prison. Operated a laptop farm at her home, used 68 stolen US identities, infiltrated more than 300 companies including Fortune 500 firms -- a named automaker, aerospace manufacturer, and Silicon Valley tech company. Scheme generated $17M for the North Korean regime. The single most concrete prosecuted case linking hiring fraud to national security harm at enterprise scale.</div>
+          <div class="card-tags"><span class="tag tag-government">Government</span><span class="tag tag-incident">Incident</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-id">1.9</div>
+          <div class="card-title">New York DFS Cybersecurity Advisory: Threats Posed by Remote Workers with DPRK Ties</div>
+          <div class="card-meta">
+            <span class="meta-item">New York State Department of Financial Services</span>
+            <span class="meta-sep"></span>
+            <span class="meta-item">November 1, 2024</span>
+          </div>
+          <a class="card-url" href="https://www.dfs.ny.gov/industry-guidance/industry-letters/il20241101-cyber-advisory-remote-workers-nk" target="_blank">dfs.ny.gov -- cyber-advisory-remote-workers-nk</a>
+          <div class="card-summary">New York's financial services regulator formally told every regulated entity -- banks, insurers, fintechs -- to treat DPRK remote worker applications as a cybersecurity threat. Explicitly instructs companies to brief senior executives, hiring managers, and cybersecurity personnel together. The first financial regulator to classify hiring as a security control gap.</div>
+          <div class="card-tags"><span class="tag tag-government">Government</span><span class="tag tag-regulatory">Regulatory</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-id">1.10</div>
+          <div class="card-title">NIST SP 800-53 Control PM-12: Insider Threat Program</div>
+          <div class="card-meta">
+            <span class="meta-item">National Institute of Standards and Technology</span>
+            <span class="meta-sep"></span>
+            <span class="meta-item">Current (ongoing)</span>
+          </div>
+          <a class="card-url" href="https://csf.tools/reference/nist-sp-800-53/r5/pm/pm-12/" target="_blank">csf.tools -- nist-sp-800-53 PM-12</a>
+          <div class="card-summary">NIST's foundational security framework explicitly requires insider threat programs that include cross-discipline incident handling. Personnel security controls include pre-employment screening as a security control -- not an HR function. Regulatory backstop for treating hiring as a security domain.</div>
+          <div class="card-tags"><span class="tag tag-government">Government</span><span class="tag tag-regulatory">Regulatory</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-id">1.11</div>
+          <div class="card-title">CISA: Assembling a Multi-Disciplinary Insider Threat Management Team</div>
+          <div class="card-meta">
+            <span class="meta-item">Cybersecurity and Infrastructure Security Agency</span>
+            <span class="meta-sep"></span>
+            <span class="meta-item">January 28, 2026</span>
+          </div>
+          <a class="card-url" href="https://www.cisa.gov/resources-tools/resources/assembling-multi-disciplinary-insider-threat-management-team" target="_blank">cisa.gov -- multi-disciplinary-insider-threat-team</a>
+          <div class="card-summary">CISA's newest insider threat guidance explicitly mandates that insider threat programs include HR, security, legal, and physical security in an integrated team. Frames this as a critical infrastructure obligation. Directly rejects the idea that insider threat is owned by any single function.</div>
+          <div class="card-tags"><span class="tag tag-government">Government</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-id">1.12</div>
+          <div class="card-title">CISA: Insider Threat Mitigation Guide</div>
+          <div class="card-meta">
+            <span class="meta-item">Cybersecurity and Infrastructure Security Agency</span>
+            <span class="meta-sep"></span>
+            <span class="meta-item">Ongoing</span>
+          </div>
+          <a class="card-url" href="https://www.cisa.gov/resources-tools/resources/insider-threat-mitigation-guide" target="_blank">cisa.gov -- insider-threat-mitigation-guide</a>
+          <div class="card-summary">CISA's primary insider threat mitigation guidance includes pre-employment vetting, continuous evaluation, and integration with cybersecurity programs. Explicitly positions the hiring stage as the entry point for insider threat risk.</div>
+          <div class="card-tags"><span class="tag tag-government">Government</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-id">1.13</div>
+          <div class="card-title">FBI DPRK IT Fraud Wanted Page</div>
+          <div class="card-meta">
+            <span class="meta-item">Federal Bureau of Investigation</span>
+            <span class="meta-sep"></span>
+            <span class="meta-item">Active</span>
+          </div>
+          <a class="card-url" href="https://www.fbi.gov/wanted/cyber/dprk-it-fraud" target="_blank">fbi.gov/wanted/cyber/dprk-it-fraud</a>
+          <div class="card-summary">The FBI maintains an active "Wanted" page specifically for DPRK IT fraud, listed alongside cyber criminals and terrorists. Classifies hiring-based infiltration as a cyber crime at the same level as ransomware and nation-state hacking. Useful visual proof point for CISO audiences.</div>
+          <div class="card-tags"><span class="tag tag-government">Government</span></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section class="section" id="s2">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <div>
+          <div class="section-title">Named Real-World Incidents</div>
+          <div class="section-subtitle">Confirmed breaches, prosecuted cases, and named enterprise victims</div>
+        </div>
+      </div>
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-id">2.1</div>
+          <div class="card-title">KnowBe4: Security Firm Hires North Korean IT Worker Who Immediately Installs Malware</div>
+          <div class="card-meta">
+            <span class="meta-item">Stu Sjouwerman, KnowBe4</span>
+            <span class="meta-sep"></span>
+            <span class="meta-item">July 2024</span>
+          </div>
+          <div class="card-urls">
+            <a class="card-url" href="https://blog.knowbe4.com/how-a-north-korean-fake-it-worker-tried-to-infiltrate-us" target="_blank">blog.knowbe4.com -- north-korean-fake-it-worker</a>
+            <a class="card-url" href="https://www.darkreading.com/vulnerabilities-threats/security-firm-hires-north-korean-hacker-knowbe4" target="_blank">darkreading.com -- security-firm-hires-north-korean-hacker</a>
+          </div>
+          <div class="card-summary">KnowBe4 hired a North Korean national for a software engineering role after four video interviews, a background check, and reference verification -- all passed using AI-enhanced photos and a stolen US identity. The new hire immediately loaded malware to the company MacBook upon receipt. Caught 25 minutes in by endpoint detection. The defining public incident: even a security company with mature controls was not immune to hiring-layer infiltration.</div>
+          <div class="card-tags"><span class="tag tag-incident">Incident</span><span class="tag tag-press">Press</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-id">2.2</div>
+          <div class="card-title">Amazon: 1,800+ North Korean Job Applications Intercepted Since April 2024</div>
+          <div class="card-meta">
+            <span class="meta-item">Stephen Schmidt, Chief Security Officer, Amazon</span>
+            <span class="meta-sep"></span>
+            <span class="meta-item">December 2025</span>
+          </div>
+          <div class="card-urls">
+            <a class="card-url" href="https://fortune.com/2025/12/17/amazon-cybersecurity-north-korea-hackers-cio-intelligence/" target="_blank">fortune.com -- amazon-cybersecurity-north-korea</a>
+            <a class="card-url" href="https://www.nbcnews.com/world/north-korea/north-korea-agents-amazon-jobs-laptop-farms-ai-rcna250627" target="_blank">nbcnews.com -- north-korea-agents-amazon-jobs</a>
+          </div>
+          <div class="card-summary">Amazon's CSO -- not Head of HR -- personally leads a program that has blocked over 1,800 suspected DPRK operatives since April 2024, with applications growing 27% per quarter. One still slipped through. Schmidt uses AI-based resume anomaly detection, geographic inconsistency scoring, and keystroke lag analysis. The CISO personally owning this problem is the definitive signal that hiring security belongs in security, not HR.</div>
+          <div class="card-tags"><span class="tag tag-incident">Incident</span><span class="tag tag-thought-leader">Thought Leader</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-id">2.3</div>
+          <div class="card-title">Kraken: Cryptocurrency Exchange Catches North Korean Hacker in Live Job Interview</div>
+          <div class="card-meta">
+            <span class="meta-item">Nick Percoco, Chief Security Officer, Kraken</span>
+            <span class="meta-sep"></span>
+            <span class="meta-item">May 2025</span>
+          </div>
+          <a class="card-url" href="https://blog.kraken.com/news/how-we-identified-a-north-korean-hacker" target="_blank">blog.kraken.com -- how-we-identified-north-korean-hacker</a>
+          <div class="card-summary">Kraken received intelligence that DPRK hackers were targeting crypto firms via job applications. When an applicant matched a flagged email address, the CSO ran a sting during the final interview -- including live identity traps (government ID display, local restaurant quiz). Candidate failed. Kraken's CSO calling this a "spy game" in public confirms the security industry views the job interview as a security operation, not an HR event.</div>
+          <div class="card-tags"><span class="tag tag-incident">Incident</span><span class="tag tag-thought-leader">Thought Leader</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-id">2.4</div>
+          <div class="card-title">Christina Chapman Case: American Facilitator Ran Laptop Farm Infiltrating Fortune 500</div>
+          <div class="card-meta">
+            <span class="meta-item">DOJ / Confirmed public record</span>
+            <span class="meta-sep"></span>
+            <span class="meta-item">July 2025 (sentencing); scheme 2018-2024</span>
+          </div>
+          <a class="card-url" href="https://www.justice.gov/opa/pr/arizona-woman-sentenced-17m-information-technology-worker-fraud-scheme-generated-revenue" target="_blank">justice.gov -- arizona-woman-sentenced-17m</a>
+          <div class="card-summary">Chapman operated a laptop farm at her Arizona home, used 68 stolen US identities to place North Korean workers inside more than 300 US companies -- confirmed Fortune 500 victims include a named automaker, aerospace manufacturer, and Silicon Valley tech company. $17M generated. 102 months in federal prison. Definitive proof that the hiring attack has real-world, large-scale, prosecuted consequences for named enterprise categories.</div>
+          <div class="card-tags"><span class="tag tag-incident">Incident</span><span class="tag tag-government">Government</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-id">2.5</div>
+          <div class="card-title">Fortune 500 Mass Infiltration: Thousands of DPRK IT Workers Hired Across US Enterprise</div>
+          <div class="card-meta">
+            <span class="meta-item">Fortune / CyberScoop / Axios</span>
+            <span class="meta-sep"></span>
+            <span class="meta-item">April -- August 2025</span>
+          </div>
+          <div class="card-urls">
+            <a class="card-url" href="https://fortune.com/2025/04/07/north-korean-it-workers-infiltrating-fortune-500-companies/" target="_blank">fortune.com -- north-korean-it-workers-fortune-500</a>
+            <a class="card-url" href="https://cyberscoop.com/north-korea-workers-infiltrate-fortune-500/" target="_blank">cyberscoop.com -- north-korea-workers-infiltrate</a>
+          </div>
+          <div class="card-summary">Reporting citing US intelligence officials confirms thousands of North Korean IT workers have successfully infiltrated hundreds of Fortune 500 companies, with some estimates suggesting nearly every Fortune 500 firm has been affected. Workers maintained 6-7 simultaneous jobs using AI-assisted identity management. Not hypothetical risk -- confirmed at scale.</div>
+          <div class="card-tags"><span class="tag tag-incident">Incident</span><span class="tag tag-press">Press</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-id">2.6</div>
+          <div class="card-title">Microsoft: Suspends 3,000 Accounts Created by North Korean IT Workers</div>
+          <div class="card-meta">
+            <span class="meta-item">Microsoft Threat Intelligence</span>
+            <span class="meta-sep"></span>
+            <span class="meta-item">July 2025</span>
+          </div>
+          <a class="card-url" href="https://fortune.com/2025/07/04/microsoft-suspends-accounts-north-korean-it-worker-conspiracy/" target="_blank">fortune.com -- microsoft-suspends-north-korean-accounts</a>
+          <div class="card-summary">Microsoft suspended 3,000 Outlook/Hotmail accounts created by North Korean IT workers as identity infrastructure for fraudulent job applications. Microsoft's active disruption of hiring-stage attack infrastructure confirms the company-level investment required to defend against this vector.</div>
+          <div class="card-tags"><span class="tag tag-incident">Incident</span><span class="tag tag-press">Press</span></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3 -->
+    <section class="section" id="s3">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <div>
+          <div class="section-title">Security Press Coverage</div>
+          <div class="section-subtitle">Dark Reading, CyberScoop, The Hacker News, Hacker News, Fortune, The Record</div>
+        </div>
+      </div>
+      <div class="cards">
+
+        <div class="card"><div class="card-id">3.1</div><div class="card-title">Dark Reading: Security Firm Hires North Korean Hacker (KnowBe4)</div><div class="card-meta"><span class="meta-item">Dark Reading</span><span class="meta-sep"></span><span class="meta-item">July 2024</span></div><a class="card-url" href="https://www.darkreading.com/vulnerabilities-threats/security-firm-hires-north-korean-hacker-knowbe4" target="_blank">darkreading.com -- security-firm-hires-north-korean-hacker</a><div class="card-summary">Dark Reading framed KnowBe4 as a systemic failure, not an isolated error. First major trade press outlet to call the hiring pipeline an attack surface. Established that the hiring vector is industrialized at scale.</div><div class="card-tags"><span class="tag tag-press">Press</span><span class="tag tag-incident">Incident</span></div></div>
+
+        <div class="card"><div class="card-id">3.2</div><div class="card-title">Dark Reading: Amazon Fends Off 1,800 Suspected DPRK IT Job Scammers</div><div class="card-meta"><span class="meta-item">Dark Reading</span><span class="meta-sep"></span><span class="meta-item">December 2025</span></div><a class="card-url" href="https://www.darkreading.com/remote-workforce/amazon-fends-off-dprk-it-job-scammers" target="_blank">darkreading.com -- amazon-fends-off-dprk-scammers</a><div class="card-summary">Coverage explicitly positions the CSO -- not HR -- as accountable for defending the hiring pipeline. Useful when presenting to security teams: this is now a peer-acknowledged CISO responsibility.</div><div class="card-tags"><span class="tag tag-press">Press</span></div></div>
+
+        <div class="card"><div class="card-id">3.3</div><div class="card-title">CyberScoop: Cyber Firm KnowBe4 Hired a Fake IT Worker from North Korea</div><div class="card-meta"><span class="meta-item">CyberScoop</span><span class="meta-sep"></span><span class="meta-item">July 2024</span></div><a class="card-url" href="https://cyberscoop.com/cyber-firm-knowbe4-hired-a-fake-it-worker-from-north-korea/" target="_blank">cyberscoop.com -- knowbe4-hired-fake-it-worker</a><div class="card-summary">CyberScoop's analysis noted the attack bypassed every standard security hiring control: video interviews, AI-enhanced photo verification, background check with a valid (stolen) SSN. Establishes that existing HR verification methods are insufficient as security controls.</div><div class="card-tags"><span class="tag tag-press">Press</span><span class="tag tag-incident">Incident</span></div></div>
+
+        <div class="card"><div class="card-id">3.4</div><div class="card-title">The Hacker News: Fake Job Applications Deliver More_eggs Malware to HR Professionals</div><div class="card-meta"><span class="meta-item">The Hacker News</span><span class="meta-sep"></span><span class="meta-item">October 2024</span></div><a class="card-url" href="https://thehackernews.com/2024/10/fake-job-applications-deliver-dangerous.html" target="_blank">thehackernews.com -- fake-job-applications-moreeggs</a><div class="card-summary">Documents the More_eggs malware campaign where attackers pose as job applicants to deliver backdoors to HR teams and recruiters. Proves the pipeline is a two-way attack surface -- both inbound (DPRK infiltrators) and outbound (malware delivery via resume PDFs).</div><div class="card-tags"><span class="tag tag-press">Press</span></div></div>
+
+        <div class="card"><div class="card-id">3.5</div><div class="card-title">The Hacker News: More_eggs Malware Disguised as Resumes Targets Recruiters</div><div class="card-meta"><span class="meta-item">The Hacker News</span><span class="meta-sep"></span><span class="meta-item">June 2024</span></div><a class="card-url" href="https://thehackernews.com/2024/06/moreeggs-malware-disguised-as-resumes.html" target="_blank">thehackernews.com -- moreeggs-resumes-recruiters</a><div class="card-summary">Earliest 2024 coverage of the More_eggs resume-as-malware campaign, attributed to FIN6 (Golden Chickens MaaS). Documents attackers pivoting from posing as employers to posing as applicants -- specifically targeting the trust relationship recruiters have with inbound applications.</div><div class="card-tags"><span class="tag tag-press">Press</span></div></div>
+
+        <div class="card"><div class="card-id">3.6</div><div class="card-title">SC Media: New Scam Campaign Means Resume Downloads May Contain Malware</div><div class="card-meta"><span class="meta-item">SC Media / SC Magazine</span><span class="meta-sep"></span><span class="meta-item">2024</span></div><a class="card-url" href="https://www.scmagazine.com/news/hiring-new-scam-campaign-means-resume-downloads-may-contain-malware" target="_blank">scmagazine.com -- resume-downloads-malware</a><div class="card-summary">Security email gateways do not flag the resume download vector because inbound application PDFs are expected traffic. The hiring pipeline creates a legitimate bypass channel for malware delivery that existing controls cannot close.</div><div class="card-tags"><span class="tag tag-press">Press</span></div></div>
+
+        <div class="card"><div class="card-id">3.7</div><div class="card-title">eSentire: Hackers Spearphish Corporate Hiring Managers with Poisoned Resumes (More_eggs)</div><div class="card-meta"><span class="meta-item">eSentire Threat Response Unit</span><span class="meta-sep"></span><span class="meta-item">2024</span></div><a class="card-url" href="https://www.esentire.com/blog/hackers-spearphish-corporate-hiring-managers-with-poisoned-resumes-infecting-them-with-the-more-eggs-malware" target="_blank">esentire.com -- spearphish-hiring-managers-moreeggs</a><div class="card-summary">eSentire's technical analysis documents attacker-controlled "candidate" websites with IP filters and CAPTCHAs ensuring human targets receive malware while bypassing automated sandboxes. Attackers have purpose-built hiring-specific delivery infrastructure.</div><div class="card-tags"><span class="tag tag-press">Press</span><span class="tag tag-report">Report</span></div></div>
+
+        <div class="card"><div class="card-id">3.8</div><div class="card-title">SHRM: Cybercriminals Use Malware-Laced Fake Resumes to Target Recruiters</div><div class="card-meta"><span class="meta-item">Society for Human Resource Management</span><span class="meta-sep"></span><span class="meta-item">2024</span></div><a class="card-url" href="https://www.shrm.org/topics-tools/news/talent-acquisition/cybercriminals-use-malware-laced-fake-resumes-to-target-recruiters" target="_blank">shrm.org -- malware-laced-fake-resumes</a><div class="card-summary">SHRM, the world's largest HR professional organization, published a warning to its members about malware-laced fake resumes. HR's own professional body acknowledging a security threat in their core workflow. Useful when HR leaders resist the security framing.</div><div class="card-tags"><span class="tag tag-press">Press</span><span class="tag tag-hr-crossover">HR Crossover</span></div></div>
+
+        <div class="card"><div class="card-id">3.9</div><div class="card-title">Help Net Security: North Korea's IT Workers Expand Beyond US Big Tech</div><div class="card-meta"><span class="meta-item">Help Net Security</span><span class="meta-sep"></span><span class="meta-item">October 2025</span></div><a class="card-url" href="https://www.helpnetsecurity.com/2025/10/01/north-korea-it-workers-worldwide/" target="_blank">helpnetsecurity.com -- north-korea-it-workers-worldwide</a><div class="card-summary">Okta Threat Intelligence finding: 50% of DPRK IT worker targeted entities are not technology companies, and 27% lie outside the US. The hiring-as-attack-vector threat is industry-agnostic and global. Relevant for CISOs in finance, healthcare, and defense.</div><div class="card-tags"><span class="tag tag-press">Press</span></div></div>
+
+        <div class="card"><div class="card-id">3.10</div><div class="card-title">Fortune: North Korean IT Worker Infiltrations Exploded 220% in 12 Months</div><div class="card-meta"><span class="meta-item">Fortune</span><span class="meta-sep"></span><span class="meta-item">August 2025</span></div><a class="card-url" href="https://fortune.com/2025/08/04/north-korean-it-worker-infiltrations-exploded/" target="_blank">fortune.com -- infiltrations-exploded-220-percent</a><div class="card-summary">Fortune reporting on CrowdStrike data: 220% growth in DPRK IT worker infiltration attempts over 12 months. AI weaponized at every stage -- resume creation, deepfake video interviews, AI-assisted coding challenges. Headline-level proof of the problem's growth trajectory.</div><div class="card-tags"><span class="tag tag-press">Press</span></div></div>
+
+        <div class="card"><div class="card-id">3.11</div><div class="card-title">The Record: Dozens of Fortune 100 Companies Hired North Korean IT Workers</div><div class="card-meta"><span class="meta-item">The Record / Recorded Future News</span><span class="meta-sep"></span><span class="meta-item">September 2024</span></div><a class="card-url" href="https://therecord.media/major-us-companies-unwittingly-hire-north-korean-remote-it-workers" target="_blank">therecord.media -- fortune-100-hired-north-korean-workers</a><div class="card-summary">The Record's coverage of the Mandiant UNC5267 report confirms Fortune 100 companies -- the most security-mature organizations in the world -- hired North Korean operatives through standard hiring processes. Named "Fortune 100" as victim category, not SMBs. The peer-CISO objection killer.</div><div class="card-tags"><span class="tag tag-press">Press</span><span class="tag tag-report">Report</span></div></div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4 -->
+    <section class="section" id="s4">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <div>
+          <div class="section-title">Conference Talks and Keynotes</div>
+          <div class="section-subtitle">RSA 2025, Black Hat 2024, Black Hat 2025 -- the security industry's own stage</div>
+        </div>
+      </div>
+      <div class="cards">
+
+        <div class="card"><div class="card-id">4.1</div><div class="card-title">RSA Conference 2025: FBI Session on DPRK Remote IT Worker Threat</div><div class="card-meta"><span class="meta-item">Bryan Vorndran (Assistant Director, FBI Cyber Division)</span><span class="meta-sep"></span><span class="meta-item">April/May 2025 -- RSAC 2025, San Francisco</span></div><a class="card-url" href="https://www.fbi.gov/investigate/cyber/partnerships/fbi-at-rsac" target="_blank">fbi.gov -- fbi-at-rsac</a><div class="card-summary">The FBI chose RSA Conference 2025 -- the largest security conference in the world -- to deliver a dedicated session on DPRK IT worker hiring infiltration. Vorndran: "a very sophisticated threat." At least 200 victim notifications issued. The FBI presenting this at RSA, not SHRM, confirms the security industry owns this problem.</div><div class="card-tags"><span class="tag tag-conference">Conference</span><span class="tag tag-government">Government</span></div></div>
+
+        <div class="card"><div class="card-id">4.2</div><div class="card-title">Black Hat USA 2024: "Convergence of Internal and External Threats" Panel</div><div class="card-meta"><span class="meta-item">Marshall Heilman (DTEX), Chris Corde (Google Cloud), Jeff Reed (Vectra), Steve Stone (Rubrik)</span><span class="meta-sep"></span><span class="meta-item">August 2024</span></div><a class="card-url" href="https://www.dtexsystems.com/blog/black-hat-2024-why-knowing-your-users-is-ultimate-defense/" target="_blank">dtexsystems.com -- black-hat-2024-knowing-your-users</a><div class="card-summary">Executive panel at Black Hat explicitly addressing how North Korean IT workers infiltrate companies through the hiring pipeline. Panel: the insider threat now begins at the hiring stage, not after employment. Four senior security practitioners treating hiring-stage infiltration as a core security problem.</div><div class="card-tags"><span class="tag tag-conference">Conference</span></div></div>
+
+        <div class="card"><div class="card-id">4.3</div><div class="card-title">Black Hat USA 2025: "How Insider Risk Became the Frontline of Conflict"</div><div class="card-meta"><span class="meta-item">Marshall Heilman (DTEX Systems CEO), Senior SentinelOne executives</span><span class="meta-sep"></span><span class="meta-item">August 6, 2025</span></div><a class="card-url" href="https://www.dtexsystems.com/blog/black-hat-2025/" target="_blank">dtexsystems.com -- black-hat-2025</a><div class="card-summary">Closed-door executive session. Heilman: North Korea runs itself "more as a criminal enterprise than nation-state" and insider risk has shifted from compliance to "the frontline of modern warfare." Explicit connection between hiring-stage infiltration and geopolitical conflict.</div><div class="card-tags"><span class="tag tag-conference">Conference</span></div></div>
+
+        <div class="card"><div class="card-id">4.4</div><div class="card-title">CrowdStrike 2024 Threat Hunting Report Release at Black Hat 2024</div><div class="card-meta"><span class="meta-item">CrowdStrike Research Team</span><span class="meta-sep"></span><span class="meta-item">August 2024</span></div><a class="card-url" href="https://www.businesswire.com/news/home/20240820982024/en/2024-CrowdStrike-Threat-Hunting-Report-Nation-States-Exploit-Legitimate-Credentials-to-Pose-as-Insiders" target="_blank">businesswire.com -- crowdstrike-2024-threat-hunting-report</a><div class="card-summary">CrowdStrike released its 2024 Threat Hunting Report at Black Hat with the subtitle "Nation-States Exploit Legitimate Credentials to Pose as Insiders." FAMOUS CHOLLIMA named as key threat actor -- 304 incidents in 2024, 40% representing insider threat operations. Releasing this at Black Hat signals mainstream security category recognition.</div><div class="card-tags"><span class="tag tag-conference">Conference</span><span class="tag tag-report">Report</span></div></div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 5 -->
+    <section class="section" id="s5">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <div>
+          <div class="section-title">Thought Leaders and Practitioners</div>
+          <div class="section-subtitle">The CSOs and analysts who have staked their public reputation on this category</div>
+        </div>
+      </div>
+      <div class="cards">
+
+        <div class="card"><div class="card-id">5.1</div><div class="card-title">Stephen Schmidt, CSO, Amazon -- Public Statements on DPRK Hiring Defense</div><div class="card-meta"><span class="meta-item">Fortune, NBC News, Dark Reading</span><span class="meta-sep"></span><span class="meta-item">December 2025</span></div><div class="card-urls"><a class="card-url" href="https://fortune.com/2025/12/17/amazon-cybersecurity-north-korea-hackers-cio-intelligence/" target="_blank">fortune.com -- amazon-north-korea-cio-intelligence</a><a class="card-url" href="https://www.nbcnews.com/world/north-korea/north-korea-agents-amazon-jobs-laptop-farms-ai-rcna250627" target="_blank">nbcnews.com -- north-korea-agents-amazon-jobs</a></div><div class="card-summary">Amazon's Chief Security Officer went on record that his security team has access to resumes, LinkedIn feeds, and recruiter data, and that AI models are used to flag anomalous applicants. Quote: "It is very, very hard to hide behind somebody else's identity when you have to be in the office." The CISO is telling the world that hiring security is his job.</div><div class="card-tags"><span class="tag tag-thought-leader">Thought Leader</span></div></div>
+
+        <div class="card"><div class="card-id">5.2</div><div class="card-title">Nick Percoco, CSO, Kraken -- "Spy Game" Job Interview Sting Operation</div><div class="card-meta"><span class="meta-item">Kraken Official Blog</span><span class="meta-sep"></span><span class="meta-item">May 2025</span></div><a class="card-url" href="https://blog.kraken.com/news/how-we-identified-a-north-korean-hacker" target="_blank">blog.kraken.com -- identified-north-korean-hacker</a><div class="card-summary">Kraken's CSO personally conducted what he called a "spy game" during a final job interview to expose a North Korean hacker. Used intelligence from industry partners, cross-referenced a flagged email, and deployed live identity traps in-interview. A sitting CSO treating the job interview as a security operation, not an HR event.</div><div class="card-tags"><span class="tag tag-thought-leader">Thought Leader</span></div></div>
+
+        <div class="card"><div class="card-id">5.3</div><div class="card-title">Marshall Heilman, CEO, DTEX Systems -- Insider Risk as National Security Frontline</div><div class="card-meta"><span class="meta-item">Black Hat 2025, DTEX Blog</span><span class="meta-sep"></span><span class="meta-item">August 2025</span></div><a class="card-url" href="https://www.dtexsystems.com/blog/black-hat-2025/" target="_blank">dtexsystems.com -- black-hat-2025</a><div class="card-summary">Former NSA analyst and DTEX CEO publicly stated the hiring pipeline is now "the frontline of conflict" in nation-state cyber operations. Joined executives from SentinelOne, Google, and others in framing this as a board-level security problem, not an HR workflow issue.</div><div class="card-tags"><span class="tag tag-thought-leader">Thought Leader</span><span class="tag tag-conference">Conference</span></div></div>
+
+        <div class="card"><div class="card-id">5.4</div><div class="card-title">Jamie Kohn, Senior Research Director, Gartner HR Practice -- "Cybersecurity Risk Far More Serious Than a Bad Hire"</div><div class="card-meta"><span class="meta-item">HR Dive, Personnel Today</span><span class="meta-sep"></span><span class="meta-item">2025</span></div><a class="card-url" href="https://www.hrdive.com/news/fake-job-candidates-ai/757126/" target="_blank">hrdive.com -- fake-job-candidates-ai</a><div class="card-summary">Gartner's own HR research director explicitly stated: "Candidate fraud creates cybersecurity risks that can be far more serious than making a bad hire." From within the HR research community -- the ultimate HR-crossover objection killer. Gartner's HR practice is telling HR leaders that hiring fraud is a security problem.</div><div class="card-tags"><span class="tag tag-thought-leader">Thought Leader</span><span class="tag tag-hr-crossover">HR Crossover</span></div></div>
+
+        <div class="card"><div class="card-id">5.5</div><div class="card-title">Stu Sjouwerman, CEO, KnowBe4 -- Public Disclosure and Industry Warning</div><div class="card-meta"><span class="meta-item">KnowBe4 Blog</span><span class="meta-sep"></span><span class="meta-item">July 2024</span></div><a class="card-url" href="https://blog.knowbe4.com/how-a-north-korean-fake-it-worker-tried-to-infiltrate-us" target="_blank">blog.knowbe4.com -- north-korean-fake-it-worker</a><div class="card-summary">KnowBe4's CEO made the rare decision to publicly disclose the incident in full detail, framing it as a warning to the industry. Published a follow-up FAQ. Transparent disclosure from a security company underscores that the hiring pipeline is now a recognized attack surface in the CISO community.</div><div class="card-tags"><span class="tag tag-thought-leader">Thought Leader</span><span class="tag tag-incident">Incident</span></div></div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 6 -->
+    <section class="section" id="s6">
+      <div class="section-header">
+        <div class="section-num">6</div>
+        <div>
+          <div class="section-title">Industry Reports and Threat Intelligence</div>
+          <div class="section-subtitle">Mandiant, CrowdStrike, Microsoft, SentinelOne, Okta, Ponemon, Verizon, Flashpoint, Greenhouse</div>
+        </div>
+      </div>
+      <div class="cards">
+
+        <div class="card"><div class="card-id">6.1</div><div class="card-title">Mandiant: Staying a Step Ahead -- Mitigating the DPRK IT Worker Threat</div><div class="card-meta"><span class="meta-item">Mandiant / Google Threat Intelligence Group</span><span class="meta-sep"></span><span class="meta-item">September 2024</span></div><a class="card-url" href="https://cloud.google.com/blog/topics/threat-intelligence/mitigating-dprk-it-worker-threat" target="_blank">cloud.google.com -- mitigating-dprk-it-worker-threat</a><div class="card-summary">Mandiant's foundational report on UNC5267 -- their tracking designation for DPRK IT worker operations. Dozens of Fortune 100 organizations inadvertently hired North Korean workers through standard hiring processes. The tier-one threat intelligence report that elevated hiring-based infiltration from anecdote to named threat actor.</div><div class="card-tags"><span class="tag tag-report">Report</span></div></div>
+
+        <div class="card"><div class="card-id">6.2</div><div class="card-title">Google/Mandiant: DPRK IT Workers Expanding in Scope and Scale</div><div class="card-meta"><span class="meta-item">Google Threat Intelligence Group (GTIG)</span><span class="meta-sep"></span><span class="meta-item">Early 2025</span></div><a class="card-url" href="https://cloud.google.com/blog/topics/threat-intelligence/dprk-it-workers-expanding-scope-scale" target="_blank">cloud.google.com -- dprk-it-workers-expanding</a><div class="card-summary">Follow-up to the September 2024 report. Geographic expansion to Europe -- one DPRK worker operating 12 personas simultaneously across Europe and the US. Move into BYOD environments and defense industrial base targeting. The threat is growing, not stabilizing.</div><div class="card-tags"><span class="tag tag-report">Report</span></div></div>
+
+        <div class="card"><div class="card-id">6.3</div><div class="card-title">CrowdStrike 2024 Threat Hunting Report: FAMOUS CHOLLIMA</div><div class="card-meta"><span class="meta-item">CrowdStrike</span><span class="meta-sep"></span><span class="meta-item">August 2024</span></div><a class="card-url" href="https://ir.crowdstrike.com/news-releases/news-release-details/2024-crowdstrike-threat-hunting-report-nation-states-exploit" target="_blank">ir.crowdstrike.com -- 2024-threat-hunting-report</a><div class="card-summary">304 FAMOUS CHOLLIMA incidents in 2024, 40% representing insider threat operations. FAMOUS CHOLLIMA infiltrated over 100 US technology companies using falsified identity documents. Affiliated with North Korea's Reconnaissance General Bureau. 220% growth year over year. CrowdStrike's Threat Hunting Report is the most technically authoritative annual insider threat publication in the industry.</div><div class="card-tags"><span class="tag tag-report">Report</span></div></div>
+
+        <div class="card"><div class="card-id">6.4</div><div class="card-title">CrowdStrike 2025 Global Threat Report: FAMOUS CHOLLIMA Scale</div><div class="card-meta"><span class="meta-item">CrowdStrike</span><span class="meta-sep"></span><span class="meta-item">2025</span></div><a class="card-url" href="https://www.crowdstrike.com/en-us/blog/crowdstrike-2025-global-threat-report-findings/" target="_blank">crowdstrike.com -- 2025-global-threat-report</a><div class="card-summary">Annual global threat report documents DPRK IT worker infiltration as top-tier ongoing threat. 220% growth in companies infiltrated. AI weaponization at every stage: synthetic identities, deepfake video interviews, AI-assisted coding challenges.</div><div class="card-tags"><span class="tag tag-report">Report</span></div></div>
+
+        <div class="card"><div class="card-id">6.5</div><div class="card-title">Palo Alto Unit 42: Global Companies Are Unknowingly Paying North Koreans</div><div class="card-meta"><span class="meta-item">Palo Alto Networks Unit 42</span><span class="meta-sep"></span><span class="meta-item">2024</span></div><a class="card-url" href="https://unit42.paloaltonetworks.com/north-korean-it-workers/" target="_blank">unit42.paloaltonetworks.com -- north-korean-it-workers</a><div class="card-summary">Unit 42 names two distinct DPRK campaigns: "Contagious Interview" (DPRK posing as employer to deliver malware) and "Wagemole" (DPRK workers seeking employment for espionage and revenue). North Korea-tied insider cases tripled year over year. First major vendor to name the two sub-campaigns as separate threat categories.</div><div class="card-tags"><span class="tag tag-report">Report</span></div></div>
+
+        <div class="card"><div class="card-id">6.6</div><div class="card-title">Palo Alto Unit 42: False Face -- Alarming Ease of Synthetic Identity Creation</div><div class="card-meta"><span class="meta-item">Palo Alto Networks Unit 42</span><span class="meta-sep"></span><span class="meta-item">2024</span></div><a class="card-url" href="https://unit42.paloaltonetworks.com/north-korean-synthetic-identity-creation/" target="_blank">unit42.paloaltonetworks.com -- synthetic-identity-creation</a><div class="card-summary">Unit 42 researcher demonstrated it took just over one hour with no prior experience to create a convincing real-time deepfake sufficient to pass a video job interview. The barrier to hiring-based infiltration is now measured in hours, not expertise.</div><div class="card-tags"><span class="tag tag-report">Report</span></div></div>
+
+        <div class="card"><div class="card-id">6.7</div><div class="card-title">Microsoft Threat Intelligence: Jasper Sleet -- North Korean Remote IT Workers' Evolving Tactics</div><div class="card-meta"><span class="meta-item">Microsoft Threat Intelligence</span><span class="meta-sep"></span><span class="meta-item">June 30, 2025</span></div><a class="card-url" href="https://www.microsoft.com/en-us/security/blog/2025/06/30/jasper-sleet-north-korean-remote-it-workers-evolving-tactics-to-infiltrate-organizations/" target="_blank">microsoft.com -- jasper-sleet-north-korean-remote-workers</a><div class="card-summary">Microsoft's formal threat actor profile for "Jasper Sleet" (formerly Storm-0287), tracking DPRK IT worker hiring infiltration since at least early 2020. Documents AI use for resume polishing, photo enhancement, and voice-changing in interviews. Microsoft suspended 3,000 accounts created by Jasper Sleet operatives.</div><div class="card-tags"><span class="tag tag-report">Report</span></div></div>
+
+        <div class="card"><div class="card-id">6.8</div><div class="card-title">SentinelOne PinnacleOne: North Korean IT Worker Threat Executive Brief</div><div class="card-meta"><span class="meta-item">SentinelOne PinnacleOne</span><span class="meta-sep"></span><span class="meta-item">2025</span></div><a class="card-url" href="https://www.sentinelone.com/blog/pinnacleone-execbrief-north-korean-it-worker-threat/" target="_blank">sentinelone.com -- pinnacleone-north-korean-it-worker</a><div class="card-summary">SentinelOne's executive brief documents over 1,000 flagged applications in a single month, 360 fake personas tracked, and "brazen" attempts to infiltrate SentinelOne's own intelligence engineering team. Peer-level proof: the vendors building security products are themselves targets of hiring-based infiltration.</div><div class="card-tags"><span class="tag tag-report">Report</span></div></div>
+
+        <div class="card"><div class="card-id">6.9</div><div class="card-title">Okta Threat Intelligence: The North Korean on Your Payroll</div><div class="card-meta"><span class="meta-item">Okta</span><span class="meta-sep"></span><span class="meta-item">September 2025</span></div><a class="card-url" href="https://www.okta.com/blog/threat-intelligence/the-north-korean-on-your-payroll/" target="_blank">okta.com -- the-north-korean-on-your-payroll</a><div class="card-summary">Okta's analysis across 130 tracked actors, 6,500 interviews, 5,000 distinct companies up to mid-2025. Key: 50% of targeted entities are not technology companies, 27% are outside the US. Okta -- the identity company -- treating hiring as an identity security problem is authoritative category validation.</div><div class="card-tags"><span class="tag tag-report">Report</span></div></div>
+
+        <div class="card"><div class="card-id">6.10</div><div class="card-title">Recorded Future (Insikt Group): Inside the Scam -- North Korea's IT Worker Threat</div><div class="card-meta"><span class="meta-item">Recorded Future / Insikt Group</span><span class="meta-sep"></span><span class="meta-item">2024-2025</span></div><a class="card-url" href="https://www.recordedfuture.com/research/inside-the-scam-north-koreas-it-worker-threat" target="_blank">recordedfuture.com -- inside-the-scam-north-korea</a><div class="card-summary">Primary research on DPRK IT worker fraud infrastructure -- 21 PurpleBravo servers linked to Contagious Interview, fake LinkedIn accounts tracked throughout the scheme. Provides technical indicators of compromise from the application stage. Establishes hiring fraud as a threat intelligence category with its own IOCs.</div><div class="card-tags"><span class="tag tag-report">Report</span></div></div>
+
+        <div class="card"><div class="card-id">6.11</div><div class="card-title">2025 Ponemon / DTEX Cost of Insider Threats Global Report</div><div class="card-meta"><span class="meta-item">Ponemon Institute / DTEX Systems</span><span class="meta-sep"></span><span class="meta-item">2025</span></div><a class="card-url" href="https://ponemon.dtexsystems.com/" target="_blank">ponemon.dtexsystems.com</a><div class="card-summary">Average annual cost of insider risk reached $17.4M per organization in 2025, up from $16.2M in 2023. 55% employee negligence, 25% malicious insiders, 20% credential theft. Average detection and containment time: 81 days. The financial proof point for why insider threat -- including hiring-stage failures -- demands security-grade controls.</div><div class="card-tags"><span class="tag tag-report">Report</span></div></div>
+
+        <div class="card"><div class="card-id">6.12</div><div class="card-title">Verizon Data Breach Investigations Report 2025</div><div class="card-meta"><span class="meta-item">Verizon</span><span class="meta-sep"></span><span class="meta-item">2025</span></div><a class="card-url" href="https://www.verizon.com/business/resources/reports/2025-dbir-executive-summary.pdf" target="_blank">verizon.com -- 2025-dbir-executive-summary</a><div class="card-summary">DBIR 2025: in EMEA, nearly 29% of breaches originated from within the organization. The 2024 edition reclassified malicious insider (Privileged Misuse) as a distinct category. The most widely cited annual breach study. Insider threat as a substantial breach category reinforces the need for pre-access controls.</div><div class="card-tags"><span class="tag tag-report">Report</span></div></div>
+
+        <div class="card"><div class="card-id">6.13</div><div class="card-title">Accenture Analysis: Insider Threats Surge as Dark Web Recruitment Rises</div><div class="card-meta"><span class="meta-item">Accenture</span><span class="meta-sep"></span><span class="meta-item">2025</span></div><a class="card-url" href="https://cybernews.com/security/accenture-insider-threat-dark-web-recruitment/" target="_blank">cybernews.com -- accenture-insider-threat-dark-web</a><div class="card-summary">Accenture's dark-web analysis: 69% rise in employees advertising access for sale in 2025 vs. 2024, and 127% surge in hackers actively recruiting insiders vs. 2022. Accenture: insider threat is "medium-frequency, high-impact strategic risk requiring board-level attention." The threat now starts before employment -- adversaries targeting potential hires during the hiring process itself.</div><div class="card-tags"><span class="tag tag-report">Report</span></div></div>
+
+        <div class="card"><div class="card-id">6.14</div><div class="card-title">Flashpoint 2025 Insider Threat Intelligence Report</div><div class="card-meta"><span class="meta-item">Flashpoint</span><span class="meta-sep"></span><span class="meta-item">2025</span></div><a class="card-url" href="https://flashpoint.io/blog/insider-threats-2025-intelligence-2026-strategy/" target="_blank">flashpoint.io -- insider-threats-2025-intelligence</a><div class="card-summary">Flashpoint documented 91,321 instances of insider recruiting, advertising, and threat actor discussions in 2025. Average: 1,162 insider-related dark web posts per month. Most targeted: telecom 42%, retail 23%, financial services 15%. Criminal organizations now operate structured insider recruitment pipelines that mirror legitimate HR processes.</div><div class="card-tags"><span class="tag tag-report">Report</span></div></div>
+
+        <div class="card"><div class="card-id">6.15</div><div class="card-title">Check Point Research: Cybercriminals Recruiting Insiders in Banks and Tech</div><div class="card-meta"><span class="meta-item">Check Point Research</span><span class="meta-sep"></span><span class="meta-item">2025</span></div><a class="card-url" href="https://blog.checkpoint.com/research/cyber-criminals-are-recruiting-insiders-in-banks-telecoms-and-tech/" target="_blank">blog.checkpoint.com -- recruiting-insiders-banks-telecoms</a><div class="card-summary">Dark web recruitment ads offering $3,000-$15,000 for insider access at named companies including Coinbase, Kraken, Accenture. Ads specify required access type: VPN credentials, help-desk tools, admin panels. Criminal organizations have industrialized insider recruitment using the same talent acquisition infrastructure as legitimate employers.</div><div class="card-tags"><span class="tag tag-report">Report</span></div></div>
+
+        <div class="card">
+          <div class="card-id">6.16</div>
+          <div class="card-title">Greenhouse 2026 AI in Hiring Report: 86% of Recruiters Report Candidate Fraud</div>
+          <div class="card-meta"><span class="meta-item">Greenhouse</span><span class="meta-sep"></span><span class="meta-item">2026</span></div>
+          <a class="card-url" href="https://www.greenhouse.com/blog/introducing-greenhouse-real-talent" target="_blank">greenhouse.com -- introducing-greenhouse-real-talent</a>
+          <div class="card-summary">Greenhouse's 2026 AI in Hiring Report: 86% of recruiters across the UK, Ireland, and Germany caught or suspected candidate fraud in the past 12 months. Published alongside the Real Talent product launch (February 2026). Vendor-published research from a major ATS platform confirms the category is now mainstream in practitioner awareness, not just the security community. The 86% figure is attributable to Greenhouse and citable in investor decks.</div>
+          <div class="card-tags"><span class="tag tag-report">Report</span><span class="tag tag-hr-crossover">HR Crossover</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-id">6.17</div>
+          <div class="card-title">Ropes 2026 Candidate Assessment Data: 36% High-Risk Flag Rate</div>
+          <div class="card-meta"><span class="meta-item">Ropes / Ken Schumacher (CEO)</span><span class="meta-sep"></span><span class="meta-item">2026</span></div>
+          <a class="card-url" href="https://www.linkedin.com/posts/kenschu_so-far-in-2026-weve-run-tens-of-thousands" target="_blank">linkedin.com/in/kenschu -- 2026 assessments post</a>
+          <div class="card-summary">Ken Schumacher, CEO of Ropes (candidate verification platform for staffing firms): "So far in 2026, we've run tens of thousands of candidate assessments. 36% were flagged as high risk. That's identity fraud, proxy interviewers, and AI-assisted deception at scale. It also includes dozens of North Korean operatives." Ropes operates at the interview and identity layer -- not the application submission layer -- making this a clean third-party validation with no competitive agenda against Sentriq.</div>
+          <div class="card-tags"><span class="tag tag-report">Report</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-id">6.18</div>
+          <div class="card-title">AuthBridge Workforce Fraud Files: 79% of Fraud from Experienced Professionals</div>
+          <div class="card-meta"><span class="meta-item">AuthBridge Research (Indian BGV company)</span><span class="meta-sep"></span><span class="meta-item">2025-2026</span></div>
+          <a class="card-url" href="https://www.linkedin.com/pulse/79-hiring-fraud-comes-from-experienced-professionals" target="_blank">linkedin.com/pulse -- 79-hiring-fraud-experienced-professionals</a>
+          <div class="card-summary">AuthBridge's Workforce Fraud Files, covering 1M+ background checks in IT/ITeS, healthcare, and financial services (India). 79% of fraud cases involve experienced professionals -- not entry-level candidates. 45% of flagged IT candidates simultaneously moonlighting for competing companies. 50% of education check failures from candidates with years of prior employment. Usage rule: India/IT-ITeS data -- supporting stat in investor conversations, not a global enterprise headline. Cited via LinkedIn Pulse article by Mrityunjaya Jay P.</div>
+          <div class="card-tags"><span class="tag tag-report">Report</span></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 7 -->
+    <section class="section" id="s7">
+      <div class="section-header">
+        <div class="section-num">7</div>
+        <div>
+          <div class="section-title">Legal and Regulatory Angle</div>
+          <div class="section-subtitle">EU AI Act, BIPA, NYDFS 23 NYCRR 500, NIST 800-53 -- compliance pressure as a forcing function</div>
+        </div>
+      </div>
+      <div class="cards">
+
+        <div class="card"><div class="card-id">7.1</div><div class="card-title">EU AI Act: High-Risk AI in Employment -- Enforcement August 2, 2026</div><div class="card-meta"><span class="meta-item">European Commission / EU Parliament</span><span class="meta-sep"></span><span class="meta-item">Enforcement: August 2, 2026</span></div><div class="card-urls"><a class="card-url" href="https://artificialintelligenceact.eu/what-the-act-means-for-staffing-businesses/" target="_blank">artificialintelligenceact.eu -- staffing businesses</a><a class="card-url" href="https://www.herohunt.ai/blog/recruiting-under-the-eu-ai-act-impact-on-hiring/" target="_blank">herohunt.ai -- recruiting-under-eu-ai-act</a></div><div class="card-summary">Under the EU AI Act (Regulation 2024/1689), AI systems used in recruitment, candidate evaluation, and employment decisions are classified as "high-risk." Article 9 mandates continuous risk management documentation. Penalties: up to EUR 15M or 3% of global turnover. Enforcement begins August 2, 2026. Any company using AI in hiring without a security-grade risk management program is out of compliance.</div><div class="card-tags"><span class="tag tag-regulatory">Regulatory</span></div></div>
+
+        <div class="card"><div class="card-id">7.2</div><div class="card-title">Illinois Biometric Information Privacy Act (BIPA)</div><div class="card-meta"><span class="meta-item">State of Illinois</span><span class="meta-sep"></span><span class="meta-item">2008 (ongoing enforcement)</span></div><a class="card-url" href="https://www.ilga.gov/legislation/ilcs/ilcs3.asp?ActID=3004&ChapterID=57" target="_blank">ilga.gov -- BIPA legislation</a><div class="card-summary">BIPA prohibits private entities from collecting biometric identifiers without written consent. Creates pressure to verify candidate identity without biometric collection -- exactly the use case for behavioral and application-layer trust signals. $1,000 per negligent violation, $5,000 per intentional violation. BIPA has generated over $1B in settled litigation against employers.</div><div class="card-tags"><span class="tag tag-regulatory">Regulatory</span></div></div>
+
+        <div class="card"><div class="card-id">7.3</div><div class="card-title">New York DFS Cybersecurity Regulation (23 NYCRR 500) -- Hiring as Security Control</div><div class="card-meta"><span class="meta-item">New York Department of Financial Services</span><span class="meta-sep"></span><span class="meta-item">November 1, 2024 (advisory); ongoing regulation</span></div><a class="card-url" href="https://www.dfs.ny.gov/industry-guidance/industry-letters/il20241101-cyber-advisory-remote-workers-nk" target="_blank">dfs.ny.gov -- cyber-advisory-remote-workers-nk</a><div class="card-summary">Beyond the standalone DPRK advisory, the DFS cybersecurity regulation requires covered entities to implement personnel security controls. The November 2024 advisory explicitly connects hiring vetting to cybersecurity compliance obligations under 23 NYCRR 500. Financial services CISOs in New York now have a direct regulatory mandate to treat hiring as a security control.</div><div class="card-tags"><span class="tag tag-regulatory">Regulatory</span><span class="tag tag-government">Government</span></div></div>
+
+        <div class="card"><div class="card-id">7.4</div><div class="card-title">NIST SP 800-53 Rev 5: Personnel Security Controls (PS Family)</div><div class="card-meta"><span class="meta-item">NIST</span><span class="meta-sep"></span><span class="meta-item">Current (Rev 5, 2020, updated ongoing)</span></div><a class="card-url" href="https://csf.tools/reference/nist-sp-800-53/r5/pm/pm-12/" target="_blank">csf.tools -- nist-sp-800-53 PS family</a><div class="card-summary">NIST 800-53's Personnel Security (PS) control family and Insider Threat Program (PM-12) explicitly position pre-employment screening as security controls, not HR functions. Federal contractors and any company seeking FedRAMP authorization must implement these controls. Establishes regulatory backing for CISOs owning hiring security.</div><div class="card-tags"><span class="tag tag-regulatory">Regulatory</span><span class="tag tag-government">Government</span></div></div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 8 -->
+    <section class="section" id="s8">
+      <div class="section-header">
+        <div class="section-num">8</div>
+        <div>
+          <div class="section-title">HR-Security Crossover Content</div>
+          <div class="section-subtitle">When HR's own community calls it a security problem, the objection collapses</div>
+        </div>
+      </div>
+      <div class="cards">
+
+        <div class="card"><div class="card-id">8.1</div><div class="card-title">Gartner: By 2028, 1 in 4 Candidate Profiles Will Be Fake</div><div class="card-meta"><span class="meta-item">Gartner</span><span class="meta-sep"></span><span class="meta-item">2025</span></div><div class="card-urls"><a class="card-url" href="https://www.hrdive.com/news/fake-job-candidates-ai/757126/" target="_blank">hrdive.com -- fake-job-candidates-ai</a><a class="card-url" href="https://www.personneltoday.com/hr/by-2028-one-in-four-candidate-profiles-will-be-fake/" target="_blank">personneltoday.com -- one-in-four-profiles-fake</a></div><div class="card-summary">Gartner, the world's leading enterprise research firm, predicts 25% of all candidate profiles will be fake by 2028. Gartner's own HR Senior Research Director: "Candidate fraud creates cybersecurity risks that can be far more serious than making a bad hire." The world's foremost enterprise analyst firm has framed hiring fraud as a cybersecurity problem. This quote belongs in every CISO and investor conversation.</div><div class="card-tags"><span class="tag tag-hr-crossover">HR Crossover</span><span class="tag tag-report">Report</span></div></div>
+
+        <div class="card"><div class="card-id">8.2</div><div class="card-title">Greenhouse Real Talent: ATS Vendor Ships Live Fraud Detection for All Customers</div><div class="card-meta"><span class="meta-item">Greenhouse</span><span class="meta-sep"></span><span class="meta-item">February 2026 (LIVE for all customers)</span></div><div class="card-urls"><a class="card-url" href="https://www.greenhouse.com/real-talent-candidate-matching" target="_blank">greenhouse.com -- real-talent-candidate-matching</a><a class="card-url" href="https://www.greenhouse.com/blog/introducing-greenhouse-real-talent" target="_blank">greenhouse.com -- introducing-greenhouse-real-talent</a></div><div class="card-summary">Greenhouse launched "Real Talent" -- live for all Greenhouse customers as of February 2026. Ships via IPQS (phone/email/IP/location anomaly signals) and CLEAR (selfie vs. government ID identity verification). An ATS vendor shipping a live security product and publishing market research signals they are positioning to own the solution. The window for a purpose-built, platform-agnostic layer is now -- Greenhouse can only detect fraud inside their own customer base. Updated May 21, 2026.</div><div class="card-tags"><span class="tag tag-hr-crossover">HR Crossover</span></div></div>
+
+        <div class="card"><div class="card-id">8.3</div><div class="card-title">Greenhouse: Lessons from 2025 -- AI, Fraud and the Future of Fair Hiring</div><div class="card-meta"><span class="meta-item">Greenhouse</span><span class="meta-sep"></span><span class="meta-item">2025/2026</span></div><a class="card-url" href="https://www.greenhouse.com/guidance/lessons-from-2025-ai-fraud-and-the-future-of-fair-hiring" target="_blank">greenhouse.com -- lessons-from-2025-ai-fraud</a><div class="card-summary">Industry guidance acknowledging that hiring fraud has fundamentally changed the trust calculus in recruiting. "Efficiency is up while trust is down" framing from a talent acquisition perspective. Confirms HR community awareness that the application pipeline is no longer a trusted channel.</div><div class="card-tags"><span class="tag tag-hr-crossover">HR Crossover</span></div></div>
+
+        <div class="card"><div class="card-id">8.4</div><div class="card-title">SHRM: Cybercriminals Use Malware-Laced Fake Resumes to Target Recruiters</div><div class="card-meta"><span class="meta-item">SHRM (Society for Human Resource Management)</span><span class="meta-sep"></span><span class="meta-item">2024</span></div><a class="card-url" href="https://www.shrm.org/topics-tools/news/talent-acquisition/cybercriminals-use-malware-laced-fake-resumes-to-target-recruiters" target="_blank">shrm.org -- malware-laced-fake-resumes</a><div class="card-summary">SHRM's flagship news publication warning HR professionals that their core daily workflow -- opening job application emails and downloading resumes -- is now a malware delivery vector. SHRM is the world's largest HR membership organization. When SHRM publishes a cybersecurity warning, the HR-security crossover is officially recognized at the professional association level.</div><div class="card-tags"><span class="tag tag-hr-crossover">HR Crossover</span><span class="tag tag-press">Press</span></div></div>
+
+        <div class="card"><div class="card-id">8.5</div><div class="card-title">Okta: Verifying the Identity of Your Remote Workforce</div><div class="card-meta"><span class="meta-item">Okta</span><span class="meta-sep"></span><span class="meta-item">2025</span></div><a class="card-url" href="https://www.okta.com/es-es/newsroom/articles/verifying-identity-remote-workforce/" target="_blank">okta.com -- verifying-identity-remote-workforce</a><div class="card-summary">Okta, the enterprise identity platform, published guidance on verifying identity during hiring and onboarding as a security control. Positions identity verification at hiring as a natural extension of their access management mandate. An identity security vendor claiming the hiring pipeline as their domain confirms this is now a security product category.</div><div class="card-tags"><span class="tag tag-hr-crossover">HR Crossover</span></div></div>
+
+        <div class="card"><div class="card-id">8.6</div><div class="card-title">Microsoft Security Blog: Fake Employees, Real Threat -- Decentralized Identity to Combat Deepfake Hiring</div><div class="card-meta"><span class="meta-item">Microsoft</span><span class="meta-sep"></span><span class="meta-item">2025</span></div><a class="card-url" href="https://techcommunity.microsoft.com/blog/microsoft-security-blog/fake-employees-real-threat-decentralized-identity-to-combat-deepfake-hiring/4479864" target="_blank">techcommunity.microsoft.com -- fake-employees-real-threat</a><div class="card-summary">Microsoft's security blog frames hiring-stage identity fraud as a security product problem, proposing decentralized identity as a technical solution. Microsoft Security Blog covering hiring fraud confirms this is security infrastructure, not HR process.</div><div class="card-tags"><span class="tag tag-hr-crossover">HR Crossover</span><span class="tag tag-report">Report</span></div></div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 9 -->
+    <section class="section" id="s9">
+      <div class="section-header">
+        <div class="section-num">9</div>
+        <div>
+          <div class="section-title">LinkedIn Market Signals -- Practitioner Voices</div>
+          <div class="section-subtitle">Scraped via LinkedIn Compass, May 8 and May 21, 2026. Real practitioners, real pain, public record.</div>
+        </div>
+      </div>
+      <div class="cards">
+
+        <div class="card market-signal"><div class="card-id">9.1</div><div class="card-title">"79% Hiring Fraud Comes from Experienced Professionals" -- Mrityunjaya (Jay) P.</div><div class="card-meta"><span class="meta-item">Mrityunjaya (Jay) P.</span><span class="meta-sep"></span><span class="meta-item">LinkedIn Pulse, 2025-2026</span></div><a class="card-url" href="https://www.linkedin.com/pulse/79-hiring-fraud-comes-from-experienced-professionals" target="_blank">linkedin.com/pulse -- 79-hiring-fraud-experienced-professionals</a><div class="card-summary">LinkedIn Pulse article citing AuthBridge Workforce Fraud Files. Key argument: fraud screening is miscalibrated -- calibrated for freshers when 79% of fraud originates from experienced professionals. Secondary stats: 45% moonlighting in IT, 50% education fraud from multi-year employees. "A bad lateral hire at a senior level may have access to proprietary code, client data, strategic plans, and internal systems." Flips the narrative from entry-level bot spam to lateral hire fabrication -- which is where enterprise HR buyers do their most consequential and sensitive hiring.</div><div class="card-tags"><span class="tag tag-hr-crossover">HR Crossover</span><span class="tag tag-market-signal">Market Signal</span></div></div>
+
+        <div class="card market-signal"><div class="card-id">9.2</div><div class="card-title">Gem Recruiting Software -- "Applicant Fraud is the Newest Threat to Your Hiring Pipeline"</div><div class="card-meta"><span class="meta-item">Gem Recruiting Software (29,661 LinkedIn followers)</span><span class="meta-sep"></span><span class="meta-item">LinkedIn, May 2026</span></div><a class="card-url" href="https://www.linkedin.com/company/gem-com/" target="_blank">linkedin.com/company/gem-com (post captured May 21, 2026)</a><div class="card-summary">Gem announced "Gem's AI Fraud Detection Agent" -- evaluates resume metadata, email, phone, LinkedIn, person verification, IP and device data. Claims 90%+ accuracy. Early customers: Daxko, OneSignal. A well-funded recruiting software platform publicly positioning around the application-layer fraud problem confirms the category is real and commercially viable. Market validation that the problem warrants product investment at scale.</div><div class="card-tags"><span class="tag tag-market-signal">Market Signal</span></div></div>
+
+        <div class="card market-signal"><div class="card-id">9.3</div><div class="card-title">Ken Schumacher, Ropes -- 36% High-Risk Flag Rate in 2026 Assessments</div><div class="card-meta"><span class="meta-item">Ken Schumacher, CEO, Ropes</span><span class="meta-sep"></span><span class="meta-item">LinkedIn, 2026</span></div><a class="card-url" href="https://www.linkedin.com/in/kenschu" target="_blank">linkedin.com/in/kenschu (post captured May 21, 2026)</a><div class="card-summary">Real-time operational data: "36% were flagged as high risk. That's identity fraud, proxy interviewers, and AI-assisted deception at scale. It also includes dozens of North Korean operatives." More than 1 in 3 candidates assessed showing high-risk signals. Because Ropes operates at interview/identity layer, not application submission, this is corroboration of fraud scale with no competitive agenda against Sentriq's insertion point.</div><div class="card-tags"><span class="tag tag-market-signal">Market Signal</span></div></div>
+
+        <div class="card market-signal"><div class="card-id">9.4</div><div class="card-title">Group-IB -- "The Hiring Pipeline Has Become a New Battleground"</div><div class="card-meta"><span class="meta-item">Group-IB (154,000 LinkedIn followers)</span><span class="meta-sep"></span><span class="meta-item">LinkedIn, 2026</span></div><a class="card-url" href="https://www.linkedin.com/company/group-ib/" target="_blank">linkedin.com/company/group-ib (post captured May 2026)</a><div class="card-summary">Major cybersecurity threat intelligence firm with 154,000 LinkedIn followers framing the hiring pipeline as an active attack surface. "Hiring pipeline has become a new battleground." Documents synthetic identities as ghost employees post-hire, state-backed DPRK IT worker rings, supply chain compromise through recruitment. Quote: "companies treat hiring as HR's responsibility rather than a security concern." A top-tier cybersecurity firm using Sentriq's exact category framing is authoritative external validation.</div><div class="card-tags"><span class="tag tag-market-signal">Market Signal</span><span class="tag tag-hr-crossover">HR Crossover</span></div></div>
+
+        <div class="card market-signal"><div class="card-id">9.5</div><div class="card-title">Marc Pavlopoulos / Talexios -- "Stage 1 (Application Submission Fraud) is Unsolved and Open"</div><div class="card-meta"><span class="meta-item">Marc Pavlopoulos</span><span class="meta-sep"></span><span class="meta-item">LinkedIn, 2026</span></div><a class="card-url" href="https://www.linkedin.com/in/marcpavlopoulos" target="_blank">linkedin.com/in/marcpavlopoulos (post captured May 2026)</a><div class="card-summary">Pavlopoulos, associated with Talexios (an interview authenticity tool), explicitly framed fraud as a two-stage problem and called Stage 1 -- application submission fraud -- "unsolved and open." His product addresses Stage 2 (interview). A competitor publicly admitting that Sentriq's insertion point has no incumbent. Use in investor conversations without naming the specific source.</div><div class="card-tags"><span class="tag tag-market-signal">Market Signal</span></div></div>
+
+        <div class="card market-signal"><div class="card-id">9.6</div><div class="card-title">Sunnah Wang -- False Positive Nearly Cost a Perfect Candidate</div><div class="card-meta"><span class="meta-item">Sunnah Wang, TA professional</span><span class="meta-sep"></span><span class="meta-item">LinkedIn, 2026</span></div><div class="card-summary">TA professional posted about nearly losing a qualified candidate after they were falsely flagged as fraudulent by existing tools. Cited Gartner's 1-in-4 stat. 8+ comments. Pain signal: the problem is not just catching fraud -- it is false positive rates creating unfair rejections and recruiter mistrust. Validates Sentriq's "signals for human review, not automated rejection" positioning. Enterprise TA buyers are worried about bias liability, and a false positive story from a practitioner is a direct rebuttal to "why not just block everything."</div><div class="card-tags"><span class="tag tag-market-signal">Market Signal</span><span class="tag tag-hr-crossover">HR Crossover</span></div></div>
+
+        <div class="card market-signal"><div class="card-id">9.7</div><div class="card-title">Paul Zauch, Randstad Enterprise -- RPO Providers "Need to Pivot"</div><div class="card-meta"><span class="meta-item">Paul Zauch, Randstad Enterprise leadership</span><span class="meta-sep"></span><span class="meta-item">LinkedIn, 2026</span></div><a class="card-url" href="https://www.linkedin.com/in/paul-zauch-7628464" target="_blank">linkedin.com/in/paul-zauch-7628464</a><div class="card-summary">Published institutional research on candidate fraud. Explicitly stated that RPO providers "need to pivot" in response to the fraud problem. Discussing the submission layer as the critical gap. Randstad Enterprise is one of the world's largest RPO providers. A senior leader publicly calling for a business model pivot is the highest-signal commercial validation outside of a signed contract. HIGH priority sales target.</div><div class="card-tags"><span class="tag tag-market-signal">Market Signal</span></div></div>
+
+      </div>
+    </section>
+
+    <!-- OBJECTION KILLERS -->
+    <section class="section" id="killers">
+      <div class="section-header">
+        <div class="section-num" style="font-size:10px;">12</div>
+        <div>
+          <div class="section-title">Objection Killers</div>
+          <div class="section-subtitle">When a CISO or investor says "that's an HR problem, not a security problem" -- use one of these</div>
+        </div>
+      </div>
+      <div class="killers">
+
+        <div class="killer">
+          <div class="killer-num">1</div>
+          <div class="killer-body">
+            <div class="killer-headline">"The DOJ sent someone to federal prison for it."</div>
+            <div class="killer-evidence">Christina Marie Chapman was sentenced to 102 months in federal prison for operating a laptop farm that placed North Korean workers inside more than 300 US companies including Fortune 500 firms. (DOJ, July 2025)</div>
+          </div>
+        </div>
+
+        <div class="killer">
+          <div class="killer-num">2</div>
+          <div class="killer-body">
+            <div class="killer-headline">"Amazon's CSO, not Head of HR, personally leads their defense against it."</div>
+            <div class="killer-evidence">Stephen Schmidt, Amazon's Chief Security Officer, has personally built and runs an AI-powered system that has blocked over 1,800 North Korean job applications since April 2024 -- and one still slipped through. (Fortune/NBC, December 2025)</div>
+          </div>
+        </div>
+
+        <div class="killer">
+          <div class="killer-num">3</div>
+          <div class="killer-body">
+            <div class="killer-headline">"Gartner's HR research director called it a cybersecurity problem."</div>
+            <div class="killer-evidence">Jamie Kohn, Gartner Senior Research Director (HR practice): "Candidate fraud creates cybersecurity risks that can be far more serious than making a bad hire." Gartner also predicts 25% of all candidate profiles will be fake by 2028. (HR Dive, 2025)</div>
+          </div>
+        </div>
+
+        <div class="killer">
+          <div class="killer-num">4</div>
+          <div class="killer-body">
+            <div class="killer-headline">"CrowdStrike responded to 304 incidents from this single attack vector in one year."</div>
+            <div class="killer-evidence">CrowdStrike's FAMOUS CHOLLIMA -- North Korea's hiring infiltration unit -- generated 304 incident response engagements in 2024, with 40% classified as insider threat operations. 220% growth year over year. (CrowdStrike 2024 Threat Hunting Report)</div>
+          </div>
+        </div>
+
+        <div class="killer">
+          <div class="killer-num">5</div>
+          <div class="killer-body">
+            <div class="killer-headline">"FBI presented this at RSA Conference, not at SHRM."</div>
+            <div class="killer-evidence">The FBI chose RSA Conference 2025 -- the largest cybersecurity conference in the world -- to deliver a dedicated session on DPRK hiring infiltration. FBI Assistant Director Bryan Vorndran moderated. 200 victim notifications issued. (FBI at RSAC 2025)</div>
+          </div>
+        </div>
+
+        <div class="killer">
+          <div class="killer-num">6</div>
+          <div class="killer-body">
+            <div class="killer-headline">"KnowBe4 -- a security company with mature controls -- was breached through their ATS."</div>
+            <div class="killer-evidence">KnowBe4 hired a North Korean national who passed four video interviews, a background check, and reference verification. He immediately loaded malware on his work laptop. Every existing HR control failed. (KnowBe4 Blog, July 2024)</div>
+          </div>
+        </div>
+
+        <div class="killer">
+          <div class="killer-num">7</div>
+          <div class="killer-body">
+            <div class="killer-headline">"Every major threat intel vendor has named this as a tracked threat actor."</div>
+            <div class="killer-evidence">Mandiant (UNC5267), CrowdStrike (FAMOUS CHOLLIMA), Microsoft (Jasper Sleet), SentinelOne, Okta, and Unit 42 all maintain active threat actor profiles for DPRK IT worker hiring infiltration. Named, tracked, persistent threat with dedicated research teams.</div>
+          </div>
+        </div>
+
+        <div class="killer">
+          <div class="killer-num">8</div>
+          <div class="killer-body">
+            <div class="killer-headline">"New York's financial regulator told banks to treat job applications as a security threat."</div>
+            <div class="killer-evidence">The New York DFS issued a formal cybersecurity advisory (November 2024) requiring every regulated bank, insurer, and fintech to brief their CISO and hiring managers together about DPRK remote worker infiltration, and to treat applicant verification as a cybersecurity control. (NYDFS, November 1, 2024)</div>
+          </div>
+        </div>
+
+        <div class="killer">
+          <div class="killer-num">9</div>
+          <div class="killer-body">
+            <div class="killer-headline">"The resume itself is a malware delivery vector."</div>
+            <div class="killer-evidence">The More_eggs backdoor campaign -- attributed to FIN6 (Golden Chickens MaaS) -- delivers malware via fake job application emails and resume PDFs targeting HR departments. Attackers have built purpose-specific candidate websites with IP filtering and CAPTCHAs to bypass security sandboxes. Your email gateway does not block resumes. (eSentire, The Hacker News, 2024)</div>
+          </div>
+        </div>
+
+        <div class="killer">
+          <div class="killer-num">10</div>
+          <div class="killer-body">
+            <div class="killer-headline">"The EU is making it a compliance obligation by August 2026."</div>
+            <div class="killer-evidence">Under the EU AI Act, any AI used in recruitment, candidate evaluation, or employment decisions is classified as high-risk. Article 9 requires documented risk management. Penalties: up to EUR 15M or 3% of global turnover. Enforcement begins August 2, 2026. (EU AI Act, 2024/1689)</div>
+          </div>
+        </div>
+
+        <div class="killer">
+          <div class="killer-num">11</div>
+          <div class="killer-body">
+            <div class="killer-headline">"86% of recruiters already caught or suspected candidate fraud this year."</div>
+            <div class="killer-evidence">Greenhouse's 2026 AI in Hiring Report surveyed recruiters across the UK, Ireland, and Germany. 86% caught or suspected candidate fraud in the past 12 months. This is not a prediction -- it is current-year practitioner data. The problem is already happening at scale in Sentriq's target markets. (Greenhouse, 2026)</div>
+          </div>
+        </div>
+
+        <div class="killer">
+          <div class="killer-num">12</div>
+          <div class="killer-body">
+            <div class="killer-headline">"In 2026, more than 1 in 3 candidates assessed by an independent platform flagged as high risk."</div>
+            <div class="killer-evidence">Ropes ran tens of thousands of candidate assessments in 2026 and flagged 36% as high risk -- identity fraud, proxy interviewers, AI-assisted deception, and DPRK operatives. Third-party operational data from a company with no competitive agenda against Sentriq's layer. (Ken Schumacher, Ropes, LinkedIn, 2026)</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div><!-- /content -->
+</main>
+</div><!-- /layout -->
+
+<script>
+  // Search
+  const input = document.getElementById('search');
+  const cards = document.querySelectorAll('.card');
+  input.addEventListener('input', function() {
+    const q = this.value.toLowerCase().trim();
+    cards.forEach(card => {
+      if (!q) { card.classList.remove('hidden'); return; }
+      const text = card.textContent.toLowerCase();
+      card.classList.toggle('hidden', !text.includes(q));
+    });
+    // Hide source sections with no visible cards; always show killers + exec-summary
+    document.querySelectorAll('.section').forEach(sec => {
+      if (!q || sec.id === 'killers') { sec.style.display = ''; return; }
+      const visibleCards = sec.querySelectorAll('.card:not(.hidden)');
+      sec.style.display = visibleCards.length === 0 ? 'none' : '';
+    });
+    const es = document.getElementById('exec-summary');
+    if (es) es.style.display = '';
+  });
+
+  // Active nav on scroll
+  const sections = document.querySelectorAll('.section, .exec-summary');
+  const navItems = document.querySelectorAll('.nav-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navItems.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '-80px 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
