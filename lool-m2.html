@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sentriq - Lool Ventures M2</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+    :root {
+        --bg:      #09090F;
+        --card:    #0D0E1A;
+        --border:  #161728;
+        --muted:   #8080A8;
+        --amber:   #E8A020;
+        --amber-d: #B87010;
+        --text:    #ffffff;
+        --text-sub: rgba(255,255,255,0.72);
+        --green:   #44CC88;
+        --primary: #E8A020;
+        --white: #ffffff;
+        --gray-900: #09090F;
+        --gray-800: #0D0E1A;
+        --orange: #E8A020;
+        --red: #E05555;
+        --purple: #3A2058;
+        --text-dim: rgba(255,255,255,0.52);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+        font-family: 'Space Grotesk', system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+    }
+
+    body::after {
+        content: '';
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        pointer-events: none; z-index: 9999; opacity: 0.02;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-repeat: repeat; background-size: 256px;
+    }
+
+    .deck { width: 100%; height: 100%; position: relative; }
+
+    .slide {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        display: flex; flex-direction: column;
+        justify-content: flex-start; align-items: center;
+        padding: clamp(24px, 3.5vh, 48px) clamp(28px, 5vw, 80px) 78px;
+        overflow-y: auto; overflow-x: hidden;
+        opacity: 0; pointer-events: none;
+        transition: opacity 0.4s ease;
+    }
+    .slide > .slide-inner { margin: auto 0; }
+    .slide.active { opacity: 1; pointer-events: all; }
+    .slide .slide-inner { transition: opacity 0.4s ease, transform 0.4s ease; opacity: 0; transform: translateY(10px); }
+    .slide.active .slide-inner { opacity: 1; transform: translateY(0); }
+    .slide-inner { max-width: 1080px; width: 100%; position: relative; z-index: 1; }
+
+    .bg-dark { background: linear-gradient(135deg, #09090F 0%, #0D0E1A 100%); }
+    .bg-cover {
+        background:
+            radial-gradient(ellipse 40% 35% at 50% 32%, rgba(232,160,32,0.38) 0%, rgba(232,160,32,0.10) 55%, transparent 100%),
+            radial-gradient(ellipse 85% 65% at 50% 35%, rgba(26,26,53,0.55) 0%, #09090F 70%);
+    }
+
+    .nav-bar {
+        position: fixed; bottom: 0; left: 0; right: 0;
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 14px 40px;
+        background: rgba(9,9,15,0.92); backdrop-filter: blur(12px);
+        border-top: 1px solid var(--border); z-index: 100;
+    }
+    .nav-logo { font-weight: 500; font-size: 13px; color: #ffffff; letter-spacing: -0.01em; display: flex; align-items: center; gap: 7px; }
+    .nav-controls { display: flex; align-items: center; gap: 14px; }
+    .nav-btn {
+        background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.11);
+        color: var(--white); width: 38px; height: 38px; border-radius: 8px;
+        cursor: pointer; display: flex; align-items: center; justify-content: center;
+        font-size: 17px; transition: all 0.25s;
+    }
+    .nav-btn:hover { background: var(--amber); border-color: var(--amber); }
+    .slide-counter { font-size: 12px; color: var(--muted); font-weight: 500; min-width: 52px; text-align: center; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 10px; }
+
+    .progress-bar {
+        position: fixed; top: 0; left: 0; height: 2px;
+        background: #E8A020;
+        box-shadow: 0 0 8px rgba(232,160,32,0.45);
+        transition: width 0.35s ease; z-index: 100;
+    }
+
+    .confidential { position: fixed; top: 16px; right: 22px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.2); z-index: 100; }
+    .meeting-badge { position: fixed; top: 16px; left: 22px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(232,160,32,0.7); z-index: 100; background: rgba(232,160,32,0.12); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(232,160,32,0.25); opacity: 0; transition: opacity 0.3s ease; }
+
+    .label {
+        font-size: 11px; font-weight: 600; text-transform: uppercase;
+        letter-spacing: 0.15em; color: var(--amber); margin-bottom: 12px;
+        display: flex; align-items: center; gap: 9px;
+    }
+    .label::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--amber); opacity: 0.5; }
+    .center .label { justify-content: center; }
+    .center .label::before { display: none; }
+
+    h1 { font-size: clamp(36px, 5.5vw, 72px); font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; margin-bottom: 18px; }
+    h2 { font-size: clamp(22px, 3.2vw, 42px); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 16px; }
+    h3 { font-size: clamp(14px, 1.6vw, 18px); font-weight: 700; line-height: 1.3; margin-bottom: 8px; }
+
+    .card {
+        background: var(--card); border: 1px solid var(--border);
+        border-radius: 14px; padding: clamp(16px, 2vw, 24px);
+    }
+    .card p { font-size: 13px; color: var(--text-sub); line-height: 1.65; }
+
+    .pill { display: inline-block; padding: 5px 13px; border-radius: 20px; font-size: 12px; font-weight: 600; border: 1px solid; }
+    .pill-blue { background: rgba(232,160,32,0.08); color: var(--amber); border-color: rgba(232,160,32,0.2); }
+    .pill-green { background: rgba(68,204,136,0.08); color: #44CC88; border-color: rgba(68,204,136,0.2); }
+    .pill-red { background: rgba(224,85,85,0.10); color: #E05555; border-color: rgba(224,85,85,0.25); }
+
+    .stat-num { font-size: clamp(36px, 5vw, 72px); font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+
+    @keyframes shimmer { 0%{background-position:-200% center} 100%{background-position:200% center} }
+    .shimmer { background: linear-gradient(90deg,#fff 0%,#E8A020 25%,#fff 50%,#E8A020 75%,#fff 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: shimmer 4s linear infinite; }
+
+    .signal-tag {
+        display: inline-flex; align-items: center; gap: 5px;
+        padding: 4px 10px; border-radius: 6px;
+        font-size: 11px; font-weight: 600;
+        background: rgba(232,160,32,0.08); color: var(--amber);
+        border: 1px solid rgba(232,160,32,0.2);
+    }
+
+    .sources { margin-top: 14px; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden; }
+    .src-toggle { display: block; width: 100%; padding: 7px 14px; background: none; border: none; cursor: pointer; font-size: 10px; color: var(--muted); font-weight: 600; font-family: inherit; text-align: left; transition: color 0.2s; }
+    .src-toggle:hover { color: rgba(255,255,255,0.6); }
+    .src-toggle::after { content: ' ▸'; }
+    .sources.open .src-toggle::after { content: ' ▾'; }
+    .src-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; padding: 0 14px; }
+    .sources.open .src-content { max-height: 200px; padding: 0 14px 10px; }
+    .src-content p { font-size: 10px; color: var(--muted); line-height: 1.8; }
+
+    .moat-card { position:relative; overflow:hidden; padding:20px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:14px; }
+    .moat-watermark { position:absolute; bottom:-10px; right:8px; font-size:72px; font-weight:800; color:rgba(255,255,255,0.07); letter-spacing:-0.04em; line-height:1; pointer-events:none; user-select:none; }
+
+    .hero-quote { margin-top:18px; padding:22px 32px; background:rgba(232,160,32,0.06); border-left:3px solid #E8A020; border-radius:0 12px 12px 0; }
+    .hero-quote p { font-size:20px; color:rgba(255,255,255,0.94); font-weight:700; letter-spacing:-0.02em; line-height:1.4; }
+    .hero-quote small { display:block; font-size:12px; color:rgba(255,255,255,0.38); margin-top:8px; letter-spacing:0.02em; }
+
+    .milestone-card { padding:12px 14px; background:#0D0E1A; border:1px solid rgba(255,255,255,0.12); border-radius:10px; display:flex; align-items:center; gap:16px; margin-bottom:8px; }
+    .milestone-num { flex-shrink:0; text-align:center; min-width:60px; }
+    .milestone-num .date { font-size:9px; font-weight:700; color:rgba(255,255,255,0.3); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:2px; }
+    .milestone-num .value { font-size:18px; font-weight:800; color:var(--amber); letter-spacing:-0.02em; line-height:1; }
+    .milestone-num .unit { font-size:9px; color:rgba(255,255,255,0.3); margin-top:1px; }
+    .milestone-body { font-size:12px; color:rgba(255,255,255,0.80); line-height:1.5; border-left:1px solid rgba(255,255,255,0.08); padding-left:16px; }
+
+    /* PIPELINE FLOW */
+    .pipe-flow { display:flex; align-items:center; gap:0; margin:24px 0; }
+    .pipe-step { display:flex; flex-direction:column; align-items:center; text-align:center; flex:1; }
+    .pipe-step-box { padding:10px 6px; border-radius:8px; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.04); width:100%; font-size:11px; font-weight:700; color:rgba(255,255,255,0.6); letter-spacing:0.02em; }
+    .pipe-step-box.gap-box { background:rgba(232,160,32,0.15); border:2px solid rgba(232,160,32,0.7); color:#E8A020; box-shadow:0 0 20px rgba(232,160,32,0.15); }
+    .pipe-arrow { color:rgba(255,255,255,0.18); font-size:18px; flex-shrink:0; margin:0 2px; }
+    .pipe-step-label { font-size:9px; color:var(--muted); margin-top:5px; }
+    .pipe-step.active .pipe-step-label { color:var(--amber); }
+
+    /* 2x2 MATRIX */
+    .matrix-wrap { position:relative; margin:16px 0; }
+    .matrix-grid { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:6px; }
+    .matrix-cell { padding:16px; border-radius:10px; border:1px solid rgba(255,255,255,0.07); background:rgba(255,255,255,0.02); min-height:110px; }
+    .matrix-cell.highlight { background:rgba(232,160,32,0.10); border:2px solid rgba(232,160,32,0.55); box-shadow:0 0 24px rgba(232,160,32,0.10); }
+    .matrix-cell-label { font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:0.12em; color:var(--muted); margin-bottom:8px; }
+    .matrix-cell.highlight .matrix-cell-label { color:var(--amber); }
+    .matrix-cell-co { font-size:11px; font-weight:700; color:rgba(255,255,255,0.75); line-height:1.5; }
+    .matrix-cell.highlight .matrix-cell-co { color:#fff; font-size:14px; font-weight:800; }
+    .matrix-axis-x { display:flex; justify-content:space-between; font-size:10px; font-weight:700; color:rgba(255,255,255,0.3); text-transform:uppercase; letter-spacing:0.1em; margin-top:6px; padding:0 2px; }
+    .matrix-axis-y { position:absolute; left:-32px; top:0; height:100%; display:flex; flex-direction:column; justify-content:space-between; align-items:flex-end; }
+    .matrix-axis-y span { font-size:10px; font-weight:700; color:rgba(255,255,255,0.3); text-transform:uppercase; letter-spacing:0.1em; writing-mode:vertical-rl; transform:rotate(180deg); }
+
+    /* TRIANGLE */
+    .triangle-wrap { display:flex; justify-content:center; align-items:center; padding:20px 0; }
+    .triangle-svg { max-width:420px; width:100%; }
+
+    @media (max-width: 900px) {
+        .slide { padding: 22px 16px 70px; }
+        h1 { font-size: 24px; } h2 { font-size: 18px; }
+        .nav-bar { padding: 10px 16px; }
+        div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+        .matrix-grid { grid-template-columns: 1fr !important; }
+        .pipe-flow { flex-wrap:wrap; }
+    }
+    @media (max-width: 640px) {
+        .matrix-wrap { overflow-x:auto; }
+    }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="gate" style="position:fixed;inset:0;z-index:99999;background:#09090F;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',system-ui,sans-serif;">
+    <div style="width:100%;max-width:360px;padding:0 24px;text-align:center;">
+        <div style="margin-bottom:32px;">
+            <div style="display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:6px;">
+                <svg width="36" height="36" viewBox="0 0 56 56" fill="none"><rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><circle cx="28" cy="7" r="3" fill="#E8A020"/></svg>
+                <span style="font-size:22px;font-weight:500;color:#ffffff;letter-spacing:-0.01em;">Sentriq<span style="color:#E8A020;">.</span></span>
+            </div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:4px;font-weight:500;">Investor Briefing: Confidential</div>
+        </div>
+        <input id="gateInput" type="password" placeholder="Enter access code" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onkeydown="if(event.key==='Enter')checkPass()" style="width:100%;padding:14px 18px;border-radius:10px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.06);color:#fff;font-size:15px;font-family:inherit;outline:none;margin-bottom:12px;text-align:center;letter-spacing:0.05em;">
+        <button onclick="checkPass()" style="width:100%;padding:14px;border-radius:10px;border:none;background:#E8A020;color:#09090F;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;" onmouseover="this.style.background='#B87010'" onmouseout="this.style.background='#E8A020'">View Deck</button>
+        <div id="gateError" style="font-size:12px;color:rgba(232,160,32,0.9);margin-top:10px;opacity:0;transition:opacity 0.3s;">Incorrect access code. Please try again.</div>
+        <div style="margin-top:32px;font-size:11px;color:rgba(255,255,255,0.2);line-height:1.6;">This document contains confidential and proprietary information.<br>Unauthorized access is prohibited.</div>
+    </div>
+</div>
+
+<script>
+    function pingOpen() {
+        var ua = navigator.userAgent;
+        var t = new Date().toISOString();
+        fetch('https://ipapi.co/json/')
+            .then(function(r){ return r.json(); })
+            .then(function(geo) {
+                var loc = (geo.city || '') + ', ' + (geo.country_name || '') + ' (' + (geo.ip || '') + ')';
+                var org = geo.org || '';
+                var msg = 'Sentriq Lool M2 deck opened\n' + loc + '\n' + org + '\n' + t;
+                fetch('https://ntfy.sh/sentriq-lool-m2-v7k3', { method: 'POST', mode: 'no-cors', body: msg }).catch(function(){});
+            })
+            .catch(function() {
+                fetch('https://ntfy.sh/sentriq-lool-m2-v7k3', {
+                    method: 'POST', mode: 'no-cors',
+                    body: 'Sentriq Lool M2 deck opened (location unavailable)\n' + ua.substring(0,80) + '\n' + t
+                }).catch(function(){});
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('deck').style.display = 'none';
+        if (sessionStorage.getItem('lool-m2-pinged')) {
+            document.getElementById('gate').style.display = 'none';
+            document.getElementById('deck').style.display = '';
+        }
+    });
+
+    function checkPass() {
+        var val = document.getElementById('gateInput').value;
+        if (val === atob('c2VudHJpcWxvb2xtMg==')) {
+            document.getElementById('gate').style.display = 'none';
+            document.getElementById('deck').style.display = '';
+            if (!sessionStorage.getItem('lool-m2-pinged')) {
+                pingOpen();
+                sessionStorage.setItem('lool-m2-pinged', '1');
+            }
+        } else {
+            var err = document.getElementById('gateError');
+            err.style.opacity = '1';
+            setTimeout(function() { err.style.opacity = '0'; }, 2500);
+            document.getElementById('gateInput').value = '';
+        }
+    }
+</script>
+
+<div class="progress-bar" id="progressBar"></div>
+<div class="confidential">Confidential</div>
+<div class="meeting-badge" id="meetingBadge">Lool Ventures</div>
+
+<div class="deck" id="deck">
+
+<!-- SLIDE 0: THE HOOK -->
+<div class="slide bg-cover active" data-index="0">
+<div class="slide-inner center" style="text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100%;">
+    <div style="display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:40px;">
+        <svg width="40" height="40" viewBox="0 0 56 56" fill="none"><rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><circle cx="28" cy="7" r="3" fill="#E8A020"/></svg>
+        <span style="font-size:20px;font-weight:500;color:#ffffff;letter-spacing:-0.01em;">Sentriq<span style="color:#E8A020;">.</span></span>
+    </div>
+
+    <div style="max-width:680px;">
+        <div style="font-size:clamp(15px,2vw,19px);color:rgba(255,255,255,0.45);font-weight:600;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:32px;">Two facts about hiring software</div>
+
+        <div style="margin-bottom:20px;padding:22px 28px;border-radius:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">
+            <div style="font-size:clamp(20px,2.8vw,32px);font-weight:800;color:#ffffff;line-height:1.2;letter-spacing:-0.02em;">Every application is submitted as text.</div>
+            <div style="font-size:13px;color:var(--text-dim);margin-top:8px;">Resume. Cover letter. Form answers. All text. Always.</div>
+        </div>
+
+        <div style="margin-bottom:36px;padding:22px 28px;border-radius:14px;background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.3);">
+            <div style="font-size:clamp(20px,2.8vw,32px);font-weight:800;color:var(--amber);line-height:1.2;letter-spacing:-0.02em;">AI can generate any text in under a second.</div>
+            <div style="font-size:13px;color:rgba(232,160,32,0.6);margin-top:8px;">And apply to 10,000 jobs in an afternoon. Automatically.</div>
+        </div>
+
+        <div style="font-size:clamp(14px,1.8vw,18px);color:rgba(255,255,255,0.55);font-weight:500;line-height:1.5;">The ATS was not built for this world.<br>Neither was the recruiter's inbox.</div>
+    </div>
+</div>
+</div>
+
+
+<!-- SLIDE 1: THE ERA CHANGE -->
+<div class="slide bg-dark" data-index="1">
+<div class="slide-inner">
+    <span class="label">The Shift</span>
+    <h2>Inbound volume is accelerating.<br><span style="color:var(--amber);">Signal quality is collapsing.</span></h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px;">
+        <div style="padding:20px;text-align:center;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;">
+            <div class="stat-num" style="color:var(--amber);">400%</div>
+            <div style="font-size:13px;color:var(--text-sub);margin-top:8px;">growth in inbound applications per role since 2022</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:6px;">LinkedIn Economic Graph, 2024</div>
+        </div>
+        <div style="padding:20px;text-align:center;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;">
+            <div class="stat-num" style="color:var(--amber);">25%</div>
+            <div style="font-size:13px;color:var(--text-sub);margin-top:8px;">of job applications will be AI-generated by 2028</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:6px;">Gartner, 2024</div>
+        </div>
+        <div style="padding:20px;text-align:center;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;">
+            <div class="stat-num" style="color:var(--amber);">23h</div>
+            <div style="font-size:13px;color:var(--text-sub);margin-top:8px;">wasted per recruiter per week reviewing low-signal applications</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:6px;">Gartner TA Benchmark, 2024</div>
+        </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div style="padding:18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;">
+            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">What the ATS sees</div>
+            <div style="font-size:14px;font-weight:700;color:var(--text-sub);line-height:1.5;">What was submitted.<br>Not how it was created.</div>
+            <div style="margin-top:12px;font-size:12px;color:var(--muted);line-height:1.6;">The ATS stores the resume. It has no view of whether the person typed it, pasted it, or generated it with AI in 4 seconds. That gap is structural. It is not fixable inside the ATS.</div>
+        </div>
+        <div style="padding:18px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.18);border-radius:12px;">
+            <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">What changed in 2024-2025</div>
+            <div style="font-size:14px;font-weight:700;color:var(--text);line-height:1.5;">Agentic AI. Not just better resumes.</div>
+            <div style="margin-top:12px;font-size:12px;color:var(--text-sub);line-height:1.6;">AutoApply tools apply to hundreds of roles per day. AI coaches answer screening questions live. Mass-apply platforms are VC-funded, consumer-grade, and growing. The application layer is no longer human-speed.</div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!-- SLIDE 2: THE TRIANGLE -->
+<div class="slide bg-dark" data-index="2">
+<div class="slide-inner">
+    <span class="label">The Problem</span>
+    <h2>Three KPIs every TA leader owns.<br><span style="color:var(--amber);">All three degrading from one source.</span></h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:18px 0;">
+
+        <div style="padding:20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;position:relative;">
+            <div style="position:absolute;top:14px;right:16px;font-size:22px;color:rgba(224,85,85,0.7);">&#8595;</div>
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">Time to Fill</div>
+            <div style="font-size:28px;font-weight:800;color:var(--text);letter-spacing:-0.03em;margin-bottom:10px;">44 days</div>
+            <div style="font-size:12px;color:var(--text-sub);line-height:1.65;">Average time to fill a role. Every low-signal application a recruiter reviews adds to the queue. Volume hides the candidates who matter.</div>
+            <div style="margin-top:12px;font-size:10px;color:var(--muted);">SHRM Talent Acquisition Benchmark, 2024</div>
+        </div>
+
+        <div style="padding:20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;position:relative;">
+            <div style="position:absolute;top:14px;right:16px;font-size:22px;color:rgba(224,85,85,0.7);">&#8595;</div>
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">Quality of Hire</div>
+            <div style="font-size:28px;font-weight:800;color:var(--text);letter-spacing:-0.03em;margin-bottom:10px;">3x salary</div>
+            <div style="font-size:12px;color:var(--text-sub);line-height:1.65;">Cost of a bad hire. Hiring managers trust shortlists less than ever. When every application looks polished, signal disappears. The wrong person gets to interview.</div>
+            <div style="margin-top:12px;font-size:10px;color:var(--muted);">SHRM / CIPD, 2024</div>
+        </div>
+
+        <div style="padding:20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;position:relative;">
+            <div style="position:absolute;top:14px;right:16px;font-size:22px;color:rgba(224,85,85,0.7);">&#8595;</div>
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">Compliance</div>
+            <div style="font-size:28px;font-weight:800;color:var(--text);letter-spacing:-0.03em;margin-bottom:10px;">Aug 2026</div>
+            <div style="font-size:12px;color:var(--text-sub);line-height:1.65;">EU AI Act enforcement deadline. Automated application screening now requires a documented audit trail. CHROs have 12 months to comply or shut down AI-assisted screening.</div>
+            <div style="margin-top:12px;font-size:10px;color:var(--muted);">EU AI Act, Art. 6 + Annex III, 2024</div>
+        </div>
+    </div>
+
+    <div style="padding:16px 24px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.22);border-radius:12px;text-align:center;">
+        <div style="font-size:15px;font-weight:700;color:var(--text);letter-spacing:-0.01em;">All three collapsing simultaneously. From the same source: unverified inbound volume.</div>
+        <div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Every existing tool in the stack addresses a different stage. None addresses the moment applications arrive.</div>
+    </div>
+</div>
+</div>
+
+
+<!-- SLIDE 3: THE GAP -->
+<div class="slide bg-dark" data-index="3">
+<div class="slide-inner">
+    <span class="label">The Unclaimed Layer</span>
+    <h2>Every enterprise secures the perimeter.<br><span style="color:var(--amber);">Nobody owns the front door.</span></h2>
+
+    <!-- HIRING FLOW -->
+    <div class="pipe-flow" style="margin:28px 0 12px;">
+        <div class="pipe-step">
+            <div class="pipe-step-box">Job Post</div>
+            <div class="pipe-step-label">Visible to candidates</div>
+        </div>
+        <div class="pipe-arrow">&#8594;</div>
+        <div class="pipe-step">
+            <div class="pipe-step-box">Apply Button</div>
+            <div class="pipe-step-label">Candidate clicks</div>
+        </div>
+        <div class="pipe-arrow">&#8594;</div>
+        <div class="pipe-step active">
+            <div class="pipe-step-box gap-box">??? UNDEFENDED ???</div>
+            <div class="pipe-step-label" style="color:var(--amber);font-weight:700;">The application integrity layer</div>
+        </div>
+        <div class="pipe-arrow">&#8594;</div>
+        <div class="pipe-step">
+            <div class="pipe-step-box">ATS Inbox</div>
+            <div class="pipe-step-label">Recruiter review begins</div>
+        </div>
+        <div class="pipe-arrow">&#8594;</div>
+        <div class="pipe-step">
+            <div class="pipe-step-box">Shortlist</div>
+            <div class="pipe-step-label">Hiring manager sees</div>
+        </div>
+        <div class="pipe-arrow">&#8594;</div>
+        <div class="pipe-step">
+            <div class="pipe-step-box">Interview</div>
+            <div class="pipe-step-label">Human time invested</div>
+        </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;">
+        <div style="padding:18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;">
+            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">What exists today</div>
+            <div style="font-size:13px;color:var(--text-sub);line-height:1.7;">
+                Background checks: post-offer. Interview tools: late funnel. ATS screening: keyword filters on submitted text. No tool sits between the Apply button and the ATS to analyze how the application was created.
+            </div>
+        </div>
+        <div style="padding:18px;background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.25);border-radius:12px;">
+            <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">The Cloudflare analogy</div>
+            <div style="font-size:13px;color:var(--text);line-height:1.7;font-weight:600;">
+                Between the internet and the server, sits Cloudflare. Every request passes through it. Nobody questions it. It is infrastructure.
+            </div>
+            <div style="font-size:13px;color:var(--text-sub);line-height:1.7;margin-top:8px;">
+                Between the apply button and the ATS: no one. That layer does not exist yet. It will. The company that builds it first owns the infrastructure.
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top:14px;padding:12px 20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:10px;text-align:center;">
+        <span style="font-size:13px;color:var(--muted);">This is not a feature gap inside an existing tool. It is a structural gap in the architecture of hiring itself.</span>
+    </div>
+</div>
+</div>
+
+
+<!-- SLIDE 4: PRODUCT -->
+<div class="slide bg-dark" data-index="4">
+<div class="slide-inner">
+    <span class="label">The Product</span>
+    <h2>Sentriq sits in the gap.<br><span style="color:var(--amber);">Three signals. Zero friction for real candidates.</span></h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:18px 0;">
+
+        <div style="padding:20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;">
+            <div style="width:36px;height:36px;border-radius:8px;background:rgba(232,160,32,0.12);border:1px solid rgba(232,160,32,0.25);display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:16px;font-weight:800;color:var(--amber);">1</div>
+            <div style="font-size:14px;font-weight:800;color:var(--text);margin-bottom:8px;">Behavioral Baseline</div>
+            <div style="font-size:12px;color:var(--text-sub);line-height:1.65;margin-bottom:12px;">Passive. Invisible. Captured before the candidate knows they are being assessed. Typing dynamics, paste events, field focus patterns, session timing, device fingerprint, mass-apply signatures. Starts before identity exists.</div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;">
+                <span class="signal-tag">Typing patterns</span>
+                <span class="signal-tag">Paste detection</span>
+                <span class="signal-tag">Session timing</span>
+                <span class="signal-tag">Device signal</span>
+            </div>
+        </div>
+
+        <div style="padding:20px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.18);border-radius:14px;">
+            <div style="width:36px;height:36px;border-radius:8px;background:rgba(232,160,32,0.15);border:1px solid rgba(232,160,32,0.4);display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:16px;font-weight:800;color:var(--amber);">2</div>
+            <div style="font-size:14px;font-weight:800;color:var(--text);margin-bottom:8px;">Gap Assessor</div>
+            <div style="font-size:12px;color:var(--text-sub);line-height:1.65;margin-bottom:12px;">Analyzes the submitted text for role-fit alignment, consistency between sections, experience-claim plausibility, and AI-generation patterns. Re-runs throughout the pipeline as new information arrives. Gives recruiters a structured signal, not a score.</div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;">
+                <span class="signal-tag">Role-fit signals</span>
+                <span class="signal-tag">Consistency</span>
+                <span class="signal-tag">AI markers</span>
+            </div>
+        </div>
+
+        <div style="padding:20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;">
+            <div style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:16px;font-weight:800;color:rgba(255,255,255,0.5);">3</div>
+            <div style="font-size:14px;font-weight:800;color:var(--text);margin-bottom:8px;">Clarification Step</div>
+            <div style="font-size:12px;color:var(--text-sub);line-height:1.65;margin-bottom:12px;">Triggered selectively when Layer 1 and 2 signals are inconclusive. A short async task framed as part of the application. Verifies live authorship without biometrics. Real candidates pass without friction. Zero automated rejections.</div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;">
+                <span class="signal-tag">Async</span>
+                <span class="signal-tag">No biometrics</span>
+                <span class="signal-tag">Human decides</span>
+            </div>
+        </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div style="padding:14px 18px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;">
+            <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">What the recruiter sees</div>
+            <div style="font-size:13px;color:var(--text-sub);">A structured application signal profile enriching each submission inside their existing ATS. No new workflow. No new screen. The signal appears where decisions already happen.</div>
+        </div>
+        <div style="padding:14px 18px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;">
+            <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">What the candidate experiences</div>
+            <div style="font-size:13px;color:var(--text-sub);">Nothing, for real candidates. A short clarification step only if signals are low. Never described as security. Never a CAPTCHA. A "short role-relevance check" that takes 4 minutes.</div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!-- SLIDE 5: COMPETITIVE -->
+<div class="slide bg-dark" data-index="5">
+<div class="slide-inner">
+    <span class="label">Competitive Landscape</span>
+    <h2>The category exists in pieces.<br><span style="color:var(--amber);">Nobody has assembled the layer.</span></h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0 8px;">
+
+        <!-- TOP LEFT: Early + Inbound -->
+        <div style="padding:18px;border-radius:12px;background:rgba(232,160,32,0.10);border:2px solid rgba(232,160,32,0.55);box-shadow:0 0 24px rgba(232,160,32,0.08);">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+                <div style="font-size:9px;font-weight:800;color:var(--amber);text-transform:uppercase;letter-spacing:0.12em;">Early in process / Inbound</div>
+                <span class="pill pill-blue" style="font-size:9px;padding:2px 8px;">OUR QUADRANT</span>
+            </div>
+            <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:6px;">Sentriq</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.7);line-height:1.55;margin-bottom:10px;">Pre-ATS. Passive behavioral + Gap Assessor + selective clarification. HR-first buyer. Cross-company signal graph. No automated rejection.</div>
+            <div style="border-top:1px solid rgba(232,160,32,0.2);padding-top:10px;">
+                <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Also here: Direct competitor</div>
+                <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.75);">Endorsed</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.5);line-height:1.55;margin-top:3px;">350+ signals. SOC2 Type II. Pre-ATS position. Security-first buyer framing. No cross-company graph. No HR-first workflow. Enterprise only.</div>
+            </div>
+        </div>
+
+        <!-- TOP RIGHT: Early + Outbound -->
+        <div style="padding:18px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);">
+            <div style="font-size:9px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">Early in process / Outbound</div>
+            <div style="font-size:13px;font-weight:800;color:rgba(255,255,255,0.85);margin-bottom:4px;">Gem AI Fraud Detection Agent</div>
+            <div style="display:inline-block;padding:2px 8px;border-radius:4px;background:rgba(224,85,85,0.12);border:1px solid rgba(224,85,85,0.35);font-size:9px;font-weight:700;color:#E05555;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Largest distribution threat</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.6);line-height:1.55;">Launched 2025. Existing enterprise TA distribution. Fraud detection on outbound sourced candidates, not inbound applications. Different problem, same buyer. Distribution risk is real.</div>
+        </div>
+
+        <!-- BOTTOM LEFT: Late + Inbound -->
+        <div style="padding:18px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);">
+            <div style="font-size:9px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">Late in process / Inbound (post-ATS)</div>
+            <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.8);margin-bottom:3px;">Ashby <span style="font-weight:500;color:rgba(255,255,255,0.4);font-size:11px;">native fraud detection LIVE Sept 2025</span></div>
+            <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.8);margin-bottom:3px;">Phenom <span style="font-weight:500;color:rgba(255,255,255,0.4);font-size:11px;">enterprise deployment confirmed (Alight)</span></div>
+            <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.8);margin-bottom:3px;">HireVue <span style="font-weight:500;color:rgba(255,255,255,0.4);font-size:11px;">interview-layer, late funnel</span></div>
+            <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.8);margin-bottom:6px;">Clarity <span style="font-weight:500;color:rgba(255,255,255,0.4);font-size:11px;">$16M Bessemer, interview-stage complement</span></div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);line-height:1.55;">All late funnel: post-submission, inside the ATS. Miss the submission event entirely. No behavioral baseline from the form fill moment.</div>
+        </div>
+
+        <!-- BOTTOM RIGHT: Late + Outbound -->
+        <div style="padding:18px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);">
+            <div style="font-size:9px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">Late in process / Outbound</div>
+            <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.8);margin-bottom:3px;">Greenhouse Real Talent <span style="font-weight:500;color:rgba(255,255,255,0.4);font-size:11px;">LIVE Feb 2026 (IPQS + CLEAR)</span></div>
+            <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.8);margin-bottom:3px;">Crosschq + ID.me <span style="font-weight:500;color:rgba(255,255,255,0.4);font-size:11px;">IDV live Apr 2026</span></div>
+            <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.8);margin-bottom:6px;">Checkr / background checks <span style="font-weight:500;color:rgba(255,255,255,0.4);font-size:11px;">post-offer only</span></div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);line-height:1.55;">Identity verification, not application quality. Post-offer or post-interview. By then, recruiters already wasted hours on the wrong candidates. ATS bundling is the structural threat: Greenhouse and Ashby already live.</div>
+        </div>
+    </div>
+
+    <!-- Axis labels -->
+    <div style="display:flex;justify-content:space-between;padding:0 4px;margin-bottom:8px;">
+        <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:0.1em;">Earlier &#8592;</div>
+        <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:0.1em;">&#8594; Later in process</div>
+    </div>
+
+    <div style="padding:10px 18px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.15);border-radius:8px;text-align:center;">
+        <span style="font-size:12px;color:var(--text-sub);">The window is closing. ATS incumbents are adding detection. The company that owns the pre-submission layer first builds the moat. <strong style="color:var(--text);">The structural advantage is timing, not features.</strong></span>
+    </div>
+</div>
+</div>
+
+
+<!-- SLIDE 6: THE MOAT -->
+<div class="slide bg-dark" data-index="6">
+<div class="slide-inner">
+    <span class="label">The Moat</span>
+    <h2>The layer compounds.<br><span style="color:var(--amber);">The first in owns the infrastructure.</span></h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0;">
+
+        <div class="moat-card">
+            <div class="moat-watermark">01</div>
+            <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">Data Moat</div>
+            <div style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:8px;">Cross-company behavioral graph</div>
+            <div style="font-size:13px;color:var(--text-sub);line-height:1.65;">No single employer can build this. A serial applicant who applies to HSBC and Booking Holdings and SQLink looks different in isolation than in aggregate. The graph only exists because Sentriq sees them all. Every new customer enriches it for every other customer.</div>
+        </div>
+
+        <div class="moat-card">
+            <div class="moat-watermark">02</div>
+            <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">Network Effect</div>
+            <div style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:8px;">The product gets better as it grows</div>
+            <div style="font-size:13px;color:var(--text-sub);line-height:1.65;">15 companies on the graph is the threshold where cross-company signal starts outperforming single-company heuristics. After that, every new node makes the detection surface larger and more precise. Competitors start from zero. We compound.</div>
+        </div>
+
+        <div class="moat-card">
+            <div class="moat-watermark">03</div>
+            <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">Workflow Lock-in</div>
+            <div style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:8px;">The audit trail becomes a compliance requirement</div>
+            <div style="font-size:13px;color:var(--text-sub);line-height:1.65;">Under the EU AI Act and EEOC disparate impact rules, any AI-assisted application screening must produce a documented signal trail. Sentriq's output becomes the compliance artifact. Once in, removing it creates a regulatory gap. Retention is structural, not contractual.</div>
+        </div>
+
+        <div class="moat-card">
+            <div class="moat-watermark">04</div>
+            <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">AI Resilience</div>
+            <div style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:8px;">All text. Low compute. 99%+ margin.</div>
+            <div style="font-size:13px;color:var(--text-sub);line-height:1.65;">Resumes are text. Answers are text. Behavioral logs are structured data. This is not a computer vision problem or a video analysis problem. Text analysis at inference is near-zero cost. The economics improve as volume scales. Gross margin is structural, not optimized.</div>
+        </div>
+    </div>
+
+    <div style="padding:14px 22px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.18);border-radius:10px;text-align:center;">
+        <div style="font-size:14px;font-weight:700;color:var(--text);">Lool's Israeli portfolio = early node supply. Every Israeli enterprise that joins strengthens the graph for all others.</div>
+        <div style="font-size:12px;color:var(--text-dim);margin-top:4px;">This is not a pitch angle. It is a structural advantage for Lool's check.</div>
+    </div>
+</div>
+</div>
+
+
+<!-- SLIDE 7: TEAM -->
+<div class="slide bg-dark" data-index="7">
+<div class="slide-inner">
+    <span class="label">The Team</span>
+    <h2>An attacker who builds defense.<br><span style="color:var(--amber);">An operator who knows the buyer.</span></h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0;">
+
+        <div style="padding:22px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.2);border-radius:14px;">
+            <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">Samuel Kemper / CEO</div>
+            <div style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:4px;">HR operator who built both sides.</div>
+            <div style="font-size:12px;color:var(--text-sub);line-height:1.7;margin-bottom:14px;">Ran TechRuiter IL, a tech recruiting firm. Sat in the ATS every day. Watched the application signal collapse from the inside. Then built ATS optimization tooling to understand how candidates game the system. I was the attacker before I understood I was building the defense.</div>
+            <div style="display:flex;flex-wrap:wrap;gap:5px;">
+                <span class="signal-tag">HR Operations</span>
+                <span class="signal-tag">Enterprise GTM</span>
+                <span class="signal-tag">ATS native</span>
+                <span class="signal-tag">US market</span>
+            </div>
+            <div style="margin-top:14px;font-size:12px;color:var(--text-sub);">HSBC and Booking Holdings: active design partner conversations from week one of outreach. The buyer trusts an HR operator. Not a security pitch.</div>
+        </div>
+
+        <div style="padding:22px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;">
+            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">Ben Czarninski / CTO</div>
+            <div style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:4px;">IDF intelligence vet who built the attack tools.</div>
+            <div style="font-size:12px;color:var(--text-sub);line-height:1.7;margin-bottom:14px;">Unit Tamar: offensive cyber. Unit Yachlam: full-stack classified systems. Then KPMG international pentest. Then AppsFlyer AppSec, trained 25 developers. Built two prior ventures including ADTech with 5 paying customers. The detection engine is built by someone who designed the attacks it is detecting.</div>
+            <div style="display:flex;flex-wrap:wrap;gap:5px;">
+                <span class="signal-tag">IDF Offensive Cyber</span>
+                <span class="signal-tag">Pentest / AppSec</span>
+                <span class="signal-tag">Full-stack</span>
+                <span class="signal-tag">Prior ventures</span>
+            </div>
+        </div>
+    </div>
+
+    <div style="padding:18px 22px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;">
+        <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Advisory Board</div>
+        <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;">
+            <div style="flex:1;min-width:200px;">
+                <div style="font-size:13px;font-weight:700;color:var(--text);">Gilad Rabinovich</div>
+                <div style="font-size:11px;color:var(--amber);margin-top:2px;margin-bottom:6px;">Former CEO, SQLink Group (2019-2022). External Director, Mizrahi-Tefahot Bank (2019-present).</div>
+                <div style="font-size:12px;color:var(--text-sub);line-height:1.6;">SQLink: Israel's largest IT staffing company. Mizrahi-Tefahot: Israel's 3rd largest bank. Both are active Sentriq design partner conversations. Gilad did not open doors. He ran the companies we are selling to and sits on the board of one of them today.</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start;flex-shrink:0;">
+                <div style="padding:8px 14px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.18);border-radius:8px;font-size:11px;font-weight:700;color:var(--text-sub);">$300K founders capital invested</div>
+                <div style="padding:8px 14px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.18);border-radius:8px;font-size:11px;font-weight:700;color:var(--text-sub);">Two IDF intelligence veterans</div>
+                <div style="padding:8px 14px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.18);border-radius:8px;font-size:11px;font-weight:700;color:var(--text-sub);">30+ ATS integrations tested</div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!-- SLIDE 8: TRACTION -->
+<div class="slide bg-dark" data-index="8">
+<div class="slide-inner">
+    <span class="label">Traction</span>
+    <h2>Two banks. Two countries.<br><span style="color:var(--amber);">Design partner pipeline built in 72 hours.</span></h2>
+
+    <div style="display:grid;grid-template-columns:3fr 2fr;gap:16px;margin:18px 0;">
+
+        <!-- LEFT: Design partner cards -->
+        <div>
+            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Active design partner conversations</div>
+
+            <div style="padding:16px;background:rgba(68,204,136,0.05);border:1px solid rgba(68,204,136,0.2);border-radius:10px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start;">
+                <div style="width:8px;height:8px;border-radius:50%;background:#44CC88;flex-shrink:0;margin-top:3px;"></div>
+                <div>
+                    <div style="font-size:13px;font-weight:800;color:var(--text);">HSBC</div>
+                    <div style="font-size:11px;color:#44CC88;margin-bottom:4px;">Most advanced. Ben built HSBC-specific production demo.</div>
+                    <div style="font-size:12px;color:var(--text-sub);line-height:1.55;">Director of Innovation Banking gave an ROI quote after one meeting. Two internal contacts identified for design partner routing.</div>
+                </div>
+            </div>
+
+            <div style="padding:16px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.18);border-radius:10px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start;">
+                <div style="width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0;margin-top:3px;"></div>
+                <div>
+                    <div style="font-size:13px;font-weight:800;color:var(--text);">SQLink Group</div>
+                    <div style="font-size:11px;color:var(--amber);margin-bottom:4px;">Israel's largest IT staffing company.</div>
+                    <div style="font-size:12px;color:var(--text-sub);line-height:1.55;">Champion: Gilad Rabinovich, former CEO. Direct relationships with current leadership. Highest application fraud exposure in the Israeli market.</div>
+                </div>
+            </div>
+
+            <div style="padding:16px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.18);border-radius:10px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start;">
+                <div style="width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0;margin-top:3px;"></div>
+                <div>
+                    <div style="font-size:13px;font-weight:800;color:var(--text);">Mizrahi-Tefahot Bank</div>
+                    <div style="font-size:11px;color:var(--amber);margin-bottom:4px;">Israel's 3rd largest bank. 5,500+ employees.</div>
+                    <div style="font-size:12px;color:var(--text-sub);line-height:1.55;">Champion: Gilad Rabinovich, current External Director on their board. Board-level access. Regulated hiring at scale.</div>
+                </div>
+            </div>
+
+            <div style="padding:16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;display:flex;gap:12px;align-items:flex-start;opacity:0.8;">
+                <div style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.3);flex-shrink:0;margin-top:3px;"></div>
+                <div>
+                    <div style="font-size:13px;font-weight:800;color:var(--text-sub);">Booking Holdings</div>
+                    <div style="font-size:11px;color:var(--muted);margin-bottom:4px;">24,000+ employees across all brands. Call pending.</div>
+                    <div style="font-size:12px;color:var(--muted);line-height:1.55;">Warm intro via advisor. Contact: VP Global Head of People Programs, former CPO at Agoda (8,000 employees, 40+ countries). Exact TA champion ICP.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Quote + context -->
+        <div style="display:flex;flex-direction:column;gap:12px;">
+            <div class="hero-quote">
+                <p>"Every call, I don't know how we quantify it, but it costs the bank quite a bit of money. And if the funnel is smaller, if you're able to screen more of these out before they even get to the call, that would be great."</p>
+                <small>C.S. Lai, Director, HSBC Innovation Banking</small>
+            </div>
+
+            <div style="padding:14px 16px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.18);border-radius:10px;">
+                <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Two countries. Both active.</div>
+                <div style="font-size:12px;color:var(--text-sub);line-height:1.6;">HSBC: US. Mizrahi-Tefahot: Israel. Same product. Same pain. Same week. The Israeli-to-global narrative is not a plan. It is already happening.</div>
+            </div>
+
+            <div style="padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+                <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Advisory board as distribution</div>
+                <div style="font-size:12px;color:var(--text-sub);line-height:1.6;">Gilad was CEO of SQLink and sits on Mizrahi's board today. He opened both doors from the inside. Former CEO plus current board seat.</div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!-- SLIDE 9: VISION -->
+<div class="slide bg-dark" data-index="9">
+<div class="slide-inner center" style="text-align:center;">
+    <span class="label" style="justify-content:center;">Vision</span>
+
+    <h2 style="font-size:clamp(26px,4vw,54px);margin-bottom:10px;">The Cloudflare of Hiring.</h2>
+    <p style="font-size:clamp(14px,1.8vw,20px);color:var(--text-dim);margin-bottom:36px;font-weight:500;">Every application. Every ATS. Every geography. One layer.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;text-align:left;margin-bottom:24px;">
+        <div style="padding:20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;">
+            <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Year 1</div>
+            <div style="font-size:16px;font-weight:800;color:var(--amber);margin-bottom:6px;">3-5 pilots</div>
+            <div style="font-size:12px;color:var(--text-sub);line-height:1.6;">Financial services and enterprise tech. Israel plus US. $10K paid pilots. Proof the layer works across markets and ATS platforms.</div>
+        </div>
+        <div style="padding:20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;">
+            <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Year 2</div>
+            <div style="font-size:16px;font-weight:800;color:var(--amber);margin-bottom:6px;">$1M ARR</div>
+            <div style="font-size:12px;color:var(--text-sub);line-height:1.6;">22-28 customers. Cross-company graph operational. Series A: the product now compounds. The moat is real, not projected.</div>
+        </div>
+        <div style="padding:20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;">
+            <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Year 4-5</div>
+            <div style="font-size:16px;font-weight:800;color:var(--amber);margin-bottom:6px;">Infrastructure M&amp;A</div>
+            <div style="font-size:12px;color:var(--text-sub);line-height:1.6;">SAP and Workday cannot replicate a cross-company behavioral graph. They will acquire the infrastructure they missed building. The exit path is structural, not aspirational.</div>
+        </div>
+    </div>
+
+    <div style="max-width:700px;padding:22px 32px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.2);border-radius:14px;text-align:center;">
+        <div style="font-size:16px;font-weight:700;color:var(--text);line-height:1.5;letter-spacing:-0.01em;">The category forms around the company that builds the infrastructure first. Israel is where the problem was understood. The US is where it gets solved.</div>
+    </div>
+</div>
+</div>
+
+
+<!-- SLIDE 10: THE ASK -->
+<div class="slide bg-dark" data-index="10">
+<div class="slide-inner">
+    <span class="label">The Ask</span>
+    <h2>$3.5M seed. Israel to the world.<br><span style="color:var(--amber);">Lool writes the anchor check.</span></h2>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0;">
+
+        <!-- LEFT: What the seed builds -->
+        <div>
+            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">What $3.5M builds</div>
+
+            <div class="milestone-card">
+                <div class="milestone-num">
+                    <div class="date">Q3</div>
+                    <div class="value">2026</div>
+                    <div class="unit">Product live</div>
+                </div>
+                <div class="milestone-body">Pilots running. 3-5 paying customers at $10K/pilot. SOC2 audit engaged. Israeli and US simultaneously.</div>
+            </div>
+
+            <div class="milestone-card">
+                <div class="milestone-num">
+                    <div class="date">Q4</div>
+                    <div class="value">2026</div>
+                    <div class="unit">SOC2 Type I</div>
+                </div>
+                <div class="milestone-body">First recurring contracts signed. Enterprise procurement unlocked. Cross-company graph threshold: 15 companies.</div>
+            </div>
+
+            <div class="milestone-card">
+                <div class="milestone-num">
+                    <div class="date">Q1</div>
+                    <div class="value">2027</div>
+                    <div class="unit">10-12 customers</div>
+                </div>
+                <div class="milestone-body">~$400K ARR. Network graph operational. Product compounds. CISO upsell layer opens as fraud intelligence matures.</div>
+            </div>
+
+            <div class="milestone-card">
+                <div class="milestone-num">
+                    <div class="date">Q4</div>
+                    <div class="value">2027</div>
+                    <div class="unit">Series A gate</div>
+                </div>
+                <div class="milestone-body">$1M ARR. 22-28 customers. 2 enterprise logos. Graph operational. Series A raise on proven infrastructure economics.</div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Why Lool -->
+        <div>
+            <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">Why Lool</div>
+
+            <div style="padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;margin-bottom:8px;">
+                <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px;">Exact thesis fit.</div>
+                <div style="font-size:12px;color:var(--text-sub);line-height:1.6;">Israeli technical founders. US category. Building from the inside out. This is the Lool pattern.</div>
+            </div>
+
+            <div style="padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;margin-bottom:8px;">
+                <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px;">IIA grant alignment.</div>
+                <div style="font-size:12px;color:var(--text-sub);line-height:1.6;">Sentriq qualifies for the Innovation Authority matching grant. Grant funds behavioral biometric R&amp;D. Seed funds product and GTM. No dilution overlap. Lool's IIA relationships accelerate approval.</div>
+            </div>
+
+            <div style="padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;margin-bottom:8px;">
+                <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px;">Lool's network = early node supply.</div>
+                <div style="font-size:12px;color:var(--text-sub);line-height:1.6;">Lool's Israeli portfolio companies are precisely the customers Sentriq needs for the cross-company graph. Every company Lool introduces strengthens the product for every other customer on it. Lool's check compounds the moat.</div>
+            </div>
+
+            <div style="padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+                <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px;">The window is closing.</div>
+                <div style="font-size:12px;color:var(--text-sub);line-height:1.6;">Greenhouse Real Talent: live Feb 2026. Ashby native detection: live Sept 2025. Gem AI Fraud Agent: enterprise distribution. The pre-submission layer is forming now. The first infrastructure player wins.</div>
+            </div>
+
+            <div style="margin-top:12px;padding:14px 18px;background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.25);border-radius:10px;text-align:center;">
+                <div style="font-size:22px;font-weight:800;color:var(--amber);letter-spacing:-0.02em;">$3.5M</div>
+                <div style="font-size:11px;color:var(--text-sub);margin-top:3px;">Seed raise. 24 months runway. Founder-only execution at close.</div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!-- SLIDE 11: CTA -->
+<div class="slide bg-cover" data-index="11">
+<div class="slide-inner center" style="text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100%;">
+    <div style="display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:32px;">
+        <svg width="48" height="48" viewBox="0 0 56 56" fill="none"><rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><circle cx="28" cy="7" r="3" fill="#E8A020"/></svg>
+        <h1 style="font-size:clamp(34px,5vw,60px);margin-bottom:0;letter-spacing:-0.03em;">Sentriq<span style="color:#E8A020;">.</span></h1>
+    </div>
+
+    <p style="font-size:clamp(16px,2.2vw,24px);color:rgba(255,255,255,0.8);font-weight:600;margin-bottom:8px;max-width:580px;line-height:1.35;">The application integrity layer between every submission and every hiring decision.</p>
+    <p style="font-size:clamp(13px,1.6vw,17px);color:rgba(255,255,255,0.4);margin-bottom:40px;">Built in Israel. Deployed globally.</p>
+
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:36px;">
+        <span class="pill pill-blue">samuel@sentriq.co</span>
+        <span class="pill pill-blue">ben@sentriq.co</span>
+        <span class="pill pill-green">sentriq.co</span>
+    </div>
+
+    <div style="max-width:480px;padding:20px 28px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.2);border-radius:14px;">
+        <div style="font-size:14px;font-weight:700;color:var(--text);line-height:1.5;">Ready to write the anchor check? We're ready to close.</div>
+        <div style="font-size:12px;color:var(--text-dim);margin-top:6px;">Conditional commit accepted: signed LOI contingent on first US or UK design partner agreement at $10K+ pilot by June 30, 2026.</div>
+    </div>
+</div>
+</div>
+
+</div><!-- end deck -->
+
+<!-- NAV -->
+<nav class="nav-bar">
+    <div class="nav-logo">
+        <svg width="28" height="28" viewBox="0 0 56 56" fill="none"><rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><circle cx="28" cy="7" r="3" fill="#E8A020"/></svg>
+        <span>Sentriq. / Lool Ventures</span>
+    </div>
+    <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">&#8592;</button>
+        <div class="slide-counter" id="slideCounter">1 / 12</div>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">&#8594;</button>
+    </div>
+</nav>
+
+<script>
+    var currentSlide = 0;
+    var totalSlides = document.querySelectorAll('.slide').length;
+
+    function showSlide(n) {
+        var slides = document.querySelectorAll('.slide');
+        slides.forEach(function(s) { s.classList.remove('active'); });
+        slides[n].classList.add('active');
+        document.getElementById('slideCounter').textContent = (n + 1) + ' / ' + totalSlides;
+        document.getElementById('progressBar').style.width = ((n + 1) / totalSlides * 100) + '%';
+        var badge = document.getElementById('meetingBadge');
+        badge.style.opacity = n === 0 ? '0' : '1';
+    }
+
+    function changeSlide(dir) {
+        currentSlide = Math.max(0, Math.min(totalSlides - 1, currentSlide + dir));
+        showSlide(currentSlide);
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); changeSlide(-1); }
+    });
+
+    var touchStartX = 0;
+    document.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+    document.addEventListener('touchend', function(e) {
+        var dx = e.changedTouches[0].screenX - touchStartX;
+        if (Math.abs(dx) > 40) changeSlide(dx < 0 ? 1 : -1);
+    }, { passive: true });
+
+    document.querySelectorAll('.src-toggle').forEach(function(btn) {
+        btn.addEventListener('click', function() { this.closest('.sources').classList.toggle('open'); });
+    });
+
+    showSlide(0);
+</script>
+</body>
+</html>
