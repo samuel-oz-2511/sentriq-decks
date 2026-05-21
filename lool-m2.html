@@ -208,6 +208,26 @@ body::after {
     .ask-grid { grid-template-columns: 1fr; }
     .funnel-track { flex-wrap: wrap; }
 }
+.comp-node { cursor: default; }
+#comp-tooltip {
+    display: none;
+    position: fixed;
+    z-index: 99999;
+    background: rgba(9,9,15,0.97);
+    border: 1px solid rgba(232,160,32,0.45);
+    border-radius: 8px;
+    padding: 8px 13px;
+    max-width: 190px;
+    font-size: 10px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.82);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    text-align: center;
+    pointer-events: none;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.55);
+    word-break: normal;
+}
 </style>
 </head>
 <body>
@@ -696,7 +716,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <!-- ═══════════════════════════════════════ -->
 
             <!-- ★ SENTRIQ (80%, 10%) top-right dominant -->
-            <div style="position:absolute;left:80%;top:10%;transform:translate(-50%,-50%);z-index:10;">
+            <div class="comp-node" data-tip="Application integrity layer. Pre-identity behavioral signals and cross-org fraud graph. No competitor owns this position." style="position:absolute;left:80%;top:10%;transform:translate(-50%,-50%);z-index:10;">
                 <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
                     <div style="padding:5px 11px;background:rgba(232,160,32,0.20);border:1.5px solid rgba(232,160,32,0.65);border-radius:8px;box-shadow:0 0 28px rgba(232,160,32,0.40),0 0 6px rgba(232,160,32,0.25);display:flex;align-items:center;gap:5px;">
                         <svg width="11" height="11" viewBox="0 0 56 56" fill="none"><rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><circle cx="28" cy="7" r="3" fill="#E8A020"/></svg>
@@ -706,7 +726,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <!-- ENDORSED (57%, 41%) approaching top-right -->
-            <div style="position:absolute;left:57%;top:41%;transform:translate(-50%,-50%);">
+            <div class="comp-node" data-tip="AI-native submission screening. Behavioral signals at the application layer, pre-revenue." style="position:absolute;left:57%;top:41%;transform:translate(-50%,-50%);">
                 <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
                     <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
                         <img src="https://logo.clearbit.com/endorsed.ai" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=endorsed.ai&sz=32';this.onerror=null;" alt="E"/>
@@ -716,7 +736,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <!-- TOFU (46%, 47%) center, approaching -->
-            <div style="position:absolute;left:46%;top:47%;transform:translate(-50%,-50%);">
+            <div class="comp-node" data-tip="Async video screening with AI scoring. Catches AI-coached interview responses post-submission." style="position:absolute;left:46%;top:47%;transform:translate(-50%,-50%);">
                 <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
                     <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
                         <img src="https://logo.clearbit.com/hiretofu.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=hiretofu.com&sz=32';this.onerror=null;" alt="T"/>
@@ -726,7 +746,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <!-- GEM (15%, 18%) top-left: sourcing intel -->
-            <div style="position:absolute;left:15%;top:18%;transform:translate(-50%,-50%);">
+            <div class="comp-node" data-tip="Sourcing CRM and pipeline analytics. No submission-layer or cross-employer fraud detection." style="position:absolute;left:15%;top:18%;transform:translate(-50%,-50%);">
                 <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
                     <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
                         <img src="https://logo.clearbit.com/gem.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=gem.com&sz=32';this.onerror=null;" alt="G"/>
@@ -736,7 +756,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <!-- ASHBY (27%, 33%) top-left: native detection -->
-            <div style="position:absolute;left:27%;top:33%;transform:translate(-50%,-50%);">
+            <div class="comp-node" data-tip="Modern ATS with native screening signals. Single-employer view, post-submission only." style="position:absolute;left:27%;top:33%;transform:translate(-50%,-50%);">
                 <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
                     <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
                         <img src="https://logo.clearbit.com/ashbyhq.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=ashbyhq.com&sz=32';this.onerror=null;" alt="A"/>
@@ -746,7 +766,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <!-- GREENHOUSE RT (33%, 49%) on center line -->
-            <div style="position:absolute;left:33%;top:49%;transform:translate(-50%,-50%);">
+            <div class="comp-node" data-tip="Real Talent module adds AI screening inside Greenhouse ATS. Siloed by contractual design." style="position:absolute;left:33%;top:49%;transform:translate(-50%,-50%);">
                 <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
                     <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
                         <img src="https://logo.clearbit.com/greenhouse.io" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=greenhouse.io&sz=32';this.onerror=null;" alt="G"/>
@@ -756,7 +776,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <!-- CROSSCHQ (67%, 71%) bottom-right: reference network -->
-            <div style="position:absolute;left:67%;top:71%;transform:translate(-50%,-50%);">
+            <div class="comp-node" data-tip="Reference intelligence network. Cross-employer data, but only at post-offer stage." style="position:absolute;left:67%;top:71%;transform:translate(-50%,-50%);">
                 <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
                     <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
                         <img src="https://logo.clearbit.com/crosschq.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=crosschq.com&sz=32';this.onerror=null;" alt="C"/>
@@ -766,7 +786,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <!-- SOCURE (77%, 80%) bottom-right: identity fraud graph -->
-            <div style="position:absolute;left:77%;top:80%;transform:translate(-50%,-50%);">
+            <div class="comp-node" data-tip="Identity fraud graph for financial services. Cross-company network, post-submission." style="position:absolute;left:77%;top:80%;transform:translate(-50%,-50%);">
                 <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
                     <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
                         <img src="https://logo.clearbit.com/socure.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=socure.com&sz=32';this.onerror=null;" alt="S"/>
@@ -776,7 +796,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <!-- VALIDIA (61%, 77%) bottom-right: credential DB -->
-            <div style="position:absolute;left:61%;top:77%;transform:translate(-50%,-50%);">
+            <div class="comp-node" data-tip="Credential verification database. Catches fabricated work history at post-offer stage." style="position:absolute;left:61%;top:77%;transform:translate(-50%,-50%);">
                 <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
                     <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
                         <img src="https://logo.clearbit.com/validia.ai" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=validia.ai&sz=32';this.onerror=null;" alt="V"/>
@@ -786,7 +806,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <!-- HIREVUE (18%, 62%) bottom-left: video interview -->
-            <div style="position:absolute;left:18%;top:62%;transform:translate(-50%,-50%);">
+            <div class="comp-node" data-tip="Video interview AI scoring and bias detection. Post-submission, single-employer." style="position:absolute;left:18%;top:62%;transform:translate(-50%,-50%);">
                 <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
                     <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
                         <img src="https://logo.clearbit.com/hirevue.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=hirevue.com&sz=32';this.onerror=null;" alt="H"/>
@@ -796,7 +816,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <!-- METAVIEW (28%, 67%) bottom-left: interview AI -->
-            <div style="position:absolute;left:28%;top:67%;transform:translate(-50%,-50%);">
+            <div class="comp-node" data-tip="GV-backed interview intelligence. Records live interviews, not application submissions." style="position:absolute;left:28%;top:67%;transform:translate(-50%,-50%);">
                 <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
                     <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
                         <img src="https://logo.clearbit.com/metaview.ai" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=metaview.ai&sz=32';this.onerror=null;" alt="M"/>
@@ -806,7 +826,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <!-- WILLO (10%, 73%) bottom-left: video screening -->
-            <div style="position:absolute;left:10%;top:73%;transform:translate(-50%,-50%);">
+            <div class="comp-node" data-tip="Async video interview platform. No behavioral detection at the application layer." style="position:absolute;left:10%;top:73%;transform:translate(-50%,-50%);">
                 <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
                     <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
                         <img src="https://logo.clearbit.com/willo.video" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=willo.video&sz=32';this.onerror=null;" alt="W"/>
@@ -816,7 +836,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <!-- PERSONA (8%, 80%) bottom-left: identity -->
-            <div style="position:absolute;left:8%;top:80%;transform:translate(-50%,-50%);">
+            <div class="comp-node" data-tip="Identity verification (KYC). Confirms who the person is, not if the application is real." style="position:absolute;left:8%;top:80%;transform:translate(-50%,-50%);">
                 <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
                     <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
                         <img src="https://logo.clearbit.com/withpersona.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=withpersona.com&sz=32';this.onerror=null;" alt="P"/>
@@ -826,7 +846,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <!-- CHECKR (20%, 88%) bottom-left corner: BGC -->
-            <div style="position:absolute;left:20%;top:88%;transform:translate(-50%,-50%);">
+            <div class="comp-node" data-tip="Background screening platform. Post-offer stage, no pre-submission behavioral signals." style="position:absolute;left:20%;top:88%;transform:translate(-50%,-50%);">
                 <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
                     <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
                         <img src="https://logo.clearbit.com/checkr.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=checkr.com&sz=32';this.onerror=null;" alt="C"/>
@@ -836,7 +856,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <!-- PHENOM (22%, 35%) top-left: ATS-integrated talent intelligence -->
-            <div style="position:absolute;left:22%;top:35%;transform:translate(-50%,-50%);">
+            <div class="comp-node" data-tip="Talent experience platform with AI screening. ATS-integrated, single-employer scope." style="position:absolute;left:22%;top:35%;transform:translate(-50%,-50%);">
                 <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
                     <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
                         <img src="https://logo.clearbit.com/phenom.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=phenom.com&sz=32';this.onerror=null;" alt="P"/>
@@ -846,7 +866,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <!-- SHERLOCK AI (32%, 72%) bottom-left: interview fraud detection -->
-            <div style="position:absolute;left:32%;top:72%;transform:translate(-50%,-50%);">
+            <div class="comp-node" data-tip="Interview fraud detection via live video. Catches proxy interviews, not application fraud." style="position:absolute;left:32%;top:72%;transform:translate(-50%,-50%);">
                 <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
                     <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
                         <img src="https://logo.clearbit.com/withsherlock.ai" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=withsherlock.ai&sz=32';this.onerror=null;" alt="S"/>
@@ -856,7 +876,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <!-- YARDSTIK (14%, 79%) bottom-left: background screening + AI signals -->
-            <div style="position:absolute;left:14%;top:79%;transform:translate(-50%,-50%);">
+            <div class="comp-node" data-tip="Background screening with AI trust signals. Human Trust Platform, launched Feb 2026." style="position:absolute;left:14%;top:79%;transform:translate(-50%,-50%);">
                 <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
                     <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
                         <img src="https://logo.clearbit.com/yardstik.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=yardstik.com&sz=32';this.onerror=null;" alt="Y"/>
@@ -1275,6 +1295,37 @@ document.addEventListener('touchend', function(e) {
 
 document.addEventListener('DOMContentLoaded', function() {
     showSlide(0);
+
+    // Competitive map tooltip
+    var tip = document.createElement('div');
+    tip.id = 'comp-tooltip';
+    document.body.appendChild(tip);
+
+    function positionTip(e) {
+        var tw = tip.offsetWidth;
+        var th = tip.offsetHeight;
+        var x = e.clientX - tw / 2;
+        var y = e.clientY - th - 14;
+        if (x < 8) x = 8;
+        if (x + tw > window.innerWidth - 8) x = window.innerWidth - 8 - tw;
+        if (y < 8) y = e.clientY + 18;
+        tip.style.left = x + 'px';
+        tip.style.top = y + 'px';
+    }
+
+    document.querySelectorAll('.comp-node').forEach(function(node) {
+        var text = node.getAttribute('data-tip');
+        if (!text) return;
+        node.addEventListener('mouseenter', function(e) {
+            tip.textContent = text;
+            tip.style.display = 'block';
+            positionTip(e);
+        });
+        node.addEventListener('mousemove', positionTip);
+        node.addEventListener('mouseleave', function() {
+            tip.style.display = 'none';
+        });
+    });
 });
 </script>
 
