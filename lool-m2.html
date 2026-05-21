@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
     <div class="nav-controls">
         <button class="nav-btn" onclick="changeSlide(-1)">&#8592;</button>
-        <span class="slide-counter" id="slideCounter">1 / 7</span>
+        <span class="slide-counter" id="slideCounter">1 / 7</span><!-- updated by JS on load -->
         <button class="nav-btn" onclick="changeSlide(1)">&#8594;</button>
     </div>
 </nav>
@@ -616,10 +616,393 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
+
+<!-- =====================================================
+     ANNEX SEPARATOR
+     ===================================================== -->
+<div class="slide bg-dark" data-index="7">
+<div class="slide-inner" style="text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;">
+    <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.22em;color:rgba(232,160,32,0.35);margin-bottom:24px;">Supporting Material</div>
+    <p style="font-size:clamp(48px,6vw,80px);font-weight:900;letter-spacing:-0.05em;color:rgba(255,255,255,0.12);">Annex</p>
+    <p style="font-size:14px;color:rgba(255,255,255,0.25);margin-top:16px;font-weight:500;letter-spacing:0.02em;">Q+A support. Not part of the monologue.</p>
+    <div style="margin-top:40px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:600px;">
+        <span style="padding:5px 14px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);border:1px solid rgba(255,255,255,0.09);">A1 Competitive Map</span>
+        <span style="padding:5px 14px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);border:1px solid rgba(255,255,255,0.09);">A2 ATS Cannot Copy</span>
+        <span style="padding:5px 14px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);border:1px solid rgba(255,255,255,0.09);">A3 Gem vs Sentriq</span>
+        <span style="padding:5px 14px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);border:1px solid rgba(255,255,255,0.09);">A4 Unit Economics</span>
+        <span style="padding:5px 14px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);border:1px solid rgba(255,255,255,0.09);">A5 Path to MVP</span>
+        <span style="padding:5px 14px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);border:1px solid rgba(255,255,255,0.09);">A6 Buyer Model</span>
+        <span style="padding:5px 14px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);border:1px solid rgba(255,255,255,0.09);">A7 Why Now / Why Us</span>
+    </div>
+</div>
+</div>
+
+
+<!-- =====================================================
+     A1: COMPETITIVE MAP (Ofir's Boston Matrix)
+     ===================================================== -->
+<div class="slide bg-dark" data-index="8">
+<div class="slide-inner">
+
+    <div class="eyebrow" style="color:rgba(255,255,255,0.28);"><span style="color:rgba(232,160,32,0.5);">A1</span> &nbsp;Competitive Map</div>
+    <p class="mid" style="margin-bottom:6px;">The submission layer <span class="amber">is unclaimed.</span></p>
+    <p class="body dim" style="margin-bottom:24px;font-size:12px;">Every existing player is either upstream in sourcing or downstream in interview. Nobody owns the moment the application is submitted.</p>
+
+    <div style="margin:0 0 14px;">
+        <div style="display:grid;grid-template-columns:90px 1fr 1fr;gap:8px;margin-bottom:8px;">
+            <div></div>
+            <div style="text-align:center;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.28);padding-bottom:6px;">Outbound<br><span style="font-size:9px;font-weight:500;opacity:0.65;text-transform:none;letter-spacing:0;">Recruiter sources you</span></div>
+            <div style="text-align:center;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:var(--amber);padding-bottom:6px;">Inbound<br><span style="font-size:9px;font-weight:500;text-transform:none;letter-spacing:0;color:rgba(232,160,32,0.65);">Candidate applies</span></div>
+        </div>
+        <div style="display:grid;grid-template-columns:90px 1fr 1fr;gap:8px;margin-bottom:8px;">
+            <div style="display:flex;align-items:center;justify-content:flex-end;padding-right:12px;">
+                <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:var(--amber);">Early</span>
+            </div>
+            <div style="padding:18px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;text-align:center;">
+                <div style="font-size:14px;font-weight:700;color:rgba(255,255,255,0.48);margin-bottom:4px;">Gem</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.28);line-height:1.5;">Sourcing fraud. Fake profiles before any application exists.</div>
+            </div>
+            <div style="padding:18px 14px;background:rgba(232,160,32,0.10);border:2px solid rgba(232,160,32,0.40);border-radius:10px;text-align:center;box-shadow:0 0 28px rgba(232,160,32,0.12);">
+                <div style="font-size:14px;font-weight:800;color:var(--amber);margin-bottom:4px;">Sentriq</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.58);line-height:1.5;margin-bottom:8px;">Application integrity at submission.</div>
+                <span style="padding:3px 10px;border-radius:20px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:var(--amber);border:1px solid rgba(232,160,32,0.40);">Alone here</span>
+            </div>
+        </div>
+        <div style="display:grid;grid-template-columns:90px 1fr 1fr;gap:8px;">
+            <div style="display:flex;align-items:center;justify-content:flex-end;padding-right:12px;">
+                <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.28);">Late</span>
+            </div>
+            <div style="padding:18px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:10px;text-align:center;">
+                <div style="font-size:11px;color:rgba(255,255,255,0.18);">No players</div>
+            </div>
+            <div style="padding:18px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;text-align:center;">
+                <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.42);margin-bottom:4px;">Greenhouse RT, Endorsed</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.28);line-height:1.5;">Post-submission text analysis. HireVue, Persona: identity verification at interview stage.</div>
+            </div>
+        </div>
+    </div>
+
+    <p style="font-size:11px;color:rgba(255,255,255,0.20);text-align:center;margin-top:8px;">The deception happens at submission. Every tool above arrives after it is already done.</p>
+
+</div>
+</div>
+
+
+<!-- =====================================================
+     A2: WHY ATS CANNOT COPY
+     ===================================================== -->
+<div class="slide bg-dark" data-index="9">
+<div class="slide-inner">
+
+    <div class="eyebrow" style="color:rgba(255,255,255,0.28);"><span style="color:rgba(232,160,32,0.5);">A2</span> &nbsp;Why ATS Cannot Copy</div>
+    <p class="mid" style="margin-bottom:6px;">Three structural blockers. <span class="amber">Not a feature gap.</span></p>
+    <p class="body dim" style="margin-bottom:28px;font-size:12px;">ATS companies are contractually, economically, and strategically prevented from entering this layer. This is not a build decision they are postponing.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px;">
+
+        <div style="padding:24px 18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;">
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(232,160,32,0.55);margin-bottom:12px;">Contractual</div>
+            <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:10px;line-height:1.2;">Siloed by design</div>
+            <p style="font-size:12px;color:rgba(255,255,255,0.42);line-height:1.6;">ATS data agreements are single-company. Their contracts prevent merging behavioral signals across employers. A cross-company graph is legally unavailable to them.</p>
+        </div>
+
+        <div style="padding:24px 18px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.18);border-radius:12px;">
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(232,160,32,0.55);margin-bottom:12px;">Economic</div>
+            <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:10px;line-height:1.2;">Wrong pricing model</div>
+            <p style="font-size:12px;color:rgba(255,255,255,0.42);line-height:1.6;">ATS runs on per-seat SaaS. Sentriq runs on per-application infrastructure. The unit economics do not translate. Building this layer requires cannibalizing their pricing architecture.</p>
+        </div>
+
+        <div style="padding:24px 18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;">
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(232,160,32,0.55);margin-bottom:12px;">Strategic</div>
+            <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:10px;line-height:1.2;">Conflicted incentive</div>
+            <p style="font-size:12px;color:rgba(255,255,255,0.42);line-height:1.6;">ATS growth is measured in application volume. A tool that filters applications before they arrive cuts their core metric. Sentriq's success is an ATS problem statement.</p>
+        </div>
+
+    </div>
+
+    <div style="padding:13px 20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;text-align:center;">
+        <p style="font-size:12px;color:rgba(255,255,255,0.35);line-height:1.6;">This is why Greenhouse Real Talent and Endorsed sit post-submission, not pre. They are working within the constraints their architecture allows. The gap is structural, not strategic.</p>
+    </div>
+
+</div>
+</div>
+
+
+<!-- =====================================================
+     A3: GEM VS SENTRIQ
+     ===================================================== -->
+<div class="slide bg-dark" data-index="10">
+<div class="slide-inner">
+
+    <div class="eyebrow" style="color:rgba(255,255,255,0.28);"><span style="color:rgba(232,160,32,0.5);">A3</span> &nbsp;Gem vs Sentriq</div>
+    <p class="mid" style="margin-bottom:6px;">Different motion. <span class="amber">Zero overlap.</span></p>
+    <p class="body dim" style="margin-bottom:28px;font-size:12px;">Gem sits on the outbound side. We sit on the inbound side. Different trigger, different buyer pain, different procurement motion.</p>
+
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:start;">
+
+        <div style="padding:24px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;">
+            <div style="font-size:14px;font-weight:800;color:rgba(255,255,255,0.45);margin-bottom:20px;">Gem</div>
+            <div style="margin-bottom:14px;">
+                <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.28);margin-bottom:5px;">Motion</div>
+                <div style="font-size:13px;color:rgba(255,255,255,0.62);line-height:1.5;">Outbound. Recruiter reaches out to candidates.</div>
+            </div>
+            <div style="margin-bottom:14px;">
+                <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.28);margin-bottom:5px;">Problem</div>
+                <div style="font-size:13px;color:rgba(255,255,255,0.62);line-height:1.5;">Fake profiles in sourcing. Candidates who do not exist at all.</div>
+            </div>
+            <div>
+                <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.28);margin-bottom:5px;">Trigger</div>
+                <div style="font-size:13px;color:rgba(255,255,255,0.62);line-height:1.5;">Recruiter initiates contact. Candidate is passive.</div>
+            </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0;gap:8px;align-self:center;">
+            <div style="width:1px;height:50px;background:rgba(255,255,255,0.08);"></div>
+            <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.18);">vs</span>
+            <div style="width:1px;height:50px;background:rgba(255,255,255,0.08);"></div>
+        </div>
+
+        <div style="padding:24px 20px;background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.22);border-radius:12px;">
+            <div style="font-size:14px;font-weight:800;color:var(--amber);margin-bottom:20px;">Sentriq</div>
+            <div style="margin-bottom:14px;">
+                <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(232,160,32,0.55);margin-bottom:5px;">Motion</div>
+                <div style="font-size:13px;color:rgba(255,255,255,0.65);line-height:1.5;">Inbound. Candidate submits an application to the employer.</div>
+            </div>
+            <div style="margin-bottom:14px;">
+                <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(232,160,32,0.55);margin-bottom:5px;">Problem</div>
+                <div style="font-size:13px;color:rgba(255,255,255,0.65);line-height:1.5;">Fabricated applications. Candidates who overstate, ghost, or industrially apply.</div>
+            </div>
+            <div>
+                <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(232,160,32,0.55);margin-bottom:5px;">Trigger</div>
+                <div style="font-size:13px;color:rgba(255,255,255,0.65);line-height:1.5;">Candidate takes action. Signal capture begins before identity is declared.</div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+
+<!-- =====================================================
+     A4: UNIT ECONOMICS / LLM COGS
+     ===================================================== -->
+<div class="slide bg-dark" data-index="11">
+<div class="slide-inner">
+
+    <div class="eyebrow" style="color:rgba(255,255,255,0.28);"><span style="color:rgba(232,160,32,0.5);">A4</span> &nbsp;Unit Economics</div>
+    <p class="mid" style="margin-bottom:6px;">Text processing is <span class="amber">near-zero COGS.</span></p>
+    <p class="body dim" style="margin-bottom:28px;font-size:12px;">Sentriq is text-native by architecture. That is not a constraint. It is the gross margin argument.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px;">
+
+        <div style="padding:22px 16px;background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.22);border-radius:12px;text-align:center;">
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(232,160,32,0.6);margin-bottom:12px;">Sentriq</div>
+            <div style="font-size:clamp(24px,3.5vw,40px);font-weight:900;letter-spacing:-0.04em;color:var(--amber);line-height:1;">$0.002</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.50);margin-top:8px;line-height:1.5;">per application<br>Text + behavioral signals</div>
+        </div>
+
+        <div style="padding:22px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;text-align:center;">
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.28);margin-bottom:12px;">Video Analysis</div>
+            <div style="font-size:clamp(24px,3.5vw,40px);font-weight:900;letter-spacing:-0.04em;color:rgba(255,255,255,0.38);line-height:1;">$0.50+</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.28);margin-top:8px;line-height:1.5;">per application<br>HireVue-style deepfake detection</div>
+        </div>
+
+        <div style="padding:22px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;text-align:center;">
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.28);margin-bottom:12px;">Background Check</div>
+            <div style="font-size:clamp(24px,3.5vw,40px);font-weight:900;letter-spacing:-0.04em;color:rgba(255,255,255,0.38);line-height:1;">$15-50</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.28);margin-top:8px;line-height:1.5;">per hire<br>Checkr / traditional BGC</div>
+        </div>
+
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div style="padding:16px 18px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.15);border-radius:10px;">
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(232,160,32,0.65);margin-bottom:8px;">Gross margin at scale</div>
+            <p style="font-size:12px;color:rgba(255,255,255,0.60);line-height:1.6;">At $84K ACV per customer (roughly 1,000 applications per month), COGS is under $25 per month. Core processing gross margin is 99%+.</p>
+        </div>
+        <div style="padding:16px 18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.35);margin-bottom:8px;">Why not video</div>
+            <p style="font-size:12px;color:rgba(255,255,255,0.42);line-height:1.6;">Video competes in a COGS war. Text signals at submission are richer and 250x cheaper to process. Video is a feature. Text is the infrastructure.</p>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+<!-- =====================================================
+     A5: PATH TO MVP
+     ===================================================== -->
+<div class="slide bg-dark" data-index="12">
+<div class="slide-inner">
+
+    <div class="eyebrow" style="color:rgba(255,255,255,0.28);"><span style="color:rgba(232,160,32,0.5);">A5</span> &nbsp;Path to MVP</div>
+    <p class="mid" style="margin-bottom:6px;">Six months to <span class="amber">production-ready pilots.</span></p>
+    <p class="body dim" style="margin-bottom:28px;font-size:12px;">The demo is built and validated around real HSBC hiring scenarios. The build plan is clear. SOC 2 Type 1 is the enterprise compliance gate, not a nice-to-have.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:20px;">
+
+        <div style="padding:18px 12px;background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.22);border-radius:10px;text-align:center;">
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(232,160,32,0.6);margin-bottom:10px;">Now</div>
+            <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:8px;line-height:1.2;">Demo</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.38);line-height:1.5;">All three layers functional. Built around real hiring scenarios.</div>
+        </div>
+
+        <div style="padding:18px 12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;text-align:center;">
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.28);margin-bottom:10px;">Month 3</div>
+            <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.2;">Pilot Integration</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1.5;">ATS SDK live. Async challenge engine. First pilot customer in environment.</div>
+        </div>
+
+        <div style="padding:18px 12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;text-align:center;">
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.28);margin-bottom:10px;">Month 6</div>
+            <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.2;">SOC 2 Type 1</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1.5;">Compliance initiated. Enterprise procurement gate cleared. Cross-company graph seeded.</div>
+        </div>
+
+        <div style="padding:18px 12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;text-align:center;">
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.28);margin-bottom:10px;">Month 18</div>
+            <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.2;">Series A</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.35);line-height:1.5;">3-5 paying pilots at $10K+/month. Network graph active across multiple employers.</div>
+        </div>
+
+    </div>
+
+    <div style="padding:14px 18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div>
+                <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.28);margin-bottom:6px;">Capital allocation</div>
+                <p style="font-size:12px;color:rgba(255,255,255,0.42);line-height:1.6;">Engineering build: $700-800K of the $3.5M raise. Remainder: pilot GTM, operating runway, compliance.</p>
+            </div>
+            <div>
+                <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.28);margin-bottom:6px;">Why SOC 2 matters</div>
+                <p style="font-size:12px;color:rgba(255,255,255,0.42);line-height:1.6;">Enterprise HR procurement will not run a pilot without a compliance path. SOC 2 Type 1 is the unlock, not optional.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+<!-- =====================================================
+     A6: BUYER MODEL
+     ===================================================== -->
+<div class="slide bg-dark" data-index="13">
+<div class="slide-inner">
+
+    <div class="eyebrow" style="color:rgba(255,255,255,0.28);"><span style="color:rgba(232,160,32,0.5);">A6</span> &nbsp;Buyer Model</div>
+    <p class="mid" style="margin-bottom:6px;">HR owns this. <span class="amber">No CISO required.</span></p>
+    <p class="body dim" style="margin-bottom:28px;font-size:12px;">The procurement path is identical to every talent intelligence tool on the market. Head of Talent signs. Security has no seat at this table.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:18px;">
+
+        <div>
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.28);margin-bottom:14px;">The reference class</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+                    <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.68);">LinkedIn Recruiter</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.28);margin-top:3px;">HR buys it. No CISO sign-off. No security review required.</div>
+                </div>
+                <div style="padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+                    <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.68);">Eightfold AI</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.28);margin-top:3px;">$200K+ ACV. Single buyer: Head of TA. Procurement is 3-6 months. Zero CISO involvement.</div>
+                </div>
+                <div style="padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+                    <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.68);">Gem, Beamery, Paradox</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.28);margin-top:3px;">All sold to HR. All bought without CISO. All live in the recruiting tools budget line.</div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(232,160,32,0.6);margin-bottom:14px;">Sentriq procurement path</div>
+            <div style="padding:22px 20px;background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.20);border-radius:12px;display:flex;flex-direction:column;gap:14px;">
+                <div>
+                    <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;">Champion</div>
+                    <div style="font-size:13px;color:rgba(255,255,255,0.65);">Head of Talent / People Programs</div>
+                </div>
+                <div>
+                    <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;">Budget line</div>
+                    <div style="font-size:13px;color:rgba(255,255,255,0.65);">Recruiting tools. Not security. Not IT infrastructure.</div>
+                </div>
+                <div>
+                    <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;">Sales cycle</div>
+                    <div style="font-size:13px;color:rgba(255,255,255,0.65);">6-week paid pilot at $10K. Proof of value before the annual contract.</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div style="padding:12px 18px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;text-align:center;">
+        <p style="font-size:11px;color:rgba(255,255,255,0.28);line-height:1.6;">HSBC champion: CS Lai, Innovation Banking. Eliana Carmel Gilboa, CPO Booking Holdings: confirmed the procurement path in our first conversation.</p>
+    </div>
+
+</div>
+</div>
+
+
+<!-- =====================================================
+     A7: WHY NOW + WHY US
+     ===================================================== -->
+<div class="slide bg-dark" data-index="14">
+<div class="slide-inner">
+
+    <div class="eyebrow" style="color:rgba(255,255,255,0.28);"><span style="color:rgba(232,160,32,0.5);">A7</span> &nbsp;Why Now + Why Us</div>
+    <p class="mid" style="margin-bottom:28px;">Defense requires <span class="amber">offense to have existed first.</span></p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+
+        <div>
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.28);margin-bottom:14px;">Why now</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+                    <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;">The attack is live</div>
+                    <div style="font-size:12px;color:rgba(255,255,255,0.40);line-height:1.5;">4x AI-generated applications since 2022. Gartner: 25% of all applications AI-generated by 2028. Not a warning. A trend line already in motion.</div>
+                </div>
+                <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+                    <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;">Incumbents moving from the wrong end</div>
+                    <div style="font-size:12px;color:rgba(255,255,255,0.40);line-height:1.5;">Greenhouse launched detection February 2026. Ashby September 2025. Both built post-submission, inside the ATS silo. The pre-submission layer is still unclaimed.</div>
+                </div>
+                <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+                    <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;">Regulatory deadline this year</div>
+                    <div style="font-size:12px;color:rgba(255,255,255,0.40);line-height:1.5;">EU AI Act August 2026 compliance deadline for high-risk AI in recruitment. Enterprise teams are mandated to act, not waiting.</div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(232,160,32,0.6);margin-bottom:14px;">Why us</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="padding:14px 16px;background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.20);border-radius:10px;">
+                    <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:4px;">Ben built the offense first</div>
+                    <div style="font-size:12px;color:rgba(255,255,255,0.52);line-height:1.5;">Two IDF intelligence units. KPMG international pentest. AppSec at AppsFlyer. You cannot design the defense without first building the attack. Ben did both.</div>
+                </div>
+                <div style="padding:14px 16px;background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.20);border-radius:10px;">
+                    <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:4px;">Samuel is the GTM unfair advantage</div>
+                    <div style="font-size:12px;color:rgba(255,255,255,0.52);line-height:1.5;">Ran TechRuiter IL. Lived inside ATS platforms for years. Knows exactly how enterprise HR buys, what procurement will approve, and who signs the check.</div>
+                </div>
+                <div style="padding:14px 16px;background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.20);border-radius:10px;">
+                    <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:4px;">HSBC is not a logo</div>
+                    <div style="font-size:12px;color:rgba(255,255,255,0.52);line-height:1.5;">A Director at Innovation Banking named two internal champions unprompted in our first meeting. The enterprise buyer is already looking for this. We are not creating demand.</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+
 </div><!-- /deck -->
 
 <script>
-var totalSlides = 7;
+var totalSlides = 15;
+var mainSlideCount = 7;
+var annexSep = 7;
 var currentSlide = 0;
 
 function showSlide(n) {
@@ -637,7 +1020,15 @@ function showSlide(n) {
     });
 
     if (badge) badge.style.opacity = n === 0 ? '0' : '1';
-    if (counter) counter.textContent = (n + 1) + ' / ' + totalSlides;
+    if (counter) {
+        if (n < mainSlideCount) {
+            counter.textContent = (n + 1) + ' / ' + mainSlideCount;
+        } else if (n === annexSep) {
+            counter.textContent = 'Annex';
+        } else {
+            counter.textContent = 'A' + (n - annexSep);
+        }
+    }
     if (bar) bar.style.width = ((n + 1) / totalSlides * 100) + '%';
 }
 
