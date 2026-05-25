@@ -228,6 +228,11 @@ body::after {
     box-shadow: 0 6px 24px rgba(0,0,0,0.55);
     word-break: normal;
 }
+@media (max-width: 768px) {
+  [data-index="22"] .slide-inner > div[style*="grid-template-columns:1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -695,6 +700,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <span style="padding:5px 14px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);border:1px solid rgba(255,255,255,0.09);">A12 First Hires</span>
         <span style="padding:5px 14px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);border:1px solid rgba(255,255,255,0.09);">A13 Pilot Structure</span>
         <span style="padding:5px 14px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);border:1px solid rgba(255,255,255,0.09);">A14 EU AI Act</span>
+        <span style="padding:5px 14px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);border:1px solid rgba(255,255,255,0.09);">A15 HR-First Upsell</span>
     </div>
 </div>
 </div>
@@ -1671,10 +1677,87 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </div>
 
+<div class="slide bg-dark" data-index="22">
+<div class="slide-inner" style="display:flex;flex-direction:column;height:100%;padding-bottom:0;">
+
+    <!-- Eyebrow -->
+    <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;flex-shrink:0;">
+        <div>
+            <div class="eyebrow" style="color:rgba(255,255,255,0.28);margin-bottom:6px;"><span style="color:rgba(232,160,32,0.5);">A15</span> &nbsp;HR-First Upsell Precedent</div>
+            <p style="font-size:clamp(18px,2.2vw,26px);font-weight:800;letter-spacing:-0.03em;line-height:1.1;">Every major workforce platform <span style="color:var(--amber);">entered through HR. Security followed.</span></p>
+        </div>
+    </div>
+
+    <!-- 2x2 card grid -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;flex:1;margin-bottom:14px;">
+
+        <!-- Rippling -->
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-size:14px;font-weight:800;color:#fff;">Rippling</span>
+                <span style="font-size:10px;font-weight:700;color:var(--amber);background:rgba(232,160,32,0.10);border:1px solid rgba(232,160,32,0.25);border-radius:6px;padding:3px 8px;">$13.5B valuation</span>
+            </div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.45);line-height:1.5;">HR and payroll as system of record. IT management and Security (device control, access, threat detection) sold as explicit upsell modules to existing HR accounts.</div>
+            <div style="margin-top:4px;padding:10px 12px;background:rgba(232,160,32,0.07);border-left:2px solid var(--amber);border-radius:0 6px 6px 0;">
+                <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(232,160,32,0.7);margin-bottom:3px;">Expansion signal</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.65);line-height:1.5;">Security module customers generate 3-4x ACV vs HR-only accounts. Compound model: each module increases LTV of all others.</div>
+            </div>
+        </div>
+
+        <!-- Workday -->
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-size:14px;font-weight:800;color:#fff;">Workday</span>
+                <span style="font-size:10px;font-weight:700;color:var(--amber);background:rgba(232,160,32,0.10);border:1px solid rgba(232,160,32,0.25);border-radius:6px;padding:3px 8px;">$52B market cap</span>
+            </div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.45);line-height:1.5;">Started as HCM. Workday Security Center (identity governance, SoD controls, access compliance) is now the highest-ACV upsell line in enterprise renewals.</div>
+            <div style="margin-top:4px;padding:10px 12px;background:rgba(232,160,32,0.07);border-left:2px solid var(--amber);border-radius:0 6px 6px 0;">
+                <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(232,160,32,0.7);margin-bottom:3px;">Expansion signal</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.65);line-height:1.5;">HR data is the identity graph. Security is the monetization layer of that graph. Same data asset, second revenue stream.</div>
+            </div>
+        </div>
+
+        <!-- monday.com -->
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-size:14px;font-weight:800;color:#fff;">monday.com <span style="font-size:9px;font-weight:600;color:rgba(232,160,32,0.6);">IL</span></span>
+                <span style="font-size:10px;font-weight:700;color:var(--amber);background:rgba(232,160,32,0.10);border:1px solid rgba(232,160,32,0.25);border-radius:6px;padding:3px 8px;">$14B market cap</span>
+            </div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.45);line-height:1.5;">Ops and People teams buy first. Enterprise Security tier (SSO, audit logs, HIPAA, advanced permissions) is the gate to the largest contract tier.</div>
+            <div style="margin-top:4px;padding:10px 12px;background:rgba(232,160,32,0.07);border-left:2px solid var(--amber);border-radius:0 6px 6px 0;">
+                <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(232,160,32,0.7);margin-bottom:3px;">Expansion signal</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.65);line-height:1.5;">Starter to Enterprise is 10x ACV. Security requirements are the single largest driver of tier upgrades. Security unlocked Fortune 500 contracts unavailable at lower tiers.</div>
+            </div>
+        </div>
+
+        <!-- ServiceNow -->
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-size:14px;font-weight:800;color:#fff;">ServiceNow</span>
+                <span style="font-size:10px;font-weight:700;color:var(--amber);background:rgba(232,160,32,0.10);border:1px solid rgba(232,160,32,0.25);border-radius:6px;padding:3px 8px;">$220B market cap</span>
+            </div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.45);line-height:1.5;">IT was the beachhead. HR Service Delivery became the expansion. Security Operations followed. Three-department land-and-expand from a single platform.</div>
+            <div style="margin-top:4px;padding:10px 12px;background:rgba(232,160,32,0.07);border-left:2px solid var(--amber);border-radius:0 6px 6px 0;">
+                <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(232,160,32,0.7);margin-bottom:3px;">Expansion signal</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.65);line-height:1.5;">HR module customers have approximately 2x net revenue retention vs single-product accounts. Multi-product churn rate is a fraction of single-product.</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Sentriq callout -->
+    <div style="padding:14px 18px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.18);border-radius:10px;flex-shrink:0;margin-bottom:8px;">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(232,160,32,0.7);margin-bottom:6px;">Why This Is Sentriq's Path</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.65);line-height:1.6;">HR lands the account. The behavioral signal data collected at the application layer becomes a pre-employment baseline for every person in the building. No security tool can build that dataset from their side. The CISO expansion: "Every employee went through Sentriq before they had a badge. That baseline is available for post-hire anomaly detection." HR leads. Security doubles the ACV.</div>
+    </div>
+
+</div>
+</div>
+
 </div><!-- /deck -->
 
 <script>
-var totalSlides = 22;
+var totalSlides = 23;
 var mainSlideCount = 7;
 var annexSep = 7;
 var currentSlide = 0;
