@@ -1809,6 +1809,77 @@ document.addEventListener('touchend', function(e) {
 document.addEventListener('DOMContentLoaded', function() {
     showSlide(0);
 
+    // ── Annex index chips: make clickable ──────────────────────────────────
+    var annexIndex = document.querySelector('[data-index="7"]');
+    if (annexIndex) {
+        var chips = annexIndex.querySelectorAll('div > span');
+        chips.forEach(function(chip, i) {
+            chip.style.cursor = 'pointer';
+            chip.style.transition = 'color 0.15s, border-color 0.15s, background 0.15s';
+            chip.addEventListener('mouseenter', function() {
+                chip.style.color = 'rgba(232,160,32,0.90)';
+                chip.style.borderColor = 'rgba(232,160,32,0.35)';
+                chip.style.background = 'rgba(232,160,32,0.07)';
+            });
+            chip.addEventListener('mouseleave', function() {
+                chip.style.color = '';
+                chip.style.borderColor = '';
+                chip.style.background = '';
+            });
+            chip.addEventListener('click', function(e) {
+                e.stopPropagation();
+                showSlide(8 + i); // A1=index8, A2=index9 ... A15=index22
+            });
+        });
+    }
+
+    // ── Back-to-annex button on every annex slide ──────────────────────────
+    var btnStyle = [
+        'position:absolute',
+        'bottom:16px',
+        'right:18px',
+        'background:rgba(255,255,255,0.04)',
+        'border:1px solid rgba(255,255,255,0.11)',
+        'color:rgba(255,255,255,0.30)',
+        'font-size:9px',
+        'font-weight:700',
+        'text-transform:uppercase',
+        'letter-spacing:0.11em',
+        'padding:5px 13px',
+        'border-radius:20px',
+        'cursor:pointer',
+        'z-index:20',
+        'transition:all 0.15s ease',
+        'font-family:inherit',
+        'line-height:1.4'
+    ].join(';');
+
+    for (var ai = 8; ai <= 22; ai++) {
+        (function(idx) {
+            var slide = document.querySelector('[data-index="' + idx + '"]');
+            if (!slide) return;
+            slide.style.position = 'relative';
+            var btn = document.createElement('button');
+            btn.textContent = '↑ Annex Index';
+            btn.setAttribute('style', btnStyle);
+            btn.addEventListener('mouseenter', function() {
+                btn.style.background = 'rgba(232,160,32,0.09)';
+                btn.style.borderColor = 'rgba(232,160,32,0.28)';
+                btn.style.color = 'rgba(232,160,32,0.75)';
+            });
+            btn.addEventListener('mouseleave', function() {
+                btn.style.background = 'rgba(255,255,255,0.04)';
+                btn.style.borderColor = 'rgba(255,255,255,0.11)';
+                btn.style.color = 'rgba(255,255,255,0.30)';
+            });
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                showSlide(7);
+            });
+            slide.appendChild(btn);
+        })(ai);
+    }
+
     // Competitive map tooltip
     var tip = document.createElement('div');
     tip.id = 'comp-tooltip';
