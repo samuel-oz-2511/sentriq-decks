@@ -190,6 +190,18 @@ h2 { font-size: clamp(20px,2.8vw,38px); font-weight: 800; line-height: 1.12; let
 /* STEP ARROW */
 .step-arrow { text-align: center; font-size: 18px; color: var(--green); }
 
+/* COMPETITIVE QUADRANT */
+.comp-node { cursor: default; }
+#comp-tooltip {
+    display: none; position: fixed; z-index: 99999;
+    background: rgba(9,9,15,0.97); border: 1px solid rgba(232,160,32,0.45);
+    border-radius: 8px; padding: 8px 13px; max-width: 200px;
+    font-size: 10px; line-height: 1.55; color: rgba(255,255,255,0.82);
+    font-family: 'Space Grotesk', sans-serif; font-weight: 500;
+    text-align: center; pointer-events: none;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.55); word-break: normal;
+}
+
 /* SOURCES */
 .sources { margin-top: 10px; font-size: 9px; color: rgba(255,255,255,0.28); line-height: 1.6; }
 .sources a { color: rgba(255,255,255,0.28); text-decoration: none; }
@@ -315,6 +327,23 @@ document.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
         }
     }
+});
+
+// Competitive quadrant tooltip
+document.addEventListener('DOMContentLoaded', function() {
+    var tooltip = document.getElementById('comp-tooltip');
+    document.querySelectorAll('.comp-node').forEach(function(node) {
+        node.addEventListener('mouseenter', function() {
+            var tip = node.getAttribute('data-tip');
+            if (tip && tooltip) { tooltip.textContent = tip; tooltip.style.display = 'block'; }
+        });
+        node.addEventListener('mousemove', function(e) {
+            if (tooltip) { tooltip.style.left = (e.clientX + 14) + 'px'; tooltip.style.top = (e.clientY - 36) + 'px'; }
+        });
+        node.addEventListener('mouseleave', function() {
+            if (tooltip) tooltip.style.display = 'none';
+        });
+    });
 });
 </script>
 
@@ -719,93 +748,189 @@ document.addEventListener('keydown', function(e) {
 
 
 <!-- ===================================================
-     SLIDE 6: COMPETITIVE POSITIONING
+     SLIDE 6: COMPETITIVE POSITIONING — QUADRANT
      =================================================== -->
 <div class="slide bg-dark" data-index="6">
-<div class="slide-inner">
+<div class="slide-inner" style="display:flex;flex-direction:column;height:100%;padding-bottom:0;">
 
-    <span class="label">Competitive Positioning</span>
-    <h2>Over $3B in adjacent capital is converging on this category. <span style="color:var(--amber);">Nobody has claimed the application layer.</span></h2>
-
-    <div style="padding:10px 16px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.14);border-radius:8px;margin:10px 0 14px;">
-        <p style="font-size:11.5px;color:rgba(255,255,255,0.65);line-height:1.65;">Every existing player optimized for either employer workflow (ATS, CRM) or post-submission signal (BGC, IDV, interview). Nobody built at the submission moment because it requires a neutral, candidate-permissioned layer: architecturally incompatible with ATS and economically unviable as a point solution without the cross-company graph.</p>
+    <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px;flex-shrink:0;">
+        <div>
+            <span class="label">Competitive Positioning</span>
+            <h2 style="margin-bottom:0;">We know exactly <span style="color:var(--amber);">where everyone stands.</span></h2>
+        </div>
+        <div style="text-align:right;flex-shrink:0;margin-left:20px;">
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);margin-bottom:5px;">17 players mapped</div>
+            <div style="display:flex;gap:10px;align-items:center;justify-content:flex-end;">
+                <span style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.28);"><span style="width:8px;height:8px;border-radius:2px;background:rgba(232,160,32,0.40);display:inline-block;border:1px solid rgba(232,160,32,0.60);"></span>Sentriq zone</span>
+                <span style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.28);"><span style="width:8px;height:8px;border-radius:2px;background:rgba(255,255,255,0.08);display:inline-block;border:1px solid rgba(255,255,255,0.15);"></span>Competitors</span>
+            </div>
+        </div>
     </div>
 
-    <!-- Gantt map -->
-    <div style="margin-bottom:16px;">
-        <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">Where every player operates</div>
-        <svg viewBox="0 0 620 250" style="width:100%;display:block;border:1px solid rgba(255,255,255,0.06);border-radius:8px;background:rgba(255,255,255,0.01);" xmlns="http://www.w3.org/2000/svg">
-            <rect x="90" y="0" width="106" height="250" fill="rgba(232,160,32,0.04)"/>
-            <rect x="0" y="0" width="620" height="26" fill="rgba(255,255,255,0.03)"/>
-            <text x="143" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="700" fill="#E8A020">FORM FILL</text>
-            <text x="249" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.38)">APPLICATION</text>
-            <text x="355" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.38)">SCREENING</text>
-            <text x="461" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.38)">INTERVIEW</text>
-            <text x="567" y="17" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.38)">POST-HIRE</text>
-            <line x1="90" y1="0" x2="90" y2="250" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-            <line x1="196" y1="26" x2="196" y2="250" stroke="rgba(232,160,32,0.22)" stroke-width="1" stroke-dasharray="3 3"/>
-            <line x1="302" y1="26" x2="302" y2="250" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-            <line x1="408" y1="26" x2="408" y2="250" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-            <line x1="514" y1="26" x2="514" y2="250" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-            <!-- Gem -->
-            <rect x="0" y="26" width="620" height="20" fill="rgba(255,255,255,0.01)"/>
-            <text x="86" y="40" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.62)">Gem</text>
-            <rect x="198" y="31" width="420" height="11" rx="2" fill="rgba(224,85,85,0.26)"/>
-            <text x="408" y="40" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7" fill="rgba(255,255,255,0.42)">AI Fraud Detection Agent</text>
-            <!-- Crosschq -->
-            <text x="86" y="59" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.62)">Crosschq</text>
-            <rect x="198" y="50" width="420" height="11" rx="2" fill="rgba(224,85,85,0.20)"/>
-            <!-- Tofu -->
-            <rect x="0" y="66" width="620" height="20" fill="rgba(255,255,255,0.01)"/>
-            <text x="86" y="80" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.62)">Tofu</text>
-            <rect x="198" y="71" width="212" height="11" rx="2" fill="rgba(200,120,60,0.26)"/>
-            <!-- Endorsed -->
-            <text x="86" y="99" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.62)">Endorsed</text>
-            <rect x="198" y="90" width="212" height="11" rx="2" fill="rgba(200,120,60,0.20)"/>
-            <!-- Persona -->
-            <rect x="0" y="106" width="620" height="20" fill="rgba(255,255,255,0.01)"/>
-            <text x="86" y="120" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.62)">Persona</text>
-            <rect x="304" y="111" width="314" height="11" rx="2" fill="rgba(140,90,210,0.26)"/>
-            <!-- HireVue -->
-            <text x="86" y="139" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.62)">HireVue</text>
-            <rect x="410" y="130" width="208" height="11" rx="2" fill="rgba(60,130,220,0.20)"/>
-            <!-- Checkr -->
-            <rect x="0" y="146" width="620" height="20" fill="rgba(255,255,255,0.01)"/>
-            <text x="86" y="160" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.62)">Checkr</text>
-            <rect x="516" y="151" width="102" height="11" rx="2" fill="rgba(100,100,100,0.33)"/>
-            <!-- Greenhouse / Workday -->
-            <text x="86" y="179" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.62)">GH / Workday</text>
-            <rect x="198" y="170" width="420" height="11" rx="2" fill="rgba(80,80,120,0.22)"/>
-            <!-- Separator -->
-            <line x1="0" y1="190" x2="620" y2="190" stroke="rgba(232,160,32,0.18)" stroke-width="1"/>
-            <!-- Sentriq -->
-            <rect x="0" y="190" width="620" height="30" fill="rgba(232,160,32,0.04)"/>
-            <text x="86" y="210" text-anchor="end" font-family="Space Grotesk,sans-serif" font-size="10" font-weight="800" fill="#E8A020">Sentriq</text>
-            <rect x="92" y="196" width="102" height="18" rx="2" fill="rgba(232,160,32,0.55)"/>
-            <text x="143" y="209" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="8" font-weight="700" fill="#09090F">Entry point</text>
-            <rect x="196" y="196" width="422" height="18" rx="2" fill="rgba(232,160,32,0.10)" stroke="rgba(232,160,32,0.30)" stroke-width="1"/>
-            <text x="407" y="209" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" font-weight="600" fill="rgba(232,160,32,0.75)">Gap Assessor: continuous pipeline coverage</text>
-            <text x="196" y="228" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7" font-weight="700" fill="rgba(232,160,32,0.40)">SUBMIT</text>
-        </svg>
+    <!-- Y top label -->
+    <div style="text-align:center;margin-bottom:3px;flex-shrink:0;">
+        <span style="font-size:8.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:var(--amber);">&#9650; At Submission</span>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
-        <div style="padding:12px 14px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.14);border-radius:8px;">
-            <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;">Pre-submission capture</div>
-            <div style="font-size:10px;color:rgba(255,255,255,0.55);line-height:1.5;">Fires during form fill. Nobody else is at the submission moment with candidate consent.</div>
+    <!-- Axis row -->
+    <div style="display:flex;align-items:stretch;flex:1;min-height:0;gap:4px;">
+
+        <!-- Left axis label -->
+        <div style="width:50px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+            <span style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.22);white-space:nowrap;">Single Employer</span>
         </div>
-        <div style="padding:12px 14px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.14);border-radius:8px;">
-            <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;">Candidate-consented graph</div>
-            <div style="font-size:10px;color:rgba(255,255,255,0.55);line-height:1.5;">Data belongs to the candidate, not the employer. Requires a neutral position no ATS can hold.</div>
+
+        <!-- THE QUADRANT -->
+        <div style="position:relative;flex:1;border:1px solid rgba(255,255,255,0.09);border-radius:6px;overflow:hidden;min-height:clamp(260px,44vh,400px);">
+
+            <!-- Quadrant backgrounds -->
+            <div style="position:absolute;right:0;top:0;width:50%;height:50%;background:rgba(232,160,32,0.08);box-shadow:inset -20px -20px 60px rgba(232,160,32,0.06);pointer-events:none;"></div>
+            <div style="position:absolute;left:0;top:0;width:50%;height:50%;background:rgba(255,255,255,0.01);pointer-events:none;"></div>
+            <div style="position:absolute;left:0;bottom:0;width:50%;height:50%;background:rgba(255,255,255,0.01);pointer-events:none;"></div>
+            <div style="position:absolute;right:0;bottom:0;width:50%;height:50%;background:rgba(255,255,255,0.015);pointer-events:none;"></div>
+
+            <!-- Axis lines -->
+            <div style="position:absolute;top:50%;left:0;right:0;height:1px;background:rgba(255,255,255,0.13);pointer-events:none;"></div>
+            <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.13);pointer-events:none;"></div>
+
+            <!-- Quadrant labels -->
+            <div style="position:absolute;left:9px;top:7px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.13);pointer-events:none;">Sourcing Intel</div>
+            <div style="position:absolute;right:9px;top:7px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(232,160,32,0.35);text-align:right;pointer-events:none;">Application Intelligence</div>
+            <div style="position:absolute;left:9px;bottom:7px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.13);pointer-events:none;">Screening Tools</div>
+            <div style="position:absolute;right:9px;bottom:7px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.13);text-align:right;pointer-events:none;">Identity Networks</div>
+
+            <!-- SENTRIQ -->
+            <div class="comp-node" data-tip="Application integrity layer. Pre-identity behavioral signals and cross-org fraud graph. No competitor owns this position." style="position:absolute;left:80%;top:10%;transform:translate(-50%,-50%);z-index:10;">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="padding:5px 11px;background:rgba(232,160,32,0.20);border:1.5px solid rgba(232,160,32,0.65);border-radius:8px;box-shadow:0 0 28px rgba(232,160,32,0.40),0 0 6px rgba(232,160,32,0.25);display:flex;align-items:center;gap:5px;">
+                        <svg width="11" height="11" viewBox="0 0 56 56" fill="none"><rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><circle cx="28" cy="7" r="3" fill="#E8A020"/></svg>
+                        <span style="font-size:11px;font-weight:800;color:var(--amber);letter-spacing:-0.01em;">Sentriq</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ENDORSED -->
+            <div class="comp-node" data-tip="Fraud detection at the application layer. Identity signals across hundreds of data points. Paying enterprise customers including Yahoo and Korn Ferry. Post-submission only." style="position:absolute;left:57%;top:22%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/endorsed.ai" width="22" height="22" style="object-fit:contain;" onerror="this.style.display='none'" alt=""/><span style="font-size:9px;font-weight:700;color:#333;">E</span></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Endorsed</div>
+                </div>
+            </div>
+
+            <!-- TOFU -->
+            <div class="comp-node" data-tip="Application-layer fraud detection. Cross-employer Fraudbase of 5M+ profiles. Powers Gem's Fraud Detection Agent. No pre-submission behavioral signal." style="position:absolute;left:60%;top:28%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/hiretofu.com" width="22" height="22" style="object-fit:contain;" onerror="this.style.display='none'" alt=""/><span style="font-size:9px;font-weight:700;color:#333;">T</span></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Tofu</div>
+                </div>
+            </div>
+
+            <!-- GEM -->
+            <div class="comp-node" data-tip="AI-first recruiting CRM. Launched a submission-layer Fraud Detection Agent in Q1 2026, powered by Tofu. Operates within a single employer's funnel only. No candidate-side consent model." style="position:absolute;left:15%;top:18%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/gem.com" width="22" height="22" style="object-fit:contain;" onerror="this.style.display='none'" alt=""/><span style="font-size:9px;font-weight:700;color:#333;">G</span></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Gem</div>
+                </div>
+            </div>
+
+            <!-- ASHBY -->
+            <div class="comp-node" data-tip="Modern all-in-one ATS. Native fraud detection launched Sep 2025. Acquired Talent Llama for AI interviewing (May 2026). Single-employer only. No cross-employer signal layer." style="position:absolute;left:27%;top:43%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/ashbyhq.com" width="22" height="22" style="object-fit:contain;" onerror="this.style.display='none'" alt=""/><span style="font-size:9px;font-weight:700;color:#333;">A</span></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Ashby</div>
+                </div>
+            </div>
+
+            <!-- GREENHOUSE -->
+            <div class="comp-node" data-tip="Real Talent module inside Greenhouse ATS: AI matching, spam detection, identity verification via CLEAR. Launched May 2025. No cross-employer signal layer." style="position:absolute;left:27%;top:37%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/greenhouse.io" width="22" height="22" style="object-fit:contain;" onerror="this.style.display='none'" alt=""/><span style="font-size:9px;font-weight:700;color:#333;">G</span></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Greenhouse</div>
+                </div>
+            </div>
+
+            <!-- CROSSCHQ -->
+            <div class="comp-node" data-tip="Hiring intelligence platform covering resume screening, AI interviews, reference checks, and fraud detection. Cross-employer referral pool via opted-in candidates. No pre-submission behavioral signal." style="position:absolute;left:67%;top:52%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/crosschq.com" width="22" height="22" style="object-fit:contain;" onerror="this.style.display='none'" alt=""/><span style="font-size:9px;font-weight:700;color:#333;">C</span></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Crosschq</div>
+                </div>
+            </div>
+
+            <!-- SOCURE -->
+            <div class="comp-node" data-tip="AI identity fraud graph with 40B+ verified outcomes. Launched Workforce Verification product for HR in July 2025. Identity signal only — no behavioral or content signal on the application itself." style="position:absolute;left:72%;top:28%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/socure.com" width="22" height="22" style="object-fit:contain;" onerror="this.style.display='none'" alt=""/><span style="font-size:9px;font-weight:700;color:#333;">S</span></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Socure</div>
+                </div>
+            </div>
+
+            <!-- HIREVUE -->
+            <div class="comp-node" data-tip="Video interview AI scoring platform. Operates from phone-screen stage onward. Single-employer. Facing active EEOC bias charge (March 2025)." style="position:absolute;left:18%;top:53%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/hirevue.com" width="22" height="22" style="object-fit:contain;" onerror="this.style.display='none'" alt=""/><span style="font-size:9px;font-weight:700;color:#333;">H</span></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">HireVue</div>
+                </div>
+            </div>
+
+            <!-- PERSONA -->
+            <div class="comp-node" data-tip="Identity verification platform. Candidate Verification product launched March 2026. Confirms who the person is — not whether the application content is real. Complementary to Sentriq, not competing." style="position:absolute;left:18%;top:70%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/withpersona.com" width="22" height="22" style="object-fit:contain;" onerror="this.style.display='none'" alt=""/><span style="font-size:9px;font-weight:700;color:#333;">P</span></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Persona</div>
+                </div>
+            </div>
+
+            <!-- CHECKR -->
+            <div class="comp-node" data-tip="Background screening. Launched identity verification March 2026. Post-application and pre-offer stages. No pre-submission behavioral signal." style="position:absolute;left:20%;top:76%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/checkr.com" width="22" height="22" style="object-fit:contain;" onerror="this.style.display='none'" alt=""/><span style="font-size:9px;font-weight:700;color:#333;">C</span></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Checkr</div>
+                </div>
+            </div>
+
+            <!-- PHENOM -->
+            <div class="comp-node" data-tip="Talent experience platform with AI screening and a Voice Screening Agent. Integrates with existing ATS. No cross-employer data sharing." style="position:absolute;left:22%;top:35%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/phenom.com" width="22" height="22" style="object-fit:contain;" onerror="this.style.display='none'" alt=""/><span style="font-size:9px;font-weight:700;color:#333;">P</span></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Phenom</div>
+                </div>
+            </div>
+
+            <!-- SHERLOCK AI -->
+            <div class="comp-node" data-tip="Interview fraud detection via multimodal analysis: video, audio, typing, gaze tracking. Catches proxy interviews at the interview stage. Not the application layer." style="position:absolute;left:32%;top:72%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/withsherlock.ai" width="22" height="22" style="object-fit:contain;" onerror="this.style.display='none'" alt=""/><span style="font-size:9px;font-weight:700;color:#333;">S</span></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Sherlock AI</div>
+                </div>
+            </div>
+
+            <!-- YARDSTIK -->
+            <div class="comp-node" data-tip="Background screening. Launched Human Trust Platform Feb 2026: AI fraud detection, identity verification, continuous monitoring. Post-submission focus." style="position:absolute;left:14%;top:79%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/yardstik.com" width="22" height="22" style="object-fit:contain;" onerror="this.style.display='none'" alt=""/><span style="font-size:9px;font-weight:700;color:#333;">Y</span></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Yardstik</div>
+                </div>
+            </div>
+
+        </div><!-- /quadrant -->
+
+        <!-- Right axis label -->
+        <div style="width:50px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+            <span style="writing-mode:vertical-rl;font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(232,160,32,0.65);white-space:nowrap;">Cross-Employer Intel</span>
         </div>
-        <div style="padding:12px 14px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.14);border-radius:8px;">
-            <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;">HR-native signal layer</div>
-            <div style="font-size:10px;color:rgba(255,255,255,0.55);line-height:1.5;">Application as the unit of analysis. Recruiter-facing output. Trust signal, not fraud score.</div>
-        </div>
+
+    </div><!-- /axis row -->
+
+    <!-- Y bottom label -->
+    <div style="text-align:center;margin-top:3px;flex-shrink:0;">
+        <span style="font-size:8.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.25);">&#9660; Post-Submission</span>
     </div>
 
 </div>
 </div>
+
+<div id="comp-tooltip"></div>
 
 
 <!-- ===================================================
@@ -829,7 +954,8 @@ document.addEventListener('keydown', function(e) {
                         <div style="font-size:12px;font-weight:700;color:#fff;">NVIDIA</div>
                         <div style="font-size:9px;color:#44CC88;">$3T market cap · 4,000+ engineers in Israel (post-Mellanox)</div>
                     </div>
-                    <p style="font-size:11px;color:rgba(255,255,255,0.60);line-height:1.55;">Recruiting team reached out via warm intro and requested a design partner conversation. Champions: Yael Aviram Rosenfeld (Director, Israel Recruiting) and Ella Lamdani (Manager, Sourcing and Coordination). Meeting being scheduled.</p>
+                    <p style="font-size:11px;color:rgba(255,255,255,0.60);line-height:1.55;">Recruiting team reached out via warm intro and requested a design partner conversation. Champions: Yael Aviram Rosenfeld (Director, Israel Recruiting) and Ella Lamdani (Manager, Sourcing and Coordination).</p>
+                    <div style="margin-top:6px;font-size:9px;font-weight:700;color:var(--amber);">Meeting confirmed: Thursday May 28.</div>
                 </div>
 
                 <div style="padding:14px;background:rgba(68,204,136,0.05);border:1px solid rgba(68,204,136,0.18);border-radius:10px;">
@@ -864,9 +990,17 @@ document.addEventListener('keydown', function(e) {
                 <p style="font-size:11px;color:rgba(255,255,255,0.60);line-height:1.6;">I/O Psychology researcher. Lead author, IJSA 2025 (n=237): the most direct peer-reviewed empirical study on AI faking susceptibility in live hiring assessments. Research collaboration in progress on challenge design and question sequencing.</p>
             </div>
 
-            <div style="padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;margin-bottom:10px;">
+            <div style="padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;margin-bottom:8px;">
                 <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:5px;">Coller Competition, Tel Aviv University</div>
                 <p style="font-size:11px;color:rgba(255,255,255,0.60);line-height:1.6;">Accepted. One of Israel's most selective startup competitions.</p>
+            </div>
+
+            <div style="padding:14px 16px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.20);border-radius:10px;margin-bottom:10px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+                    <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--amber);background:rgba(232,160,32,0.10);border:1px solid rgba(232,160,32,0.25);padding:2px 6px;border-radius:4px;">Finalist</div>
+                    <div style="font-size:11px;font-weight:700;color:#fff;">Mamram Tech Screening Program</div>
+                </div>
+                <p style="font-size:11px;color:rgba(255,255,255,0.60);line-height:1.6;">IDF's elite computing unit accelerator. Final committee: June 3. One of Israel's most competitive deep-tech validation tracks.</p>
             </div>
 
             <div style="padding:14px 16px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.18);border-radius:10px;">
