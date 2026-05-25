@@ -1787,6 +1787,9 @@ function showSlide(n) {
         }
     }
     if (bar) bar.style.width = ((n + 1) / totalSlides * 100) + '%';
+
+    var annexBack = document.getElementById('annexBackBtn');
+    if (annexBack) annexBack.style.display = (n >= 8) ? 'block' : 'none';
 }
 
 function changeSlide(dir) {
@@ -1833,51 +1836,44 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ── Back-to-annex button on every annex slide ──────────────────────────
-    var btnStyle = [
-        'position:absolute',
-        'bottom:16px',
-        'right:18px',
-        'background:rgba(255,255,255,0.04)',
-        'border:1px solid rgba(255,255,255,0.11)',
-        'color:rgba(255,255,255,0.30)',
+    // ── Single fixed back-to-annex button (body-level, above nav bar) ────────
+    var annexBack = document.createElement('button');
+    annexBack.id = 'annexBackBtn';
+    annexBack.textContent = '↑ Annex Index';
+    annexBack.setAttribute('style', [
+        'position:fixed',
+        'bottom:56px',
+        'right:24px',
+        'background:rgba(255,255,255,0.06)',
+        'border:1px solid rgba(255,255,255,0.14)',
+        'color:rgba(255,255,255,0.42)',
         'font-size:9px',
         'font-weight:700',
         'text-transform:uppercase',
         'letter-spacing:0.11em',
-        'padding:5px 13px',
+        'padding:6px 14px',
         'border-radius:20px',
         'cursor:pointer',
-        'z-index:20',
+        'z-index:101',
         'transition:all 0.15s ease',
         'font-family:inherit',
-        'line-height:1.4'
-    ].join(';');
-
-    for (var ai = 8; ai <= 22; ai++) {
-        (function(idx) {
-            var slide = document.querySelector('[data-index="' + idx + '"]');
-            if (!slide) return;
-            var btn = document.createElement('button');
-            btn.textContent = '↑ Annex Index';
-            btn.setAttribute('style', btnStyle);
-            btn.addEventListener('mouseenter', function() {
-                btn.style.background = 'rgba(232,160,32,0.09)';
-                btn.style.borderColor = 'rgba(232,160,32,0.28)';
-                btn.style.color = 'rgba(232,160,32,0.75)';
-            });
-            btn.addEventListener('mouseleave', function() {
-                btn.style.background = 'rgba(255,255,255,0.04)';
-                btn.style.borderColor = 'rgba(255,255,255,0.11)';
-                btn.style.color = 'rgba(255,255,255,0.30)';
-            });
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                showSlide(7);
-            });
-            slide.appendChild(btn);
-        })(ai);
-    }
+        'display:none'
+    ].join(';'));
+    annexBack.addEventListener('mouseenter', function() {
+        annexBack.style.background = 'rgba(232,160,32,0.10)';
+        annexBack.style.borderColor = 'rgba(232,160,32,0.30)';
+        annexBack.style.color = 'rgba(232,160,32,0.80)';
+    });
+    annexBack.addEventListener('mouseleave', function() {
+        annexBack.style.background = 'rgba(255,255,255,0.06)';
+        annexBack.style.borderColor = 'rgba(255,255,255,0.14)';
+        annexBack.style.color = 'rgba(255,255,255,0.42)';
+    });
+    annexBack.addEventListener('click', function(e) {
+        e.stopPropagation();
+        showSlide(7);
+    });
+    document.body.appendChild(annexBack);
 
     // Competitive map tooltip
     var tip = document.createElement('div');
