@@ -236,6 +236,11 @@ h2 { font-size: clamp(20px,2.8vw,38px); font-weight: 800; line-height: 1.12; let
     .col2-mobile { grid-template-columns: 1fr !important; }
     .col3-mobile { grid-template-columns: 1fr !important; }
     .ask-outer { grid-template-columns: 1fr !important; gap: 16px !important; }
+    .step-arrow { display: none !important; }
+}
+@media (max-width: 768px) {
+    .comp-mobile-list { display: block !important; }
+    .comp-quadrant-wrap { display: none !important; }
 }
 @media (max-width: 640px) {
     .stack-layer-label { width: 100px; }
@@ -314,7 +319,7 @@ function checkPass() {
 }
 
 var currentSlide = 0;
-var totalSlides = 11;
+var totalSlides = 12;
 
 function showSlide(n) {
     var slides = document.querySelectorAll('.slide');
@@ -373,7 +378,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
     <div class="nav-controls">
         <button class="nav-btn" onclick="changeSlide(-1)">&#8592;</button>
-        <span class="slide-counter" id="slideCounter">1 / 11</span>
+        <span class="slide-counter" id="slideCounter">1 / 12</span>
         <button class="nav-btn" onclick="changeSlide(1)">&#8594;</button>
     </div>
 </nav>
@@ -398,7 +403,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </p>
 
     <p style="margin-top:36px;font-size:clamp(13px,1.5vw,16px);color:rgba(255,255,255,0.50);font-weight:500;max-width:460px;line-height:1.75;">
-        Hiring will always be text. What changed is who is writing it.
+        The application is the first signal. Sentriq reads it before anyone else does.
     </p>
 
     <div style="margin-top:48px;padding:12px 26px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:10px;">
@@ -414,8 +419,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="slide-inner">
 
     <span class="label">The Problem</span>
-    <h2>Volume is up 4x. <span style="color:var(--amber);">Confidence in the funnel is down.</span></h2>
-    <p style="font-size:13px;color:rgba(255,255,255,0.50);margin-bottom:22px;line-height:1.65;">Mass-generated applications and fabricated credentials break all three recruiting KPIs simultaneously.</p>
+    <h2>Volume is up 4x. <span style="color:var(--amber);">Recruiters cannot tell which applications are real.</span></h2>
+    <p style="font-size:13px;color:rgba(255,255,255,0.50);margin-bottom:22px;line-height:1.65;">The problem is not volume. It is that the extra applications cannot be distinguished from the real ones.</p>
 
     <div class="tri-stat-grid">
 
@@ -465,7 +470,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;">
+    <div class="col2-mobile" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;">
         <div style="text-align:center;padding:12px 18px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.14);border-radius:8px;">
             <p style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.72);line-height:1.5;">35% of hiring managers are not convinced candidates represent themselves honestly.</p>
             <p style="font-size:10px;color:rgba(255,255,255,0.35);margin-top:4px;">Arctic Shores + Researchscape, "State of Volume Hiring 2026," n=564 HMs + 1,105 job seekers</p>
@@ -497,7 +502,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         <div style="display:flex;align-items:flex-start;justify-content:center;padding-top:8px;font-size:16px;color:rgba(255,255,255,0.10);">&#8594;</div>
         <div style="text-align:center;">
-            <div style="padding:8px 4px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--amber);border-bottom:2px solid var(--amber);margin-bottom:10px;background:rgba(232,160,32,0.08);border-radius:6px 6px 0 0;">Submission<br>Event</div>
+            <div style="padding:8px 4px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--amber);border-bottom:2px solid rgba(232,160,32,0.40);margin-bottom:10px;background:rgba(232,160,32,0.04);border-radius:6px 6px 0 0;">Submission<br>Event</div>
             <span class="pill-gap" style="display:inline-block;">Gap</span>
         </div>
         <div style="display:flex;align-items:flex-start;justify-content:center;padding-top:8px;font-size:16px;color:rgba(255,255,255,0.10);">&#8594;</div>
@@ -514,19 +519,20 @@ document.addEventListener('DOMContentLoaded', function() {
     </div><!-- /funnel-scroll -->
 
     <div style="padding:14px 20px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.20);border-radius:10px;margin-bottom:14px;">
-        <p style="font-size:13px;color:rgba(255,255,255,0.70);line-height:1.65;">Sentriq captures behavioral and content signals at the moment of submission. ATS incumbents cannot fill this gap: their enterprise data isolation is a contractual guarantee, not a roadmap gap. Endorsed operates post-submission, inside a single employer's funnel — subject to the same data isolation constraint without the ATS install base.</p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.70);line-height:1.65;">Sentriq captures behavioral and content signals at the moment of submission. ATS incumbents cannot fill this gap: their enterprise data isolation is a contractual guarantee, not a roadmap gap. Endorsed operates post-submission, inside a single employer's funnel, subject to the same data isolation constraint without the ATS install base.</p>
     </div>
 
     <div class="col2-mobile" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
         <div class="hero-quote" style="border-radius:10px;border-left-width:3px;">
-            <p style="font-size:14px;color:rgba(255,255,255,0.88);line-height:1.65;font-style:italic;">"The topic is burning."</p>
+            <p style="font-size:10px;color:rgba(255,255,255,0.38);margin-bottom:6px;font-weight:600;">First briefing. No prototype shown.</p>
+<p style="font-size:14px;color:rgba(255,255,255,0.88);line-height:1.65;font-style:italic;">"The topic is burning."</p>
             <p style="font-size:11px;color:var(--amber);margin-top:8px;font-weight:700;">Eliana Carmel Gilboa &nbsp;|&nbsp; Chief People Officer, Booking Holdings</p>
             <p style="font-size:10px;color:rgba(255,255,255,0.38);margin-top:4px;">24,000 employees globally &nbsp;·&nbsp; Advisory Board</p>
         </div>
         <div style="padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
-            <p style="font-size:13px;color:rgba(255,255,255,0.75);line-height:1.65;">IJSA 2025 study (n=237): between 25% and 33% of applicants used AI to fabricate or significantly inflate their responses. The tools recruiters use were not built for this.</p>
+            <p style="font-size:13px;color:rgba(255,255,255,0.75);line-height:1.65;">IJSA 2025 study (n=237): between 25% and 33% of applicants used AI to fabricate or significantly inflate their responses. In live assessments, standard screening tools cannot distinguish AI-inflated responses from genuine ones.</p>
             <p style="font-size:11px;color:rgba(255,255,255,0.55);margin-top:8px;font-weight:600;">Prof. Louis Hickman &nbsp;|&nbsp; I/O Psychology, Virginia Tech</p>
-            <p style="font-size:10px;color:rgba(255,255,255,0.38);margin-top:4px;">Lead author, IJSA 2025 &nbsp;·&nbsp; Co-designing challenge sequencing</p>
+            <p style="font-size:10px;color:rgba(255,255,255,0.38);margin-top:4px;">Lead author, IJSA 2025</p>
         </div>
     </div>
 
@@ -584,23 +590,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="lc-badge">&nbsp;</div>
                 <div class="lc-name">Background Check</div>
                 <div class="lc-tool">Checkr / HireRight</div>
-                <div class="lc-cost">$1,900+ already spent</div>
+                <div class="lc-cost">~$1,900 accumulated</div>
             </div>
         </div>
     </div>
 
     <div class="col3-mobile" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:10px;">
         <div style="padding:14px 16px;background:rgba(68,204,136,0.06);border:1px solid rgba(68,204,136,0.18);border-radius:10px;">
-            <div style="font-size:12px;font-weight:700;color:#44CC88;margin-bottom:6px;">Sentriq surfaces trust signals at zero internal cost</div>
+            <div style="font-size:12px;font-weight:700;color:#44CC88;margin-bottom:6px;">Sentriq surfaces trust signals before a single recruiter minute is spent</div>
             <div style="font-size:11px;color:rgba(255,255,255,0.50);line-height:1.6;">Before a single calendar invite is sent.</div>
         </div>
-        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.22);border-radius:10px;">
+        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
             <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.72);margin-bottom:6px;">Background checks run last</div>
             <div style="font-size:11px;color:rgba(255,255,255,0.50);line-height:1.6;">After 6+ rounds. After $1,900+ in recruiter and executive time is already gone.</div>
         </div>
         <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;">
             <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px;">Signal at the right moment</div>
-            <div style="font-size:11px;color:rgba(255,255,255,0.50);line-height:1.6;">SHRM: average cost-per-hire $4,683 (2023). Over 80% of that cost accumulates after submission.</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.50);line-height:1.6;">SHRM: average cost-per-hire $4,683 (2023). The majority of that cost accumulates after submission, at interview and panel stages.</div>
         </div>
     </div>
 
@@ -616,7 +622,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <span class="label">The Product</span>
     <h2>The signal arrives <span style="color:var(--amber);">before a single recruiter minute is spent.</span></h2>
-    <p style="font-size:11px;color:rgba(255,255,255,0.38);margin-bottom:14px;font-weight:500;">Demo live &nbsp;·&nbsp; Pilot program launching Q3 2026</p>
+    <p style="font-size:11px;color:rgba(255,255,255,0.38);margin-bottom:14px;font-weight:500;">Demo live &nbsp;·&nbsp; First pilots underway</p>
 
     <!-- Flow -->
     <div style="margin-bottom:22px;padding:12px 18px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.18);border-radius:10px;text-align:center;">
@@ -660,7 +666,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             <div style="font-size:10px;font-weight:700;color:rgba(232,160,32,0.75);letter-spacing:0.05em;margin-bottom:5px;">Layer 2</div>
             <div class="signal-name">Async Challenge</div>
-            <div class="signal-desc">Triggered only when Layer 1 flags anomalies. Calibrated to this application, this role, this detected gap. Zero friction for applications that clear Layer 1.</div>
+            <div class="signal-desc">Triggered only when Layer 1 signals a mismatch. Calibrated to this application, this role, this specific gap. Zero friction for applications that clear Layer 1.</div>
         </div>
         <div class="signal-card active">
             <div class="signal-icon">
@@ -668,7 +674,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             <div style="font-size:10px;font-weight:700;color:rgba(232,160,32,0.75);letter-spacing:0.05em;margin-bottom:5px;">Layer 3</div>
             <div class="signal-name">Human Review</div>
-            <div class="signal-desc">Only flagged applications escalate. Recruiter sees signal, not verdict. Zero automated rejections. EU AI Act compliant by design.</div>
+            <div class="signal-desc">Only flagged applications escalate. Recruiter sees signal, not verdict. Zero automated rejections. False positive rate disclosed per role during pilot. EU AI Act compliant by design.</div>
         </div>
     </div>
 
@@ -690,65 +696,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
-<!-- SLIDE 6 (shown 6th): NETWORK EFFECTS -->
-<div class="slide bg-dark" data-index="6">
-<div class="slide-inner">
-
-    <span class="label">Network Effects</span>
-    <h2>The 16th company joins a network that <span style="color:var(--amber);">already recognized the pattern at the 15th.</span></h2>
-
-    <div class="col2-mobile" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;">
-
-        <div style="display:flex;flex-direction:column;gap:10px;">
-            <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:rgba(255,255,255,0.03);border-radius:10px;border-left:3px solid rgba(232,160,32,0.30);">
-                <div style="width:30px;height:30px;border-radius:50%;background:rgba(232,160,32,0.20);border:1px solid rgba(232,160,32,0.40);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;color:var(--amber);">1</div>
-                <div>
-                    <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;">Day one: signals are meaningful from the first application.</div>
-                    <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.55;">Universal behavioral baselines apply without prior customer data. No cold-start problem.</div>
-                </div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:rgba(255,255,255,0.03);border-radius:10px;border-left:3px solid rgba(232,160,32,0.55);">
-                <div style="width:30px;height:30px;border-radius:50%;background:rgba(232,160,32,0.25);border:1px solid rgba(232,160,32,0.50);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;color:var(--amber);">10</div>
-                <div>
-                    <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;">Cross-company patterns emerge.</div>
-                    <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.55;">Same behavioral fingerprint at three companies last month? Flagged on arrival at the fourth, without employers sharing data.</div>
-                </div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:rgba(255,255,255,0.03);border-radius:10px;border-left:3px solid var(--amber);">
-                <div style="width:30px;height:30px;border-radius:50%;background:rgba(232,160,32,0.30);border:1px solid rgba(232,160,32,0.60);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;color:var(--amber);">100</div>
-                <div>
-                    <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;">Campaign-level detection.</div>
-                    <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.55;">Coordinated clusters identified across the network before reaching any single employer. The signal no single company can see alone.</div>
-                </div>
-            </div>
-            <div style="padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;text-align:center;">
-                <p style="font-size:12px;color:rgba(255,255,255,0.80);line-height:1.6;"><strong style="color:var(--amber);">Network signal threshold: 15 companies.</strong></p>
-                <p style="font-size:11px;color:var(--muted);margin-top:4px;">Early pilots are the first nodes. Year one target.</p>
-            </div>
-        </div>
-
-        <div style="padding:20px;background:rgba(232,160,32,0.03);border:1px solid rgba(232,160,32,0.28);border-radius:14px;display:flex;flex-direction:column;gap:12px;">
-            <div style="padding:14px 16px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.20);border-radius:10px;">
-                <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.10em;margin-bottom:6px;">Ground Up's portfolio is the opening node set</div>
-                <p style="font-size:12px;color:rgba(255,255,255,0.72);line-height:1.65;">Every Ground Up portfolio company that joins strengthens the graph for every other. The network compounds inside your portfolio before it expands outward.</p>
-            </div>
-            <div>
-                <div style="font-size:11px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.10em;margin-bottom:6px;">Why competitors cannot replicate this</div>
-                <p style="font-size:12px;color:rgba(255,255,255,0.60);line-height:1.65;">Greenhouse's enterprise contracts permanently isolate customer data. That structural guarantee is the moat they cannot cross, and it is written into every contract they have signed.</p>
-            </div>
-            <div style="padding:10px 14px;background:rgba(232,160,32,0.08);border-radius:8px;border:1px solid rgba(232,160,32,0.20);">
-                <p style="font-size:12px;color:var(--amber);font-weight:600;text-align:center;">The more companies join, the harder it becomes to game any of them.</p>
-                <p style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.55;margin-top:5px;text-align:center;">Behavioral session data accumulated at scale, upstream of submission. It cannot be bought retroactively.</p>
-            </div>
-        </div>
-
-    </div>
-
-</div>
-</div>
-
-
-<!-- SLIDE 5 (shown 5th): COMPETITIVE POSITIONING - QUADRANT -->
+<!-- SLIDE 5: COMPETITIVE POSITIONING -->
 <div class="slide bg-dark" data-index="5">
 <div class="slide-inner" style="display:flex;flex-direction:column;height:100%;padding-bottom:0;">
 
@@ -765,6 +713,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 
+    <p style="font-size:11px;color:rgba(255,255,255,0.50);line-height:1.65;margin-bottom:6px;flex-shrink:0;">Gem's Q1 2026 AI Fraud Detection Agent operates post-submission, inside a single employer's data wall. It cannot access cross-company behavioral patterns. Every ATS incumbent faces the same structural constraint: enterprise data isolation is a contractual guarantee, written into every deal they have signed.</p>
     <!-- Y top label -->
     <div style="text-align:center;margin-bottom:3px;flex-shrink:0;">
         <span style="font-size:8.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:var(--amber);">&#9650; At Submission</span>
@@ -792,7 +741,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.13);pointer-events:none;"></div>
 
             <!-- Quadrant labels -->
-            <div style="position:absolute;left:9px;top:7px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.13);pointer-events:none;">Sourcing Intel</div>
+            <div style="position:absolute;left:9px;top:7px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.13);pointer-events:none;">Candidate Sourcing</div>
             <div style="position:absolute;right:9px;top:7px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(232,160,32,0.35);text-align:right;pointer-events:none;">Application Intelligence</div>
             <div style="position:absolute;left:9px;bottom:7px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.13);pointer-events:none;">Screening Tools</div>
             <div style="position:absolute;right:9px;bottom:7px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.13);text-align:right;pointer-events:none;">Identity Networks</div>
@@ -934,6 +883,66 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <div id="comp-tooltip"></div>
 
+<!-- SLIDE 6: NETWORK EFFECTS -->
+<div class="slide bg-dark" data-index="6">
+<div class="slide-inner">
+
+    <span class="label">Network Effects</span>
+    <h2>By the time the 16th company joins, the network <span style="color:var(--amber);">already flagged the pattern at the 15th.</span></h2>
+
+    <div class="col2-mobile" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;">
+
+        <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:rgba(255,255,255,0.03);border-radius:10px;border-left:3px solid rgba(232,160,32,0.30);">
+                <div style="width:30px;height:30px;border-radius:50%;background:rgba(232,160,32,0.20);border:1px solid rgba(232,160,32,0.40);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;color:var(--amber);">1</div>
+                <div>
+                    <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;">Day one: signals are meaningful from the first application.</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.55;">Universal behavioral baselines apply without prior customer data. No cold-start problem.</div>
+                </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:rgba(255,255,255,0.03);border-radius:10px;border-left:3px solid rgba(232,160,32,0.55);">
+                <div style="width:30px;height:30px;border-radius:50%;background:rgba(232,160,32,0.25);border:1px solid rgba(232,160,32,0.50);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;color:var(--amber);">10</div>
+                <div>
+                    <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;">Cross-company patterns emerge.</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.55;">Same behavioral fingerprint at three companies last month? Flagged on arrival at the fourth, without employers sharing data.</div>
+                </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:rgba(255,255,255,0.03);border-radius:10px;border-left:3px solid var(--amber);">
+                <div style="width:30px;height:30px;border-radius:50%;background:rgba(232,160,32,0.30);border:1px solid rgba(232,160,32,0.60);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;color:var(--amber);">100</div>
+                <div>
+                    <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;">Campaign-level detection.</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.55;">Coordinated clusters identified across the network before reaching any single employer. The signal no single company can see alone.</div>
+                </div>
+            </div>
+            <div style="padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;text-align:center;">
+                <p style="font-size:12px;color:rgba(255,255,255,0.80);line-height:1.6;"><strong style="color:var(--amber);">Network signal threshold: 15 companies.</strong></p>
+                <p style="font-size:11px;color:var(--muted);margin-top:4px;">Early pilots are the first nodes. Q4 2026 target.</p>
+            </div>
+        </div>
+
+        <div style="padding:20px;background:rgba(232,160,32,0.03);border:1px solid rgba(232,160,32,0.28);border-radius:14px;display:flex;flex-direction:column;gap:12px;">
+            <div style="padding:14px 16px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.20);border-radius:10px;">
+                <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.10em;margin-bottom:6px;">Ground Up's portfolio is the opening node set</div>
+                <p style="font-size:12px;color:rgba(255,255,255,0.72);line-height:1.65;">Every Ground Up portfolio company that joins strengthens the graph for every other. The network compounds inside your portfolio before it expands outward.</p>
+            </div>
+            <div>
+                <div style="font-size:11px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.10em;margin-bottom:6px;">Why competitors cannot replicate this</div>
+                <p style="font-size:12px;color:rgba(255,255,255,0.60);line-height:1.65;">Greenhouse's enterprise contracts permanently isolate customer data. That structural guarantee is the moat they cannot cross, and it is written into every contract they have signed.</p>
+            </div>
+            <div style="padding:10px 14px;background:rgba(232,160,32,0.08);border-radius:8px;border:1px solid rgba(232,160,32,0.20);">
+                <p style="font-size:12px;color:var(--amber);font-weight:600;text-align:center;">The more companies join, the harder it becomes to game any of them.</p>
+                <p style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.55;margin-top:5px;text-align:center;">Behavioral session data builds with every application. It cannot be replicated by a competitor entering later.</p>
+            </div>
+            <div style="padding:10px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:8px;">
+                <p style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.55;"><strong style="color:rgba(255,255,255,0.72);">Privacy by design.</strong> Signals are anonymized and aggregated. No individual candidate data crosses employer boundaries. Consent architecture follows GDPR Article 6(1)(f) legitimate interest framework.</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+
 
 <!-- ===================================================
      SLIDE 7: VALIDATION
@@ -956,8 +965,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div style="font-size:12px;font-weight:700;color:#fff;">NVIDIA</div>
                         <div style="font-size:9px;color:#44CC88;">Largest enterprise tech employer in Israel · 4,000+ engineers</div>
                     </div>
-                    <p style="font-size:11px;color:rgba(255,255,255,0.60);line-height:1.55;">NVIDIA's Israel recruiting leadership requested a design partner conversation. Champions: Yael Aviram Rosenfeld (Director, Israel Recruiting) and Ella Lamdani (Manager, Sourcing and Coordination).</p>
-                    <div style="margin-top:6px;font-size:9px;font-weight:700;color:var(--amber);">Meeting: May 2026.</div>
+                    <p style="font-size:11px;color:rgba(255,255,255,0.60);line-height:1.55;">NVIDIA's Israel recruiting leadership agreed to a design partner conversation. Champions: Yael Aviram Rosenfeld (Director, Israel Recruiting) and Ella Lamdani (Manager, Sourcing and Coordination).</p>
+                    <div style="margin-top:6px;font-size:9px;font-weight:700;color:var(--amber);">Design partner conversation underway.</div>
                 </div>
 
                 <div style="padding:14px;background:rgba(68,204,136,0.05);border:1px solid rgba(68,204,136,0.18);border-radius:10px;">
@@ -970,7 +979,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p style="font-size:11px;color:rgba(255,255,255,0.85);line-height:1.6;font-style:italic;">"Every call costs the bank quite a bit of money. If the funnel is smaller, if you're able to screen more of these out before they even get to the call, that would be great."</p>
                         <div style="margin-top:5px;font-size:10px;font-weight:700;color:var(--amber);">C.S. Lai, Director, HSBC Innovation Banking</div>
                     </div>
-                    <p style="font-size:10px;color:rgba(255,255,255,0.45);margin-top:8px;">Two internal champions identified unprompted. Demo built on HSBC's actual live job postings.</p>
+                    <p style="font-size:10px;color:rgba(255,255,255,0.45);margin-top:8px;">Two internal champions identified unprompted. Demo built on HSBC's actual live job postings. Design partner agreement in progress.</p>
                 </div>
 
                 <div style="padding:14px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.22);border-radius:10px;">
@@ -1007,7 +1016,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--amber);background:rgba(232,160,32,0.15);border:1px solid rgba(232,160,32,0.35);padding:3px 8px;border-radius:4px;letter-spacing:0.08em;">Finalist</div>
                     <div style="font-size:12px;font-weight:700;color:#fff;">Mamram Tech Screening</div>
                 </div>
-                <p style="font-size:11px;color:rgba(255,255,255,0.70);line-height:1.6;">IDF's elite computing unit accelerator. One of Israel's most competitive deep-tech validation tracks. Ben is a Mamram veteran.</p>
+                <p style="font-size:11px;color:rgba(255,255,255,0.70);line-height:1.6;">IDF's elite computing unit selection program. One of Israel's most competitive deep-tech validation tracks. Ben is a Mamram veteran.</p>
             </div>
         </div>
 
@@ -1072,13 +1081,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div style="font-size:10px;color:rgba(255,255,255,0.55);margin-top:2px;">CPA &nbsp;·&nbsp; TAU MBA &nbsp;·&nbsp; BSc CS</div>
                 </div>
             </div>
-            <p style="font-size:12px;color:rgba(255,255,255,0.62);line-height:1.65;margin-bottom:10px;">Two IDF intelligence units (Tamar + Yachlam). KPMG international pentest. Built AppSec at AppsFlyer. Production-scale behavioral signal detection experience.</p>
+            <p style="font-size:12px;color:rgba(255,255,255,0.62);line-height:1.65;margin-bottom:10px;">Two IDF intelligence units (Tamar + Yachlam). KPMG international security consulting. Built AppSec at AppsFlyer. Production-scale behavioral signal detection experience.</p>
             <div style="display:flex;flex-direction:column;gap:6px;">
                 <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.5;padding-left:10px;border-left:2px solid rgba(68,204,136,0.25);">AppSec at AppsFlyer: 25 developers trained in behavioral signal security.</div>
                 <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.5;padding-left:10px;border-left:2px solid rgba(68,204,136,0.25);">Serial founder: Banxi (Coller finalist), Kaima (Mamram veteran).</div>
                 <div style="padding:8px 12px;background:rgba(68,204,136,0.06);border:1px solid rgba(68,204,136,0.22);border-radius:8px;">
                     <div style="font-size:10px;font-weight:700;color:#44CC88;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;">ADTech venture</div>
-                    <div style="font-size:11px;color:rgba(255,255,255,0.70);line-height:1.5;">5 paying customers, production scale, running today. Proof he builds things that work.</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.70);line-height:1.5;">5 paying customers, production scale. Ben is full-time on Sentriq. ADTech in operational wind-down.</div>
                 </div>
             </div>
         </div>
@@ -1087,17 +1096,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <!-- Israeli Advantage -->
     <div style="padding:14px 18px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.18);border-radius:12px;">
-        <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">The Israeli Advantage</div>
+        <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">Why This Team</div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
             <div style="padding:8px 14px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.15);border-radius:8px;text-align:center;">
                 <div style="font-size:20px;font-weight:700;color:var(--amber);">30+</div>
-                <div style="font-size:10px;color:var(--muted);">ATS experiments</div>
+                <div style="font-size:10px;color:var(--muted);">ATS platforms studied</div>
             </div>
             <div style="padding:8px 14px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.15);border-radius:8px;text-align:center;">
                 <div style="font-size:20px;font-weight:700;color:var(--amber);">25</div>
                 <div style="font-size:10px;color:var(--muted);">Devs trained in signal security</div>
             </div>
-            <p style="font-size:12px;color:rgba(255,255,255,0.65);line-height:1.6;flex:1;min-width:200px;">Samuel's operator history is not a background note. It is the GTM unfair advantage. No competitor has this pairing: the HR operator who built and ran recruiting pipelines, and the security engineer who built the detection infrastructure to protect them.</p>
+            <p style="font-size:12px;color:rgba(255,255,255,0.65);line-height:1.6;flex:1;min-width:200px;">Samuel's operator history is not a background note. It is the GTM unfair advantage. No competitor has this pairing: the HR operator who built and ran recruiting pipelines, and the engineer who built behavioral signal systems from inside two IDF intelligence units. First enterprise targets are NVIDIA Israel and HSBC Israel. IIA grant eligibility extends effective runway. Israeli-to-US enterprise is exactly what Ground Up does.</p>
         </div>
     </div>
 
@@ -1105,10 +1114,95 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
+
+
 <!-- ===================================================
-     SLIDE 9: THE ASK
+     SLIDE 9: MARKET & PATH TO SERIES A
      =================================================== -->
 <div class="slide bg-dark" data-index="9">
+<div class="slide-inner">
+
+    <span class="label">Market &amp; Path to Series A</span>
+    <h2>A $12B market with <span style="color:var(--amber);">no one at the submission layer.</span></h2>
+
+    <div class="col2-mobile" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;">
+
+        <div>
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.18em;margin-bottom:10px;">Market sizing</div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+                <div style="padding:14px 16px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.22);border-radius:10px;">
+                    <div style="font-size:11px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.10em;margin-bottom:6px;">TAM</div>
+                    <div style="font-size:28px;font-weight:800;color:#fff;line-height:1;">$12B</div>
+                    <div style="font-size:10px;color:var(--muted);margin-top:4px;">AI in Talent Acquisition. Gartner, 2024.</div>
+                </div>
+                <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+                    <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.65);text-transform:uppercase;letter-spacing:0.10em;margin-bottom:6px;">SAM</div>
+                    <div style="font-size:28px;font-weight:800;color:#fff;line-height:1;">$2.5B</div>
+                    <div style="font-size:10px;color:var(--muted);margin-top:4px;">~30,000 enterprises hiring at scale. $84K ACV.</div>
+                </div>
+                <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+                    <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.65);text-transform:uppercase;letter-spacing:0.10em;margin-bottom:6px;">Israeli Beachhead</div>
+                    <div style="font-size:28px;font-weight:800;color:#fff;line-height:1;">$16.8M</div>
+                    <div style="font-size:10px;color:var(--muted);margin-top:4px;">200 Israeli enterprise targets. Validation path before US push.</div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.18em;margin-bottom:10px;">19-month path to Series A</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:3px solid rgba(232,160,32,0.30);">
+                    <div style="font-size:10px;font-weight:800;color:var(--amber);min-width:60px;flex-shrink:0;">Months 1-6</div>
+                    <div>
+                        <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:2px;">3-5 paid pilots at $10K each</div>
+                        <div style="font-size:10px;color:var(--muted);line-height:1.55;">NVIDIA, HSBC, Ground Up portfolio. Product validation at enterprise scale.</div>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:3px solid rgba(232,160,32,0.55);">
+                    <div style="font-size:10px;font-weight:800;color:var(--amber);min-width:60px;flex-shrink:0;">Months 7-12</div>
+                    <div>
+                        <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:2px;">Convert to $36K-84K annual contracts</div>
+                        <div style="font-size:10px;color:var(--muted);line-height:1.55;">8-10 logos. Cross-company signal network reaches first meaningful density.</div>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:3px solid var(--amber);">
+                    <div style="font-size:10px;font-weight:800;color:var(--amber);min-width:60px;flex-shrink:0;">Month 19</div>
+                    <div>
+                        <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:2px;">$1M ARR + 20 logos = Series A</div>
+                        <div style="font-size:10px;color:var(--muted);line-height:1.55;">Network signal layer live. Category defined.</div>
+                    </div>
+                </div>
+                <div style="padding:10px 14px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.20);border-radius:8px;margin-top:4px;">
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:space-around;">
+                        <div style="text-align:center;">
+                            <div style="font-size:14px;font-weight:700;color:var(--amber);">$8,200</div>
+                            <div style="font-size:9px;color:var(--muted);">CAC</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div style="font-size:14px;font-weight:700;color:var(--amber);">15x</div>
+                            <div style="font-size:9px;color:var(--muted);">LTV:CAC</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div style="font-size:14px;font-weight:700;color:var(--amber);">78%</div>
+                            <div style="font-size:9px;color:var(--muted);">Gross margin</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div style="font-size:14px;font-weight:700;color:var(--amber);">115%</div>
+                            <div style="font-size:9px;color:var(--muted);">NRR target</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+<!-- ===================================================
+     SLIDE 10: THE ASK
+     =================================================== -->
+<div class="slide bg-dark" data-index="10">
 <div class="slide-inner">
 
     <span class="label">The Ask</span>
@@ -1119,8 +1213,8 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="ask-amount">$3.5M</div>
             <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:6px;font-weight:500;">Seed Round</div>
             <div style="margin-top:14px;padding:10px 14px;background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.22);border-radius:8px;">
-                <div style="font-size:11px;color:var(--amber);font-weight:700;">Burn: $82K/mo at close, scaling to $174K/mo at full team (9-person team)</div>
-                <div style="font-size:10px;color:rgba(255,255,255,0.45);margin-top:2px;">19 months to Series A trigger, $1.186M cash intact</div>
+                <div style="font-size:11px;color:var(--amber);font-weight:700;">Burn: $82K/mo at close, scaling to $174K/mo gross at full team (net: ~$92K/mo at revenue onset)</div>
+                <div style="font-size:10px;color:rgba(255,255,255,0.45);margin-top:2px;">19 months to Series A. $1M ARR + 20 logos.</div>
                 <div style="font-size:10px;color:rgba(255,255,255,0.45);margin-top:2px;">78% gross margin &nbsp;·&nbsp; 115% NRR target</div>
                 <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
                     <span style="font-size:10px;color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:5px;padding:3px 8px;">CAC $8,200</span>
@@ -1136,10 +1230,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="ask-col-title">What the seed builds</div>
                 <div class="ask-item">At close: Samuel, Ben, Senior Full-Stack, Data/AI Engineer</div>
                 <div class="ask-item">Integrity Manager: human-in-the-loop review, EU AI Act compliance layer</div>
-                <div class="ask-item">3-5 Scale pilots at $3K/mo convert to $36K/yr annual contracts on product validation</div>
+                <div class="ask-item">3-5 paid pilots at $10K each, converting to $36K/yr Growth or $84K/yr Scale contracts</div>
                 <div class="ask-item">$1M ARR with 20 logos opens Series A in month 19</div>
                 <div class="ask-item">Cloud compute: GCP startup credits active through Q2 2027</div>
-                <div class="ask-item">IIA matching grant: eligible for up to 2M NIS non-dilutive — pending Israeli entity registration</div>
+                <div class="ask-item">IIA matching grant: up to 2M NIS non-dilutive. Israeli entity filing in progress alongside seed close.</div>
             </div>
 
             <div>
@@ -1161,7 +1255,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 
     <div style="padding:14px 20px;background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.22);border-radius:10px;text-align:center;">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--amber);margin-bottom:8px;">Next step: let's talk terms</div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--amber);margin-bottom:8px;">Next step: schedule a conversation</div>
         <div style="display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap;">
             <span style="font-size:13px;color:rgba(255,255,255,0.72);">sentriq.co</span>
             <span style="color:rgba(255,255,255,0.20);">|</span>
@@ -1176,9 +1270,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <!-- ===================================================
-     SLIDE 10: CLOSE
+     SLIDE 11: CLOSE
      =================================================== -->
-<div class="slide bg-close" data-index="10">
+<div class="slide bg-close" data-index="11">
 <div class="slide-inner" style="text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:62vh;">
 
     <div style="display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:44px;">
@@ -1190,11 +1284,11 @@ document.addEventListener('DOMContentLoaded', function() {
         Every company that hires is a node. The network is being built right now.
     </p>
     <p style="font-size:clamp(22px,3.5vw,46px);font-weight:800;letter-spacing:-0.035em;color:var(--amber);max-width:760px;line-height:1.2;">
-        The Hiring Captcha is the network.
+        The Candidate Hiring Captcha is the network.
     </p>
 
     <div style="margin-top:40px;padding:16px 28px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:12px;display:inline-block;">
-        <p style="font-size:13px;color:rgba(255,255,255,0.65);">One conversation. Two portfolio companies as opening nodes.</p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.65);">One conversation. Your portfolio becomes the opening nodes.</p>
         <p style="font-size:14px;font-weight:600;color:#fff;margin-top:6px;">samuel@sentriq.co &nbsp;·&nbsp; sentriq.co</p>
     </div>
 
