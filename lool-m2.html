@@ -1067,60 +1067,105 @@ document.addEventListener('DOMContentLoaded', function() {
     <p class="mid" style="margin-bottom:6px;">Text processing is <span class="amber">near-zero COGS.</span></p>
     <p class="body dim" style="margin-bottom:28px;font-size:12px;">Sentriq is text-native by architecture. Text is where the deception lives. And near-zero COGS is the result.</p>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px;">
+    <!-- Cost comparison: Sentriq vs alternatives -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px;">
 
-        <div style="padding:22px 16px;background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.22);border-radius:12px;text-align:center;">
-            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(232,160,32,0.6);margin-bottom:12px;">Sentriq</div>
-            <div style="font-size:clamp(24px,3.5vw,40px);font-weight:900;letter-spacing:-0.04em;color:var(--amber);line-height:1;">$0.002</div>
-            <div style="font-size:11px;color:rgba(255,255,255,0.50);margin-top:8px;line-height:1.5;">per application<br>Text + behavioral signals</div>
+        <div style="padding:18px 16px;background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.22);border-radius:12px;text-align:center;">
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(232,160,32,0.6);margin-bottom:10px;">Sentriq</div>
+            <div style="font-size:clamp(22px,3.2vw,36px);font-weight:900;letter-spacing:-0.04em;color:var(--amber);line-height:1;">$0.038</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.50);margin-top:6px;line-height:1.5;">avg per applicant<br><span style="color:rgba(255,255,255,0.28);">worst case $0.31</span></div>
         </div>
 
-        <div style="padding:22px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;text-align:center;">
-            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.28);margin-bottom:12px;">Video Analysis</div>
-            <div style="font-size:clamp(24px,3.5vw,40px);font-weight:900;letter-spacing:-0.04em;color:rgba(255,255,255,0.38);line-height:1;">$0.50+</div>
-            <div style="font-size:11px;color:rgba(255,255,255,0.28);margin-top:8px;line-height:1.5;">per application<br>HireVue-style deepfake detection</div>
+        <div style="padding:18px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;text-align:center;">
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.28);margin-bottom:10px;">Video Analysis</div>
+            <div style="font-size:clamp(22px,3.2vw,36px);font-weight:900;letter-spacing:-0.04em;color:rgba(255,255,255,0.38);line-height:1;">$0.50+</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.28);margin-top:6px;line-height:1.5;">per application<br>HireVue-style detection</div>
         </div>
 
-        <div style="padding:22px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;text-align:center;">
-            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.28);margin-bottom:12px;">Background Check</div>
-            <div style="font-size:clamp(24px,3.5vw,40px);font-weight:900;letter-spacing:-0.04em;color:rgba(255,255,255,0.38);line-height:1;">$15-50</div>
-            <div style="font-size:11px;color:rgba(255,255,255,0.28);margin-top:8px;line-height:1.5;">per hire<br>Checkr / traditional BGC</div>
+        <div style="padding:18px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;text-align:center;">
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.28);margin-bottom:10px;">Background Check</div>
+            <div style="font-size:clamp(22px,3.2vw,36px);font-weight:900;letter-spacing:-0.04em;color:rgba(255,255,255,0.38);line-height:1;">$15-50</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.28);margin-top:6px;line-height:1.5;">per hire<br>Checkr / traditional BGC</div>
         </div>
 
     </div>
 
-    <div style="padding:16px 18px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.15);border-radius:10px;">
-            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(232,160,32,0.65);margin-bottom:12px;">HSBC stress test: full hiring funnel</div>
+    <!-- COGS model: two boxes -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;">
 
-            <!-- Two scenario rows -->
-            <div style="display:grid;grid-template-columns:auto 1fr 1fr 1fr 1fr;gap:0;align-items:center;margin-bottom:6px;">
-                <!-- Header row -->
-                <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.22);padding:4px 10px 8px 0;"></div>
-                <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.28);text-align:center;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.07);">Applications/yr</div>
-                <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.28);text-align:center;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.07);">Total events</div>
-                <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.28);text-align:center;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.07);">COGS/month</div>
-                <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(232,160,32,0.65);text-align:center;padding-bottom:8px;border-bottom:1px solid rgba(232,160,32,0.22);">Gross margin</div>
+        <!-- Box 1: Per Applicant Cost -->
+        <div style="padding:16px 18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;">
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.35);margin-bottom:12px;">Per Applicant Cost</div>
+
+            <div style="display:grid;grid-template-columns:1fr auto auto;gap:3px 10px;align-items:center;margin-bottom:12px;">
+                <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.20);padding-bottom:5px;border-bottom:1px solid rgba(255,255,255,0.06);">Stage</div>
+                <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.20);text-align:center;padding-bottom:5px;border-bottom:1px solid rgba(255,255,255,0.06);">Reach</div>
+                <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.20);text-align:right;padding-bottom:5px;border-bottom:1px solid rgba(255,255,255,0.06);">Unit cost</div>
+
+                <div style="font-size:11px;color:rgba(255,255,255,0.55);padding:3px 0;">Layer 1 screening</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.32);text-align:center;">100%</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.55);text-align:right;">$0.010</div>
+
+                <div style="font-size:11px;color:rgba(255,255,255,0.55);padding:3px 0;">Async challenge</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.32);text-align:center;">20%</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.55);text-align:right;">$0.100</div>
+
+                <div style="font-size:11px;color:rgba(255,255,255,0.55);padding:3px 0;">Transcript analysis</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.32);text-align:center;">10%</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.55);text-align:right;">$0.050</div>
+
+                <div style="font-size:11px;color:rgba(255,255,255,0.55);padding:3px 0;">Technical assessment</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.32);text-align:center;">5%</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.55);text-align:right;">$0.100</div>
+
+                <div style="font-size:11px;color:rgba(255,255,255,0.55);padding:3px 0;">Final interview</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.32);text-align:center;">2.5%</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.55);text-align:right;">$0.050</div>
             </div>
 
-            <!-- Scenario 1: submission only -->
-            <div style="display:grid;grid-template-columns:auto 1fr 1fr 1fr 1fr;gap:0;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-                <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.35);padding-right:10px;white-space:nowrap;">Submission only</div>
-                <div style="font-size:13px;font-weight:800;color:rgba(255,255,255,0.65);text-align:center;">600K</div>
-                <div style="font-size:13px;font-weight:800;color:rgba(255,255,255,0.65);text-align:center;">600K</div>
-                <div style="font-size:13px;font-weight:800;color:rgba(255,255,255,0.65);text-align:center;">$100</div>
-                <div style="font-size:14px;font-weight:900;color:var(--amber);text-align:center;">99.5%</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div style="padding:8px 10px;background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.22);border-radius:8px;text-align:center;">
+                    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(232,160,32,0.55);margin-bottom:4px;">Expected avg</div>
+                    <div style="font-size:22px;font-weight:900;letter-spacing:-0.03em;color:var(--amber);line-height:1;">$0.038</div>
+                </div>
+                <div style="padding:8px 10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:8px;text-align:center;">
+                    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.22);margin-bottom:4px;">Worst case</div>
+                    <div style="font-size:22px;font-weight:900;letter-spacing:-0.03em;color:rgba(255,255,255,0.38);line-height:1;">$0.31</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Box 2: Per Position Cost -->
+        <div style="padding:16px 18px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.15);border-radius:10px;">
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(232,160,32,0.65);margin-bottom:12px;">Per Position (500 applicants)</div>
+
+            <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:10px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:8px;">
+                    <div>
+                        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.65);">LLM processing</div>
+                        <div style="font-size:10px;color:rgba(255,255,255,0.28);">All 5 stages, funnel-weighted</div>
+                    </div>
+                    <div style="font-size:18px;font-weight:900;color:rgba(255,255,255,0.65);">$20.63</div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:8px;">
+                    <div>
+                        <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.65);">Infrastructure</div>
+                        <div style="font-size:10px;color:rgba(255,255,255,0.28);">7-yr audit trail, shared infra</div>
+                    </div>
+                    <div style="font-size:18px;font-weight:900;color:rgba(255,255,255,0.65);">$4.10</div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.22);border-radius:8px;">
+                    <div>
+                        <div style="font-size:12px;font-weight:800;color:var(--amber);">Total COGS / position</div>
+                        <div style="font-size:10px;color:rgba(232,160,32,0.55);">vs. $200 revenue at Tier 1</div>
+                    </div>
+                    <div style="font-size:24px;font-weight:900;color:var(--amber);">~$25</div>
+                </div>
             </div>
 
-            <!-- Scenario 2: full funnel x8 -->
-            <div style="display:grid;grid-template-columns:auto 1fr 1fr 1fr 1fr;gap:0;align-items:center;padding:8px 0;">
-                <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.35);padding-right:10px;white-space:nowrap;">Full funnel (8x)</div>
-                <div style="font-size:13px;font-weight:800;color:rgba(255,255,255,0.65);text-align:center;">600K</div>
-                <div style="font-size:13px;font-weight:800;color:rgba(255,255,255,0.65);text-align:center;">4.8M</div>
-                <div style="font-size:13px;font-weight:800;color:rgba(255,255,255,0.65);text-align:center;">$800</div>
-                <div style="font-size:14px;font-weight:900;color:var(--amber);text-align:center;">96%</div>
-            </div>
+            <p style="font-size:10px;color:rgba(255,255,255,0.28);line-height:1.6;margin:0;">Direct variable cost only. Blended gross margin target: 78% (incl. DevOps allocation).</p>
+        </div>
 
-            <p style="font-size:10px;color:rgba(255,255,255,0.30);line-height:1.6;margin-top:10px;">Every candidate assessed at every stage of the HSBC hiring funnel. 4.8M events per year at $0.002 each = $800/month. Against $20K/month revenue (Tier 1 $240K ACV). The model does not break at full-funnel enterprise scale.</p>
     </div>
 
 </div>
