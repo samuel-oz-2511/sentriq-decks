@@ -1760,7 +1760,15 @@ document.addEventListener('touchend', function(e) {
 document.addEventListener('DOMContentLoaded', function() {
     showSlide(0);
 
-    // ── Annex index chips: make clickable ──────────────────────────────────
+    // ── Annex index chips: clickable + visited state ───────────────────────
+    var visitedAnnex = new Set();
+
+    function applyVisitedStyle(chip) {
+        chip.style.color = 'rgba(255,255,255,0.80)';
+        chip.style.borderColor = 'rgba(255,255,255,0.38)';
+        chip.style.background = 'rgba(255,255,255,0.07)';
+    }
+
     var annexIndex = document.querySelector('[data-index="7"]');
     if (annexIndex) {
         var chips = annexIndex.querySelectorAll('div > span');
@@ -1768,18 +1776,25 @@ document.addEventListener('DOMContentLoaded', function() {
             chip.style.cursor = 'pointer';
             chip.style.transition = 'color 0.15s, border-color 0.15s, background 0.15s';
             chip.addEventListener('mouseenter', function() {
+                if (visitedAnnex.has(i)) return; // visited chips don't respond to hover
                 chip.style.color = 'rgba(232,160,32,0.90)';
                 chip.style.borderColor = 'rgba(232,160,32,0.35)';
                 chip.style.background = 'rgba(232,160,32,0.07)';
             });
             chip.addEventListener('mouseleave', function() {
+                if (visitedAnnex.has(i)) {
+                    applyVisitedStyle(chip); // restore visited state, don't reset
+                    return;
+                }
                 chip.style.color = '';
                 chip.style.borderColor = '';
                 chip.style.background = '';
             });
             chip.addEventListener('click', function(e) {
                 e.stopPropagation();
-                showSlide(8 + i); // A1=index8, A2=index9 ... A15=index22
+                visitedAnnex.add(i);
+                applyVisitedStyle(chip);
+                showSlide(8 + i); // A1=index8, A2=index9 ... A14=index21
             });
         });
     }
