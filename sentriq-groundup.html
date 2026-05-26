@@ -114,6 +114,13 @@ body::after {
 .label::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--amber); opacity: 0.5; }
 .center .label { justify-content: center; }
 .center .label::before { display: none; }
+/* Problem/negative slides use muted label color, never amber */
+.label-muted {
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.15em; color: rgba(255,255,255,0.45); margin-bottom: 12px;
+    display: flex; align-items: center; gap: 9px;
+}
+.label-muted::before { content: ''; display: inline-block; width: 20px; height: 1px; background: rgba(255,255,255,0.22); opacity: 0.8; }
 h2 { font-size: clamp(20px,2.8vw,38px); font-weight: 800; line-height: 1.12; letter-spacing: -0.03em; margin-bottom: 14px; }
 
 /* HOOK SLIDE */
@@ -347,6 +354,26 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
+// Touch / swipe navigation
+(function() {
+    var touchStartX = 0;
+    var touchStartY = 0;
+    document.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].clientX;
+        touchStartY = e.changedTouches[0].clientY;
+    }, { passive: true });
+    document.addEventListener('touchend', function(e) {
+        if (document.getElementById('deck').style.display === 'none') return;
+        var dx = e.changedTouches[0].clientX - touchStartX;
+        var dy = e.changedTouches[0].clientY - touchStartY;
+        // Only trigger on predominantly horizontal swipes of at least 40px
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+            if (dx < 0) changeSlide(1);
+            else changeSlide(-1);
+        }
+    }, { passive: true });
+})();
+
 // Competitive quadrant tooltip
 document.addEventListener('DOMContentLoaded', function() {
     var tooltip = document.getElementById('comp-tooltip');
@@ -419,7 +446,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="slide bg-dark" data-index="1">
 <div class="slide-inner">
 
-    <span class="label">The Problem</span>
+    <span class="label-muted">The Problem</span>
     <h2>Volume is up 4x. <span style="color:#fff;">Recruiters cannot tell which applications are real.</span></h2>
     <p style="font-size:13px;color:rgba(255,255,255,0.50);margin-bottom:22px;line-height:1.65;">AI ends the signal advantage recruiters relied on.</p>
 
@@ -490,7 +517,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="slide bg-dark" data-index="2">
 <div class="slide-inner">
 
-    <span class="label">The Missing Layer</span>
+    <span class="label-muted">The Missing Layer</span>
     <h2>Every tool sits <span style="color:#fff;">downstream of the deception.</span></h2>
     <p style="font-size:13px;color:rgba(255,255,255,0.50);margin-bottom:22px;line-height:1.65;">The submission event is unwatched. It is the only moment the application's origin is visible.</p>
 
@@ -702,7 +729,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- SLIDE 5: COMPETITIVE POSITIONING -->
 <div class="slide bg-dark" data-index="5">
-<div class="slide-inner" style="display:flex;flex-direction:column;height:100%;padding-bottom:68px;">
+<div class="slide-inner" style="display:flex;flex-direction:column;min-height:0;padding-bottom:68px;">
 
     <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px;flex-shrink:0;">
         <div>
@@ -961,7 +988,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="slide bg-dark" data-index="7">
 <div class="slide-inner">
 
-    <span class="label">Early Traction</span>
+    <span class="label">Traction &amp; Validation</span>
     <h2>NVIDIA Israel. HSBC. <span style="color:var(--amber);">One advisory board confirmed.</span></h2>
 
     <div class="col2-mobile" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;">
@@ -1015,7 +1042,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             <div style="padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;margin-bottom:8px;">
                 <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:5px;">Prof. Louis Hickman, Virginia Tech</div>
-                <p style="font-size:11px;color:rgba(255,255,255,0.60);line-height:1.6;">I/O Psychology researcher. Lead author, IJSA 2025 (n=237): the most direct peer-reviewed empirical study on AI faking susceptibility in live hiring assessments. Co-designing challenge sequencing and question frameworks with Sentriq.</p>
+                <p style="font-size:11px;color:rgba(255,255,255,0.60);line-height:1.6;">I/O Psychology researcher. Lead author, IJSA 2025 (n=237): the most direct peer-reviewed empirical study on AI faking susceptibility in live hiring assessments. Early design and research conversations with Sentriq.</p>
             </div>
 
             <div style="padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;margin-bottom:8px;">
@@ -1026,9 +1053,9 @@ document.addEventListener('DOMContentLoaded', function() {
             <div style="padding:14px 16px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.25);border-radius:10px;margin-bottom:8px;">
                 <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
                     <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--amber);background:rgba(232,160,32,0.15);border:1px solid rgba(232,160,32,0.35);padding:3px 8px;border-radius:4px;letter-spacing:0.08em;">IDF Pedigree</div>
-                    <div style="font-size:12px;font-weight:700;color:#fff;">Mamram Selection</div>
+                    <div style="font-size:12px;font-weight:700;color:#fff;">IDF Intelligence</div>
                 </div>
-                <p style="font-size:11px;color:rgba(255,255,255,0.70);line-height:1.6;">IDF's elite computing unit selection program. One of Israel's most competitive deep-tech validation tracks. Ben is a Mamram veteran.</p>
+                <p style="font-size:11px;color:rgba(255,255,255,0.70);line-height:1.6;">Tamar (offensive cyber intelligence) and Yachlam (full-stack military intelligence). Ben is an IDF intelligence veteran.</p>
             </div>
         </div>
 
@@ -1096,7 +1123,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <p style="font-size:12px;color:rgba(255,255,255,0.62);line-height:1.65;margin-bottom:10px;">Two IDF intelligence units (Tamar + Yachlam). KPMG international consulting. Built application integrity infrastructure at AppsFlyer. Production-scale behavioral signal detection experience.</p>
             <div style="display:flex;flex-direction:column;gap:6px;">
                 <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.5;padding-left:10px;border-left:2px solid rgba(68,204,136,0.25);">AppsFlyer: 25 developers trained in behavioral signal architecture.</div>
-                <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.5;padding-left:10px;border-left:2px solid rgba(68,204,136,0.25);">Serial founder: Banxi (Coller finalist), Kaima (Mamram veteran).</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.5;padding-left:10px;border-left:2px solid rgba(68,204,136,0.25);">Serial founder: Banxi (Coller finalist), Kaima (IDF intel veteran).</div>
                 <div style="padding:8px 12px;background:rgba(68,204,136,0.06);border:1px solid rgba(68,204,136,0.22);border-radius:8px;">
                     <div style="font-size:10px;font-weight:700;color:#44CC88;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;">ADTech venture</div>
                     <div style="font-size:11px;color:rgba(255,255,255,0.70);line-height:1.5;">5 paying customers, production scale. Ben is full-time on Sentriq. ADTech in operational wind-down.</div>
@@ -1116,7 +1143,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             <div style="padding:8px 14px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.15);border-radius:8px;text-align:center;">
                 <div style="font-size:20px;font-weight:700;color:var(--amber);">25</div>
-                <div style="font-size:10px;color:var(--muted);">Devs trained in signal security</div>
+                <div style="font-size:10px;color:var(--muted);">Devs trained in behavioral signal detection</div>
             </div>
             <p style="font-size:12px;color:rgba(255,255,255,0.65);line-height:1.6;flex:1;min-width:200px;">Samuel's operator history is not a background note. It is the GTM unfair advantage. No competitor has this pairing: the HR operator who ran the ATS pipelines Sentriq now sits upstream of, and an engineer trained on behavioral detection at the highest classification level in Israeli intelligence. First enterprise targets are NVIDIA Israel and HSBC Israel. IIA grant eligibility extends effective runway. Israeli-to-US enterprise is exactly what Ground Up does.</p>
         </div>
@@ -1150,7 +1177,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
                     <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.65);text-transform:uppercase;letter-spacing:0.10em;margin-bottom:6px;">SAM</div>
                     <div style="font-size:28px;font-weight:800;color:#fff;line-height:1;">$2.5B</div>
-                    <div style="font-size:10px;color:var(--muted);margin-top:4px;">~30,000 enterprises (1,000+ employees, US/UK/EU/IL). Bottom-up from US Census SUSB 2022.</div>
+                    <div style="font-size:10px;color:var(--muted);margin-top:4px;">~30,000 enterprises × $84K blended ACV (Scale + Growth tiers). US Census SUSB 2022.</div>
                 </div>
                 <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
                     <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.65);text-transform:uppercase;letter-spacing:0.10em;margin-bottom:6px;">Israeli Beachhead</div>
@@ -1180,7 +1207,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:3px solid var(--amber);">
                     <div style="font-size:10px;font-weight:800;color:var(--amber);min-width:60px;flex-shrink:0;">Month 19</div>
                     <div>
-                        <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:2px;">$1M ARR (Q4 2027 quarterly avg) + 20 logos = Series A</div>
+                        <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:2px;">$1M ARR threshold (Q4 2027) + 20 logos = Series A</div>
                         <div style="font-size:10px;color:var(--muted);line-height:1.55;">Network signal layer live. Category defined.</div>
                     </div>
                 </div>
@@ -1207,10 +1234,10 @@ document.addEventListener('DOMContentLoaded', function() {
         <div>
             <div class="ask-amount">$3.5M</div>
             <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:6px;font-weight:500;">Seed Round</div>
-            <div style="margin-top:14px;padding:10px 14px;background:rgba(232,160,32,0.08);border:1px solid rgba(232,160,32,0.22);border-radius:8px;">
+            <div style="margin-top:14px;padding:10px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.10);border-radius:8px;">
                 <div style="font-size:11px;color:rgba(255,255,255,0.72);font-weight:700;">Burn: $82K/mo at close, scaling to $174K/mo gross at full team (net: $92K/mo at Series A trigger)</div>
                 <div style="font-size:10px;color:rgba(255,255,255,0.45);margin-top:2px;">19 months to Series A. $1M ARR + 20 logos.</div>
-                <div style="font-size:10px;color:rgba(255,255,255,0.40);margin-top:3px;">Burn ramps $82K &rarr; $174K over 19 months. $1.186M intact at Series A trigger. ($174K gross &minus; $83K MRR = $91K/mo net at Series A)</div>
+                <div style="font-size:10px;color:rgba(255,255,255,0.40);margin-top:3px;">Burn ramps $82K &rarr; $174K over 19 months. $1.186M intact at Series A trigger. ($174K gross &minus; $82K MRR = $92K/mo net at Series A)</div>
                 <div style="font-size:10px;color:rgba(255,255,255,0.45);margin-top:2px;">78% gross margin &nbsp;·&nbsp; 115% NRR target</div>
                 <div style="margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;">
                     <span style="font-size:10px;color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);border-radius:5px;padding:3px 8px;">CAC $8,200</span>
@@ -1230,7 +1257,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="ask-item">3-5 design partner pilots at $10K each (2 roles, 6 weeks), converting to Scale ($36K/yr) or Mid-Market ($84K/yr) annual contracts</div>
                 <div class="ask-item">$1M ARR with 20 logos opens Series A in month 19</div>
                 <div class="ask-item">Infrastructure: GCP startup credits + IIA non-dilutive grant cover non-headcount costs through Q2 2027</div>
-                <div class="ask-item">IIA matching grant: up to 2M NIS (~$667K non-dilutive). Extends effective raise to ~$4.17M at no equity cost. Israeli entity filing underway. IIA application follows entity registration.</div>
+                <div class="ask-item">IIA matching grant: up to 2M NIS (~$667K non-dilutive, if approved). Effective raise extends to ~$4.17M if secured. Israeli entity filing underway. IIA application follows entity registration.</div>
             </div>
 
             <div class="ask-grid-col2">
