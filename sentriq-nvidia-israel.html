@@ -681,6 +681,42 @@ body::after {
                 </div>
             </div>
 
+            <!-- Network Effect — spans full width -->
+            <div style="grid-column:1/-1;display:flex;align-items:center;gap:20px;padding:14px 20px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.22);border-radius:12px;">
+
+                <!-- Cross-company graph SVG -->
+                <svg width="130" height="64" viewBox="0 0 130 64" fill="none" style="flex-shrink:0;">
+                    <!-- Spoke lines to center -->
+                    <line x1="20" y1="12" x2="65" y2="32" stroke="rgba(232,160,32,0.35)" stroke-width="1.2"/>
+                    <line x1="110" y1="12" x2="65" y2="32" stroke="rgba(232,160,32,0.35)" stroke-width="1.2"/>
+                    <line x1="8"  y1="38" x2="65" y2="32" stroke="rgba(232,160,32,0.35)" stroke-width="1.2"/>
+                    <line x1="122" y1="38" x2="65" y2="32" stroke="rgba(232,160,32,0.35)" stroke-width="1.2"/>
+                    <line x1="40" y1="58" x2="65" y2="32" stroke="rgba(232,160,32,0.35)" stroke-width="1.2"/>
+                    <line x1="90" y1="58" x2="65" y2="32" stroke="rgba(232,160,32,0.35)" stroke-width="1.2"/>
+                    <!-- Outer company nodes -->
+                    <circle cx="20"  cy="12" r="6" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"/>
+                    <circle cx="110" cy="12" r="6" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"/>
+                    <circle cx="8"   cy="38" r="6" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"/>
+                    <circle cx="122" cy="38" r="6" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"/>
+                    <circle cx="40"  cy="58" r="6" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"/>
+                    <circle cx="90"  cy="58" r="6" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"/>
+                    <!-- Center Sentriq hub -->
+                    <circle cx="65" cy="32" r="11" fill="rgba(232,160,32,0.12)" stroke="var(--amber)" stroke-width="2"/>
+                    <text x="65" y="36" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="8" font-weight="800" fill="var(--amber)">SQ</text>
+                </svg>
+
+                <div style="flex:1;">
+                    <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:var(--amber);margin-bottom:4px;">Network Effect</div>
+                    <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.80);">A pattern seen at one company is protection for all of them.</div>
+                </div>
+
+                <div style="flex-shrink:0;text-align:center;padding-left:18px;border-left:1px solid rgba(232,160,32,0.20);">
+                    <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.35);margin-bottom:4px;">The moat</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.5;">No single employer<br>can see this alone</div>
+                </div>
+
+            </div>
+
         </div>
 
     </div>
