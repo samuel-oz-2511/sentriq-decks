@@ -326,7 +326,7 @@ function checkPass() {
 }
 
 var currentSlide = 0;
-var totalSlides = 13;
+var totalSlides = 14;
 
 function showSlide(n) {
     var slides = document.querySelectorAll('.slide');
@@ -405,7 +405,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
     <div class="nav-controls">
         <button class="nav-btn" onclick="changeSlide(-1)">&#8592;</button>
-        <span class="slide-counter" id="slideCounter">1 / 13</span>
+        <span class="slide-counter" id="slideCounter">1 / 14</span>
         <button class="nav-btn" onclick="changeSlide(1)">&#8594;</button>
     </div>
 </nav>
@@ -714,35 +714,50 @@ document.addEventListener('DOMContentLoaded', function() {
         <span style="font-size:10px;color:rgba(255,255,255,0.55);margin-left:8px;">Layer 1 signals cross-referenced against behavioral patterns from every employer in the Sentriq network. Invisible to any single-employer funnel.</span>
     </div>
 
-    <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:14px;">
-        <div style="padding:11px 18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:8px;text-align:center;">
-            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.55);margin-bottom:4px;">Gap Assessor</div>
-            <div style="font-size:11px;color:rgba(255,255,255,0.50);">Reads transcripts and assignment submissions. Surfaces credential gaps. Triggers a personalized async challenge. Full audit trail through offer.</div>
-        </div>
-    </div>
-
-    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:12px;">
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px;">
         <span class="pill">Text-native</span>
         <span class="pill">Fraud-trained</span>
         <span class="pill">Platform-agnostic</span>
         <span class="pill">Compliance-ready</span>
     </div>
 
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;margin-top:4px;">
+</div>
+</div>
+
+
+<!-- SLIDE 5: PRODUCT EXTENDED -->
+<div class="slide bg-dark" data-index="5">
+<div class="slide-inner">
+
+    <span class="label">Product · Extended</span>
+    <h2>Built on the same signal layer. <span style="color:var(--amber);">Three capabilities that deepen coverage.</span></h2>
+    <p style="font-size:11px;color:rgba(255,255,255,0.38);margin-bottom:20px;font-weight:500;">Gap Assessor in demo &nbsp;·&nbsp; OSINT layer in development &nbsp;·&nbsp; ATS audit in pilot scope</p>
+
+    <div style="padding:20px 22px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.22);border-radius:12px;margin-bottom:20px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--amber);">Gap Assessor</div>
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,0.30);background:rgba(255,255,255,0.05);padding:2px 7px;border-radius:4px;letter-spacing:0.08em;">In demo</div>
+        </div>
+        <p style="font-size:14px;font-weight:700;color:#fff;margin-bottom:8px;">Credential gaps that survive every other filter.</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.62);line-height:1.65;">Reads interview transcripts and assignment submissions after the application is scored. Surfaces inconsistencies between claimed credentials and demonstrated knowledge. Triggers a personalized async challenge for that specific gap. Full audit trail through offer. Zero friction unless a gap is found.</p>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
         <div style="height:1px;flex:1;background:rgba(255,255,255,0.07);"></div>
         <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.28);">Extended Capabilities &nbsp;&middot;&nbsp; Roadmap</div>
         <div style="height:1px;flex:1;background:rgba(255,255,255,0.07);"></div>
     </div>
-    <div class="col2-mobile" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div style="padding:12px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:10px;">
+
+    <div class="col2-mobile" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div style="padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:10px;">
             <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.40);margin-bottom:5px;">OSINT Intelligence Layer &nbsp;<span style="font-weight:500;letter-spacing:0.05em;">In development</span></div>
-            <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:5px;">Public Signal Cross-Reference</div>
-            <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.6;">Cross-references submitted claims against public signals: professional presence, contribution history, public record consistency. No friction. No candidate interaction. Same methodology used in enterprise OSINT operations.</div>
+            <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:6px;">Public Signal Cross-Reference</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.6;">Cross-references submitted claims against public signals: professional presence, contribution history, public record consistency. No friction. No candidate interaction.</div>
         </div>
-        <div style="padding:12px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:10px;">
+        <div style="padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:10px;">
             <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.40);margin-bottom:5px;">ATS Security Audit &nbsp;<span style="font-weight:500;letter-spacing:0.05em;">Pilot scope</span></div>
-            <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:5px;">Adversarial Simulation</div>
-            <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.6;">Authorized simulation: Sentriq runs synthetic applications through the employer's live ATS intake and shows exactly which fabricated profiles would have entered undetected. The buyer sees the problem in their own data before signing anything.</div>
+            <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:6px;">Adversarial Simulation</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.6;">Sentriq runs synthetic applications through the employer's live ATS intake and shows exactly which fabricated profiles would have entered undetected. The buyer sees the problem in their own data before signing anything.</div>
         </div>
     </div>
 
@@ -750,8 +765,8 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
-<!-- SLIDE 5: COMPETITIVE POSITIONING -->
-<div class="slide bg-dark" data-index="5">
+<!-- SLIDE 6: COMPETITIVE POSITIONING -->
+<div class="slide bg-dark" data-index="6">
 <div class="slide-inner" style="display:flex;flex-direction:column;min-height:0;">
 
     <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px;flex-shrink:0;">
@@ -957,7 +972,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div id="comp-tooltip"></div>
 
 <!-- SLIDE 6: COMPETITIVE MOAT -->
-<div class="slide bg-dark" data-index="6">
+<div class="slide bg-dark" data-index="7">
 <div class="slide-inner">
 
     <span class="label">Competitive Moat</span>
@@ -1002,7 +1017,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <!-- SLIDE 7: NETWORK EFFECTS -->
-<div class="slide bg-dark" data-index="7">
+<div class="slide bg-dark" data-index="8">
 <div class="slide-inner">
 
     <span class="label">Network Effects</span>
@@ -1065,7 +1080,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ===================================================
      SLIDE 7: VALIDATION
      =================================================== -->
-<div class="slide bg-dark" data-index="8">
+<div class="slide bg-dark" data-index="9">
 <div class="slide-inner">
 
     <span class="label">Traction &amp; Validation</span>
@@ -1139,7 +1154,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ===================================================
      SLIDE 8: TEAM
      =================================================== -->
-<div class="slide bg-dark" data-index="9">
+<div class="slide bg-dark" data-index="10">
 <div class="slide-inner">
 
     <span class="label">The Team</span>
@@ -1237,7 +1252,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ===================================================
      SLIDE 9: MARKET & PATH TO SERIES A
      =================================================== -->
-<div class="slide bg-dark" data-index="10">
+<div class="slide bg-dark" data-index="11">
 <div class="slide-inner">
 
     <span class="label">Market &amp; Path to Series A</span>
@@ -1298,7 +1313,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ===================================================
      SLIDE 10: THE ASK
      =================================================== -->
-<div class="slide bg-dark" data-index="11">
+<div class="slide bg-dark" data-index="12">
 <div class="slide-inner">
 
     <span class="label">The Ask</span>
@@ -1357,7 +1372,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ===================================================
      SLIDE 11: CLOSE
      =================================================== -->
-<div class="slide bg-close" data-index="12">
+<div class="slide bg-close" data-index="13">
 <div class="slide-inner" style="text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:62vh;">
 
     <div style="display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:44px;">
