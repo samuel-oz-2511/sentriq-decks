@@ -728,14 +728,19 @@ document.addEventListener('DOMContentLoaded', function() {
         <span class="pill">Compliance-ready</span>
     </div>
 
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;margin-top:4px;">
+        <div style="height:1px;flex:1;background:rgba(255,255,255,0.07);"></div>
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.28);">Extended Capabilities &nbsp;&middot;&nbsp; Roadmap</div>
+        <div style="height:1px;flex:1;background:rgba(255,255,255,0.07);"></div>
+    </div>
     <div class="col2-mobile" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div style="padding:12px 14px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.18);border-radius:10px;">
-            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:var(--amber);margin-bottom:5px;">OSINT Intelligence Layer &nbsp;<span style="color:rgba(255,255,255,0.35);font-weight:500;letter-spacing:0.05em;">In development</span></div>
+        <div style="padding:12px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:10px;">
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.40);margin-bottom:5px;">OSINT Intelligence Layer &nbsp;<span style="font-weight:500;letter-spacing:0.05em;">In development</span></div>
             <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:5px;">Public Signal Cross-Reference</div>
             <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.6;">Cross-references submitted claims against public signals: professional presence, contribution history, public record consistency. No friction. No candidate interaction. Same methodology used in enterprise OSINT operations.</div>
         </div>
-        <div style="padding:12px 14px;background:rgba(232,160,32,0.04);border:1px solid rgba(232,160,32,0.18);border-radius:10px;">
-            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:var(--amber);margin-bottom:5px;">ATS Security Audit &nbsp;<span style="color:rgba(255,255,255,0.35);font-weight:500;letter-spacing:0.05em;">Pilot scope</span></div>
+        <div style="padding:12px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:10px;">
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.40);margin-bottom:5px;">ATS Security Audit &nbsp;<span style="font-weight:500;letter-spacing:0.05em;">Pilot scope</span></div>
             <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:5px;">Adversarial Simulation</div>
             <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.6;">Authorized simulation: Sentriq runs synthetic applications through the employer's live ATS intake and shows exactly which fabricated profiles would have entered undetected. The buyer sees the problem in their own data before signing anything.</div>
         </div>
@@ -966,7 +971,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,0.72);">Tofu / Gem</div>
                 <div style="font-size:9px;color:var(--muted);margin-top:2px;">Fraud database</div>
             </div>
-            <div style="font-size:12px;color:rgba(255,255,255,0.65);line-height:1.65;">Tofu has a cross-employer fraud profile database (5M+ records) that powers Gem's detection agent. But this is a <strong style="color:rgba(255,255,255,0.80);">post-submission profile record system</strong>: it looks up whether a submitted profile has appeared in other funnels before. Sentriq captures <strong style="color:rgba(255,255,255,0.80);">pre-submission behavioral signals during the session itself</strong>, before any profile data exists. Tofu cannot see what happens before the application is submitted. That moment is ours.</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.65);line-height:1.65;">Tofu's 5M+ fraud profile database powers Gem's detection agent. It is a <strong style="color:rgba(255,255,255,0.80);">post-submission lookup</strong>: did this profile appear at another employer? Sentriq captures <strong style="color:rgba(255,255,255,0.80);">pre-submission behavioral signals during the session itself</strong>, the moment Tofu cannot reach.</div>
         </div>
 
         <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;display:grid;grid-template-columns:88px 1fr;gap:14px;align-items:start;">
@@ -1029,7 +1034,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
             <div style="padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;text-align:center;">
                 <p style="font-size:12px;color:rgba(255,255,255,0.80);line-height:1.6;"><strong style="color:var(--amber);">Value on day one, network moat by 2027.</strong></p>
-                <p style="font-size:11px;color:var(--muted);margin-top:4px;">Layer 1 behavioral signals are meaningful from the first application, with or without the network. Each new employer adds to the behavioral model and lowers the detection threshold for every other.</p>
+                <p style="font-size:11px;color:var(--muted);margin-top:4px;">Automated paste behavior, submission timing anomalies, AI content markers, and mass-apply fingerprints are universal signals. They fire from the first application, no prior customer data required. Each new employer adds to the behavioral model and lowers the detection threshold for every other.</p>
             </div>
         </div>
 
@@ -1064,7 +1069,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="slide-inner">
 
     <span class="label">Traction &amp; Validation</span>
-    <h2>HSBC. Booking Holdings. <span style="color:var(--amber);">Advisory agreement signed.</span></h2>
+    <h2>Booking Holdings advisory signed. <span style="color:var(--amber);">Enterprise design partner conversations active.</span></h2>
 
     <div class="col2-mobile" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;">
 
@@ -1318,6 +1323,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <div>
                 <div class="ask-col-title">Why Connecticut Innovations</div>
                 <div class="ask-item">CI has backed 9 Israeli companies entering US markets. VentureClash Tel Aviv. They understand the arc.</div>
+                <div class="ask-item">$50M AI Fund mandate aligns with Sentriq's applied AI infrastructure layer. This is an on-thesis category investment.</div>
                 <div class="ask-item">Evergreen fund: no LP pressure to flip at year 3. Infrastructure categories take time to dominate.</div>
                 <div class="ask-item">Booking Holdings (Norwalk, CT) advisory agreement signed. The US anchor has a CT address from day one.</div>
                 <div class="ask-item">IIA grant fluency extends effective runway to ~$4.17M at no equity cost.</div>
