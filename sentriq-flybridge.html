@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Sentriq - Flybridge</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root {
+    --bg:      #09090F;
+    --card:    #0D0E1A;
+    --border:  #161728;
+    --muted:   #8080A8;
+    --amber:   #E8A020;
+    --amber-d: #B87010;
+    --text:    #ffffff;
+    --text-sub: rgba(255,255,255,0.72);
+    --text-dim: rgba(255,255,255,0.52);
+    --green:   #44CC88;
+    --red:     #E05555;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow: hidden;
+    height: 100%;
+    height: -webkit-fill-available;
+    width: 100%;
+}
+@supports (height: 100dvh) { html, body { height: 100dvh; } }
+
+body::after {
+    content: '';
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none; z-index: 9999; opacity: 0.019;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat; background-size: 256px;
+}
+
+.deck { width: 100%; height: 100%; position: relative; }
+
+.slide {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    justify-content: flex-start; align-items: center;
+    padding: clamp(24px,3.5vh,48px) clamp(28px,5vw,80px) 78px;
+    overflow-y: auto; overflow-x: hidden;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+.slide > .slide-inner { margin: auto 0; }
+.slide.active { opacity: 1; pointer-events: all; }
+.slide .slide-inner { transition: opacity 0.4s ease, transform 0.4s ease; opacity: 0; transform: translateY(10px); }
+.slide.active .slide-inner { opacity: 1; transform: translateY(0); }
+.slide-inner { max-width: 1080px; width: 100%; position: relative; z-index: 1; }
+
+.bg-hook {
+    background:
+        radial-gradient(ellipse 40% 35% at 50% 32%, rgba(232,160,32,0.34) 0%, rgba(232,160,32,0.09) 55%, transparent 100%),
+        radial-gradient(ellipse 85% 65% at 50% 35%, rgba(26,26,53,0.55) 0%, #09090F 70%);
+}
+.bg-dark { background: #09090F; }
+.bg-close {
+    background:
+        radial-gradient(ellipse 55% 45% at 50% 55%, rgba(232,160,32,0.28) 0%, rgba(232,160,32,0.07) 60%, transparent 100%),
+        #09090F;
+}
+
+/* NAV */
+.nav-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 40px;
+    padding-bottom: calc(14px + env(safe-area-inset-bottom));
+    background: rgba(9,9,15,0.93); backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border); z-index: 100;
+}
+.nav-logo { font-weight: 500; font-size: 13px; color: #fff; letter-spacing: -0.01em; display: flex; align-items: center; gap: 7px; }
+.nav-controls { display: flex; align-items: center; gap: 14px; }
+.nav-btn {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.11);
+    color: #fff; width: 38px; height: 38px; border-radius: 8px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 17px; transition: all 0.25s;
+}
+.nav-btn:hover { background: var(--amber); border-color: var(--amber); color: #09090F; }
+.slide-counter { font-size: 12px; color: var(--muted); font-weight: 500; min-width: 52px; text-align: center; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 10px; }
+
+.progress-bar {
+    position: fixed; top: 0; left: 0; height: 3px;
+    background: var(--amber);
+    box-shadow: 0 0 8px rgba(232,160,32,0.45);
+    transition: width 0.35s ease; z-index: 100;
+}
+.tri-stat-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; align-items: center; }
+.funnel-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; margin-bottom: 20px; }
+.funnel-row { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; gap: 4px; align-items: start; min-width: 680px; }
+
+.confidential { position: fixed; top: 16px; right: 22px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.2); z-index: 100; }
+.meeting-badge { position: fixed; top: 16px; left: 22px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(232,160,32,0.7); z-index: 100; background: rgba(232,160,32,0.12); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(232,160,32,0.25); opacity: 0; transition: opacity 0.3s ease; }
+
+/* TYPE */
+.label {
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.15em; color: var(--amber); margin-bottom: 12px;
+    display: flex; align-items: center; gap: 9px;
+}
+.label::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--amber); opacity: 0.5; }
+.center .label { justify-content: center; }
+.center .label::before { display: none; }
+/* Problem/negative slides use muted label color, never amber */
+.label-muted {
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.15em; color: rgba(255,255,255,0.45); margin-bottom: 12px;
+    display: flex; align-items: center; gap: 9px;
+}
+.label-muted::before { content: ''; display: inline-block; width: 20px; height: 1px; background: rgba(255,255,255,0.22); opacity: 0.8; }
+h2 { font-size: clamp(20px,2.8vw,38px); font-weight: 800; line-height: 1.12; letter-spacing: -0.03em; margin-bottom: 14px; }
+
+/* HOOK SLIDE */
+.giant {
+    font-size: clamp(30px,4.5vw,60px);
+    font-weight: 800; line-height: 1.1; letter-spacing: -0.04em; color: #fff;
+}
+.amber { color: var(--amber); }
+
+/* TRIANGLE */
+.tri-wrap { display: flex; align-items: center; justify-content: center; }
+.tri-svg { width: clamp(160px,28vw,360px); height: auto; }
+
+/* SIGNAL CARDS (product) */
+.signal-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 16px; }
+.signal-card {
+    padding: 20px 16px; background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; text-align: center;
+}
+.signal-card.active { border-color: rgba(232,160,32,0.16); background: rgba(232,160,32,0.05); }
+.signal-icon { margin: 0 auto 12px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+.signal-name { font-size: 14px; font-weight: 800; letter-spacing: -0.01em; color: #fff; margin-bottom: 8px; }
+.signal-desc { font-size: 11px; color: rgba(255,255,255,0.58); line-height: 1.6; }
+
+/* PILL */
+.pill {
+    display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.10em;
+    color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04);
+}
+.pill-amber { background: rgba(232,160,32,0.10); color: var(--amber); border-color: rgba(232,160,32,0.28); }
+.pill-gap { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.72); border-color: rgba(255,255,255,0.22); border-radius: 6px; padding: 3px 10px; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; }
+
+/* LIFECYCLE */
+.lc-grid-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; margin-bottom: 14px; }
+.lc-grid { display: flex; gap: 6px; min-width: 700px; }
+.lc-stage {
+    flex: 1; padding: 10px 8px; background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; text-align: center;
+    display: flex; flex-direction: column; gap: 4px;
+}
+.lc-stage.lc-sentriq { background: rgba(232,160,32,0.10); border-color: rgba(232,160,32,0.45); }
+.lc-stage.lc-danger { background: rgba(224,85,85,0.07); border-color: rgba(224,85,85,0.25); }
+.lc-badge { font-size: 9px; font-weight: 800; color: var(--amber); height: 14px; }
+.lc-name { font-size: 10px; font-weight: 700; color: #fff; }
+.lc-tool { font-size: 9px; color: var(--muted); }
+.lc-cost { font-size: 9px; font-weight: 600; color: rgba(255,255,255,0.55); }
+
+/* TEAM GRID */
+.team-origin {
+    padding: 18px 22px; background: rgba(232,160,32,0.06);
+    border: 1px solid rgba(232,160,32,0.20); border-radius: 12px; margin-bottom: 16px;
+}
+.team-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 12px; }
+.team-card { padding: 20px; border-radius: 14px; }
+.team-card-s { background: rgba(232,160,32,0.04); border: 1px solid rgba(232,160,32,0.18); }
+.team-card-b { background: rgba(68,204,136,0.04); border: 1px solid rgba(68,204,136,0.18); }
+.team-avatar {
+    width: 46px; height: 46px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 700; flex-shrink: 0; color: #09090F;
+}
+.proof-item {
+    padding: 10px 12px; background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07); border-radius: 8px;
+    font-size: 11px; color: rgba(255,255,255,0.65); line-height: 1.6; margin-bottom: 8px;
+}
+.proof-item strong { color: #fff; font-weight: 700; display: block; margin-bottom: 3px; }
+
+/* ASK */
+.ask-amount { font-size: clamp(56px,8vw,96px); font-weight: 900; letter-spacing: -0.05em; color: var(--amber); line-height: 1; }
+.ask-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.ask-col-title { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.10em; color: rgba(255,255,255,0.65); margin-bottom: 12px; }
+.ask-item { position: relative; padding-left: 14px; font-size: 12px; color: rgba(255,255,255,0.65); line-height: 1.65; margin-bottom: 6px; }
+.ask-item::before { content: ''; position: absolute; left: 0; top: 8px; width: 4px; height: 4px; border-radius: 50%; background: var(--amber); }
+
+/* STEP ARROW */
+.step-arrow { text-align: center; font-size: 18px; color: var(--muted); }
+
+/* COMPETITIVE QUADRANT */
+.comp-node { cursor: default; }
+#comp-tooltip {
+    display: none; position: fixed; z-index: 99999;
+    background: rgba(9,9,15,0.97); border: 1px solid rgba(232,160,32,0.45);
+    border-radius: 8px; padding: 8px 13px; max-width: 200px;
+    font-size: 10px; line-height: 1.55; color: rgba(255,255,255,0.82);
+    font-family: 'Space Grotesk', sans-serif; font-weight: 500;
+    text-align: center; pointer-events: none;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.55); word-break: normal;
+}
+
+/* SOURCES */
+.sources { margin-top: 10px; font-size: 9px; color: rgba(255,255,255,0.28); line-height: 1.6; }
+.sources a { color: rgba(255,255,255,0.28); text-decoration: none; }
+.sources a:hover { color: var(--amber); }
+
+/* STACK LAYER */
+.stack-layer {
+    display: flex; align-items: center; padding: 9px 12px;
+    border-radius: 7px; border: 1px solid rgba(255,255,255,0.07);
+    background: rgba(255,255,255,0.02); margin-bottom: 4px;
+}
+.stack-layer-label { font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.45); width: 170px; flex-shrink: 0; }
+.stack-layer-vendors { font-size: 10.5px; color: rgba(255,255,255,0.38); flex: 1; }
+.stack-layer-badge { margin-left: auto; font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 2px 7px; border-radius: 4px; background: rgba(68,204,136,0.10); color: #44CC88; border: 1px solid rgba(68,204,136,0.22); white-space: nowrap; }
+
+/* QUOTE */
+.hero-quote { padding: 12px 18px; background: rgba(255,255,255,0.03); border-left: 3px solid var(--amber); border-radius: 0 8px 8px 0; }
+
+@media (max-width: 860px) {
+    .slide { padding: 20px 16px 68px; }
+    .signal-grid { grid-template-columns: 1fr; }
+    .ask-grid { grid-template-columns: 1fr; }
+    .team-cards { grid-template-columns: 1fr; }
+    .lc-grid { min-width: 600px; }
+    .tri-svg { width: clamp(130px,40vw,240px); }
+    .giant { font-size: 24px; }
+    .tri-stat-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+    .tri-stat-grid .tri-wrap { order: -1; }
+    .col2-mobile { grid-template-columns: 1fr !important; }
+    .col3-mobile { grid-template-columns: 1fr !important; }
+    .step-arrow { display: none !important; }
+}
+@media (max-width: 768px) {
+    .comp-mobile-list { display: block !important; }
+    .comp-quadrant-wrap { display: none !important; }
+}
+@media (max-width: 640px) {
+    .stack-layer-label { width: 100px; }
+    .lc-grid-wrap { overflow-x: auto; }
+    .step-arrow { display: none !important; }
+    .comp-mobile-list { display: block !important; }
+    .comp-quadrant-wrap { display: none !important; }
+    .comp-mobile-list .comp-grid-inner { grid-template-columns: 1fr 1fr !important; }
+    .ask-grid-col2 { display: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div id="gate" style="position:fixed;inset:0;z-index:99999;background:#09090F;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',system-ui,sans-serif;">
+    <div style="width:100%;max-width:360px;padding:0 24px;text-align:center;">
+        <div style="margin-bottom:32px;">
+            <div style="display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:6px;">
+                <svg width="36" height="36" viewBox="0 0 56 56" fill="none"><rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><circle cx="28" cy="7" r="3" fill="#E8A020"/></svg>
+                <span style="font-size:22px;font-weight:500;color:#fff;letter-spacing:-0.01em;">Sentriq<span style="color:#E8A020;">.</span></span>
+            </div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:4px;font-weight:500;">Investor Briefing: Confidential</div>
+        </div>
+        <input id="gateInput" type="password" placeholder="Enter access code" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onkeydown="if(event.key==='Enter')checkPass()" style="width:100%;padding:14px 18px;border-radius:10px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.06);color:#fff;font-size:15px;font-family:inherit;outline:none;margin-bottom:12px;text-align:center;letter-spacing:0.05em;">
+        <button onclick="checkPass()" style="width:100%;padding:14px;border-radius:10px;border:none;background:#E8A020;color:#09090F;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;" onmouseover="this.style.background='#B87010'" onmouseout="this.style.background='#E8A020'">View Deck</button>
+        <div id="gateError" style="font-size:12px;color:rgba(224,85,85,0.9);margin-top:10px;opacity:0;transition:opacity 0.3s;">Incorrect access code. Please try again.</div>
+        <div style="margin-top:32px;font-size:11px;color:rgba(255,255,255,0.2);line-height:1.6;">This document contains confidential and proprietary information.<br>Unauthorized access is prohibited.</div>
+    </div>
+</div>
+
+<script>
+function pingOpen() {
+    var ua = navigator.userAgent;
+    var t = new Date().toISOString();
+    fetch('https://ipapi.co/json/')
+        .then(function(r){ return r.json(); })
+        .then(function(geo) {
+            var loc = (geo.city||'') + ', ' + (geo.country_name||'') + ' (' + (geo.ip||'') + ')';
+            var org = geo.org || '';
+            var msg = 'Sentriq Flybridge deck opened\n' + loc + '\n' + org + '\n' + t;
+            fetch('https://ntfy.sh/sentriq-fb-v4m2', { method:'POST', mode:'no-cors', body:msg }).catch(function(){});
+        })
+        .catch(function() {
+            fetch('https://ntfy.sh/sentriq-fb-v4m2', {
+                method:'POST', mode:'no-cors',
+                body: 'Sentriq Flybridge deck opened (geo unavailable)\n' + ua.substring(0,80) + '\n' + t
+            }).catch(function(){});
+        });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('deck').style.display = 'none';
+    if (sessionStorage.getItem('fb-pinged')) {
+        document.getElementById('gate').style.display = 'none';
+        document.getElementById('deck').style.display = '';
+        showSlide(0);
+    }
+});
+
+function checkPass() {
+    var val = document.getElementById('gateInput').value;
+    if (val === atob('RkJzZW50cmlxMjAyNg==')) {
+        document.getElementById('gate').style.display = 'none';
+        document.getElementById('deck').style.display = '';
+        if (!sessionStorage.getItem('fb-pinged')) {
+            pingOpen();
+            sessionStorage.setItem('fb-pinged', '1');
+        }
+        showSlide(0);
+    } else {
+        var err = document.getElementById('gateError');
+        err.style.opacity = '1';
+        setTimeout(function() { err.style.opacity = '0'; }, 2500);
+        document.getElementById('gateInput').value = '';
+    }
+}
+
+var currentSlide = 0;
+var totalSlides = 14;
+
+function showSlide(n) {
+    var slides = document.querySelectorAll('.slide');
+    if (n < 0) n = 0;
+    if (n >= totalSlides) n = totalSlides - 1;
+    slides.forEach(function(s) { s.classList.remove('active'); });
+    var target = document.querySelector('.slide[data-index="' + n + '"]');
+    if (target) target.classList.add('active');
+    currentSlide = n;
+    document.getElementById('slideCounter').textContent = (n + 1) + ' / ' + totalSlides;
+    document.getElementById('progressBar').style.width = ((n + 1) / totalSlides * 100) + '%';
+    var badge = document.getElementById('meetingBadge');
+    badge.style.opacity = n > 0 ? '1' : '0';
+}
+
+function changeSlide(dir) { showSlide(currentSlide + dir); }
+
+document.addEventListener('keydown', function(e) {
+    if (document.getElementById('gate').style.display === 'none' || document.getElementById('gate').style.display === '') {
+        if (document.getElementById('deck').style.display !== 'none') {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+        }
+    }
+});
+
+// Touch / swipe navigation
+(function() {
+    var touchStartX = 0;
+    var touchStartY = 0;
+    document.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].clientX;
+        touchStartY = e.changedTouches[0].clientY;
+    }, { passive: true });
+    document.addEventListener('touchend', function(e) {
+        if (document.getElementById('deck').style.display === 'none') return;
+        var dx = e.changedTouches[0].clientX - touchStartX;
+        var dy = e.changedTouches[0].clientY - touchStartY;
+        // Only trigger on predominantly horizontal swipes of at least 40px
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+            if (dx < 0) changeSlide(1);
+            else changeSlide(-1);
+        }
+    }, { passive: true });
+})();
+
+// Competitive quadrant tooltip
+document.addEventListener('DOMContentLoaded', function() {
+    var tooltip = document.getElementById('comp-tooltip');
+    document.querySelectorAll('.comp-node').forEach(function(node) {
+        node.addEventListener('mouseenter', function() {
+            var tip = node.getAttribute('data-tip');
+            if (tip && tooltip) { tooltip.textContent = tip; tooltip.style.display = 'block'; }
+        });
+        node.addEventListener('mousemove', function(e) {
+            if (tooltip) { tooltip.style.left = (e.clientX + 14) + 'px'; tooltip.style.top = (e.clientY - 36) + 'px'; }
+        });
+        node.addEventListener('mouseleave', function() {
+            if (tooltip) tooltip.style.display = 'none';
+        });
+    });
+});
+</script>
+
+<div class="progress-bar" id="progressBar"></div>
+<div class="confidential">Confidential</div>
+<div class="meeting-badge" id="meetingBadge">Flybridge</div>
+
+<div class="deck" id="deck" style="display:none;">
+
+<!-- NAV -->
+<nav class="nav-bar">
+    <div class="nav-logo">
+        <svg width="22" height="22" viewBox="0 0 56 56" fill="none"><rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><circle cx="28" cy="7" r="3" fill="#E8A020"/></svg>
+        Sentriq
+    </div>
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="changeSlide(-1)">&#8592;</button>
+        <span class="slide-counter" id="slideCounter">1 / 14</span>
+        <button class="nav-btn" onclick="changeSlide(1)">&#8594;</button>
+    </div>
+</nav>
+
+
+<!-- ===================================================
+     SLIDE 0: HOOK
+     =================================================== -->
+<div class="slide bg-hook" data-index="0">
+<div class="slide-inner" style="text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;">
+
+    <div style="display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:52px;">
+        <svg width="34" height="34" viewBox="0 0 56 56" fill="none"><rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><circle cx="28" cy="7" r="3" fill="#E8A020"/></svg>
+        <span style="font-size:17px;font-weight:500;color:#fff;letter-spacing:-0.01em;">Sentriq<span style="color:#E8A020;">.</span></span>
+    </div>
+
+    <p class="giant" style="max-width:820px;">
+        Hiring has always run on text.
+    </p>
+    <p class="giant" style="max-width:820px;margin-top:10px;color:var(--amber);">
+        AI just made that text untrustworthy.
+    </p>
+
+    <p style="margin-top:36px;font-size:clamp(13px,1.5vw,16px);color:rgba(255,255,255,0.50);font-weight:500;max-width:460px;line-height:1.75;">
+        The application is the first signal. Sentriq is the only layer that reads it.
+    </p>
+
+    <p style="margin-top:20px;font-size:clamp(12px,1.3vw,14px);color:rgba(255,255,255,0.28);font-weight:400;max-width:480px;line-height:1.75;font-style:italic;">
+        We're Samuel and Ben. We met at our kids' kindergarten and noticed the same problem from opposite sides of the table.
+    </p>
+
+    <div style="margin-top:32px;padding:12px 26px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:10px;">
+        <p style="font-size:13px;color:rgba(255,255,255,0.45);">Samuel Kemper &amp; Ben Czarninski &nbsp;&#183;&nbsp; Pre-Seed 2026</p>
+    </div>
+
+</div>
+</div>
+
+
+<!-- SLIDE 1: THE PROBLEM - TRIANGLE -->
+<div class="slide bg-dark" data-index="1">
+<div class="slide-inner">
+
+    <span class="label-muted">The Problem</span>
+    <h2>Volume is up 4x. <span style="color:#fff;">Recruiters cannot tell which applications are real.</span></h2>
+    <p style="font-size:13px;color:rgba(255,255,255,0.50);margin-bottom:22px;line-height:1.65;">AI ends the signal advantage recruiters relied on.</p>
+
+    <div class="tri-stat-grid">
+
+        <!-- LEFT STAT -->
+        <div style="text-align:center;padding:16px;">
+            <div style="font-size:clamp(30px,4.2vw,54px);font-weight:900;letter-spacing:-0.04em;color:var(--amber);line-height:1;">4x</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.42);margin-top:6px;line-height:1.5;">Applications submitted<br>per role since 2022</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.30);margin-top:4px;">LinkedIn Economic Graph, 2024</div>
+        </div>
+
+        <!-- TRIANGLE -->
+        <div class="tri-wrap">
+            <svg class="tri-svg" viewBox="0 0 440 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <filter id="glow"><feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                    <linearGradient id="tg" x1="220" y1="30" x2="220" y2="390" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#E8A020" stop-opacity="0.9"/>
+                        <stop offset="100%" stop-color="#E8A020" stop-opacity="0.4"/>
+                    </linearGradient>
+                </defs>
+                <polygon points="220,42 44,372 396,372" fill="rgba(232,160,32,0.04)" stroke="none"/>
+                <polygon points="220,42 44,372 396,372" fill="none" stroke="url(#tg)" stroke-width="2.2" filter="url(#glow)"/>
+                <circle cx="220" cy="42" r="5" fill="#E8A020" opacity="0.9"/>
+                <circle cx="44" cy="372" r="5" fill="#E8A020" opacity="0.9"/>
+                <circle cx="396" cy="372" r="5" fill="#E8A020" opacity="0.9"/>
+                <text x="220" y="18" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="800" fill="rgba(255,255,255,0.72)" letter-spacing="2">SHORTLIST INTEGRITY</text>
+                <text x="20" y="412" text-anchor="start" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="800" fill="rgba(255,255,255,0.60)" letter-spacing="2">TIME TO FILL</text>
+                <text x="420" y="412" text-anchor="end" font-family="Space Grotesk, sans-serif" font-size="11" font-weight="800" fill="rgba(255,255,255,0.60)" letter-spacing="2">MATCH QUALITY</text>
+                <text x="220" y="212" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="700" fill="rgba(255,255,255,0.45)">Breaking</text>
+                <text x="220" y="232" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="700" fill="rgba(255,255,255,0.45)">simultaneously</text>
+            </svg>
+        </div>
+
+        <!-- RIGHT STATS -->
+        <div style="text-align:center;padding:16px;display:flex;flex-direction:column;gap:14px;">
+            <div>
+                <div style="font-size:clamp(24px,3.4vw,46px);font-weight:900;letter-spacing:-0.04em;color:var(--amber);line-height:1;">23h</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.42);margin-top:5px;line-height:1.5;">per open role<br>lost to manual screening</div>
+                <div style="font-size:10px;color:rgba(255,255,255,0.30);margin-top:3px;">Shortlist, 2025</div>
+            </div>
+            <div style="border-top:1px solid rgba(255,255,255,0.07);padding-top:12px;">
+                <div style="font-size:clamp(24px,3.4vw,46px);font-weight:900;letter-spacing:-0.04em;color:var(--amber);line-height:1;">51%</div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.42);margin-top:5px;line-height:1.5;">of hiring managers say CVs<br>don't accurately reflect skills</div>
+                <div style="font-size:10px;color:rgba(255,255,255,0.30);margin-top:3px;">Arctic Shores + Researchscape, 2026</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col2-mobile" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;">
+        <div style="text-align:center;padding:12px 18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:8px;">
+            <p style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.72);line-height:1.5;">35% of hiring managers are not convinced candidates represent themselves honestly. Before AI, recruiters had learned to manage the baseline. AI broke it.</p>
+            <p style="font-size:10px;color:rgba(255,255,255,0.35);margin-top:4px;">Arctic Shores + Researchscape, "State of Volume Hiring 2026," n=564 HMs + 1,105 job seekers</p>
+        </div>
+        <div style="text-align:center;padding:12px 18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:8px;display:flex;flex-direction:column;justify-content:center;">
+            <p style="font-size:14px;font-weight:700;color:#fff;line-height:1.4;">1 in 4 candidate profiles<br>will be fake by 2028.</p>
+            <p style="font-size:10px;color:rgba(255,255,255,0.50);margin-top:6px;font-weight:600;">Gartner, 2025</p>
+            <p style="font-size:10px;color:rgba(255,255,255,0.35);margin-top:3px;">AI made scale fabrication effortless. This is the new problem.</p>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+<!-- SLIDE 2: THE GAP - WHAT EXISTS -->
+<div class="slide bg-dark" data-index="2">
+<div class="slide-inner">
+
+    <span class="label-muted">The Missing Layer</span>
+    <h2>Every tool sits <span style="color:#fff;">downstream of the deception.</span></h2>
+    <p style="font-size:13px;color:rgba(255,255,255,0.50);margin-bottom:22px;line-height:1.65;">The submission event is unwatched. It is the only moment the application's origin is visible. That is where the deception happens.</p>
+
+    <!-- Hiring funnel scroll wrapper for mobile -->
+    <div class="funnel-scroll">
+    <div class="funnel-row">
+        <div style="text-align:center;">
+            <div style="padding:8px 4px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.45);border-bottom:2px solid rgba(255,255,255,0.07);margin-bottom:10px;">Browsing</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.38);line-height:1.6;">Nothing</div>
+        </div>
+        <div style="display:flex;align-items:flex-start;justify-content:center;padding-top:8px;font-size:16px;color:rgba(255,255,255,0.10);">&#8594;</div>
+        <div style="text-align:center;">
+            <div style="padding:8px 4px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--amber);border-bottom:2px solid var(--amber);margin-bottom:10px;background:rgba(232,160,32,0.08);border-radius:6px 6px 0 0;">Submission<br>Event</div>
+            <span class="pill-gap" style="display:inline-block;">Gap</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;justify-content:center;padding-top:8px;font-size:16px;color:rgba(255,255,255,0.10);">&#8594;</div>
+        <div style="text-align:center;">
+            <div style="padding:8px 4px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.45);border-bottom:2px solid rgba(255,255,255,0.07);margin-bottom:10px;">ATS + Screen</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.7;">Greenhouse Real Talent<br>Endorsed<br>Ashby detection</div>
+        </div>
+        <div style="display:flex;align-items:flex-start;justify-content:center;padding-top:8px;font-size:16px;color:rgba(255,255,255,0.10);">&#8594;</div>
+        <div style="text-align:center;">
+            <div style="padding:8px 4px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.45);border-bottom:2px solid rgba(255,255,255,0.07);margin-bottom:10px;">Interview / Post-hire</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.7;">HireVue<br>Checkr<br>Persona (identity)</div>
+        </div>
+    </div><!-- /funnel-row -->
+    </div><!-- /funnel-scroll -->
+
+    <div style="padding:14px 20px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.20);border-radius:10px;margin-bottom:14px;">
+        <p style="font-size:13px;color:rgba(255,255,255,0.70);line-height:1.65;">Sentriq captures behavioral and content signals at the moment of submission, the one moment every downstream tool misses. ATS incumbents process what is already in the funnel. Endorsed operates inside a single employer's funnel. Neither can see the submission event.</p>
+    </div>
+
+    <div class="col2-mobile" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div class="hero-quote" style="border-radius:10px;border-left-width:3px;">
+            <p style="font-size:10px;color:rgba(255,255,255,0.38);margin-bottom:6px;font-weight:600;">First briefing. No prototype shown.</p>
+<p style="font-size:14px;color:rgba(255,255,255,0.88);line-height:1.65;font-style:italic;">"The topic is burning."</p>
+            <p style="font-size:11px;color:var(--amber);margin-top:8px;font-weight:700;">Eliana Carmel Gilboa &nbsp;|&nbsp; Chief People Officer, Booking Holdings &nbsp;·&nbsp; Sentriq Advisory Board</p>
+            <p style="font-size:10px;color:rgba(255,255,255,0.38);margin-top:4px;">24,000 employees globally &nbsp;·&nbsp; Booking Holdings</p>
+        </div>
+        <div style="padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+            <p style="font-size:13px;color:rgba(255,255,255,0.75);line-height:1.65;">IJSA 2025 study (n=237): between 25% and 33% of applicants used AI to fabricate or significantly inflate their responses. In live assessments, standard screening tools cannot distinguish AI-inflated responses from genuine ones.</p>
+            <p style="font-size:11px;color:rgba(255,255,255,0.55);margin-top:8px;font-weight:600;">Prof. Louis Hickman &nbsp;|&nbsp; I/O Psychology, Virginia Tech</p>
+            <p style="font-size:10px;color:rgba(255,255,255,0.38);margin-top:4px;">Lead author, IJSA 2025</p>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+<!-- SLIDE 3: PRE-SUBMISSION ADVANTAGE -->
+<div class="slide bg-dark" data-index="3">
+<div class="slide-inner">
+
+    <span class="label">Pre-Submission Advantage</span>
+    <h2>Enterprises verify integrity after $1,900+ per finalist has been committed. <span style="color:var(--amber);">Sentriq catches it at zero.</span></h2>
+    <p style="font-size:14px;color:rgba(255,255,255,0.50);max-width:680px;margin:10px 0 16px;line-height:1.65;">Sentriq operates at the moment of application. Before a single recruiter, engineer, or executive minute is committed.</p>
+
+    <div class="lc-grid-wrap">
+        <div class="lc-grid">
+            <div class="lc-stage lc-sentriq">
+                <div class="lc-badge">Sentriq<span style="color:#E8A020;">.</span></div>
+                <div class="lc-name">Application</div>
+                <div class="lc-tool">Candidate Hiring Captcha</div>
+                <div class="lc-cost">Signal here</div>
+            </div>
+            <div class="lc-stage">
+                <div class="lc-badge">&nbsp;</div>
+                <div class="lc-name">ATS Screen</div>
+                <div class="lc-tool">Greenhouse / Lever</div>
+                <div class="lc-cost">~$5 / application</div>
+            </div>
+            <div class="lc-stage">
+                <div class="lc-badge">&nbsp;</div>
+                <div class="lc-name">Assessment</div>
+                <div class="lc-tool">HireVue / Criteria</div>
+                <div class="lc-cost">~$30 / screen</div>
+            </div>
+            <div class="lc-stage">
+                <div class="lc-badge">&nbsp;</div>
+                <div class="lc-name">Phone Screen</div>
+                <div class="lc-tool">Recruiter</div>
+                <div class="lc-cost">~$30 / screen</div>
+            </div>
+            <div class="lc-stage">
+                <div class="lc-badge">&nbsp;</div>
+                <div class="lc-name">Tech Interview</div>
+                <div class="lc-tool">CodeSignal</div>
+                <div class="lc-cost">~$500 / interview</div>
+            </div>
+            <div class="lc-stage">
+                <div class="lc-badge">&nbsp;</div>
+                <div class="lc-name">Final Panel</div>
+                <div class="lc-tool">Hiring panel</div>
+                <div class="lc-cost">~$1,800 / panel</div>
+            </div>
+            <div class="lc-stage lc-danger">
+                <div class="lc-badge">&nbsp;</div>
+                <div class="lc-name">Background Check</div>
+                <div class="lc-tool">Checkr / HireRight</div>
+                <div class="lc-cost">~$1,900 accumulated</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col3-mobile" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:10px;">
+        <div style="padding:14px 16px;background:rgba(68,204,136,0.06);border:1px solid rgba(68,204,136,0.18);border-radius:10px;">
+            <div style="font-size:12px;font-weight:700;color:#44CC88;margin-bottom:6px;">Sentriq surfaces trust signals before the first calendar invite is sent.</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.50);line-height:1.6;">Every phone screen, every code challenge, every panel: all committed before a single application is verified.</div>
+        </div>
+        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+            <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.72);margin-bottom:6px;">Background checks run last</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.50);line-height:1.6;">After 6+ rounds. After $1,900+ in recruiter and executive time is already gone.</div>
+        </div>
+        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;">
+            <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px;">$4,683 per hire. Most of it committed before any signal.</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.50);line-height:1.6;">SHRM: average cost-per-hire $4,683 (2023). Panel interviews alone represent $1,800 of that, committed before a hire is made.</div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+<!-- ===================================================
+     SLIDE 4: THE PRODUCT
+     =================================================== -->
+<div class="slide bg-dark" data-index="4">
+<div class="slide-inner">
+
+    <span class="label">The Product</span>
+    <h2>The signal is ready <span style="color:var(--amber);">before the recruiter opens the first application.</span></h2>
+    <p style="font-size:11px;color:rgba(255,255,255,0.38);margin-bottom:14px;font-weight:500;">Demo live &nbsp;·&nbsp; First enterprise pilot conversations active</p>
+
+    <!-- Flow -->
+    <div style="margin-bottom:22px;padding:12px 18px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.18);border-radius:10px;text-align:center;">
+        <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+            <div style="padding:8px 14px;background:rgba(255,255,255,0.05);border-radius:8px;">
+                <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2px;">Application</div>
+                <div style="font-size:12px;font-weight:700;">Submitted</div>
+            </div>
+            <div class="step-arrow" style="font-size:18px;">&#8594;</div>
+            <div style="padding:8px 16px;background:rgba(232,160,32,0.15);border:2px solid rgba(232,160,32,0.40);border-radius:8px;">
+                <div style="font-size:9px;color:var(--amber);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2px;">Sentriq: application integrity layer</div>
+                <div style="font-size:12px;font-weight:700;color:#fff;">Trust Signal</div>
+            </div>
+            <div class="step-arrow" style="font-size:18px;">&#8594;</div>
+            <div style="padding:8px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;">
+                <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2px;">ATS</div>
+                <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.55);">Fit Score</div>
+            </div>
+            <div class="step-arrow" style="font-size:18px;">&#8594;</div>
+            <div style="padding:8px 14px;background:rgba(255,255,255,0.05);border-radius:8px;">
+                <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2px;">Recruiter</div>
+                <div style="font-size:12px;font-weight:700;">Decides</div>
+            </div>
+        </div>
+        <p style="font-size:10px;color:var(--muted);margin-top:8px;">Not a filter. Not a verdict. A trust signal the recruiter sees in context and acts on.</p>
+        <p style="font-size:10px;color:var(--muted);margin-top:4px;">Deployed as a JavaScript snippet on the careers page. No ATS modification required.</p>
+    </div>
+
+    <!-- Three layers -->
+    <div class="signal-grid">
+        <div class="signal-card active">
+            <div class="signal-icon">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" stroke="#E8A020" stroke-width="1.5" opacity="0.5"/><circle cx="14" cy="14" r="4" fill="#E8A020"/></svg>
+            </div>
+            <div style="font-size:10px;font-weight:700;color:rgba(232,160,32,0.75);letter-spacing:0.05em;margin-bottom:5px;">Layer 1</div>
+            <div class="signal-name">Behavioral Baseline</div>
+            <div class="signal-desc">Captured from the moment the application session begins, before identity is declared. Typing dynamics, paste events, field focus, idle periods, submission timing. Invisible. No friction.</div>
+        </div>
+        <div class="signal-card active">
+            <div class="signal-icon">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="6" y="7" width="16" height="2" rx="1" fill="#E8A020"/><rect x="6" y="13" width="12" height="2" rx="1" fill="#E8A020" opacity="0.6"/><rect x="6" y="19" width="8" height="2" rx="1" fill="#E8A020" opacity="0.3"/></svg>
+            </div>
+            <div style="font-size:10px;font-weight:700;color:rgba(232,160,32,0.75);letter-spacing:0.05em;margin-bottom:5px;">Layer 2</div>
+            <div style="font-size:8px;color:rgba(255,255,255,0.45);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.08em;">Triggered when needed</div>
+            <div class="signal-name">Async Challenge</div>
+            <div class="signal-desc">Triggered only when Layer 1 signals a mismatch. Calibrated to this application, this role, this specific gap. Zero friction for applications that clear Layer 1.</div>
+        </div>
+        <div class="signal-card active">
+            <div class="signal-icon">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="7" cy="14" r="3" fill="#E8A020"/><circle cx="21" cy="7" r="3" fill="#E8A020" opacity="0.6"/><circle cx="21" cy="21" r="3" fill="#E8A020" opacity="0.6"/><line x1="10" y1="13" x2="18" y2="8" stroke="#E8A020" stroke-width="1" opacity="0.4"/><line x1="10" y1="15" x2="18" y2="20" stroke="#E8A020" stroke-width="1" opacity="0.4"/></svg>
+            </div>
+            <div style="font-size:10px;font-weight:700;color:rgba(232,160,32,0.75);letter-spacing:0.05em;margin-bottom:5px;">Layer 3</div>
+            <div style="font-size:8px;color:rgba(255,255,255,0.45);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.08em;">Triggered when needed</div>
+            <div class="signal-name">Human Review</div>
+            <div class="signal-desc">Only flagged applications escalate. Recruiter sees signal, not verdict. Zero automated rejections. False positive rate disclosed per role during pilot. EU AI Act compliant by design.</div>
+        </div>
+    </div>
+
+    <div style="padding:10px 16px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.18);border-radius:8px;margin-bottom:12px;text-align:center;">
+        <span style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.10em;">Cross-Company Graph</span>
+        <span style="font-size:10px;color:rgba(255,255,255,0.55);margin-left:8px;">Layer 1 signals cross-referenced against behavioral patterns from every employer in the Sentriq network. Invisible to any single-employer funnel.</span>
+    </div>
+
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px;">
+        <span class="pill">Text-native</span>
+        <span class="pill">Fraud-trained</span>
+        <span class="pill">Platform-agnostic</span>
+        <span class="pill">Compliance-ready</span>
+    </div>
+
+</div>
+</div>
+
+
+<!-- SLIDE 5: PRODUCT EXTENDED -->
+<div class="slide bg-dark" data-index="5">
+<div class="slide-inner">
+
+    <span class="label">Product · Extended</span>
+    <h2>Built on the same signal layer. <span style="color:var(--amber);">Three capabilities that deepen coverage.</span></h2>
+    <p style="font-size:11px;color:rgba(255,255,255,0.38);margin-bottom:20px;font-weight:500;">Gap Assessor in demo &nbsp;·&nbsp; OSINT layer in development &nbsp;·&nbsp; ATS audit in pilot scope</p>
+
+    <div style="padding:20px 22px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.22);border-radius:12px;margin-bottom:20px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--amber);">Gap Assessor</div>
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,0.30);background:rgba(255,255,255,0.05);padding:2px 7px;border-radius:4px;letter-spacing:0.08em;">In demo</div>
+        </div>
+        <p style="font-size:14px;font-weight:700;color:#fff;margin-bottom:8px;">Credential gaps that survive every other filter.</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.62);line-height:1.65;">Reads interview transcripts and assignment submissions after the application is scored. Surfaces inconsistencies between claimed credentials and demonstrated knowledge. Triggers a personalized async challenge for that specific gap. Full audit trail through offer. Zero friction unless a gap is found.</p>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+        <div style="height:1px;flex:1;background:rgba(255,255,255,0.07);"></div>
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.28);">Extended Capabilities &nbsp;&middot;&nbsp; Roadmap</div>
+        <div style="height:1px;flex:1;background:rgba(255,255,255,0.07);"></div>
+    </div>
+
+    <div class="col2-mobile" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div style="padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:10px;">
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.40);margin-bottom:5px;">OSINT Intelligence Layer &nbsp;<span style="font-weight:500;letter-spacing:0.05em;">In development</span></div>
+            <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:6px;">Public Signal Cross-Reference</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.6;">Cross-references submitted claims against public signals: professional presence, contribution history, public record consistency. No friction. No candidate interaction.</div>
+        </div>
+        <div style="padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:10px;">
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.40);margin-bottom:5px;">ATS Security Audit &nbsp;<span style="font-weight:500;letter-spacing:0.05em;">Pilot scope</span></div>
+            <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:6px;">Adversarial Simulation</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.6;">Sentriq runs synthetic applications through the employer's live ATS intake and shows exactly which fabricated profiles would have entered undetected. The buyer sees the problem in their own data before signing anything.</div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+<!-- SLIDE 6: COMPETITIVE POSITIONING -->
+<div class="slide bg-dark" data-index="6">
+<div class="slide-inner" style="display:flex;flex-direction:column;min-height:0;">
+
+    <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px;flex-shrink:0;">
+        <div>
+            <span class="label">Competitive Positioning</span>
+            <h2 style="margin-bottom:0;">Every competitor is downstream. <span style="color:var(--amber);">We sit at the one moment they cannot reach.</span></h2>
+        <p style="font-size:11px;color:rgba(255,255,255,0.45);margin-bottom:6px;flex-shrink:0;">Category: Application Intelligence.</p>
+        </div>
+        <div style="text-align:right;flex-shrink:0;margin-left:20px;">
+            <div style="display:flex;gap:10px;align-items:center;justify-content:flex-end;">
+                <span style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.45);"><span style="width:8px;height:8px;border-radius:2px;background:rgba(232,160,32,0.40);display:inline-block;border:1px solid rgba(232,160,32,0.60);"></span>Sentriq zone</span>
+                <span style="display:flex;align-items:center;gap:4px;font-size:9px;color:rgba(255,255,255,0.45);"><span style="width:8px;height:8px;border-radius:2px;background:rgba(255,255,255,0.08);display:inline-block;border:1px solid rgba(255,255,255,0.15);"></span>Competitors</span>
+            </div>
+        </div>
+    </div>
+
+    <p style="font-size:11px;color:rgba(255,255,255,0.38);margin-bottom:10px;font-style:italic;">Hover any node to see why they cannot reach the submission layer.</p>
+    <!-- Y top label -->
+    <div style="text-align:center;margin-bottom:3px;flex-shrink:0;">
+        <span style="font-size:8.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:var(--amber);">&#9650; At Submission</span>
+    </div>
+
+    <!-- Axis row -->
+    <div class="comp-quadrant-wrap" style="display:flex;align-items:stretch;flex:1;min-height:0;gap:4px;">
+
+        <!-- Left axis label -->
+        <div style="width:50px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+            <span style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.55);white-space:nowrap;">Single Employer</span>
+        </div>
+
+        <!-- THE QUADRANT -->
+        <div style="position:relative;flex:1;border:1px solid rgba(255,255,255,0.09);border-radius:6px;overflow:hidden;min-height:clamp(260px,44vh,400px);">
+
+            <!-- Quadrant backgrounds -->
+            <div style="position:absolute;right:0;top:0;width:50%;height:50%;background:rgba(232,160,32,0.08);box-shadow:inset -20px -20px 60px rgba(232,160,32,0.06);pointer-events:none;"></div>
+            <div style="position:absolute;left:0;top:0;width:50%;height:50%;background:rgba(255,255,255,0.01);pointer-events:none;"></div>
+            <div style="position:absolute;left:0;bottom:0;width:50%;height:50%;background:rgba(255,255,255,0.01);pointer-events:none;"></div>
+            <div style="position:absolute;right:0;bottom:0;width:50%;height:50%;background:rgba(255,255,255,0.015);pointer-events:none;"></div>
+
+            <!-- Axis lines -->
+            <div style="position:absolute;top:50%;left:0;right:0;height:1px;background:rgba(255,255,255,0.13);pointer-events:none;"></div>
+            <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.13);pointer-events:none;"></div>
+
+            <!-- Quadrant labels -->
+            <div style="position:absolute;left:9px;top:7px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.13);pointer-events:none;">Candidate Sourcing</div>
+            <div style="position:absolute;right:9px;top:7px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(232,160,32,0.35);text-align:right;pointer-events:none;">Application Intelligence</div>
+            <div style="position:absolute;left:9px;bottom:7px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.13);pointer-events:none;">Screening Tools</div>
+            <div style="position:absolute;right:9px;bottom:7px;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.13);text-align:right;pointer-events:none;">Identity Networks</div>
+
+            <!-- SENTRIQ -->
+            <div class="comp-node" data-tip="Application integrity layer. Pre-identity behavioral signals and cross-org signal graph. No competitor owns this position." style="position:absolute;left:75%;top:15%;transform:translate(-50%,-50%);z-index:10;">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="padding:5px 11px;background:rgba(232,160,32,0.20);border:1.5px solid rgba(232,160,32,0.65);border-radius:8px;box-shadow:0 0 28px rgba(232,160,32,0.40),0 0 6px rgba(232,160,32,0.25);display:flex;align-items:center;gap:5px;">
+                        <svg width="11" height="11" viewBox="0 0 56 56" fill="none"><rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><circle cx="28" cy="7" r="3" fill="#E8A020"/></svg>
+                        <span style="font-size:11px;font-weight:800;color:var(--amber);letter-spacing:-0.01em;">Sentriq</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ENDORSED -->
+            <div class="comp-node" data-tip="Application integrity signal at the post-submission layer. Identity and behavioral signals for single-employer funnels. Paying enterprise customers including Yahoo and Korn Ferry." style="position:absolute;left:57%;top:22%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/endorsed.ai" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=endorsed.ai&sz=32';this.onerror=null;" alt=""/></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Endorsed</div>
+                </div>
+            </div>
+
+            <!-- TOFU -->
+            <div class="comp-node" data-tip="Cross-employer fraud profile database (5M+ post-submission records). Knows if a profile appeared in other funnels. Cannot see what happens before the application is submitted. No pre-submission behavioral signal. Powers Gem's Fraud Detection Agent." style="position:absolute;left:48%;top:38%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;">
+                        <img src="https://logo.clearbit.com/hiretofu.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=hiretofu.com&sz=32';this.onerror=null;" alt="T"/>
+                    </div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;letter-spacing:0.02em;">Tofu</div>
+                </div>
+            </div>
+
+            <!-- GEM -->
+            <div class="comp-node" data-tip="AI-first recruiting CRM. Launched a submission-layer Fraud Detection Agent in Q1 2026, powered by Tofu. Operates within a single employer's funnel only. No cross-employer signal layer." style="position:absolute;left:20%;top:12%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/gem.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=gem.com&sz=32';this.onerror=null;" alt=""/></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Gem</div>
+                </div>
+            </div>
+
+            <!-- ASHBY -->
+            <div class="comp-node" data-tip="Modern all-in-one ATS. Native application integrity detection launched Sep 2025. Acquired Talent Llama for AI interviewing (May 2026). Single-employer only. No cross-employer signal layer." style="position:absolute;left:20%;top:32%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/ashbyhq.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=ashbyhq.com&sz=32';this.onerror=null;" alt=""/></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Ashby</div>
+                </div>
+            </div>
+
+            <!-- GREENHOUSE -->
+            <div class="comp-node" data-tip="Real Talent module inside Greenhouse ATS: AI matching, spam detection, identity verification via CLEAR. Launched May 2025. No cross-employer signal layer." style="position:absolute;left:32%;top:40%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/greenhouse.io" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=greenhouse.io&sz=32';this.onerror=null;" alt=""/></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Greenhouse</div>
+                </div>
+            </div>
+
+            <!-- CROSSCHQ -->
+            <div class="comp-node" data-tip="Hiring intelligence platform covering resume screening, AI interviews, reference checks, and application screening. Cross-employer referral pool via opted-in candidates. No pre-submission behavioral signal." style="position:absolute;left:67%;top:52%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/crosschq.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=crosschq.com&sz=32';this.onerror=null;" alt=""/></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Crosschq</div>
+                </div>
+            </div>
+
+            <!-- SOCURE -->
+            <div class="comp-node" data-tip="AI identity graph with 40B+ verified outcomes. Launched Workforce Verification for HR in July 2025. Identity signal only; no behavioral or content signal on the application itself." style="position:absolute;left:63%;top:28%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/socure.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=socure.com&sz=32';this.onerror=null;" alt=""/></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Socure</div>
+                </div>
+            </div>
+
+            <!-- HIREVUE -->
+            <div class="comp-node" data-tip="Video interview AI scoring platform. Operates from phone-screen stage onward. Single-employer. Facing active EEOC bias charge (March 2025)." style="position:absolute;left:18%;top:53%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/hirevue.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=hirevue.com&sz=32';this.onerror=null;" alt=""/></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">HireVue</div>
+                </div>
+            </div>
+
+            <!-- PERSONA -->
+            <div class="comp-node" data-tip="Identity verification platform. Candidate Verification product launched March 2026. Confirms who the person is, not whether the application content is real. Complementary to Sentriq, not competing." style="position:absolute;left:15%;top:65%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/withpersona.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=withpersona.com&sz=32';this.onerror=null;" alt=""/></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Persona</div>
+                </div>
+            </div>
+
+            <!-- CHECKR -->
+            <div class="comp-node" data-tip="Background screening. Launched identity verification March 2026. Post-application and pre-offer stages. No pre-submission behavioral signal." style="position:absolute;left:26%;top:73%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/checkr.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=checkr.com&sz=32';this.onerror=null;" alt=""/></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Checkr</div>
+                </div>
+            </div>
+
+            <!-- PHENOM -->
+            <div class="comp-node" data-tip="Talent experience platform with AI screening and a Voice Screening Agent. Integrates with existing ATS. No cross-employer data sharing." style="position:absolute;left:10%;top:26%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/phenom.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=phenom.com&sz=32';this.onerror=null;" alt=""/></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Phenom</div>
+                </div>
+            </div>
+
+            <!-- SHERLOCK AI -->
+            <div class="comp-node" data-tip="Interview integrity detection via multimodal analysis: video, audio, typing, gaze tracking. Catches proxy interviews at the interview stage. Not the application layer." style="position:absolute;left:38%;top:78%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/withsherlock.ai" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=withsherlock.ai&sz=32';this.onerror=null;" alt=""/></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Sherlock AI</div>
+                </div>
+            </div>
+
+            <!-- YARDSTIK -->
+            <div class="comp-node" data-tip="Background screening. Launched Human Trust Platform Feb 2026: AI integrity verification, identity verification, continuous monitoring. Post-submission focus." style="position:absolute;left:12%;top:82%;transform:translate(-50%,-50%);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+                    <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/yardstik.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.src='https://www.google.com/s2/favicons?domain=yardstik.com&sz=32';this.onerror=null;" alt=""/></div>
+                    <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;">Yardstik</div>
+                </div>
+            </div>
+
+        </div><!-- /quadrant -->
+
+        <!-- Right axis label -->
+        <div style="width:50px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+            <span style="writing-mode:vertical-rl;font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(232,160,32,0.65);white-space:nowrap;">Cross-Employer Intel</span>
+        </div>
+
+    </div><!-- /axis row -->
+
+    <!-- Y bottom label -->
+    <div style="text-align:center;margin-top:3px;flex-shrink:0;">
+        <span style="font-size:8.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.35);">&#9660; Post-Submission</span>
+    </div>
+
+    <!-- Mobile fallback (shown at max-width:768px via CSS) -->
+    <div class="comp-mobile-list" style="display:none;margin-top:16px;">
+        <div class="comp-grid-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:11px;">
+            <div style="padding:10px;background:rgba(232,160,32,0.10);border:1px solid rgba(232,160,32,0.35);border-radius:8px;text-align:center;"><strong style="color:var(--amber);">Sentriq</strong><div style="color:rgba(255,255,255,0.55);font-size:9px;margin-top:4px;">Submission + Cross-employer</div></div>
+            <div style="padding:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:8px;text-align:center;"><strong style="color:#fff;">Endorsed</strong><div style="color:rgba(255,255,255,0.45);font-size:9px;margin-top:4px;">Post-submission, single</div></div>
+            <div style="padding:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:8px;text-align:center;"><strong style="color:#fff;">Greenhouse</strong><div style="color:rgba(255,255,255,0.45);font-size:9px;margin-top:4px;">ATS, single employer</div></div>
+            <div style="padding:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:8px;text-align:center;"><strong style="color:#fff;">Socure</strong><div style="color:rgba(255,255,255,0.45);font-size:9px;margin-top:4px;">Identity layer, no behavioral signal</div></div>
+            <div style="padding:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:8px;text-align:center;"><strong style="color:#fff;">HireVue</strong><div style="color:rgba(255,255,255,0.45);font-size:9px;margin-top:4px;">Interview, single</div></div>
+            <div style="padding:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:8px;text-align:center;"><strong style="color:#fff;">Phenom</strong><div style="color:rgba(255,255,255,0.45);font-size:9px;margin-top:4px;">ATS layer, single</div></div>
+            <div style="padding:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:8px;text-align:center;"><strong style="color:#fff;">Tofu</strong><div style="color:rgba(255,255,255,0.45);font-size:9px;margin-top:4px;">Fraud detection, no network</div></div>
+            <div style="padding:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:8px;text-align:center;"><strong style="color:#fff;">Gem</strong><div style="color:rgba(255,255,255,0.45);font-size:9px;margin-top:4px;">Post-submission, single</div></div>
+            <div style="padding:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:8px;text-align:center;"><strong style="color:#fff;">Ashby</strong><div style="color:rgba(255,255,255,0.45);font-size:9px;margin-top:4px;">ATS + detection, single</div></div>
+            <div style="padding:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:8px;text-align:center;"><strong style="color:#fff;">Crosschq</strong><div style="color:rgba(255,255,255,0.45);font-size:9px;margin-top:4px;">Post-offer, opt-in</div></div>
+            <div style="padding:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:8px;text-align:center;"><strong style="color:#fff;">Persona</strong><div style="color:rgba(255,255,255,0.45);font-size:9px;margin-top:4px;">Identity only</div></div>
+            <div style="padding:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:8px;text-align:center;"><strong style="color:#fff;">Checkr</strong><div style="color:rgba(255,255,255,0.45);font-size:9px;margin-top:4px;">Background, post-offer</div></div>
+            <div style="padding:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:8px;text-align:center;"><strong style="color:#fff;">Sherlock AI</strong><div style="color:rgba(255,255,255,0.45);font-size:9px;margin-top:4px;">Profile verification</div></div>
+            <div style="padding:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:8px;text-align:center;"><strong style="color:#fff;">Yardstik</strong><div style="color:rgba(255,255,255,0.45);font-size:9px;margin-top:4px;">Trust platform, post-hire</div></div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<div id="comp-tooltip"></div>
+
+<!-- SLIDE 6: COMPETITIVE MOAT -->
+<div class="slide bg-dark" data-index="7">
+<div class="slide-inner">
+
+    <span class="label">Competitive Moat</span>
+    <h2>Every incumbent signed their data wall into contracts <span style="color:var(--amber);">before this problem existed.</span></h2>
+    <p style="font-size:13px;color:rgba(255,255,255,0.50);margin-bottom:22px;line-height:1.65;">This is not a feature gap. It is an architectural constraint no product update can undo.</p>
+
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+
+        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;display:grid;grid-template-columns:88px 1fr;gap:14px;align-items:start;">
+            <div style="padding:6px 8px;background:rgba(255,255,255,0.05);border-radius:7px;text-align:center;">
+                <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,0.72);">Tofu / Gem</div>
+                <div style="font-size:9px;color:var(--muted);margin-top:2px;">Fraud database</div>
+            </div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.65);line-height:1.65;">Tofu's 5M+ fraud profile database powers Gem's detection agent. It is a <strong style="color:rgba(255,255,255,0.80);">post-submission lookup</strong>: did this profile appear at another employer? Sentriq captures <strong style="color:rgba(255,255,255,0.80);">pre-submission behavioral signals during the session itself</strong>, the moment Tofu cannot reach.</div>
+        </div>
+
+        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;display:grid;grid-template-columns:88px 1fr;gap:14px;align-items:start;">
+            <div style="padding:6px 8px;background:rgba(255,255,255,0.05);border-radius:7px;text-align:center;">
+                <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,0.72);">Endorsed</div>
+                <div style="font-size:9px;color:var(--muted);margin-top:2px;">Signal layer</div>
+            </div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.65);line-height:1.65;">Reads behavioral signals inside one employer's funnel after submission. No pre-submission capture, no cross-employer behavioral graph. Sentriq's behavioral model is trained on signals from every employer in the network. The pattern at company 15 was learned at companies 1 through 14.</div>
+        </div>
+
+        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;display:grid;grid-template-columns:88px 1fr;gap:14px;align-items:start;">
+            <div style="padding:6px 8px;background:rgba(255,255,255,0.05);border-radius:7px;text-align:center;">
+                <div style="font-size:11px;font-weight:800;color:rgba(255,255,255,0.72);">Crosschq</div>
+                <div style="font-size:9px;color:var(--muted);margin-top:2px;">Reference net</div>
+            </div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.65);line-height:1.65;">Cross-employer pool is opt-in and post-offer: a reference network, not a submission-layer signal. Operates after the deception has already cleared every stage of the funnel.</div>
+        </div>
+
+    </div>
+
+    <div style="padding:14px 18px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.20);border-radius:10px;">
+        <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.10em;margin-bottom:7px;">The window is not closing</div>
+        <p style="font-size:12px;color:rgba(255,255,255,0.72);line-height:1.65;">Every ATS that ships a detection feature announces the problem to their entire customer base. Each launch validates Sentriq's category and drives the next wave of enterprise demand. The incumbents are building the market for us.</p>
+    </div>
+
+</div>
+</div>
+
+
+<!-- SLIDE 7: NETWORK EFFECTS -->
+<div class="slide bg-dark" data-index="8">
+<div class="slide-inner">
+
+    <span class="label">Network Effects</span>
+    <h2>By the time the 16th company joins, the network <span style="color:var(--amber);">already flagged the pattern at the 15th.</span></h2>
+
+    <div class="col2-mobile" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;">
+
+        <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:rgba(255,255,255,0.03);border-radius:10px;border-left:3px solid rgba(232,160,32,0.30);">
+                <div style="width:30px;height:30px;border-radius:50%;background:rgba(232,160,32,0.20);border:1px solid rgba(232,160,32,0.40);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;color:var(--amber);">1</div>
+                <div>
+                    <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;">Day one: signals are meaningful from the first application.</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.55;">Universal behavioral baselines apply without prior customer data. No cold-start problem.</div>
+                </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:rgba(255,255,255,0.03);border-radius:10px;border-left:3px solid rgba(232,160,32,0.55);">
+                <div style="width:30px;height:30px;border-radius:50%;background:rgba(232,160,32,0.25);border:1px solid rgba(232,160,32,0.50);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;color:var(--amber);">10</div>
+                <div>
+                    <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;">Cross-company patterns emerge.</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.55;">Same behavioral fingerprint at three companies last month? Flagged on arrival at the fourth, without employers sharing data.</div>
+                </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:rgba(255,255,255,0.03);border-radius:10px;border-left:3px solid var(--amber);">
+                <div style="width:30px;height:30px;border-radius:50%;background:rgba(232,160,32,0.30);border:1px solid rgba(232,160,32,0.60);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;color:var(--amber);">100</div>
+                <div>
+                    <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;">Campaign-level visibility.</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.55;">Coordinated clusters identified across the network before reaching any single employer. The signal no single company can see alone.</div>
+                </div>
+            </div>
+            <div style="padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;text-align:center;">
+                <p style="font-size:12px;color:rgba(255,255,255,0.80);line-height:1.6;"><strong style="color:var(--amber);">Value on day one, network moat by 2027.</strong></p>
+                <p style="font-size:11px;color:var(--muted);margin-top:4px;">Automated paste behavior, submission timing anomalies, AI content markers, and mass-apply fingerprints are universal signals. They fire from the first application, no prior customer data required. Each new employer adds to the behavioral model and lowers the detection threshold for every other.</p>
+            </div>
+        </div>
+
+        <div style="padding:20px;background:rgba(232,160,32,0.03);border:1px solid rgba(232,160,32,0.28);border-radius:14px;display:flex;flex-direction:column;gap:12px;">
+            <div style="padding:14px 16px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.20);border-radius:10px;">
+                <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.10em;margin-bottom:6px;">Flybridge's portfolio is the opening network</div>
+                <p style="font-size:12px;color:rgba(255,255,255,0.72);line-height:1.65;">Every Flybridge portfolio company that joins strengthens the detection graph for every other. Booking Holdings advisory is already live. BetterCloud, Chief, and other enterprise portfolio companies face this exact hiring scale problem today. The network compounds inside your portfolio before expanding outward.</p>
+            </div>
+            <div style="padding:10px 14px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.20);border-radius:8px;">
+                <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.10em;margin-bottom:5px;">The moat is two mechanisms</div>
+                <p style="font-size:11px;color:rgba(255,255,255,0.72);line-height:1.65;">Two things cross employer boundaries: behavioral model weights (updated by volume) and a pattern library built from CVs, job descriptions, and transcripts that surfaces inflated qualifications at the structural level. No individual record leaves an employer's environment.</p>
+            </div>
+            <div style="padding:10px 14px;background:rgba(232,160,32,0.08);border-radius:8px;border:1px solid rgba(232,160,32,0.20);">
+                <p style="font-size:12px;color:var(--amber);font-weight:600;text-align:center;">The more companies join, the harder it becomes to manipulate any of them.</p>
+                <p style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.55;margin-top:5px;text-align:center;">Behavioral session data builds with every application. It cannot be replicated by a competitor entering later.</p>
+            </div>
+            <div style="padding:10px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:8px;">
+                <p style="font-size:11px;color:rgba(255,255,255,0.55);line-height:1.55;"><strong style="color:rgba(255,255,255,0.72);">Privacy by design.</strong> Signals are anonymized and aggregated. No individual candidate data crosses employer boundaries. Consent architecture follows GDPR Article 6(1)(f) legitimate interest framework.</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+
+<!-- ===================================================
+     SLIDE 7: VALIDATION
+     =================================================== -->
+<div class="slide bg-dark" data-index="9">
+<div class="slide-inner">
+
+    <span class="label">Traction &amp; Validation</span>
+    <h2>Booking Holdings advisory signed. <span style="color:var(--amber);">Enterprise design partner conversations active.</span></h2>
+
+    <div class="col2-mobile" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;">
+
+        <div>
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.18em;margin-bottom:10px;">Design partner pipeline</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+
+                <div style="padding:14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);border-radius:10px;">
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                        <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--amber);background:rgba(232,160,32,0.10);border:1px solid rgba(232,160,32,0.25);padding:2px 6px;border-radius:4px;">In progress</div>
+                        <div style="font-size:12px;font-weight:700;color:#fff;">HSBC</div>
+                        <div style="font-size:9px;color:rgba(255,255,255,0.45);">Global bank · 220,000+ employees</div>
+                    </div>
+                    <div class="hero-quote">
+                        <p style="font-size:11px;color:rgba(255,255,255,0.85);line-height:1.6;font-style:italic;">"Every call costs the bank quite a bit of money. If the funnel is smaller, if you're able to screen more of these out before they even get to the call, that would be great."</p>
+                        <div style="margin-top:5px;font-size:10px;font-weight:700;color:var(--amber);">C.S. Lai, Director, HSBC Innovation Banking</div>
+                    </div>
+                    <p style="font-size:10px;color:rgba(255,255,255,0.45);margin-top:8px;">Two internal champions self-identified. Demo built against HSBC's live postings. Design partner agreement in progress.</p>
+                </div>
+
+
+            </div>
+
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.18em;margin-top:14px;margin-bottom:8px;">Confirmed advisor</div>
+            <div style="padding:14px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.22);border-radius:10px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+                    <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--amber);background:rgba(232,160,32,0.10);border:1px solid rgba(232,160,32,0.25);padding:2px 6px;border-radius:4px;">Advisory Board</div>
+                    <div style="font-size:12px;font-weight:700;color:#fff;">Eliana Carmel Gilboa</div>
+                </div>
+                <p style="font-size:11px;color:rgba(255,255,255,0.60);line-height:1.55;">Chief People Officer, Booking Holdings (24,000+ employees). Former CPO, Agoda (40+ countries). Product domain expert. Enterprise HR compliance authority. Confirmed advisory agreement.</p>
+            </div>
+        </div>
+
+        <div>
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.18em;margin-bottom:10px;">Validation + context</div>
+
+            <div style="padding:14px 16px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.22);border-radius:10px;margin-bottom:8px;">
+                <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.10em;margin-bottom:7px;">Flybridge Thesis Fit</div>
+                <p style="font-size:11px;color:rgba(255,255,255,0.72);line-height:1.65;">HSBC and Booking Holdings are the first two design partner conversations. Both are global enterprise accounts. ZestAI (trust in credit AI decisions) and BitSight (security intelligence) are the closest Flybridge portfolio analogies: infrastructure-layer trust signals that power decisions at scale. Sentriq is the same category for hiring.</p>
+            </div>
+
+            <div style="padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;margin-bottom:8px;">
+                <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:5px;">Prof. Louis Hickman, Virginia Tech</div>
+                <p style="font-size:11px;color:rgba(255,255,255,0.60);line-height:1.6;">I/O Psychology researcher. Lead author, IJSA 2025 (n=237): the most direct peer-reviewed empirical study on AI faking susceptibility in live hiring assessments. Research collaboration in progress on challenge design and question sequencing.</p>
+            </div>
+
+            <div style="padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:10px;margin-bottom:8px;">
+                <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:5px;">Coller Competition, Tel Aviv University</div>
+                <p style="font-size:11px;color:rgba(255,255,255,0.60);line-height:1.6;">Accepted. One of Israel's most selective startup competitions.</p>
+            </div>
+
+            <div style="padding:14px 16px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.25);border-radius:10px;margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+                    <div style="font-size:12px;font-weight:700;color:#fff;">RUNI Ventures</div>
+                    <div style="font-size:9px;font-weight:700;text-transform:uppercase;color:var(--amber);background:rgba(232,160,32,0.15);border:1px solid rgba(232,160,32,0.35);padding:3px 8px;border-radius:4px;letter-spacing:0.08em;">Active Investor Conversation</div>
+                </div>
+                <p style="font-size:11px;color:rgba(255,255,255,0.70);line-height:1.6;">Reichman University's seed fund. Advanced to next stage. Smart money: their academic and research network provides the institutional backbone for validating the async challenge methodology, a direct complement to the Hickman collaboration. Reichman's R&amp;D ecosystem is the natural home for Ben's early research roadmap in Israel.</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+
+<!-- ===================================================
+     SLIDE 8: TEAM
+     =================================================== -->
+<div class="slide bg-dark" data-index="10">
+<div class="slide-inner">
+
+    <span class="label">The Team</span>
+    <h2>The operator who ran the ATS. <span style="color:var(--amber);">The engineer who built behavioral signal systems from inside IDF intelligence.</span></h2>
+
+    <!-- Origin -->
+    <div class="team-origin">
+        <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:var(--amber);margin-bottom:8px;">The Origin</div>
+        <p style="font-size:15px;color:rgba(255,255,255,0.85);line-height:1.6;font-weight:500;">We met at our kids' kindergarten. Two fathers, one problem.</p>
+    </div>
+
+    <!-- Cards -->
+    <div class="team-cards">
+
+        <div class="team-card team-card-s">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+                <div class="team-avatar" style="background:linear-gradient(135deg,var(--amber),#B87010);box-shadow:0 0 0 3px #09090F,0 0 0 5px rgba(232,160,32,0.28);">S</div>
+                <div>
+                    <div style="font-size:15px;font-weight:700;">Samuel Kemper</div>
+                    <div style="font-size:11px;color:var(--amber);">Co-Founder, CEO</div>
+                    <div style="font-size:10px;color:rgba(255,255,255,0.55);margin-top:2px;">EMBA, Technion</div>
+                </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:7px;">
+                <div style="padding:8px 10px;background:rgba(232,160,32,0.06);border-radius:7px;border-left:2px solid rgba(232,160,32,0.45);">
+                    <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;">HR Operator &nbsp;·&nbsp; Enterprise GTM</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.62);line-height:1.5;">Ran recruiting from the inside: Greenhouse, Comeet, Workday. Lived in every ATS that Sentriq now sits upstream of. Knows exactly who the champion is, what they feel, and how to reach them.</div>
+                </div>
+                <div style="padding:8px 10px;background:rgba(255,255,255,0.03);border-radius:7px;border-left:2px solid rgba(232,160,32,0.22);">
+                    <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;">Serial Founder</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.62);line-height:1.5;"><strong style="color:#fff;">CYou Retail</strong> (Nielsen Fund, $12K MRR) &nbsp;·&nbsp; <strong style="color:#fff;">TechRuiter IL</strong> (7 headhunters, defense and tech placements) &nbsp;·&nbsp; LLM recruiting platform (30+ ATS experiments)</div>
+                </div>
+                <div style="padding:8px 10px;background:rgba(255,255,255,0.03);border-radius:7px;border-left:2px solid rgba(232,160,32,0.22);">
+                    <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;">IDF Unit 81 &nbsp;·&nbsp; Entrepreneur in Residence</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.62);line-height:1.5;">Israel's elite technology intelligence unit. One of a small cohort of civilian entrepreneurs embedded to build and transfer dual-use technology at state scale.</div>
+                </div>
+                <div style="padding:7px 10px;background:rgba(232,160,32,0.04);border-radius:6px;border:1px solid rgba(232,160,32,0.12);">
+                    <p style="font-size:11px;color:rgba(255,255,255,0.70);line-height:1.55;font-style:italic;">"I want to reward the candidates who deserve human time."</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-card team-card-b">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+                <div class="team-avatar" style="background:linear-gradient(135deg,#44CC88,rgba(68,204,136,0.5));box-shadow:0 0 0 3px #09090F,0 0 0 5px rgba(68,204,136,0.28);">B</div>
+                <div>
+                    <div style="font-size:15px;font-weight:700;">Ben Czarninski</div>
+                    <div style="font-size:11px;color:#44CC88;">Co-Founder, CTO</div>
+                    <div style="font-size:10px;color:rgba(255,255,255,0.55);margin-top:2px;">CPA &nbsp;·&nbsp; TAU MBA &nbsp;·&nbsp; BSc CS</div>
+                </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:7px;">
+                <div style="padding:8px 10px;background:rgba(68,204,136,0.06);border-radius:7px;border-left:2px solid rgba(68,204,136,0.50);">
+                    <div style="font-size:10px;font-weight:700;color:#44CC88;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;">Offensive Cyber &nbsp;·&nbsp; IDF Intelligence</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.62);line-height:1.5;">IDF Unit Tamar (offensive cyber intelligence) + IDF Yachlam (full-stack intelligence systems). Trained on how deception campaigns are engineered from the inside. The threat model Sentriq detects is not theoretical.</div>
+                </div>
+                <div style="padding:8px 10px;background:rgba(255,255,255,0.03);border-radius:7px;border-left:2px solid rgba(68,204,136,0.22);">
+                    <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;">AppSec &nbsp;·&nbsp; Penetration Testing</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.62);line-height:1.5;"><strong style="color:#fff;">KPMG</strong> international penetration testing &nbsp;·&nbsp; <strong style="color:#fff;">AppsFlyer</strong>: built the AppSec function, trained 25 engineers. Sentriq's detection methodology comes from firsthand attack research, not pattern matching.</div>
+                </div>
+                <div style="padding:8px 10px;background:rgba(255,255,255,0.03);border-radius:7px;border-left:2px solid rgba(68,204,136,0.22);">
+                    <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;">Serial Founder</div>
+                    <div style="font-size:11px;color:rgba(255,255,255,0.62);line-height:1.5;"><strong style="color:#fff;">Banxi</strong> (Coller Competition finalist) &nbsp;·&nbsp; <strong style="color:#fff;">Kaima</strong> (ESG startup) &nbsp;·&nbsp; <strong style="color:#fff;">ADTech</strong> venture with 5 paying customers shipped before Sentriq.</div>
+                </div>
+                <div style="padding:7px 10px;background:rgba(68,204,136,0.04);border-radius:6px;border:1px solid rgba(68,204,136,0.12);">
+                    <p style="font-size:11px;color:rgba(255,255,255,0.70);line-height:1.55;font-style:italic;">"I know exactly how they cheat. That is the whole advantage."</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Israeli Advantage -->
+    <div style="padding:14px 18px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.18);border-radius:12px;">
+        <div style="font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;">Why This Team</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+            <div style="padding:8px 14px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.15);border-radius:8px;text-align:center;">
+                <div style="font-size:20px;font-weight:700;color:var(--amber);">30+</div>
+                <div style="font-size:10px;color:var(--muted);">ATS platforms studied</div>
+            </div>
+            <div style="padding:8px 14px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.15);border-radius:8px;text-align:center;">
+                <div style="font-size:20px;font-weight:700;color:var(--amber);">25</div>
+                <div style="font-size:10px;color:var(--muted);">Engineers trained in AppSec (AppsFlyer)</div>
+            </div>
+            <p style="font-size:12px;color:rgba(255,255,255,0.65);line-height:1.6;flex:1;min-width:200px;">Samuel's operator history is not a background note. It is the GTM unfair advantage. No competitor has this pairing: the HR operator who ran the ATS pipelines Sentriq now sits upstream of, and an engineer from two IDF intelligence units whose detection approach draws from firsthand attack research. First design partner engagements are HSBC and Booking Holdings, both global enterprise accounts. IIA grant eligibility extends effective runway. Flybridge's thesis backs founders creating real progress at technology scale. That is exactly the arc we are on.</p>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+
+
+<!-- ===================================================
+     SLIDE 9: MARKET & PATH TO SERIES A
+     =================================================== -->
+<div class="slide bg-dark" data-index="11">
+<div class="slide-inner">
+
+    <span class="label">Market &amp; Path to Seed</span>
+    <h2>A $12B market with <span style="color:var(--amber);">no one at the submission layer.</span></h2>
+
+    <div class="col2-mobile" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;">
+
+        <div>
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.18em;margin-bottom:10px;">Market sizing</div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+                <div style="padding:14px 16px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.22);border-radius:10px;">
+                    <div style="font-size:11px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.10em;margin-bottom:6px;">TAM</div>
+                    <div style="font-size:28px;font-weight:800;color:#fff;line-height:1;">$12B</div>
+                    <div style="font-size:10px;color:var(--muted);margin-top:4px;">Global recruitment technology market. Gartner, 2025.</div>
+                </div>
+                <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+                    <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.65);text-transform:uppercase;letter-spacing:0.10em;margin-bottom:6px;">SAM</div>
+                    <div style="font-size:28px;font-weight:800;color:#fff;line-height:1;">$2.5B</div>
+                    <div style="font-size:10px;color:var(--muted);margin-top:4px;">~30,000 enterprises (1,000+ employees) at Scale ACV ($84K). US Census SUSB 2022 + Forbes Global 2000.</div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.18em;margin-bottom:10px;">Pre-seed milestones: 18 months to seed</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:3px solid rgba(232,160,32,0.30);">
+                    <div style="font-size:10px;font-weight:800;color:var(--amber);min-width:60px;flex-shrink:0;">Months 1-6</div>
+                    <div>
+                        <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:2px;">2-3 signed design partner pilots at $10K each (2 roles, 6 weeks)</div>
+                        <div style="font-size:10px;color:var(--muted);line-height:1.55;">HSBC and Booking Holdings conversations active. Product validated at enterprise scale. First behavioral signal data from live funnels.</div>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:3px solid rgba(232,160,32,0.55);">
+                    <div style="font-size:10px;font-weight:800;color:var(--amber);min-width:60px;flex-shrink:0;">Months 7-12</div>
+                    <div>
+                        <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:2px;">First revenue: $20-30K. Cross-company signal baseline live.</div>
+                        <div style="font-size:10px;color:var(--muted);line-height:1.55;">Pilots converting to annual contracts at design partner rate. Product-market fit signal visible.</div>
+                    </div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:3px solid var(--amber);">
+                    <div style="font-size:10px;font-weight:800;color:var(--amber);min-width:60px;flex-shrink:0;">Month 18</div>
+                    <div>
+                        <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:2px;">$3M+ seed raise on signed pilots, not projections</div>
+                        <div style="font-size:10px;color:var(--muted);line-height:1.55;">Category defined. Network moat building. Path to $1M ARR and Series A visible to next-stage investors.</div>
+                    </div>
+                </div>
+                <div style="padding:10px 14px;background:rgba(232,160,32,0.06);border:1px solid rgba(232,160,32,0.20);border-radius:8px;margin-top:4px;text-align:center;">
+                    <p style="font-size:12px;color:rgba(255,255,255,0.72);line-height:1.6;">At blended unit economics ($150K ACV, 78% GM), each logo is a <strong style="color:var(--amber);">~$350K LTV asset</strong> by the seed round mix.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+<!-- ===================================================
+     SLIDE 10: THE ASK
+     =================================================== -->
+<div class="slide bg-dark" data-index="12">
+<div class="slide-inner">
+
+    <span class="label">The Ask</span>
+
+    <div style="margin-bottom:20px;">
+
+        <div class="ask-amount">$700K</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:6px;font-weight:500;margin-bottom:14px;">Pre-Seed Round</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.50);line-height:1.6;margin-bottom:20px;">Lean founding team. 18 months runway to first revenue. GCP startup credits + IIA grant eligibility (up to 2M NIS, non-dilutive) cover infrastructure costs. Built to reach the milestones that unlock a $3M+ seed: 2-3 signed paying pilots, behavioral baseline live, enterprise demand proven at the submission layer.</div>
+
+        <div class="ask-grid">
+
+            <div>
+                <div class="ask-col-title">What the pre-seed builds</div>
+                <div class="ask-item">Samuel + Ben full-time: product, pilots, GTM. Zero dependency on closing to execute.</div>
+                <div class="ask-item">First engineering hire: SDK integration + behavioral signal infrastructure</div>
+                <div class="ask-item">2-3 paid design partner pilots at $10K each (6 weeks, 2 open roles). HSBC and Booking Holdings conversations active now.</div>
+                <div class="ask-item">First revenue by month 9. Seed raise on signed pilots, not projections.</div>
+                <div class="ask-item">78% gross margin. Each pilot converts to $84K-$240K annual contract. The unit economics work from pilot one.</div>
+            </div>
+
+            <div>
+                <div class="ask-col-title">Why Flybridge</div>
+                <div class="ask-item">Dorothy's thesis: visionary founders building AI startups that create real progress for society at technology scale. Hiring trust is exactly that: a problem breaking for 100 million workers, not a niche SaaS dashboard.</div>
+                <div class="ask-item">Portfolio fit: ZestAI (AI trust in credit decisions) + BitSight (security intelligence data). Flybridge has backed trust infrastructure before. Sentriq is the same category for hiring.</div>
+                <div class="ask-item">Founder-first: you asked who we are, not just what we build. We met at our kids' kindergarten. An HR operator and an offensive cyber engineer. That question is the right one.</div>
+                <div class="ask-item">Next Wave NYC: Dorothy's enterprise and investor network gives Sentriq immediate New York access at the moment we enter the US market.</div>
+                <div class="ask-item">Pre-seed is exactly the right stage: enterprise demand validated (HSBC, Booking Holdings), product in demo, first paying pilots being structured.</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div style="padding:14px 20px;background:rgba(232,160,32,0.05);border:1px solid rgba(232,160,32,0.18);border-radius:10px;margin-bottom:16px;">
+        <p style="font-size:14px;color:rgba(255,255,255,0.82);line-height:1.6;">
+            <span style="color:var(--amber);font-weight:700;">The category is forming now.</span> The submission layer has no owner. The fund that enters first at pre-seed builds with the network, not behind it.
+        </p>
+    </div>
+
+    <div style="padding:14px 20px;background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.22);border-radius:10px;text-align:center;">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--amber);margin-bottom:8px;">Next step: one conversation</div>
+        <div style="display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap;">
+            <span style="font-size:13px;color:rgba(255,255,255,0.72);">sentriq.co</span>
+            <span style="color:rgba(255,255,255,0.20);">|</span>
+            <span style="font-size:13px;color:rgba(255,255,255,0.72);">samuel@sentriq.co</span>
+            <span style="color:rgba(255,255,255,0.20);">|</span>
+            <span style="font-size:13px;color:rgba(255,255,255,0.72);">ben@sentriq.co</span>
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+<!-- ===================================================
+     SLIDE 11: CLOSE
+     =================================================== -->
+<div class="slide bg-close" data-index="13">
+<div class="slide-inner" style="text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:62vh;">
+
+    <div style="display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:44px;">
+        <svg width="28" height="28" viewBox="0 0 56 56" fill="none"><rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/><rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/><circle cx="28" cy="7" r="3" fill="#E8A020"/></svg>
+        <span style="font-size:16px;font-weight:500;color:#fff;letter-spacing:-0.01em;">Sentriq<span style="color:#E8A020;">.</span></span>
+    </div>
+
+    <p style="font-size:clamp(22px,3.5vw,46px);font-weight:800;letter-spacing:-0.035em;color:rgba(255,255,255,0.90);max-width:760px;line-height:1.2;margin-bottom:16px;">
+        Every company that installs Sentriq makes it harder to game the next one.
+    </p>
+    <p style="font-size:clamp(22px,3.5vw,46px);font-weight:800;letter-spacing:-0.035em;color:var(--amber);max-width:760px;line-height:1.2;">
+        The Candidate Hiring Captcha is the signal network.
+    </p>
+
+    <div style="margin-top:40px;padding:16px 28px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:12px;display:inline-block;">
+        <p style="font-size:13px;color:rgba(255,255,255,0.65);">You asked who we are. We're Samuel and Ben. We built this because hiring trust is breaking at exactly the moment the world needs it most.</p>
+        <p style="font-size:14px;font-weight:600;color:#fff;margin-top:6px;">samuel@sentriq.co &nbsp;·&nbsp; sentriq.co</p>
+    </div>
+
+</div>
+</div>
+
+
+</div><!-- /deck -->
+</body>
+</html>
