@@ -260,6 +260,7 @@ body::after {
   flex-wrap:wrap;
 }
 #s10 .logo-pill {
+  display:flex; align-items:center; gap:0.65rem;
   padding:0.9rem 2rem;
   border:1px solid rgba(255,255,255,0.14);
   border-radius:10px;
@@ -267,6 +268,7 @@ body::after {
   font-size:clamp(1rem,1.8vw,1.5rem);
   font-weight:700; letter-spacing:0.04em;
 }
+#s10 .logo-pill img { width:clamp(20px,2vw,28px); height:clamp(20px,2vw,28px); border-radius:4px; flex-shrink:0; }
 #s10 .quote {
   max-width:70vw; margin:0 auto;
   font-size:clamp(1.5rem,3.5vw,3.8rem);
@@ -727,17 +729,14 @@ data-note="This is what makes Sentriq defensible. Every company that joins the p
     <text x="800" y="308" text-anchor="middle" fill="rgba(232,160,32,0.72)" font-size="22" font-family="Space Grotesk, sans-serif" font-weight="600">SIGNAL GRAPH</text>
     <!-- Employer nodes: dark circles with text + logo overlay when online -->
     <circle cx="250" cy="130" r="58" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.28)" stroke-width="2.5"/>
-    <image href="https://www.google.com/s2/favicons?sz=128&domain=hsbc.com" x="198" y="78" width="104" height="104" clip-path="url(#cl-hsbc)" preserveAspectRatio="xMidYMid meet" style="border-radius:50%;"/>
-    <text x="250" y="139" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="30" font-family="Space Grotesk, sans-serif" font-weight="700">HSBC</text>
-    <text x="250" y="212" text-anchor="middle" fill="rgba(255,255,255,0.52)" font-size="22" font-family="Space Grotesk, sans-serif" font-weight="500">hsbc.com</text>
+    <image href="https://www.google.com/s2/favicons?sz=128&domain=hsbc.com" x="198" y="78" width="104" height="104" clip-path="url(#cl-hsbc)" preserveAspectRatio="xMidYMid meet"/>
+    <text x="250" y="212" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="24" font-family="Space Grotesk, sans-serif" font-weight="700">HSBC</text>
     <circle cx="1350" cy="130" r="58" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.28)" stroke-width="2.5"/>
     <image href="https://www.google.com/s2/favicons?sz=128&domain=nvidia.com" x="1298" y="78" width="104" height="104" clip-path="url(#cl-nvidia)" preserveAspectRatio="xMidYMid meet"/>
-    <text x="1350" y="139" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="30" font-family="Space Grotesk, sans-serif" font-weight="700">NVIDIA</text>
-    <text x="1350" y="212" text-anchor="middle" fill="rgba(255,255,255,0.52)" font-size="22" font-family="Space Grotesk, sans-serif" font-weight="500">nvidia.com</text>
+    <text x="1350" y="212" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="24" font-family="Space Grotesk, sans-serif" font-weight="700">NVIDIA</text>
     <circle cx="250" cy="420" r="58" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.28)" stroke-width="2.5"/>
     <image href="https://www.google.com/s2/favicons?sz=128&domain=booking.com" x="198" y="368" width="104" height="104" clip-path="url(#cl-booking)" preserveAspectRatio="xMidYMid meet"/>
-    <text x="250" y="429" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="26" font-family="Space Grotesk, sans-serif" font-weight="700">BOOKING</text>
-    <text x="250" y="502" text-anchor="middle" fill="rgba(255,255,255,0.52)" font-size="22" font-family="Space Grotesk, sans-serif" font-weight="500">booking.com</text>
+    <text x="250" y="502" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-size="22" font-family="Space Grotesk, sans-serif" font-weight="700">Booking Holdings</text>
     <circle cx="1350" cy="420" r="58" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-dasharray="7 5"/>
     <text x="1350" y="429" text-anchor="middle" fill="rgba(255,255,255,0.42)" font-size="30" font-family="Space Grotesk, sans-serif" font-weight="600">+MORE</text>
     <!-- Hero text -->
@@ -806,7 +805,7 @@ data-note="Every investor in this room will ask who else is building this. Here 
       <div class="s9-name">Gem</div>
     </div>
     <div class="s9-comp" style="left:27%;top:44%;">
-      <div class="s9-logo"><img src="https://www.google.com/s2/favicons?sz=64&domain=heytofu.ai" width="34" height="34" onerror="this.outerHTML='<span class=s9-abbr>TF</span>'" alt="TF"/></div>
+      <div class="s9-logo"><img src="https://www.google.com/s2/favicons?sz=64&domain=tofu.ai" width="34" height="34" onerror="this.outerHTML='<span class=s9-abbr>TF</span>'" alt="TF"/></div>
       <div class="s9-name">Tofu</div>
     </div>
   </div>
@@ -826,9 +825,11 @@ data-note="When we sat down with the HSBC Innovation Banking team, we were five 
   <div class="label">Enterprise validation</div>
   <div class="logos">
     <div class="logo-pill">
+      <img src="https://www.google.com/s2/favicons?sz=64&domain=hsbc.com" alt="" onerror="this.style.display='none'"/>
       HSBC
     </div>
     <div class="logo-pill">
+      <img src="https://www.google.com/s2/favicons?sz=64&domain=booking.com" alt="" onerror="this.style.display='none'"/>
       Booking Holdings
     </div>
   </div>
