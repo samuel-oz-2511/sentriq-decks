@@ -436,7 +436,7 @@ body::after {
   </div>
   <div class="nav-controls">
     <button class="nav-btn" onclick="changeSlide(-1)">&#8592;</button>
-    <span class="slide-counter" id="slideCounter">1 / 10</span>
+    <span class="slide-counter" id="slideCounter">1 / 9</span>
     <button class="nav-btn" onclick="changeSlide(1)">&#8594;</button>
   </div>
 </nav>
@@ -748,12 +748,20 @@ body::after {
     <!-- Layer 1 -->
     <div class="layer-card">
       <div class="layer-label">Layer 1</div>
-      <div class="layer-name">Behavioral Baseline</div>
-      <div class="layer-desc">Captured as the form is filled, before identity is declared. Anonymous signals from the first keystroke.</div>
-      <!-- mini waveform svg -->
-      <svg width="80" height="28" viewBox="0 0 80 28" fill="none" style="margin-top:12px;opacity:0.4;">
-        <polyline points="0,14 8,14 12,4 16,22 20,8 24,20 28,14 36,14 40,6 44,20 48,14 56,14 60,10 64,18 68,14 80,14"
-          stroke="#E8A020" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+      <div class="layer-name">Signal Capture</div>
+      <div class="layer-desc" style="font-size:11.5px;">Three signals run simultaneously:
+        <div style="margin-top:8px;display:flex;flex-direction:column;gap:5px;">
+          <div style="display:flex;align-items:baseline;gap:6px;"><span style="color:var(--amber);font-weight:700;font-size:10px;">B</span><span>Behavioral dynamics as the form is filled</span></div>
+          <div style="display:flex;align-items:baseline;gap:6px;"><span style="color:var(--amber);font-weight:700;font-size:10px;">C</span><span>CV content: fabrication markers, credential consistency</span></div>
+          <div style="display:flex;align-items:baseline;gap:6px;"><span style="color:var(--amber);font-weight:700;font-size:10px;">G</span><span>Gap detection against the role requirements</span></div>
+        </div>
+        <div style="margin-top:8px;font-size:10.5px;color:rgba(255,255,255,0.4);">Together they determine whether Layer 2 fires.</div>
+      </div>
+      <!-- three-line waveform -->
+      <svg width="80" height="36" viewBox="0 0 80 36" fill="none" style="margin-top:8px;opacity:0.45;">
+        <polyline points="0,6 10,6 14,2 18,10 22,4 26,8 30,6 80,6" stroke="#E8A020" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
+        <polyline points="0,18 8,18 12,10 16,26 20,12 24,22 28,18 36,18 40,12 44,24 48,18 80,18" stroke="#E8A020" stroke-width="1.2" fill="none" stroke-linejoin="round" opacity="0.6"/>
+        <polyline points="0,30 12,30 16,24 20,36 24,28 28,32 32,30 80,30" stroke="#E8A020" stroke-width="1.2" fill="none" stroke-linejoin="round" opacity="0.35"/>
       </svg>
     </div>
 
@@ -954,7 +962,7 @@ body::after {
   </div>
 
   <div class="animate-enter" style="margin-top:40px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center;animation-delay:0.35s;">
-    <span class="pill">Layer 1: Behavioral</span>
+    <span class="pill">Layer 1: Signal Capture</span>
     <span class="pill">Layer 2: Async Challenge</span>
     <span class="pill">Layer 3: Human Review</span>
   </div>
@@ -1104,85 +1112,13 @@ body::after {
 </div>
 
 
-<!-- =============================================
-     SLIDE 8: THE VISION
-     ============================================= -->
-<div class="slide bg-hook" data-index="8">
-<div class="slide-inner" style="text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-
-  <div class="eyebrow" style="justify-content:center;">Where This Goes</div>
-
-  <div class="giant animate-enter" style="animation-delay:0.05s;">Services are the wedge.</div>
-  <div class="giant amber animate-enter" style="margin-top:6px;animation-delay:0.14s;">Infrastructure is the company.</div>
-
-  <!-- FLOW CHAIN -->
-  <div class="flow-chain animate-enter" style="animation-delay:0.22s;">
-
-    <div class="flow-step">
-      <div class="flow-step-num">1</div>
-      <div class="flow-step-text">Sell high-touch hiring trust service for enterprise, sensitive roles</div>
-    </div>
-    <div class="flow-connector">&#8595;</div>
-
-    <div class="flow-step">
-      <div class="flow-step-num">2</div>
-      <div class="flow-step-text">Map repeatable workflows during delivery: every engagement creates reusable product</div>
-    </div>
-    <div class="flow-connector">&#8595;</div>
-
-    <div class="flow-step">
-      <div class="flow-step-num">3</div>
-      <div class="flow-step-text">Turn workflows into product: sell the tool, not just the outcome</div>
-    </div>
-    <div class="flow-connector">&#8595;</div>
-
-    <div class="flow-step" style="background:rgba(232,160,32,0.07);border-color:rgba(232,160,32,0.28);">
-      <div class="flow-step-num" style="background:rgba(232,160,32,0.2);border-color:var(--amber);">4</div>
-      <div class="flow-step-text" style="color:rgba(255,255,255,0.85);">Expand into hiring trust infrastructure: cross-company graph, network effects</div>
-    </div>
-
-  </div>
-
-  <!-- Category bar -->
-  <div class="cat-bar animate-enter" style="animation-delay:0.38s;">
-    <div class="cat-item">
-      <div class="cat-val">$12B</div>
-      <div class="cat-label">Global TA tech market (Gartner)</div>
-    </div>
-    <div class="cat-divider"></div>
-    <div class="cat-item">
-      <div class="cat-val" style="font-size:14px;font-weight:700;color:rgba(255,255,255,0.6);">Submission layer</div>
-      <div class="cat-label">No current owner</div>
-    </div>
-    <div class="cat-divider"></div>
-    <div class="cat-item">
-      <div class="cat-val">1 in 4</div>
-      <div class="cat-label">Profiles fake by 2028 (Gartner, 2025)</div>
-    </div>
-  </div>
-
-  <!-- Logo sign-off -->
-  <div style="margin-top:32px;display:flex;align-items:center;gap:10px;justify-content:center;opacity:0.55;" class="animate-enter" style="animation-delay:0.5s;">
-    <svg width="20" height="20" viewBox="0 0 56 56" fill="none">
-      <rect x="9" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
-      <rect x="9" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
-      <rect x="36" y="16" width="11" height="4.5" rx="2" fill="#E8A020"/>
-      <rect x="42.5" y="19.5" width="4.5" height="32" rx="2" fill="#E8A020"/>
-      <circle cx="28" cy="7" r="3" fill="#E8A020"/>
-    </svg>
-    <span style="font-size:12px;font-weight:500;color:#fff;">sentriq<span style="color:#E8A020;">.co</span></span>
-  </div>
-
-</div>
-</div>
-
 
 </div><!-- /deck -->
 
 
 <script>
 var current = 0;
-var total = 10;
+var total = 9;
 
 function showSlide(idx) {
   var slides = document.querySelectorAll('.slide');
