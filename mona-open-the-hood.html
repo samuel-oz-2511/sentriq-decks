@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open the Hood -- June 17, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #09090F;
+  --bg2:       #0f0f18;
+  --bg3:       #14141f;
+  --amber:     #E8A020;
+  --amber-mid: rgba(232,160,32,0.18);
+  --amber-low: rgba(232,160,32,0.07);
+  --white:     #F5F5F7;
+  --muted:     rgba(245,245,247,0.45);
+  --subtle:    rgba(245,245,247,0.09);
+  --subtle2:   rgba(245,245,247,0.05);
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Space Grotesk', sans-serif;
+  overflow: hidden;
+}
+
+/* ─── DECK SHELL ─── */
+.deck {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  padding: 52px 72px 96px;
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.slide.active {
+  display: flex;
+  opacity: 1;
+}
+
+/* ─── NAV ─── */
+.nav {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  z-index: 100;
+  background: rgba(9,9,15,0.88);
+  border: 1px solid var(--subtle);
+  border-radius: 40px;
+  padding: 9px 22px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.nav button {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 20px;
+  transition: background 0.15s, opacity 0.15s;
+  opacity: 0.6;
+  letter-spacing: 0.03em;
+}
+.nav button:hover { background: var(--subtle); opacity: 1; }
+.nav button:disabled { opacity: 0.18; cursor: default; }
+
+.nav-counter {
+  font-size: 11px;
+  color: var(--muted);
+  min-width: 42px;
+  text-align: center;
+  letter-spacing: 0.08em;
+}
+
+.slide-dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--subtle);
+  transition: background 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.dot.active { background: var(--amber); transform: scale(1.4); }
+
+/* ─── SHARED TYPOGRAPHY ─── */
+.eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 14px;
+}
+
+.slide-title {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--white);
+}
+
+.slide-title .dim  { color: var(--muted); }
+.slide-title .lit  { color: var(--amber); }
+
+.rule {
+  width: 36px;
+  height: 2px;
+  background: var(--amber);
+  margin: 22px 0;
+  flex-shrink: 0;
+}
+
+/* ─── UTILITY ─── */
+.flex-1 { flex: 1; }
+.flex-row { display: flex; align-items: center; }
+.gap-8  { gap: 8px; }
+.gap-16 { gap: 16px; }
+.gap-24 { gap: 24px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
+.micro {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.micro.amber { color: var(--amber); }
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid rgba(232,160,32,0.35);
+  color: var(--amber);
+}
+
+/* ─── CARD ─── */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--subtle);
+  border-radius: 14px;
+  padding: 26px;
+}
+.card.amber { border-color: rgba(232,160,32,0.28); background: rgba(232,160,32,0.04); }
+
+/* ─── INLINE SVG ICON WRAPPER ─── */
+.icon-wrap {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: var(--amber-low);
+  border: 1px solid rgba(232,160,32,0.18);
+}
+
+/* ─── STEP FLOW ─── */
+.step-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.step-num {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  border-radius: 50%;
+  background: var(--amber-mid);
+  border: 1px solid rgba(232,160,32,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--amber);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.step-text {
+  font-size: 14px;
+  color: rgba(245,245,247,0.8);
+  line-height: 1.55;
+}
+.step-text strong { color: var(--white); font-weight: 600; }
+
+/* ─── PULL QUOTE ─── */
+.pull-quote {
+  background: var(--amber-low);
+  border-left: 3px solid var(--amber);
+  border-radius: 0 10px 10px 0;
+  padding: 20px 24px;
+  font-size: 15px;
+  font-style: italic;
+  color: rgba(245,245,247,0.88);
+  line-height: 1.65;
+}
+
+/* ─── ICON ITEM ─── */
+.icon-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.icon-item-text { display: flex; flex-direction: column; gap: 3px; }
+.icon-item-label { font-size: 13px; font-weight: 600; color: var(--white); }
+.icon-item-sub   { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SLIDE 1 -- TITLE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#slide-1 {
+  justify-content: center;
+  padding-left: 80px;
+}
+
+.s1-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 56px;
+  opacity: 0.85;
+}
+.s1-logo-name {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--white);
+}
+
+.s1-kicker {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 18px;
+}
+
+.s1-headline {
+  font-size: 80px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.s1-sub {
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: -0.01em;
+  margin-bottom: 52px;
+}
+
+.s1-pills {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.s1-pill {
+  font-size: 13px;
+  color: var(--muted);
+  padding-right: 20px;
+  margin-right: 20px;
+  border-right: 1px solid var(--subtle);
+}
+.s1-pill:last-child { border-right: none; }
+
+/* background geometric */
+#slide-1::before {
+  content: '';
+  position: absolute;
+  right: -60px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,160,32,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SLIDE 2 -- PURPOSE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.purpose-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  flex: 1;
+  margin-top: 4px;
+}
+
+.purpose-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.single-q {
+  background: var(--amber-mid);
+  border: 1px solid rgba(232,160,32,0.22);
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-top: 20px;
+}
+.single-q-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 10px;
+}
+.single-q-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.yes-no-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: var(--subtle2);
+  border: 1px solid var(--subtle);
+}
+
+.yn-badge {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.yn-badge.yes { background: var(--amber-mid); color: var(--amber); border: 1px solid rgba(232,160,32,0.3); }
+.yn-badge.no  { background: rgba(245,245,247,0.06); color: var(--muted); border: 1px solid var(--subtle); }
+
+.yn-text { font-size: 13px; line-height: 1.5; }
+.yn-text.active { color: var(--white); font-weight: 500; }
+.yn-text.inactive { color: var(--muted); }
+
+.not-deciding-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.nd-chip {
+  background: var(--subtle2);
+  border: 1px solid var(--subtle);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: rgba(245,245,247,0.2);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SLIDE 3 -- THESIS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.thesis-statement {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: var(--white);
+  max-width: 700px;
+  margin-bottom: 32px;
+}
+.thesis-statement em {
+  color: var(--amber);
+  font-style: normal;
+}
+
+.path-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  flex: 1;
+}
+
+.path-col {
+  border-radius: 14px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.path-col.dim-col {
+  background: var(--subtle2);
+  border: 1px solid var(--subtle);
+  opacity: 0.65;
+}
+.path-col.lit-col {
+  background: rgba(232,160,32,0.05);
+  border: 1px solid rgba(232,160,32,0.28);
+}
+
+.path-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.path-label.dim { color: var(--muted); }
+.path-label.lit { color: var(--amber); }
+
+.path-title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.dim-col .path-title { color: var(--muted); }
+.lit-col .path-title { color: var(--white); }
+
+.path-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+.path-bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.dim-col .path-bullet { color: var(--muted); }
+.lit-col .path-bullet { color: rgba(245,245,247,0.78); }
+
+.pb-dot {
+  width: 5px;
+  height: 5px;
+  min-width: 5px;
+  border-radius: 50%;
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+.dim-col .pb-dot { background: rgba(245,245,247,0.2); }
+.lit-col .pb-dot { background: var(--amber); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SLIDE 4 -- AGENDA
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.timeline-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  margin-top: 10px;
+}
+
+.tl-row {
+  display: flex;
+  align-items: stretch;
+  position: relative;
+}
+
+.tl-time {
+  width: 56px;
+  min-width: 56px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--amber);
+  letter-spacing: 0.06em;
+  padding-top: 18px;
+  text-align: right;
+  padding-right: 20px;
+  flex-shrink: 0;
+}
+
+.tl-line-col {
+  width: 2px;
+  min-width: 2px;
+  background: var(--subtle);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.tl-dot-outer {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--subtle);
+  position: absolute;
+  left: -5px;
+  top: 16px;
+  z-index: 2;
+  transition: border-color 0.2s;
+}
+.tl-dot-outer.amber-dot {
+  border-color: var(--amber);
+  background: var(--amber-mid);
+}
+
+.tl-card {
+  flex: 1;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid var(--subtle);
+  background: var(--bg2);
+}
+.tl-card.active-card {
+  background: rgba(232,160,32,0.05);
+  border-color: rgba(232,160,32,0.25);
+}
+
+.tl-icon {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 8px;
+  background: var(--subtle2);
+  border: 1px solid var(--subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tl-card.active-card .tl-icon {
+  background: var(--amber-low);
+  border-color: rgba(232,160,32,0.22);
+}
+
+.tl-info { flex: 1; display: flex; align-items: baseline; gap: 10px; }
+.tl-name { font-size: 14px; font-weight: 600; color: var(--white); }
+.tl-card.active-card .tl-name { color: var(--white); }
+
+.tl-dur {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 500;
+  margin-left: auto;
+}
+.tl-card.active-card .tl-dur { color: var(--amber); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SLIDE 5 -- MONA OPENS THE HOOD
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.s5-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 24px;
+  flex: 1;
+  align-items: start;
+}
+
+.understand-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.understand-chip {
+  background: var(--subtle2);
+  border: 1px solid var(--subtle);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: rgba(245,245,247,0.75);
+  line-height: 1.45;
+}
+
+.big-question-block {
+  background: var(--amber-low);
+  border: 1px solid rgba(232,160,32,0.22);
+  border-radius: 14px;
+  padding: 28px;
+  margin-bottom: 20px;
+}
+.bq-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 14px;
+}
+.bq-text {
+  font-size: 16px;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.65;
+  font-weight: 400;
+}
+
+.core-question {
+  background: var(--bg2);
+  border: 1px solid var(--subtle);
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+.cq-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.cq-text {
+  font-size: 13px;
+  color: rgba(245,245,247,0.75);
+  line-height: 1.55;
+}
+.cq-text strong { color: var(--white); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SLIDE 6 -- SENTRIQ OPENS THE HOOD
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.icon-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  flex: 1;
+}
+
+.icon-card {
+  background: var(--bg2);
+  border: 1px solid var(--subtle);
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  transition: border-color 0.15s;
+}
+.icon-card:hover { border-color: rgba(232,160,32,0.2); }
+
+.ic-icon {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 8px;
+  background: var(--amber-low);
+  border: 1px solid rgba(232,160,32,0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ic-text { display: flex; flex-direction: column; gap: 3px; }
+.ic-label { font-size: 13px; font-weight: 600; color: var(--white); }
+.ic-sub { font-size: 11.5px; color: var(--muted); line-height: 1.5; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SLIDE 7 -- COMBINED COMPANY
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.s7-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 28px;
+  flex: 1;
+}
+
+.principle-block {
+  background: var(--amber-low);
+  border-left: 3px solid var(--amber);
+  border-radius: 0 10px 10px 0;
+  padding: 20px 22px;
+  font-size: 15px;
+  color: rgba(245,245,247,0.9);
+  line-height: 1.65;
+  font-style: italic;
+  margin-bottom: 22px;
+}
+
+.flow-chain {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.flow-item {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+}
+
+.flow-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 36px;
+  min-width: 36px;
+}
+
+.flow-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--amber-mid);
+  border: 1px solid rgba(232,160,32,0.32);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--amber);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.flow-connector {
+  width: 1px;
+  flex: 1;
+  background: var(--subtle);
+  margin: 3px 0;
+  min-height: 16px;
+}
+
+.flow-content {
+  flex: 1;
+  padding: 4px 0 18px 16px;
+}
+
+.flow-content-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.4;
+}
+.flow-content-sub {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.45;
+  margin-top: 2px;
+}
+
+.together-qs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+.tq-item {
+  background: var(--subtle2);
+  border: 1px solid var(--subtle);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: rgba(245,245,247,0.75);
+  line-height: 1.45;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SLIDE 8 -- FOUNDER FIT
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.s8-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 28px;
+  flex: 1;
+}
+
+.triangle-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  position: relative;
+}
+
+.triad-svg-wrap {
+  width: 100%;
+  max-width: 340px;
+}
+
+.founder-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+
+.founder-card {
+  background: var(--bg2);
+  border: 1px solid var(--subtle);
+  border-radius: 12px;
+  padding: 18px 22px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.founder-card.primary-card {
+  border-color: rgba(232,160,32,0.25);
+  background: rgba(232,160,32,0.04);
+}
+
+.fc-avatar {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 50%;
+  background: var(--bg3);
+  border: 1px solid var(--subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.founder-card.primary-card .fc-avatar {
+  background: var(--amber-mid);
+  border-color: rgba(232,160,32,0.3);
+  color: var(--amber);
+}
+
+.fc-info { display: flex; flex-direction: column; gap: 3px; }
+.fc-name { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); }
+.fc-role { font-size: 14px; font-weight: 600; color: var(--white); }
+.fc-scope { font-size: 12px; color: var(--muted); line-height: 1.45; }
+
+.questions-col { display: flex; flex-direction: column; gap: 10px; }
+
+.q-section { display: flex; flex-direction: column; gap: 6px; }
+.q-section-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 2px;
+}
+.q-item {
+  background: var(--subtle2);
+  border: 1px solid var(--subtle);
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-size: 12.5px;
+  color: rgba(245,245,247,0.72);
+  line-height: 1.5;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SLIDE 9 -- NEXT STEPS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.s9-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 28px;
+  flex: 1;
+}
+
+.steps-col { display: flex; flex-direction: column; gap: 0; }
+
+.ns-item {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.ns-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 42px;
+  min-width: 42px;
+}
+
+.ns-num {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--amber-mid);
+  border: 1px solid rgba(232,160,32,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--amber);
+  flex-shrink: 0;
+}
+.ns-line {
+  width: 1px;
+  flex: 1;
+  background: var(--subtle);
+  margin: 4px 0;
+  min-height: 14px;
+}
+
+.ns-content {
+  flex: 1;
+  padding: 4px 0 18px 4px;
+}
+.ns-title { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 2px; }
+.ns-sub   { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+.structural-note {
+  background: var(--amber-low);
+  border: 1px solid rgba(232,160,32,0.25);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.sn-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 12px;
+}
+.sn-text {
+  font-size: 13.5px;
+  color: rgba(245,245,247,0.85);
+  line-height: 1.65;
+}
+
+.decides-col { display: flex; flex-direction: column; gap: 10px; }
+.decides-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--subtle2);
+  border: 1px solid var(--subtle);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: rgba(245,245,247,0.78);
+  line-height: 1.5;
+}
+.decides-dot {
+  width: 5px;
+  height: 5px;
+  min-width: 5px;
+  border-radius: 50%;
+  background: var(--amber);
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RESPONSIVE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media (max-width: 900px) {
+  .slide { padding: 36px 28px 88px; }
+  .s1-headline { font-size: 52px; }
+  .slide-title { font-size: 30px; }
+  .two-col,
+  .three-col,
+  .purpose-grid,
+  .path-grid,
+  .s5-grid,
+  .s7-layout,
+  .s8-layout,
+  .s9-layout { grid-template-columns: 1fr; }
+  .icon-grid { grid-template-columns: 1fr; }
+  .understand-grid { grid-template-columns: 1fr; }
+  #slide-1 { padding-left: 28px; }
+}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<!-- ════════════════════════════════════
+     SLIDE 1 -- TITLE
+     ════════════════════════════════════ -->
+<div class="slide active" id="slide-1">
+  <div class="s1-logo">
+    <!-- Sentriq logo: bracket + dot -->
+    <svg width="32" height="32" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="9"    y="16"   width="11"  height="4.5" rx="2" fill="#E8A020"/>
+      <rect x="9"    y="19.5" width="4.5" height="32"  rx="2" fill="#E8A020"/>
+      <rect x="36"   y="16"   width="11"  height="4.5" rx="2" fill="#E8A020"/>
+      <rect x="42.5" y="19.5" width="4.5" height="32"  rx="2" fill="#E8A020"/>
+      <circle cx="28" cy="7" r="3" fill="#E8A020"/>
+    </svg>
+    <span class="s1-logo-name">Sentriq</span>
+  </div>
+
+  <div class="s1-kicker">Confidential -- June 17, 2026</div>
+  <div class="s1-headline">Open<br>the Hood</div>
+  <div class="s1-sub">A mutual truth session</div>
+
+  <div class="s1-pills">
+    <span class="s1-pill">Mona</span>
+    <span class="s1-pill">Samuel</span>
+    <span class="s1-pill">Ben</span>
+    <span class="s1-pill" style="border-right:none;">2 hours</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     SLIDE 2 -- PURPOSE
+     ════════════════════════════════════ -->
+<div class="slide" id="slide-2">
+  <div class="eyebrow">Purpose</div>
+  <div class="slide-title">What this call is for</div>
+  <div class="rule"></div>
+
+  <div class="single-q">
+    <div class="single-q-label">The one question we are answering today</div>
+    <div class="single-q-text">Is there enough fit -- product, commercial, founder, and strategic -- to move into data room diligence?</div>
+  </div>
+
+  <div class="purpose-grid" style="margin-top:20px;">
+    <div class="purpose-col">
+      <div class="micro amber" style="margin-bottom:6px;">How we operate today</div>
+      <div class="yes-no-item">
+        <div class="yn-badge yes">+</div>
+        <div class="yn-text active">Directness over performance</div>
+      </div>
+      <div class="yes-no-item">
+        <div class="yn-badge yes">+</div>
+        <div class="yn-text active">Transparency about what is not built</div>
+      </div>
+      <div class="yes-no-item">
+        <div class="yn-badge yes">+</div>
+        <div class="yn-text active">No pressure to oversell anything</div>
+      </div>
+      <div class="yes-no-item">
+        <div class="yn-badge yes">+</div>
+        <div class="yn-text active">Comfort with hard questions -- from both sides</div>
+      </div>
+    </div>
+    <div class="purpose-col">
+      <div class="micro" style="margin-bottom:6px;">Not deciding today</div>
+      <div class="not-deciding-row">
+        <div class="nd-chip">Equity split</div>
+        <div class="nd-chip">Legal structure</div>
+        <div class="nd-chip">Final titles</div>
+        <div class="nd-chip">Any commitment</div>
+        <div class="nd-chip">Governance</div>
+      </div>
+      <div class="yes-no-item" style="margin-top:12px; background:var(--amber-low); border-color:rgba(232,160,32,0.18);">
+        <div class="yn-badge yes">!</div>
+        <div class="yn-text active" style="font-size:12px;">Everything structural comes after this call. Not during it.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     SLIDE 3 -- THESIS
+     ════════════════════════════════════ -->
+<div class="slide" id="slide-3">
+  <div class="eyebrow">The Shared Thesis</div>
+  <div class="thesis-statement">Services are the wedge.<br><em>Hiring trust infrastructure</em> is the company.</div>
+
+  <div class="path-grid">
+    <div class="path-col dim-col">
+      <div class="path-label dim">Not this</div>
+      <div class="path-title">Premium executive sourcing + background checks</div>
+      <div class="path-bullets">
+        <div class="path-bullet"><div class="pb-dot"></div>Revenue, but not venture-scale</div>
+        <div class="path-bullet"><div class="pb-dot"></div>Every client is a custom engagement</div>
+        <div class="path-bullet"><div class="pb-dot"></div>The company is the founder -- it doesn't outlast them</div>
+        <div class="path-bullet"><div class="pb-dot"></div>Margin compresses as the team grows</div>
+      </div>
+    </div>
+    <div class="path-col lit-col">
+      <div class="path-label lit">This</div>
+      <div class="path-title">Hiring trust infrastructure for sensitive, regulated, and high-risk hiring</div>
+      <div class="path-bullets">
+        <div class="path-bullet"><div class="pb-dot"></div>Each engagement creates reusable product</div>
+        <div class="path-bullet"><div class="pb-dot"></div>The company becomes the infrastructure layer</div>
+        <div class="path-bullet"><div class="pb-dot"></div>Services fund the build -- they don't replace it</div>
+        <div class="path-bullet"><div class="pb-dot"></div>Margin expands as product replaces labor</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     SLIDE 4 -- AGENDA
+     ════════════════════════════════════ -->
+<div class="slide" id="slide-4">
+  <div class="eyebrow">Agenda</div>
+  <div class="slide-title">Two hours, five parts</div>
+
+  <div class="timeline-wrap">
+
+    <div class="tl-row">
+      <div class="tl-time">0:00</div>
+      <div class="tl-line-col">
+        <div class="tl-dot-outer"></div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(245,245,247,0.5)" stroke-width="1.8" stroke-linecap="round">
+            <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>
+          </svg>
+        </div>
+        <div class="tl-info"><span class="tl-name">Opening</span></div>
+        <span class="tl-dur">10 min</span>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-time">0:10</div>
+      <div class="tl-line-col">
+        <div class="tl-dot-outer amber-dot"></div>
+      </div>
+      <div class="tl-card active-card">
+        <div class="tl-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8A020" stroke-width="1.8" stroke-linecap="round">
+            <rect x="3" y="6" width="4" height="14" rx="1"/>
+            <rect x="3" y="6" width="9" height="4" rx="1"/>
+            <rect x="3" y="16" width="9" height="4" rx="1"/>
+            <rect x="17" y="6" width="4" height="14" rx="1"/>
+            <rect x="12" y="6" width="9" height="4" rx="1"/>
+            <rect x="12" y="16" width="9" height="4" rx="1"/>
+            <circle cx="12" cy="5" r="2" fill="#E8A020"/>
+          </svg>
+        </div>
+        <div class="tl-info"><span class="tl-name">Sentriq Opens the Hood</span></div>
+        <span class="tl-dur">30 min</span>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-time">0:40</div>
+      <div class="tl-line-col">
+        <div class="tl-dot-outer amber-dot"></div>
+      </div>
+      <div class="tl-card active-card">
+        <div class="tl-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8A020" stroke-width="1.8" stroke-linecap="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <div class="tl-info"><span class="tl-name">Mona Opens the Hood</span></div>
+        <span class="tl-dur">30 min</span>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-time">1:10</div>
+      <div class="tl-line-col">
+        <div class="tl-dot-outer"></div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(245,245,247,0.5)" stroke-width="1.8" stroke-linecap="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div class="tl-info"><span class="tl-name">Combined Company</span></div>
+        <span class="tl-dur">25 min</span>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-time">1:35</div>
+      <div class="tl-line-col">
+        <div class="tl-dot-outer"></div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(245,245,247,0.5)" stroke-width="1.8" stroke-linecap="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
+        <div class="tl-info"><span class="tl-name">Founder Fit</span></div>
+        <span class="tl-dur">20 min</span>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-time">1:55</div>
+      <div class="tl-line-col" style="background:transparent;">
+        <div class="tl-dot-outer"></div>
+      </div>
+      <div class="tl-card">
+        <div class="tl-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(245,245,247,0.5)" stroke-width="1.8" stroke-linecap="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </div>
+        <div class="tl-info"><span class="tl-name">Next Steps</span></div>
+        <span class="tl-dur">5 min</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     SLIDE 5 -- SENTRIQ OPENS THE HOOD
+     ════════════════════════════════════ -->
+<div class="slide" id="slide-5">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+    <div>
+      <div class="eyebrow" style="margin-bottom:6px;">Part 1 -- 0:10 to 0:40</div>
+      <div class="slide-title" style="font-size:36px;">Sentriq Opens the Hood</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="tag">30 min</div>
+      <a href="sentriq-mona-window.html" target="_blank"
+         style="display:inline-flex;align-items:center;gap:6px;padding:6px 16px;background:rgba(232,160,32,0.12);border:1px solid rgba(232,160,32,0.45);border-radius:20px;text-decoration:none;color:#E8A020;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;font-family:inherit;cursor:pointer;transition:background 0.15s;"
+         onmouseover="this.style.background='rgba(232,160,32,0.22)'"
+         onmouseout="this.style.background='rgba(232,160,32,0.12)'"
+      >
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E8A020" stroke-width="2.2" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Launch Sentriq Deck
+      </a>
+    </div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="icon-grid">
+
+    <div class="icon-card">
+      <div class="ic-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8A020" stroke-width="1.8" stroke-linecap="round">
+          <path d="M9.663 17h4.673M12 3v1M3.34 7l.86.5M20.66 7l-.86.5M3 12H2M22 12h-1M5.2 19l.6-.9M18.8 19l-.6-.9"/>
+          <path d="M12 4a8 8 0 1 1 0 16 8 8 0 0 1 0-16z"/>
+        </svg>
+      </div>
+      <div class="ic-text">
+        <div class="ic-label">The hiring trust thesis</div>
+        <div class="ic-sub">What we believe, why now, why us</div>
+      </div>
+    </div>
+
+    <div class="icon-card">
+      <div class="ic-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8A020" stroke-width="1.8" stroke-linecap="round">
+          <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+        </svg>
+      </div>
+      <div class="ic-text">
+        <div class="ic-label">Product direction</div>
+        <div class="ic-sub">Behavioral layer, pre-submission signals, ATS integration</div>
+      </div>
+    </div>
+
+    <div class="icon-card">
+      <div class="ic-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8A020" stroke-width="1.8" stroke-linecap="round">
+          <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+      </div>
+      <div class="ic-text">
+        <div class="ic-label">Honest build status</div>
+        <div class="ic-sub">What is demo, what is not yet built</div>
+      </div>
+    </div>
+
+    <div class="icon-card">
+      <div class="ic-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8A020" stroke-width="1.8" stroke-linecap="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+        </svg>
+      </div>
+      <div class="ic-text">
+        <div class="ic-label">Ben's technical capability</div>
+        <div class="ic-sub">Architecture, first build priorities</div>
+      </div>
+    </div>
+
+    <div class="icon-card">
+      <div class="ic-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8A020" stroke-width="1.8" stroke-linecap="round">
+          <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </div>
+      <div class="ic-text">
+        <div class="ic-label">Israel R&amp;D + IIA grants</div>
+        <div class="ic-sub">Talent, structural cost advantage, grant access</div>
+      </div>
+    </div>
+
+    <div class="icon-card">
+      <div class="ic-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8A020" stroke-width="1.8" stroke-linecap="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+      </div>
+      <div class="ic-text">
+        <div class="ic-label">Active design partners</div>
+        <div class="ic-sub">HSBC, NVIDIA -- conversations in progress</div>
+      </div>
+    </div>
+
+    <div class="icon-card" style="grid-column: span 2;">
+      <div class="ic-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8A020" stroke-width="1.8" stroke-linecap="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+      </div>
+      <div class="ic-text">
+        <div class="ic-label">Advisory</div>
+        <div class="ic-sub">Eliana Carmel Gilboa -- CPO, Booking Holdings (global). Advisory agreement signed.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     SLIDE 6 -- MONA OPENS THE HOOD
+     ════════════════════════════════════ -->
+<div class="slide" id="slide-6">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+    <div>
+      <div class="eyebrow" style="margin-bottom:6px;">Part 2 -- 0:40 to 1:10</div>
+      <div class="slide-title" style="font-size:36px;">Mona Opens the Hood</div>
+    </div>
+    <div class="tag">30 min</div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="s5-grid">
+    <div>
+      <div class="micro amber" style="margin-bottom:10px;">What we want to understand</div>
+      <div class="understand-grid">
+        <div class="understand-chip">What was sold, to whom, and on what terms</div>
+        <div class="understand-chip">What was delivered vs. what remains</div>
+        <div class="understand-chip">What is repeatable vs. fully custom</div>
+        <div class="understand-chip">Who the buying contact is and why they bought</div>
+        <div class="understand-chip">The investor picture -- who and on what terms</div>
+        <div class="understand-chip">Technical partner history and IP status</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div class="big-question-block">
+        <div class="bq-label">The one question that cuts through</div>
+        <div class="bq-text">"Walk me through one complete client engagement: what they asked for, what you delivered, who did the work, what it cost, and whether you could do it again for a different client without starting from scratch."</div>
+      </div>
+      <div class="core-question">
+        <div class="cq-label">Core question of this segment</div>
+        <div class="cq-text">Are customers buying <strong>executive sourcing and background checks</strong> -- or are they buying <strong>hiring trust and risk reduction</strong>?</div>
+      </div>
+      <div class="core-question" style="background:rgba(232,160,32,0.04);border-color:rgba(232,160,32,0.2);">
+        <div class="cq-label" style="color:var(--amber);">Three questions to land before we close this segment</div>
+        <div class="cq-text" style="display:flex;flex-direction:column;gap:10px;">
+          <div>Can you name a client who would pay for a <strong>product</strong>, not for Mona personally showing up?</div>
+          <div>Is the problem clients pay to solve about <strong>sourcing</strong> -- or about <strong>trust and risk</strong>?</div>
+          <div>When you say fast exit -- what does that mean in <strong>years and in dollars</strong>?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     SLIDE 7 -- COMBINED COMPANY
+     ════════════════════════════════════ -->
+<div class="slide" id="slide-7">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+    <div>
+      <div class="eyebrow" style="margin-bottom:6px;">Part 3 -- 1:10 to 1:35</div>
+      <div class="slide-title" style="font-size:36px;">Combined Company</div>
+    </div>
+    <div class="tag">25 min</div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="s7-layout">
+    <div>
+      <div class="principle-block">
+        Every client engagement must create reusable product infrastructure. If a customer asks for something that cannot be reused, it is either priced as custom services -- or avoided.
+      </div>
+      <div class="micro amber" style="margin-bottom:12px;">The path from services to infrastructure</div>
+      <div class="flow-chain">
+        <div class="flow-item">
+          <div class="flow-left">
+            <div class="flow-num">1</div>
+            <div class="flow-connector"></div>
+          </div>
+          <div class="flow-content">
+            <div class="flow-content-title">Sell high-touch hiring trust service</div>
+            <div class="flow-content-sub">Senior and sensitive roles, regulated industries</div>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-left">
+            <div class="flow-num">2</div>
+            <div class="flow-connector"></div>
+          </div>
+          <div class="flow-content">
+            <div class="flow-content-title">Map repeatable workflows during delivery</div>
+            <div class="flow-content-sub">Identify what we do more than once</div>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-left">
+            <div class="flow-num">3</div>
+            <div class="flow-connector"></div>
+          </div>
+          <div class="flow-content">
+            <div class="flow-content-title">Build internal tools from those workflows</div>
+            <div class="flow-content-sub">Speed, consistency, leverage</div>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-left">
+            <div class="flow-num">4</div>
+            <div class="flow-connector"></div>
+          </div>
+          <div class="flow-content">
+            <div class="flow-content-title">Turn internal tools into product</div>
+            <div class="flow-content-sub">Sell the tool, not just the outcome</div>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-left">
+            <div class="flow-num">5</div>
+          </div>
+          <div class="flow-content">
+            <div class="flow-content-title">Expand into broader hiring trust infrastructure</div>
+            <div class="flow-content-sub">From senior hiring to every sensitive role</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="micro amber" style="margin-bottom:12px;">Questions to answer together</div>
+      <div class="together-qs">
+        <div class="tq-item">What does the combined company actually do?</div>
+        <div class="tq-item">Who is the primary buyer -- HR, Risk, Compliance, Legal?</div>
+        <div class="tq-item">What becomes software first?</div>
+        <div class="tq-item">What stays as services while the product is being built?</div>
+        <div class="tq-item">How do we protect the company from becoming a custom agency?</div>
+        <div class="tq-item">What does the first 90 days together look like?</div>
+        <div class="tq-item">What would make this venture-scale?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     SLIDE 8 -- FOUNDER FIT
+     ════════════════════════════════════ -->
+<div class="slide" id="slide-8">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+    <div>
+      <div class="eyebrow" style="margin-bottom:6px;">Part 4 -- 1:35 to 1:55</div>
+      <div class="slide-title" style="font-size:36px;">Founder Fit</div>
+    </div>
+    <div class="tag">20 min</div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="s8-layout">
+
+    <!-- LEFT: triangle + role cards -->
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <!-- SVG triad diagram -->
+      <div style="display:flex;justify-content:center;margin-bottom:4px;">
+        <svg viewBox="0 0 320 200" width="100%" style="max-width:320px;" xmlns="http://www.w3.org/2000/svg">
+          <!-- Triangle lines -->
+          <line x1="160" y1="22" x2="40" y2="175" stroke="rgba(245,245,247,0.1)" stroke-width="1.5"/>
+          <line x1="160" y1="22" x2="280" y2="175" stroke="rgba(245,245,247,0.1)" stroke-width="1.5"/>
+          <line x1="40"  y1="175" x2="280" y2="175" stroke="rgba(245,245,247,0.1)" stroke-width="1.5"/>
+          <!-- Amber center glow -->
+          <circle cx="160" cy="120" r="28" fill="rgba(232,160,32,0.04)" stroke="rgba(232,160,32,0.1)" stroke-width="1"/>
+          <text x="160" y="126" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="9" fill="rgba(232,160,32,0.55)" letter-spacing="0.15em">TOGETHER</text>
+          <!-- Mona node (top) -->
+          <circle cx="160" cy="22" r="20" fill="#0f0f18" stroke="#E8A020" stroke-width="1.5"/>
+          <text x="160" y="19" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="8" font-weight="700" fill="#E8A020" letter-spacing="0.1em">MONA</text>
+          <text x="160" y="29" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7.5" fill="rgba(245,245,247,0.55)">CEO</text>
+          <!-- Samuel node (bottom-left) -->
+          <circle cx="40" cy="175" r="20" fill="#0f0f18" stroke="rgba(245,245,247,0.18)" stroke-width="1.5"/>
+          <text x="40" y="172" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7" font-weight="700" fill="rgba(245,245,247,0.7)" letter-spacing="0.08em">SAMUEL</text>
+          <text x="40" y="181" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7" fill="rgba(245,245,247,0.4)">COO</text>
+          <!-- Ben node (bottom-right) -->
+          <circle cx="280" cy="175" r="20" fill="#0f0f18" stroke="rgba(245,245,247,0.18)" stroke-width="1.5"/>
+          <text x="280" y="172" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="8" font-weight="700" fill="rgba(245,245,247,0.7)" letter-spacing="0.08em">BEN</text>
+          <text x="280" y="181" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7" fill="rgba(245,245,247,0.4)">CTO</text>
+        </svg>
+      </div>
+
+      <div class="founder-card primary-card">
+        <div class="fc-avatar">M</div>
+        <div class="fc-info">
+          <div class="fc-name">Mona</div>
+          <div class="fc-role">CEO</div>
+          <div class="fc-scope">GTM, enterprise sales, fundraising, investor relations, international market access</div>
+        </div>
+      </div>
+      <div class="founder-card">
+        <div class="fc-avatar">S</div>
+        <div class="fc-info">
+          <div class="fc-name">Samuel</div>
+          <div class="fc-role">COO / Product + Operations</div>
+          <div class="fc-scope">Operations, product, Israel R&amp;D, service-to-product transformation, company-building</div>
+        </div>
+      </div>
+      <div class="founder-card">
+        <div class="fc-avatar">B</div>
+        <div class="fc-info">
+          <div class="fc-name">Ben</div>
+          <div class="fc-role">CTO</div>
+          <div class="fc-scope">Architecture, engineering execution, security, scalability, technical hiring</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: questions -->
+    <div class="questions-col">
+      <div class="q-section">
+        <div class="q-section-label">About you personally</div>
+        <div class="q-item">What do you want from this -- personally and professionally?</div>
+        <div class="q-item">What are you best at?</div>
+        <div class="q-item">What are you genuinely not good at?</div>
+        <div class="q-item">What do you need from the other founders?</div>
+        <div class="q-item">What would make this founder relationship fail?</div>
+      </div>
+      <div class="q-section">
+        <div class="q-section-label">About working together</div>
+        <div class="q-item">How do you handle conflict?</div>
+        <div class="q-item">Who has final say -- on product? On hiring? On fundraising?</div>
+        <div class="q-item">What happens when GTM wants custom work and product wants repeatability?</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     SLIDE 9 -- NEXT STEPS
+     ════════════════════════════════════ -->
+<div class="slide" id="slide-9">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+    <div>
+      <div class="eyebrow" style="margin-bottom:6px;">Part 5 -- 1:55 to 2:00</div>
+      <div class="slide-title" style="font-size:36px;">If This Felt Right</div>
+    </div>
+    <div class="tag">5 min</div>
+  </div>
+  <div class="rule"></div>
+
+  <div class="s9-layout">
+
+    <div class="steps-col">
+      <div class="micro amber" style="margin-bottom:14px;">Proposed sequence</div>
+
+      <div class="ns-item">
+        <div class="ns-left"><div class="ns-num">1</div><div class="ns-line"></div></div>
+        <div class="ns-content">
+          <div class="ns-title">Mona shares data room access</div>
+          <div class="ns-sub">Starting with the two SAFE agreements -- first priority for our legal review</div>
+        </div>
+      </div>
+
+      <div class="ns-item">
+        <div class="ns-left"><div class="ns-num">2</div><div class="ns-line"></div></div>
+        <div class="ns-content">
+          <div class="ns-title">Samuel and Ben review documents</div>
+          <div class="ns-sub">Contracts, cap table, IP, SAFE terms, advisor agreements</div>
+        </div>
+      </div>
+
+      <div class="ns-item">
+        <div class="ns-left"><div class="ns-num">3</div><div class="ns-line"></div></div>
+        <div class="ns-content">
+          <div class="ns-title">Samuel speaks with the SAFE investors directly</div>
+          <div class="ns-sub">To understand their conviction and their vision for the company</div>
+        </div>
+      </div>
+
+      <div class="ns-item">
+        <div class="ns-left"><div class="ns-num">4</div><div class="ns-line"></div></div>
+        <div class="ns-content">
+          <div class="ns-title">In-person working session -- Stockholm</div>
+          <div class="ns-sub">Two days. Founder fit cannot be decided over Zoom alone.</div>
+        </div>
+      </div>
+
+      <div class="ns-item">
+        <div class="ns-left"><div class="ns-num">5</div></div>
+        <div class="ns-content">
+          <div class="ns-title">Structural discussion</div>
+          <div class="ns-sub">Equity, governance, legal formation. Only after all of the above.</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="structural-note">
+        <div class="sn-label">One structural note</div>
+        <div class="sn-text">
+          Legal advice is clear: the right structure is a new company from scratch -- not a merger into an existing entity. This is driven by Israeli tax law. It is also the cleanest structure for all three founders.
+        </div>
+      </div>
+
+      <div class="micro amber" style="margin-bottom:12px;">What this call decides</div>
+      <div class="decides-col">
+        <div class="decides-item">
+          <div class="decides-dot"></div>
+          Whether there is enough alignment to go deeper
+        </div>
+        <div class="decides-item">
+          <div class="decides-dot"></div>
+          Whether all three people want to take the next step
+        </div>
+        <div class="decides-item">
+          <div class="decides-dot"></div>
+          Whether the thesis we are each building toward is the same thesis
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<!-- NAV BAR -->
+<div class="nav">
+  <button id="btn-prev" onclick="changeSlide(-1)" disabled>&#8592; Prev</button>
+  <div class="slide-dots" id="dots"></div>
+  <span class="nav-counter" id="counter">1 / 9</span>
+  <button id="btn-next" onclick="changeSlide(1)">Next &#8594;</button>
+</div>
+
+<script>
+  const slides  = document.querySelectorAll('.slide');
+  const total   = slides.length;
+  let current   = 0;
+
+  const dotsEl  = document.getElementById('dots');
+  const counter = document.getElementById('counter');
+  const btnPrev = document.getElementById('btn-prev');
+  const btnNext = document.getElementById('btn-next');
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(n) {
+    slides[current].classList.remove('active');
+    dotsEl.children[current].classList.remove('active');
+    current = n;
+    slides[current].classList.add('active');
+    dotsEl.children[current].classList.add('active');
+    counter.textContent = (current + 1) + ' / ' + total;
+    btnPrev.disabled = current === 0;
+    btnNext.disabled = current === total - 1;
+  }
+
+  function changeSlide(dir) {
+    const next = current + dir;
+    if (next >= 0 && next < total) goTo(next);
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')                    { e.preventDefault(); changeSlide(-1); }
+  });
+</script>
+</body>
+</html>
