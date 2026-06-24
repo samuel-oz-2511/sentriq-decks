@@ -454,6 +454,15 @@ function pingOpen() {
     });
 }
 
+// Fallback: clearbit logo failures -> Google favicon
+document.addEventListener('error', function(e) {
+  if (e.target.tagName === 'IMG' && e.target.closest && e.target.closest('.comp-node')) {
+    var src = e.target.getAttribute('src') || '';
+    var m = src.match(/clearbit\.com\/(.+)/);
+    if (m) { e.target.onerror = null; e.target.src = 'https://www.google.com/s2/favicons?domain=' + m[1] + '&sz=32'; }
+  }
+}, true);
+
 document.addEventListener('DOMContentLoaded', function() {
   if (!sessionStorage.getItem('runi-m1-pinged')) {
     pingOpen();
@@ -1430,58 +1439,49 @@ document.addEventListener('DOMContentLoaded', function() {
 
   <div class="label">The Ask</div>
 
-  <div style="display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:start;">
+  <div style="display:flex;align-items:baseline;gap:18px;margin-bottom:20px;">
+    <div class="ask-amount shimmer">$3.5M</div>
+    <div style="font-size:13px;color:rgba(255,255,255,0.40);font-weight:500;">Seed Round</div>
+  </div>
 
-    <!-- Amount -->
+  <div class="ask-grid">
+
     <div>
-      <div class="ask-amount shimmer">$3.5M</div>
-      <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:6px;font-weight:500;">Seed Round</div>
-    </div>
+      <div class="ask-col-title">Use of funds</div>
 
-    <!-- Details -->
-    <div>
-      <div class="ask-grid">
-
-        <div>
-          <div class="ask-col-title">Use of funds</div>
-
-          <div class="milestone-card stagger-children" id="milestones">
-            <div class="milestone-card">
-              <div class="milestone-num">
-                <div class="date">At close</div>
-                <div class="value">4</div>
-                <div class="unit">people</div>
-              </div>
-              <div class="milestone-body">Samuel, Ben, Senior Full-Stack, Data/AI Engineer</div>
-            </div>
-            <div class="milestone-card">
-              <div class="milestone-num">
-                <div class="date">Target</div>
-                <div class="value">3-5</div>
-                <div class="unit">pilots</div>
-              </div>
-              <div class="milestone-body">Paid pilots at $10K+/month prove the product and validate the price</div>
-            </div>
-            <div class="milestone-card">
-              <div class="milestone-num">
-                <div class="date">Series A</div>
-                <div class="value">$1M</div>
-                <div class="unit">ARR</div>
-              </div>
-              <div class="milestone-body">6-9 enterprise logos converts pilots to annual contracts</div>
-            </div>
-          </div>
+      <div class="milestone-card">
+        <div class="milestone-num">
+          <div class="date">At close</div>
+          <div class="value">4</div>
+          <div class="unit">people</div>
         </div>
-
-        <div>
-          <div class="ask-col-title">Why RUNI specifically</div>
-          <div class="ask-item">You built DiA at pre-revenue and took it to Philips. You know what deep-tech looks like at this stage.</div>
-          <div class="ask-item">Samuel is a Reichman alumnus. This portfolio starts from inside your own ecosystem.</div>
-          <div class="ask-item">Financial services and mid-market tech are the entry verticals. Booking Holdings advisory board committed. Your check activates the first wave of paying customers.</div>
+        <div class="milestone-body">Samuel, Ben, Senior Full-Stack, Data/AI Engineer</div>
+      </div>
+      <div class="milestone-card">
+        <div class="milestone-num">
+          <div class="date">Target</div>
+          <div class="value">3-5</div>
+          <div class="unit">pilots</div>
         </div>
-
+        <div class="milestone-body">Paid pilots at $10K+/month prove the product and validate the price</div>
+      </div>
+      <div class="milestone-card">
+        <div class="milestone-num">
+          <div class="date">Series A</div>
+          <div class="value">$1M</div>
+          <div class="unit">ARR</div>
+        </div>
+        <div class="milestone-body">6-9 enterprise logos converts pilots to annual contracts</div>
       </div>
     </div>
+
+    <div>
+      <div class="ask-col-title">Why RUNI specifically</div>
+      <div class="ask-item">You built DiA at pre-revenue and took it to Philips. You know what deep-tech looks like at this stage.</div>
+      <div class="ask-item">Samuel is a Reichman alumnus. This portfolio starts from inside your own ecosystem.</div>
+      <div class="ask-item">Financial services and mid-market tech are the entry verticals. Booking Holdings advisory board committed. Your check activates the first wave of paying customers.</div>
+    </div>
+
   </div>
 
   <div style="margin-top:22px;padding:14px 22px;background:rgba(232,160,32,0.05);border-left:3px solid var(--amber);border-radius:0 10px 10px 0;">
