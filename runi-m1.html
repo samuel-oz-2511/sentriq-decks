@@ -477,16 +477,13 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
   <div class="nav-controls">
     <button class="nav-btn" onclick="changeSlide(-1)">&#8592;</button>
-    <span class="slide-counter" id="slideCounter">1 / 7</span>
+    <span class="slide-counter" id="slideCounter">1 / 15</span>
     <button class="nav-btn" onclick="changeSlide(1)">&#8594;</button>
   </div>
 </nav>
 
 
-<!-- =====================================================
-     SLIDE 0: THE HOOK
-     ===================================================== -->
-<div class="slide bg-hook active" data-index="0">
+<div class="slide bg-hook  active" data-index="0">
 <div class="slide-inner" style="text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;">
 
   <svg width="52" height="52" viewBox="0 0 56 56" fill="none" style="margin-bottom:36px;animation:glow-pulse 3s ease-in-out infinite;">
@@ -514,9 +511,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
-<!-- =====================================================
-     SLIDE 1: THE TRIANGLE
-     ===================================================== -->
 <div class="slide bg-dark" data-index="1">
 <div class="slide-inner">
 
@@ -578,10 +572,59 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
-<!-- =====================================================
-     SLIDE 2: WHAT EXISTS
-     ===================================================== -->
 <div class="slide bg-dark" data-index="2">
+<div class="slide-inner">
+
+  <div class="label" style="color:rgba(255,255,255,0.28);">Market Sizing</div>
+  <p class="mid" style="margin-bottom:6px;">A new category inside a <span class="amber">$12B market.</span></p>
+  <p class="body dim" style="margin-bottom:24px;font-size:12px;">Application intelligence does not exist as a budget line yet. It will. The buyers, the budget, and the urgency are already in place.</p>
+
+  <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;">
+    <div style="padding:18px 24px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.28);margin-bottom:5px;">TAM / Total Addressable Market</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.42);line-height:1.5;">Global recruitment technology market</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;margin-left:24px;">
+        <div style="font-size:clamp(28px,4vw,48px);font-weight:900;letter-spacing:-0.04em;color:rgba(255,255,255,0.52);">$12B</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.25);margin-top:4px;">Gartner, 2025</div>
+      </div>
+    </div>
+    <div style="text-align:center;font-size:13px;color:rgba(255,255,255,0.10);">&#9660;</div>
+    <div style="padding:18px 24px;background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.22);border-radius:12px;display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.14em;color:rgba(232,160,32,0.55);margin-bottom:5px;">Global SAM / Serviceable Addressable Market</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.5;">~30,000 enterprises (1,000+ employees) across US, UK, and EU at Scale ACV</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;margin-left:24px;">
+        <div style="font-size:clamp(28px,4vw,48px);font-weight:900;letter-spacing:-0.04em;color:var(--amber);">~$2.5B</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.30);margin-top:4px;">Bottom-up: Census SUSB 2022 + Forbes Global 2000</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:12px 18px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+      <div>
+        <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);margin-bottom:4px;">US enterprise universe</div>
+        <p style="font-size:11px;color:rgba(255,255,255,0.32);line-height:1.55;">4,748 firms with 2,500+ employees across 5 target NAICS sectors (Census SUSB 2022). ICP subset: ~500 logos with high-volume hiring in fraud-exposed roles.</p>
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);margin-bottom:4px;">Global multiplier</div>
+        <p style="font-size:11px;color:rgba(255,255,255,0.32);line-height:1.55;">US = 31% of global enterprise base (Forbes Global 2000, 2024). Non-US expands SAM 2.5x. EU AI Act compliance deadline August 2026 accelerates adoption outside the US.</p>
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);margin-bottom:4px;">US entry point</div>
+        <p style="font-size:11px;color:rgba(255,255,255,0.32);line-height:1.55;">Financial services and mid-market tech first. Booking Holdings advisory board committed. $1M ARR with 6-9 US logos opens Series A.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+<div class="slide bg-dark" data-index="3">
 <div class="slide-inner">
 
   <div class="label">What Exists</div>
@@ -651,10 +694,54 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
-<!-- =====================================================
-     SLIDE 3: THE SOLUTION
-     ===================================================== -->
-<div class="slide bg-dark" data-index="3">
+<div class="slide bg-dark" data-index="4">
+<div class="slide-inner">
+
+  <div class="label" style="color:rgba(255,255,255,0.28);">Why Now + Why Us</div>
+  <p class="mid" style="margin-bottom:28px;">Defense requires <span class="amber">offense to have existed first.</span></p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+    <div>
+      <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.50);margin-bottom:14px;">Why now</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;">The attack is live</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.40);line-height:1.5;">4x increase in AI-assisted applications since 2022. Gartner: 1 in 4 candidate profiles will be fake by 2028. Not a warning. A trend line already in motion.</div>
+        </div>
+        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;">Incumbents moving from the wrong end</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.40);line-height:1.5;">Greenhouse Real Talent launched May 2025. Endorsed has paying enterprise customers. Both built inside the ATS silo, detecting after submission. The behavioral layer before submission is still unclaimed.</div>
+        </div>
+        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;">Regulatory deadline this year</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.40);line-height:1.5;">EU AI Act August 2026 compliance deadline for high-risk AI in recruitment. Enterprise teams are mandated to act, not waiting.</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(232,160,32,0.6);margin-bottom:14px;">Why us</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="padding:14px 16px;background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.20);border-radius:10px;">
+          <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:4px;">Ben built the offense first</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.52);line-height:1.5;">Two IDF intelligence units. KPMG international pentest. AppSec at AppsFlyer. You cannot design the defense without first building the attack. Ben did both.</div>
+        </div>
+        <div style="padding:14px 16px;background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.20);border-radius:10px;">
+          <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:4px;">Samuel is the GTM unfair advantage</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.52);line-height:1.5;">Ran TechRuiter IL. Lived inside ATS platforms for years. Knows exactly how enterprise HR buys, what procurement will approve, and who signs the check.</div>
+        </div>
+        <div style="padding:14px 16px;background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.20);border-radius:10px;">
+          <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:4px;">Booking Holdings signed the advisory board</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.52);line-height:1.5;">Eliana Carmel Gilboa, CPO at Booking Holdings (24,000 employees). Committed to product ideation, compliance input, and buyer introductions. The enterprise buyer is already looking for this.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+<div class="slide bg-dark" data-index="5">
 <div class="slide-inner">
 
   <div class="label">The Solution</div>
@@ -754,10 +841,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
-<!-- =====================================================
-     SLIDE 4: THE PRODUCT
-     ===================================================== -->
-<div class="slide bg-dark" data-index="4">
+<div class="slide bg-dark" data-index="6">
 <div class="slide-inner">
 
   <div class="label">The Product</div>
@@ -830,207 +914,12 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
-<!-- =====================================================
-     SLIDE 5: TEAM + TRACTION
-     ===================================================== -->
-<div class="slide bg-dark" data-index="5">
-<div class="slide-inner">
-
-  <div class="label">Team + Traction</div>
-  <p class="large" style="margin-bottom:22px;">Operators who lived it. <span class="amber">Buyers who validated it.</span></p>
-
-  <div class="team-grid">
-
-    <!-- LEFT: Story + Bios -->
-    <div>
-      <div class="hero-quote" style="margin-bottom:16px;">
-        <p>We met at our kids' kindergarten. Two fathers, one problem.</p>
-        <small>The Origin</small>
-      </div>
-
-      <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:12px;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
-        <div class="avatar avatar-samuel">S</div>
-        <div>
-          <div class="label label-no-bar" style="margin-bottom:4px;font-size:10px;">Samuel</div>
-          <p style="font-size:12px;color:rgba(255,255,255,0.65);line-height:1.6;">Ran TechRuiter IL. Lived inside ATS platforms for years. Watched recruiters drown in applications they could not trust.</p>
-          <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:8px;">
-            <span class="signal-tag">GTM</span>
-            <span class="signal-tag">HR Operations</span>
-            <span class="signal-tag">Enterprise Sales</span>
-          </div>
-        </div>
-      </div>
-
-      <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
-        <div class="avatar avatar-ben">B</div>
-        <div>
-          <div class="label label-no-bar" style="margin-bottom:4px;font-size:10px;">Ben</div>
-          <p style="font-size:12px;color:rgba(255,255,255,0.65);line-height:1.6;">Two IDF intelligence units (Tamar + Yachlam). KPMG international pentest. AppSec at AppsFlyer. CPA, MBA, BSc CS.</p>
-          <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:8px;">
-            <span class="signal-tag">Offensive Cyber</span>
-            <span class="signal-tag">Full-Stack</span>
-            <span class="signal-tag">AppSec</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- RIGHT: Proof -->
-    <div>
-      <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.40);margin-bottom:12px;">Early validation</div>
-
-      <div class="stagger-children" id="proofItems">
-
-        <div class="moat-card moat-amber">
-          <strong>Eliana Carmel Gilboa, Advisory Board SIGNED</strong>
-          <span>CPO, Booking Holdings. Advisory board committed. "The topic is burning."</span>
-          <div class="moat-watermark">1</div>
-        </div>
-
-        <div class="moat-card">
-          <strong>Verified Shortlist: Mid-Market Signal</strong>
-          <span>Mid-market willingness-to-pay confirmed. Gap Assessor launching in parallel.</span>
-          <div class="moat-watermark">2</div>
-        </div>
-
-        <div class="moat-card">
-          <strong>HSBC</strong>
-          <span>Enterprise prospect. Compliance review in process.</span>
-          <div class="moat-watermark">3</div>
-        </div>
-
-        <div class="moat-card">
-          <strong>Prof. Louis Hickman, Virginia Tech</strong>
-          <span>I/O Psychology. Research collaboration confirmed. IJSA 2025 (n=237).</span>
-          <div class="moat-watermark">4</div>
-        </div>
-
-        <div class="moat-card">
-          <strong>Coller Competition, Tel Aviv University</strong>
-          <span>Accepted. One of Israel's most selective startup competitions.</span>
-          <div class="moat-watermark">5</div>
-        </div>
-
-      </div>
-    </div>
-
-  </div>
-
-</div>
-</div>
-
-
-<!-- =====================================================
-     SLIDE 6: THE ASK
-     ===================================================== -->
-<div class="slide bg-dark" data-index="6">
-<div class="slide-inner">
-
-  <div class="label">The Ask</div>
-
-  <div style="display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:start;">
-
-    <!-- Amount -->
-    <div>
-      <div class="ask-amount shimmer">$3.5M</div>
-      <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:6px;font-weight:500;">Seed Round</div>
-    </div>
-
-    <!-- Details -->
-    <div>
-      <div class="ask-grid">
-
-        <div>
-          <div class="ask-col-title">Use of funds</div>
-
-          <div class="milestone-card stagger-children" id="milestones">
-            <div class="milestone-card">
-              <div class="milestone-num">
-                <div class="date">At close</div>
-                <div class="value">4</div>
-                <div class="unit">people</div>
-              </div>
-              <div class="milestone-body">Samuel, Ben, Senior Full-Stack, Data/AI Engineer</div>
-            </div>
-            <div class="milestone-card">
-              <div class="milestone-num">
-                <div class="date">Target</div>
-                <div class="value">3-5</div>
-                <div class="unit">pilots</div>
-              </div>
-              <div class="milestone-body">Paid pilots at $10K+/month prove the product and validate the price</div>
-            </div>
-            <div class="milestone-card">
-              <div class="milestone-num">
-                <div class="date">Series A</div>
-                <div class="value">$1M</div>
-                <div class="unit">ARR</div>
-              </div>
-              <div class="milestone-body">6-9 enterprise logos converts pilots to annual contracts</div>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="ask-col-title">Why RUNI specifically</div>
-          <div class="ask-item">You built DiA at pre-revenue and took it to Philips. You know what deep-tech looks like at this stage.</div>
-          <div class="ask-item">Samuel is a Reichman alumnus. This portfolio starts from inside your own ecosystem.</div>
-          <div class="ask-item">Financial services and mid-market tech are the entry verticals. Booking Holdings advisory board committed. Your check activates the first wave of paying customers.</div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <div style="margin-top:22px;padding:14px 22px;background:rgba(232,160,32,0.05);border-left:3px solid var(--amber);border-radius:0 10px 10px 0;">
-    <p style="font-size:13px;color:rgba(255,255,255,0.75);line-height:1.6;">
-      <span style="color:var(--amber);font-weight:700;">The category is forming now.</span> No incumbent owns the submission layer. The fund that anchors Sentriq writes the category definition.
-    </p>
-  </div>
-
-  <div style="margin-top:18px;text-align:center;display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;">
-    <span style="font-size:13px;color:rgba(255,255,255,0.55);">sentriq.co</span>
-    <span style="color:rgba(255,255,255,0.18);">|</span>
-    <span style="font-size:13px;color:rgba(255,255,255,0.55);">samuel@sentriq.co</span>
-    <span style="color:rgba(255,255,255,0.18);">|</span>
-    <span style="font-size:13px;color:rgba(255,255,255,0.55);">ben@sentriq.co</span>
-  </div>
-
-</div>
-</div>
-
-
-<!-- =====================================================
-     ANNEX SEPARATOR
-     ===================================================== -->
 <div class="slide bg-dark" data-index="7">
-<div class="slide-inner" style="text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;">
-  <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.22em;color:rgba(232,160,32,0.35);margin-bottom:24px;">Supporting Material</div>
-  <p style="font-size:clamp(48px,6vw,80px);font-weight:900;letter-spacing:-0.05em;color:rgba(255,255,255,0.12);">Annex</p>
-  <p style="font-size:14px;color:rgba(255,255,255,0.25);margin-top:16px;font-weight:500;letter-spacing:0.02em;">Q+A support. Not part of the monologue.</p>
-  <div style="margin-top:40px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:600px;">
-    <span style="padding:5px 14px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);border:1px solid rgba(255,255,255,0.09);">A1 Competitive Map</span>
-    <span style="padding:5px 14px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);border:1px solid rgba(255,255,255,0.09);">A2 ATS Cannot Copy</span>
-    <span style="padding:5px 14px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);border:1px solid rgba(255,255,255,0.09);">A3 Gem vs Sentriq</span>
-    <span style="padding:5px 14px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);border:1px solid rgba(255,255,255,0.09);">A4 Unit Economics</span>
-    <span style="padding:5px 14px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);border:1px solid rgba(255,255,255,0.09);">A5 Path to MVP</span>
-    <span style="padding:5px 14px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);border:1px solid rgba(255,255,255,0.09);">A6 Buyer Model</span>
-    <span style="padding:5px 14px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);border:1px solid rgba(255,255,255,0.09);">A7 Why Now / Why Us</span>
-    <span style="padding:5px 14px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);border:1px solid rgba(255,255,255,0.09);">A8 Market Sizing</span>
-  </div>
-</div>
-</div>
-
-
-<!-- =====================================================
-     A1: COMPETITIVE MAP
-     ===================================================== -->
-<div class="slide bg-dark" data-index="8">
 <div class="slide-inner" style="display:flex;flex-direction:column;height:100%;padding-bottom:0;">
 
   <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px;flex-shrink:0;">
     <div>
-      <div class="label" style="color:rgba(255,255,255,0.28);margin-bottom:6px;"><span style="color:rgba(232,160,32,0.5);">A1</span> &nbsp;Competitive Map</div>
+      <div class="label" style="color:rgba(255,255,255,0.28);margin-bottom:6px;">Competitive Map</div>
       <p style="font-size:clamp(18px,2.2vw,26px);font-weight:800;letter-spacing:-0.03em;line-height:1.1;">We know exactly <span style="color:var(--amber);">where everyone stands.</span></p>
     </div>
     <div style="text-align:right;flex-shrink:0;margin-left:20px;">
@@ -1132,7 +1021,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       </div>
 
-      <div class="comp-node" data-tip="Video interview AI scoring platform. Operates from phone-screen stage onward. Facing active EEOC bias charge." style="position:absolute;left:18%;top:53%;transform:translate(-50%,-50%);">
+      <div class="comp-node" data-tip="Video interview AI scoring platform. Operates from phone-screen stage onward. Facing EEOC bias charge." style="position:absolute;left:18%;top:53%;transform:translate(-50%,-50%);">
         <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
           <div style="width:28px;height:28px;border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.18);background:white;display:flex;align-items:center;justify-content:center;margin:0 auto;"><img src="https://logo.clearbit.com/hirevue.com" width="22" height="22" style="object-fit:contain;display:block;" onerror="this.style.display='none'" alt="H"/></div>
           <div style="font-size:7.5px;font-weight:700;color:rgba(255,255,255,0.45);white-space:nowrap;letter-spacing:0.02em;">HireVue</div>
@@ -1204,13 +1093,10 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
-<!-- =====================================================
-     A2: WHY ATS CANNOT COPY
-     ===================================================== -->
-<div class="slide bg-dark" data-index="9">
+<div class="slide bg-dark" data-index="8">
 <div class="slide-inner">
 
-  <div class="label" style="color:rgba(255,255,255,0.28);"><span style="color:rgba(232,160,32,0.5);">A2</span> &nbsp;Why ATS Cannot Copy</div>
+  <div class="label" style="color:rgba(255,255,255,0.28);">Why ATS Cannot Copy</div>
   <p class="mid" style="margin-bottom:6px;">Four structural blockers. <span class="amber">All permanent.</span></p>
   <p class="body dim" style="margin-bottom:24px;font-size:12px;">ATS companies are contractually, economically, legally, and structurally locked out of this layer.</p>
 
@@ -1245,13 +1131,10 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
-<!-- =====================================================
-     A3: GEM VS SENTRIQ
-     ===================================================== -->
-<div class="slide bg-dark" data-index="10">
+<div class="slide bg-dark" data-index="9">
 <div class="slide-inner">
 
-  <div class="label" style="color:rgba(255,255,255,0.28);"><span style="color:rgba(232,160,32,0.5);">A3</span> &nbsp;Gem vs Sentriq</div>
+  <div class="label" style="color:rgba(255,255,255,0.28);">Gem vs Sentriq</div>
   <p class="mid" style="margin-bottom:6px;">Different motion. <span class="amber">Zero overlap.</span></p>
   <p class="body dim" style="margin-bottom:28px;font-size:12px;">Gem sits on the outbound side. We sit on the inbound side. Different trigger, different buyer pain, different procurement motion.</p>
 
@@ -1301,13 +1184,62 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
-<!-- =====================================================
-     A4: UNIT ECONOMICS
-     ===================================================== -->
+<div class="slide bg-dark" data-index="10">
+<div class="slide-inner">
+
+  <div class="label" style="color:rgba(255,255,255,0.28);">Buyer Model</div>
+  <p class="mid" style="margin-bottom:6px;">Talent intelligence has <span class="amber">one buyer. Always has.</span></p>
+  <p class="body dim" style="margin-bottom:28px;font-size:12px;">Every tool in this category is bought by the Head of Talent or People Programs. Same champion, same budget line, same procurement motion.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:18px;">
+    <div>
+      <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.50);margin-bottom:14px;">The reference class</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+          <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.68);">LinkedIn Recruiter</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.28);margin-top:3px;">Head of TA signs. Recruiting budget. Global standard.</div>
+        </div>
+        <div style="padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+          <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.68);">Eightfold AI</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.28);margin-top:3px;">$200K+ ACV. Head of TA champion. 3-6 month enterprise cycle.</div>
+        </div>
+        <div style="padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+          <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.68);">Gem, Beamery, Paradox</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.28);margin-top:3px;">Talent budget. People leadership champion. Same motion as Sentriq.</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(232,160,32,0.6);margin-bottom:14px;">Sentriq procurement path</div>
+      <div style="padding:22px 20px;background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.20);border-radius:12px;display:flex;flex-direction:column;gap:14px;">
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;">Champion</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.65);">Head of Talent / People Programs</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;">Budget line</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.65);">Talent intelligence and recruiting tools</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;">Sales cycle</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.65);">6-week paid pilot at $10K. Proof of value before the annual contract.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:12px 18px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;text-align:center;">
+    <p style="font-size:11px;color:rgba(255,255,255,0.28);line-height:1.6;">Eliana Carmel Gilboa, CPO Booking Holdings: confirmed the procurement motion and signed the advisory board.</p>
+  </div>
+
+</div>
+</div>
+
+
 <div class="slide bg-dark" data-index="11">
 <div class="slide-inner">
 
-  <div class="label" style="color:rgba(255,255,255,0.28);"><span style="color:rgba(232,160,32,0.5);">A4</span> &nbsp;Unit Economics</div>
+  <div class="label" style="color:rgba(255,255,255,0.28);">Unit Economics</div>
   <p class="mid" style="margin-bottom:6px;">Text processing is <span class="amber">near-zero COGS.</span></p>
   <p class="body dim" style="margin-bottom:28px;font-size:12px;">Sentriq is text-native by architecture. Text is where the deception lives. Near-zero COGS is the result.</p>
 
@@ -1359,13 +1291,97 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
-<!-- =====================================================
-     A5: PATH TO MVP
-     ===================================================== -->
 <div class="slide bg-dark" data-index="12">
 <div class="slide-inner">
 
-  <div class="label" style="color:rgba(255,255,255,0.28);"><span style="color:rgba(232,160,32,0.5);">A5</span> &nbsp;Path to MVP</div>
+  <div class="label">Team + Traction</div>
+  <p class="large" style="margin-bottom:22px;">Operators who lived it. <span class="amber">Buyers who validated it.</span></p>
+
+  <div class="team-grid">
+
+    <!-- LEFT: Story + Bios -->
+    <div>
+      <div class="hero-quote" style="margin-bottom:16px;">
+        <p>We met at our kids' kindergarten. Two fathers, one problem.</p>
+        <small>The Origin</small>
+      </div>
+
+      <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:12px;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+        <div class="avatar avatar-samuel">S</div>
+        <div>
+          <div class="label label-no-bar" style="margin-bottom:4px;font-size:10px;">Samuel</div>
+          <p style="font-size:12px;color:rgba(255,255,255,0.65);line-height:1.6;">Ran TechRuiter IL. Lived inside ATS platforms for years. Watched recruiters drown in applications they could not trust.</p>
+          <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:8px;">
+            <span class="signal-tag">GTM</span>
+            <span class="signal-tag">HR Operations</span>
+            <span class="signal-tag">Enterprise Sales</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:flex-start;gap:14px;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
+        <div class="avatar avatar-ben">B</div>
+        <div>
+          <div class="label label-no-bar" style="margin-bottom:4px;font-size:10px;">Ben</div>
+          <p style="font-size:12px;color:rgba(255,255,255,0.65);line-height:1.6;">Two IDF intelligence units (Tamar + Yachlam). KPMG international pentest. AppSec at AppsFlyer. CPA, MBA, BSc CS.</p>
+          <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:8px;">
+            <span class="signal-tag">Offensive Cyber</span>
+            <span class="signal-tag">Full-Stack</span>
+            <span class="signal-tag">AppSec</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Proof -->
+    <div>
+      <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.40);margin-bottom:12px;">Early validation</div>
+
+      <div class="stagger-children" id="proofItems">
+
+        <div class="moat-card moat-amber">
+          <strong>Eliana Carmel Gilboa, Advisory Board SIGNED</strong>
+          <span>CPO, Booking Holdings. Advisory board committed. "The topic is burning."</span>
+          <div class="moat-watermark">1</div>
+        </div>
+
+        <div class="moat-card">
+          <strong>Verified Shortlist: Mid-Market Signal</strong>
+          <span>Mid-market willingness-to-pay confirmed. Gap Assessor launching in parallel.</span>
+          <div class="moat-watermark">2</div>
+        </div>
+
+        <div class="moat-card">
+          <strong>HSBC</strong>
+          <span>Enterprise prospect. Compliance review in process.</span>
+          <div class="moat-watermark">3</div>
+        </div>
+
+        <div class="moat-card">
+          <strong>Prof. Louis Hickman, Virginia Tech</strong>
+          <span>I/O Psychology. Research collaboration confirmed. IJSA 2025 (n=237).</span>
+          <div class="moat-watermark">4</div>
+        </div>
+
+        <div class="moat-card">
+          <strong>Coller Competition, Tel Aviv University</strong>
+          <span>Accepted. One of Israel's most selective startup competitions.</span>
+          <div class="moat-watermark">5</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+
+<div class="slide bg-dark" data-index="13">
+<div class="slide-inner">
+
+  <div class="label" style="color:rgba(255,255,255,0.28);">Path to MVP</div>
   <p class="mid" style="margin-bottom:6px;">Six months to <span class="amber">production-ready pilots.</span></p>
   <p class="body dim" style="margin-bottom:28px;font-size:12px;">The demo is built and validated around real enterprise hiring scenarios. SOC 2 Type 1 is the enterprise compliance gate.</p>
 
@@ -1388,7 +1404,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div style="padding:18px 12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;text-align:center;">
       <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.28);margin-bottom:10px;">Month 18</div>
       <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.2;">Series A</div>
-      <div style="font-size:12px;color:rgba(255,255,255,0.58);line-height:1.5;">3-5 paying pilots at $10K+/month. Network graph active across multiple employers.</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.58);line-height:1.5;">3-5 paying pilots at $10K+/month. Network graph across multiple employers.</div>
     </div>
   </div>
 
@@ -1409,160 +1425,77 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
-<!-- =====================================================
-     A6: BUYER MODEL
-     ===================================================== -->
-<div class="slide bg-dark" data-index="13">
-<div class="slide-inner">
-
-  <div class="label" style="color:rgba(255,255,255,0.28);"><span style="color:rgba(232,160,32,0.5);">A6</span> &nbsp;Buyer Model</div>
-  <p class="mid" style="margin-bottom:6px;">Talent intelligence has <span class="amber">one buyer. Always has.</span></p>
-  <p class="body dim" style="margin-bottom:28px;font-size:12px;">Every tool in this category is bought by the Head of Talent or People Programs. Same champion, same budget line, same procurement motion.</p>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:18px;">
-    <div>
-      <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.50);margin-bottom:14px;">The reference class</div>
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        <div style="padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
-          <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.68);">LinkedIn Recruiter</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.28);margin-top:3px;">Head of TA signs. Recruiting budget. Global standard.</div>
-        </div>
-        <div style="padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
-          <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.68);">Eightfold AI</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.28);margin-top:3px;">$200K+ ACV. Head of TA champion. 3-6 month enterprise cycle.</div>
-        </div>
-        <div style="padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
-          <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.68);">Gem, Beamery, Paradox</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.28);margin-top:3px;">Talent budget. People leadership champion. Same motion as Sentriq.</div>
-        </div>
-      </div>
-    </div>
-    <div>
-      <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(232,160,32,0.6);margin-bottom:14px;">Sentriq procurement path</div>
-      <div style="padding:22px 20px;background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.20);border-radius:12px;display:flex;flex-direction:column;gap:14px;">
-        <div>
-          <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;">Champion</div>
-          <div style="font-size:13px;color:rgba(255,255,255,0.65);">Head of Talent / People Programs</div>
-        </div>
-        <div>
-          <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;">Budget line</div>
-          <div style="font-size:13px;color:rgba(255,255,255,0.65);">Talent intelligence and recruiting tools</div>
-        </div>
-        <div>
-          <div style="font-size:11px;font-weight:700;color:var(--amber);margin-bottom:4px;">Sales cycle</div>
-          <div style="font-size:13px;color:rgba(255,255,255,0.65);">6-week paid pilot at $10K. Proof of value before the annual contract.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div style="padding:12px 18px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;text-align:center;">
-    <p style="font-size:11px;color:rgba(255,255,255,0.28);line-height:1.6;">Eliana Carmel Gilboa, CPO Booking Holdings: confirmed the procurement motion and signed the advisory board.</p>
-  </div>
-
-</div>
-</div>
-
-
-<!-- =====================================================
-     A7: WHY NOW + WHY US
-     ===================================================== -->
 <div class="slide bg-dark" data-index="14">
 <div class="slide-inner">
 
-  <div class="label" style="color:rgba(255,255,255,0.28);"><span style="color:rgba(232,160,32,0.5);">A7</span> &nbsp;Why Now + Why Us</div>
-  <p class="mid" style="margin-bottom:28px;">Defense requires <span class="amber">offense to have existed first.</span></p>
+  <div class="label">The Ask</div>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+  <div style="display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:start;">
+
+    <!-- Amount -->
     <div>
-      <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.50);margin-bottom:14px;">Why now</div>
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
-          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;">The attack is live</div>
-          <div style="font-size:12px;color:rgba(255,255,255,0.40);line-height:1.5;">4x increase in AI-assisted applications since 2022. Gartner: 1 in 4 candidate profiles will be fake by 2028. Not a warning. A trend line already in motion.</div>
-        </div>
-        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
-          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;">Incumbents moving from the wrong end</div>
-          <div style="font-size:12px;color:rgba(255,255,255,0.40);line-height:1.5;">Greenhouse Real Talent launched May 2025. Endorsed has paying enterprise customers. Both built inside the ATS silo, detecting after submission. The behavioral layer before submission is still unclaimed.</div>
-        </div>
-        <div style="padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;">
-          <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;">Regulatory deadline this year</div>
-          <div style="font-size:12px;color:rgba(255,255,255,0.40);line-height:1.5;">EU AI Act August 2026 compliance deadline for high-risk AI in recruitment. Enterprise teams are mandated to act, not waiting.</div>
-        </div>
-      </div>
+      <div class="ask-amount shimmer">$3.5M</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:6px;font-weight:500;">Seed Round</div>
     </div>
+
+    <!-- Details -->
     <div>
-      <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:rgba(232,160,32,0.6);margin-bottom:14px;">Why us</div>
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        <div style="padding:14px 16px;background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.20);border-radius:10px;">
-          <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:4px;">Ben built the offense first</div>
-          <div style="font-size:12px;color:rgba(255,255,255,0.52);line-height:1.5;">Two IDF intelligence units. KPMG international pentest. AppSec at AppsFlyer. You cannot design the defense without first building the attack. Ben did both.</div>
+      <div class="ask-grid">
+
+        <div>
+          <div class="ask-col-title">Use of funds</div>
+
+          <div class="milestone-card stagger-children" id="milestones">
+            <div class="milestone-card">
+              <div class="milestone-num">
+                <div class="date">At close</div>
+                <div class="value">4</div>
+                <div class="unit">people</div>
+              </div>
+              <div class="milestone-body">Samuel, Ben, Senior Full-Stack, Data/AI Engineer</div>
+            </div>
+            <div class="milestone-card">
+              <div class="milestone-num">
+                <div class="date">Target</div>
+                <div class="value">3-5</div>
+                <div class="unit">pilots</div>
+              </div>
+              <div class="milestone-body">Paid pilots at $10K+/month prove the product and validate the price</div>
+            </div>
+            <div class="milestone-card">
+              <div class="milestone-num">
+                <div class="date">Series A</div>
+                <div class="value">$1M</div>
+                <div class="unit">ARR</div>
+              </div>
+              <div class="milestone-body">6-9 enterprise logos converts pilots to annual contracts</div>
+            </div>
+          </div>
         </div>
-        <div style="padding:14px 16px;background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.20);border-radius:10px;">
-          <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:4px;">Samuel is the GTM unfair advantage</div>
-          <div style="font-size:12px;color:rgba(255,255,255,0.52);line-height:1.5;">Ran TechRuiter IL. Lived inside ATS platforms for years. Knows exactly how enterprise HR buys, what procurement will approve, and who signs the check.</div>
+
+        <div>
+          <div class="ask-col-title">Why RUNI specifically</div>
+          <div class="ask-item">You built DiA at pre-revenue and took it to Philips. You know what deep-tech looks like at this stage.</div>
+          <div class="ask-item">Samuel is a Reichman alumnus. This portfolio starts from inside your own ecosystem.</div>
+          <div class="ask-item">Financial services and mid-market tech are the entry verticals. Booking Holdings advisory board committed. Your check activates the first wave of paying customers.</div>
         </div>
-        <div style="padding:14px 16px;background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.20);border-radius:10px;">
-          <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:4px;">Booking Holdings signed the advisory board</div>
-          <div style="font-size:12px;color:rgba(255,255,255,0.52);line-height:1.5;">Eliana Carmel Gilboa, CPO at Booking Holdings (24,000 employees). Committed to product ideation, compliance input, and buyer introductions. The enterprise buyer is already looking for this.</div>
-        </div>
+
       </div>
     </div>
   </div>
 
-</div>
-</div>
-
-
-<!-- =====================================================
-     A8: MARKET SIZING
-     ===================================================== -->
-<div class="slide bg-dark" data-index="15">
-<div class="slide-inner">
-
-  <div class="label" style="color:rgba(255,255,255,0.28);"><span style="color:rgba(232,160,32,0.5);">A8</span> &nbsp;Market Sizing</div>
-  <p class="mid" style="margin-bottom:6px;">A new category inside a <span class="amber">$12B market.</span></p>
-  <p class="body dim" style="margin-bottom:24px;font-size:12px;">Application intelligence does not exist as a budget line yet. It will. The buyers, the budget, and the urgency are already in place.</p>
-
-  <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:18px;">
-    <div style="padding:18px 24px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;display:flex;align-items:center;justify-content:space-between;">
-      <div>
-        <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.28);margin-bottom:5px;">TAM / Total Addressable Market</div>
-        <div style="font-size:13px;color:rgba(255,255,255,0.42);line-height:1.5;">Global recruitment technology market</div>
-      </div>
-      <div style="text-align:right;flex-shrink:0;margin-left:24px;">
-        <div style="font-size:clamp(28px,4vw,48px);font-weight:900;letter-spacing:-0.04em;color:rgba(255,255,255,0.52);">$12B</div>
-        <div style="font-size:10px;color:rgba(255,255,255,0.25);margin-top:4px;">Gartner, 2025</div>
-      </div>
-    </div>
-    <div style="text-align:center;font-size:13px;color:rgba(255,255,255,0.10);">&#9660;</div>
-    <div style="padding:18px 24px;background:rgba(232,160,32,0.07);border:1px solid rgba(232,160,32,0.22);border-radius:12px;display:flex;align-items:center;justify-content:space-between;">
-      <div>
-        <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.14em;color:rgba(232,160,32,0.55);margin-bottom:5px;">Global SAM / Serviceable Addressable Market</div>
-        <div style="font-size:13px;color:rgba(255,255,255,0.58);line-height:1.5;">~30,000 enterprises (1,000+ employees) across US, UK, and EU at Scale ACV</div>
-      </div>
-      <div style="text-align:right;flex-shrink:0;margin-left:24px;">
-        <div style="font-size:clamp(28px,4vw,48px);font-weight:900;letter-spacing:-0.04em;color:var(--amber);">~$2.5B</div>
-        <div style="font-size:10px;color:rgba(255,255,255,0.30);margin-top:4px;">Bottom-up: Census SUSB 2022 + Forbes Global 2000</div>
-      </div>
-    </div>
+  <div style="margin-top:22px;padding:14px 22px;background:rgba(232,160,32,0.05);border-left:3px solid var(--amber);border-radius:0 10px 10px 0;">
+    <p style="font-size:13px;color:rgba(255,255,255,0.75);line-height:1.6;">
+      <span style="color:var(--amber);font-weight:700;">The category is forming now.</span> No incumbent owns the submission layer. The fund that anchors Sentriq writes the category definition.
+    </p>
   </div>
 
-  <div style="padding:12px 18px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;">
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
-      <div>
-        <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);margin-bottom:4px;">US enterprise universe</div>
-        <p style="font-size:11px;color:rgba(255,255,255,0.32);line-height:1.55;">4,748 firms with 2,500+ employees across 5 target NAICS sectors (Census SUSB 2022). ICP subset: ~500 logos with active high-volume hiring in fraud-exposed roles.</p>
-      </div>
-      <div>
-        <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);margin-bottom:4px;">Global multiplier</div>
-        <p style="font-size:11px;color:rgba(255,255,255,0.32);line-height:1.55;">US = 31% of global enterprise base (Forbes Global 2000, 2024). Non-US expands SAM 2.5x. EU AI Act compliance deadline August 2026 accelerates adoption outside the US.</p>
-      </div>
-      <div>
-        <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:rgba(255,255,255,0.22);margin-bottom:4px;">US entry point</div>
-        <p style="font-size:11px;color:rgba(255,255,255,0.32);line-height:1.55;">Financial services and mid-market tech first. Booking Holdings advisory board committed. $1M ARR with 6-9 US logos opens Series A.</p>
-      </div>
-    </div>
+  <div style="margin-top:18px;text-align:center;display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;">
+    <span style="font-size:13px;color:rgba(255,255,255,0.55);">sentriq.co</span>
+    <span style="color:rgba(255,255,255,0.18);">|</span>
+    <span style="font-size:13px;color:rgba(255,255,255,0.55);">samuel@sentriq.co</span>
+    <span style="color:rgba(255,255,255,0.18);">|</span>
+    <span style="font-size:13px;color:rgba(255,255,255,0.55);">ben@sentriq.co</span>
   </div>
 
 </div>
@@ -1570,10 +1503,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </div><!-- /deck -->
 
+
 <script>
-var totalSlides = 16;
-var mainSlideCount = 7;
-var annexSep = 7;
+var totalSlides = 15;
 var currentSlide = 0;
 
 function animateCounter(el) {
@@ -1605,15 +1537,7 @@ function showSlide(n) {
   });
 
   if (badge) badge.style.opacity = n === 0 ? '0' : '1';
-  if (counter) {
-    if (n < mainSlideCount) {
-      counter.textContent = (n + 1) + ' / ' + mainSlideCount;
-    } else if (n === annexSep) {
-      counter.textContent = 'Annex';
-    } else {
-      counter.textContent = 'A' + (n - annexSep);
-    }
-  }
+  if (counter) counter.textContent = (n + 1) + ' / ' + 15;
   if (bar) bar.style.width = ((n + 1) / totalSlides * 100) + '%';
 
   // Stagger reveal
